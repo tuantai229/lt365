@@ -49,15 +49,24 @@ class NewsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\News  $news
+     * @param  \Illuminate\Http\Request  $request
+     * @param  string  $slug
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug, $id)
+    public function show(Request $request, $slug, $id)
     {
         $news = News::active()->findOrFail($id);
 
-        // Increment view count
-        $news->increment('view_count');
+        // Increment view count with session-based throttling
+        $viewedPosts = $request->session()->get('viewed_posts', []);
+        $viewDelay = 3 * 60; // 3 minutes in seconds
+
+        if (!isset($viewedPosts[$news->id]) || (time() - $viewedPosts[$news->id]) > $viewDelay) {
+            $news->increment('view_count');
+            $viewedPosts[$news->id] = time();
+            $request->session()->put('viewed_posts', $viewedPosts);
+        }
 
         $relatedNews = News::active()
             ->where('id', '!=', $news->id)
