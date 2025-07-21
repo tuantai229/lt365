@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liên hệ - LT365 | Tư vấn thi chuyển cấp</title>
+    <meta name="description" content="Liên hệ với LT365 để được tư vấn miễn phí về thi chuyển cấp. Hotline: 0987 654 321. Hỗ trợ 24/7 cho phụ huynh và học sinh.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6'
+                    },
+                    fontFamily: {
+                        'pacifico': ['Pacifico', 'cursive']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .dropdown {
+            display: none;
+        }
+        .dropdown-trigger:hover .dropdown {
+            display: block;
+        }
+        .nested-dropdown {
+            display: none;
+        }
+        .nested-dropdown-trigger:hover .nested-dropdown {
+            display: block;
+        }
+        .rounded-button {
+            border-radius: 0.5rem;
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <!-- Top Header -->
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="font-['Pacifico'] text-2xl text-primary">LT365</a>
+            
+            <!-- Search Bar -->
+            <div class="w-2/5 relative">
+                <input type="search" placeholder="Tìm kiếm tài liệu, trường học..." class="w-full py-2 pl-10 pr-4 border border-gray-200 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm">
+                <div class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center text-gray-400">
+                    <i class="ri-search-line"></i>
+                </div>
+            </div>
+            
+            <!-- Right Section -->
+            <div class="flex items-center gap-6">
+                <!-- Hotline -->
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                        <i class="ri-phone-line"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500">Hotline</p>
+                        <p class="text-sm font-medium">0987 654 321</p>
+                    </div>
+                </div>
+                
+                <!-- Auth Buttons -->
+                <div class="flex items-center gap-3">
+                    <button class="px-4 py-2 text-primary border border-primary rounded-button hover:bg-primary/5 transition-colors duration-200 text-sm font-medium whitespace-nowrap !rounded-button">Đăng nhập</button>
+                    <button class="px-4 py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition-colors duration-200 text-sm font-medium whitespace-nowrap !rounded-button">Đăng ký</button>
+                </div>
+            </div>
+        </div>
+        <!-- Main Menu -->
+        <nav class="bg-primary text-white">
+            <div class="container mx-auto px-4">
+                <ul class="flex">
+                    <li class="relative">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80">Trang chủ</a>
+                    </li>
+                    <li class="relative dropdown-trigger">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80 flex items-center">
+                            Thi chuyển cấp
+                            <i class="ri-arrow-down-s-line ml-1"></i>
+                        </a>
+                        <div class="dropdown absolute top-full left-0 bg-white text-gray-800 shadow-lg rounded-md w-56 z-50">
+                            <div class="py-2">
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Thi vào lớp 1</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Thi vào lớp 6</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Thi vào lớp 10</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="relative dropdown-trigger">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80 flex items-center">
+                            Trường học
+                            <i class="ri-arrow-down-s-line ml-1"></i>
+                        </a>
+                        <div class="dropdown absolute top-full left-0 bg-white text-gray-800 shadow-lg rounded-md w-56 z-50">
+                            <div class="py-2">
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Danh sách trường</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Điểm chuẩn</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Thông tin tuyển sinh</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="relative">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80">Tài liệu</a>
+                    </li>
+                    <li class="relative">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80">Tin tức</a>
+                    </li>
+                    <li class="relative">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80">Trung tâm</a>
+                    </li>
+                    <li class="relative">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80 bg-primary/20">Liên hệ</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-primary to-indigo-700 text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-4xl font-bold mb-6">Liên hệ với chúng tôi</h1>
+                <p class="text-lg opacity-90 mb-8">Đội ngũ chuyên gia giáo dục LT365 luôn sẵn sàng tư vấn miễn phí về lộ trình học tập và thi chuyển cấp cho con bạn</p>
+                <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
+                            <i class="ri-phone-line text-2xl"></i>
+                        </div>
+                        <div class="text-left">
+                            <p class="font-semibold">Hotline 24/7</p>
+                            <p class="text-xl font-bold">0987 654 321</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
+                            <i class="ri-mail-line text-2xl"></i>
+                        </div>
+                        <div class="text-left">
+                            <p class="font-semibold">Email hỗ trợ</p>
+                            <p class="text-xl font-bold">info@lt365.vn</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Form -->
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <h2 class="text-2xl font-bold mb-6 text-gray-900">Gửi yêu cầu tư vấn</h2>
+                    <p class="text-gray-600 mb-6">Vui lòng điền thông tin bên dưới, chúng tôi sẽ liên hệ với bạn trong vòng 24 giờ</p>
+                    
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="fullname" class="block text-sm font-medium text-gray-700 mb-2">Họ và tên <span class="text-red-500">*</span></label>
+                                <input type="text" id="fullname" name="fullname" required class="w-full p-3 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
+                            </div>
+                            <div>
+                                <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Số điện thoại</label>
+                                <input type="tel" id="phone" name="phone" class="w-full p-3 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email <span class="text-red-500">*</span></label>
+                            <input type="email" id="email" name="email" required class="w-full p-3 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
+                        </div>
+                        
+                        <div>
+                            <label for="grade" class="block text-sm font-medium text-gray-700 mb-2">Cấp học quan tâm</label>
+                            <div class="relative">
+                                <select id="grade" name="grade" class="w-full p-3 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary appearance-none pr-10">
+                                    <option value="">Chọn cấp học</option>
+                                    <option value="lop-1">Thi vào lớp 1</option>
+                                    <option value="lop-6">Thi vào lớp 6</option>
+                                    <option value="lop-10">Thi vào lớp 10</option>
+                                </select>
+                                <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                    <i class="ri-arrow-down-s-line text-gray-400"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Nội dung tin nhắn</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Chia sẻ thắc mắc hoặc yêu cầu tư vấn cụ thể..." class="w-full p-3 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary resize-vertical"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full py-3 bg-primary text-white rounded-button hover:bg-primary/90 transition-colors duration-200 font-medium">
+                            <i class="ri-send-plane-line mr-2"></i>
+                            Gửi yêu cầu tư vấn
+                        </button>
+                        
+                        <p class="text-xs text-gray-500 text-center">* Chúng tôi cam kết bảo mật thông tin cá nhân của bạn</p>
+                    </form>
+                </div>
+
+                <!-- Contact Info & Quick Contact -->
+                <div class="space-y-8">
+                    <!-- Contact Information -->
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <h3 class="text-2xl font-bold mb-6 text-gray-900">Thông tin liên hệ</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+                                    <i class="ri-phone-fill text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-1">Hotline tư vấn</h4>
+                                    <p class="text-primary font-bold text-lg">0987 654 321</p>
+                                    <p class="text-sm text-gray-600">8:00 - 17:30, Thứ Hai - Thứ Bảy</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+                                    <i class="ri-mail-fill text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-1">Email</h4>
+                                    <p class="text-primary font-bold">info@lt365.vn</p>
+                                    <p class="text-sm text-gray-600">Phản hồi trong vòng 24 giờ</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+                                    <i class="ri-map-pin-fill text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-1">Địa chỉ văn phòng</h4>
+                                    <p class="text-gray-700">Số 123 Đường Cầu Giấy</p>
+                                    <p class="text-gray-700">Quận Cầu Giấy, Hà Nội</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+                                    <i class="ri-time-fill text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-1">Giờ làm việc</h4>
+                                    <p class="text-gray-700">8:00 - 17:30</p>
+                                    <p class="text-gray-700">Thứ Hai - Thứ Bảy</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Quick Contact -->
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <h3 class="text-2xl font-bold mb-6 text-gray-900">Liên hệ nhanh</h3>
+                        <div class="space-y-4">
+                            <a href="tel:0987654321" class="flex items-center gap-3 p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors duration-200">
+                                <i class="ri-phone-line text-blue-600 text-xl"></i>
+                                <div>
+                                    <p class="font-medium text-sm text-gray-700">Gọi ngay</p>
+                                    <p class="text-blue-600 font-semibold">0987 654 321</p>
+                                </div>
+                            </a>
+                            
+                            <a href="#" class="flex items-center gap-3 p-4 bg-green-50 rounded-lg hover:bg-green-100 transition-colors duration-200">
+                                <i class="ri-message-line text-green-600 text-xl"></i>
+                                <div>
+                                    <p class="font-medium text-sm text-gray-700">Chat Zalo</p>
+                                    <p class="text-green-600 font-semibold">0987 654 321</p>
+                                </div>
+                            </a>
+                            
+                            <a href="mailto:info@lt365.vn" class="flex items-center gap-3 p-4 bg-red-50 rounded-lg hover:bg-red-100 transition-colors duration-200">
+                                <i class="ri-mail-line text-red-600 text-xl"></i>
+                                <div>
+                                    <p class="font-medium text-sm text-gray-700">Gửi email</p>
+                                    <p class="text-red-600 font-semibold text-sm">info@lt365.vn</p>
+                                </div>
+                            </a>
+                        </div>
+                        
+                        <!-- Social Media -->
+                        <div class="mt-6 pt-6 border-t border-gray-200">
+                            <h4 class="font-semibold text-gray-900 mb-4">Theo dõi chúng tôi</h4>
+                            <div class="flex gap-3">
+                                <a href="#" class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white hover:bg-blue-700 transition-colors duration-200">
+                                    <i class="ri-facebook-fill"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-red-600 flex items-center justify-center text-white hover:bg-red-700 transition-colors duration-200">
+                                    <i class="ri-youtube-fill"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-pink-600 flex items-center justify-center text-white hover:bg-pink-700 transition-colors duration-200">
+                                    <i class="ri-instagram-fill"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-gray-900 transition-colors duration-200">
+                                    <i class="ri-tiktok-fill"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold mb-4 text-gray-900">Câu hỏi thường gặp</h2>
+                    <p class="text-lg text-gray-600">Những thắc mắc phổ biến từ phụ huynh và học sinh</p>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-lg font-semibold mb-3 text-gray-900 flex items-center">
+                            <i class="ri-question-line text-primary mr-2"></i>
+                            Dịch vụ tư vấn của LT365 có mất phí không?
+                        </h3>
+                        <p class="text-gray-700">Tư vấn cơ bản qua điện thoại và email hoàn toàn miễn phí. Chúng tôi chỉ thu phí cho các dịch vụ tư vấn chuyên sâu, lập kế hoạch học tập cá nhân hóa.</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-lg font-semibold mb-3 text-gray-900 flex items-center">
+                            <i class="ri-question-line text-primary mr-2"></i>
+                            Chúng tôi tư vấn cho những cấp học nào?
+                        </h3>
+                        <p class="text-gray-700">LT365 chuyên tư vấn cho các kỳ thi chuyển cấp: Thi vào lớp 1, lớp 6 và lớp 10. Chúng tôi có đội ngũ chuyên gia giàu kinh nghiệm cho từng cấp học.</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-lg font-semibold mb-3 text-gray-900 flex items-center">
+                            <i class="ri-question-line text-primary mr-2"></i>
+                            Thời gian phản hồi tư vấn là bao lâu?
+                        </h3>
+                        <p class="text-gray-700">Chúng tôi cam kết phản hồi trong vòng 24 giờ làm việc. Đối với các trường hợp khẩn cấp, bạn có thể gọi trực tiếp hotline để được hỗ trợ ngay lập tức.</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-lg font-semibold mb-3 text-gray-900 flex items-center">
+                            <i class="ri-question-line text-primary mr-2"></i>
+                            LT365 có hỗ trợ tư vấn online không?
+                        </h3>
+                        <p class="text-gray-700">Có, chúng tôi hỗ trợ tư vấn qua nhiều kênh: điện thoại, email, Zalo, và họp online qua Zoom/Google Meet theo yêu cầu.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <!-- Column 1 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Về LT365</h3>
+                    <p class="text-gray-300 mb-4">Cung cấp thông tin, tài liệu và tư vấn chuyên sâu về thi chuyển cấp cho phụ huynh và học sinh trên toàn quốc.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition-colors duration-200">
+                            <i class="ri-facebook-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition-colors duration-200">
+                            <i class="ri-youtube-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition-colors duration-200">
+                            <i class="ri-instagram-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition-colors duration-200">
+                            <i class="ri-tiktok-fill"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Column 2 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Danh mục</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-white">Thi vào lớp 1</a></li>
+                        <li><a href="#" class="hover:text-white">Thi vào lớp 6</a></li>
+                        <li><a href="#" class="hover:text-white">Thi vào lớp 10</a></li>
+                        <li><a href="#" class="hover:text-white">Tài liệu ôn thi</a></li>
+                        <li><a href="#" class="hover:text-white">Tin tức tuyển sinh</a></li>
+                        <li><a href="#" class="hover:text-white">Giáo viên & Trung tâm</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Hỗ trợ</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-white">Câu hỏi thường gặp</a></li>
+                        <li><a href="#" class="hover:text-white">Hướng dẫn sử dụng</a></li>
+                        <li><a href="#" class="hover:text-white">Chính sách bảo mật</a></li>
+                        <li><a href="#" class="hover:text-white">Điều khoản sử dụng</a></li>
+                        <li><a href="#" class="hover:text-white">Quy định thanh toán</a></li>
+                        <li><a href="#" class="hover:text-white">Liên hệ hỗ trợ</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 4 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Liên hệ</h3>
+                    <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center text-primary mt-1 mr-2">
+                                <i class="ri-phone-fill"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium text-white">Hotline</p>
+                                <p>0987 654 321</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center text-primary mt-1 mr-2">
+                                <i class="ri-mail-fill"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium text-white">Email</p>
+                                <p>info@lt365.vn</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center text-primary mt-1 mr-2">
+                                <i class="ri-map-pin-fill"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium text-white">Địa chỉ</p>
+                                <p>Số 123 Đường Cầu Giấy, Quận Cầu Giấy, Hà Nội</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center text-primary mt-1 mr-2">
+                                <i class="ri-time-fill"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium text-white">Giờ làm việc</p>
+                                <p>8:00 - 17:30, Thứ Hai - Thứ Bảy</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-6">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2025 LT365. Tất cả quyền được bảo lưu.</p>
+                    <div class="flex gap-4 text-sm text-gray-400">
+                        <a href="#" class="hover:text-white">Chính sách bảo mật</a>
+                        <span>|</span>
+                        <a href="#" class="hover:text-white">Điều khoản sử dụng</a>
+                        <span>|</span>
+                        <a href="#" class="hover:text-white">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Form validation
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const fullname = document.getElementById('fullname').value.trim();
+            const email = document.getElementById('email').value.trim();
+            
+            if (!fullname) {
+                alert('Vui lòng nhập họ và tên');
+                return;
+            }
+            
+            if (!email) {
+                alert('Vui lòng nhập email');
+                return;
+            }
+            
+            // Simulate form submission
+            alert('Cảm ơn bạn đã gửi yêu cầu! Chúng tôi sẽ liên hệ với bạn trong vòng 24 giờ.');
+            this.reset();
+        });
+
+        // Phone click tracking
+        document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+            link.addEventListener('click', function() {
+                console.log('Phone call initiated');
+            });
+        });
+
+        // Email click tracking
+        document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
+            link.addEventListener('click', function() {
+                console.log('Email client opened');
+            });
+        });
+    </script>
+</body>
+</html>

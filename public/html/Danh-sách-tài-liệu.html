@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tài liệu & Đề thi - Kho tài liệu ôn thi chuyển cấp | LT365</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#4f46e5',secondary:'#f59e0b'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .dropdown {
+            display: none;
+        }
+        .dropdown-trigger:hover .dropdown {
+            display: block;
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .filter-tag {
+            transition: all 0.2s ease;
+        }
+        .filter-tag:hover {
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <!-- Top Header -->
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="font-['Pacifico'] text-2xl text-primary">LT365</a>
+            
+            <!-- Search Bar -->
+            <div class="w-2/5 relative">
+                <input type="search" placeholder="Tìm kiếm tài liệu, đề thi..." class="w-full py-2 pl-10 pr-4 border border-gray-200 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm">
+                <div class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center text-gray-400">
+                    <i class="ri-search-line"></i>
+                </div>
+            </div>
+            
+            <!-- Right Section -->
+            <div class="flex items-center gap-6">
+                <!-- Hotline -->
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                        <i class="ri-phone-line"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500">Hotline</p>
+                        <p class="text-sm font-medium">0987 654 321</p>
+                    </div>
+                </div>
+                
+                <!-- Auth Buttons -->
+                <div class="flex items-center gap-3">
+                    <button class="px-4 py-2 text-primary border border-primary rounded-button hover:bg-primary/5 transition-colors duration-200 text-sm font-medium whitespace-nowrap !rounded-button">Đăng nhập</button>
+                    <button class="px-4 py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition-colors duration-200 text-sm font-medium whitespace-nowrap !rounded-button">Đăng ký</button>
+                </div>
+            </div>
+        </div>
+        <!-- Main Menu -->
+        <nav class="bg-primary text-white">
+            <div class="container mx-auto px-4">
+                <ul class="flex">
+                    <li class="relative">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80">Trang chủ</a>
+                    </li>
+                    <li class="relative dropdown-trigger">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80 flex items-center">
+                            Thi chuyển cấp
+                            <i class="ri-arrow-down-s-line ml-1"></i>
+                        </a>
+                        <div class="dropdown absolute top-full left-0 bg-white text-gray-800 shadow-lg rounded-md w-56 z-50">
+                            <div class="py-2">
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Thi vào lớp 1</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Thi vào lớp 6</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Thi vào lớp 10</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="relative dropdown-trigger">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80 flex items-center">
+                            Trường học
+                            <i class="ri-arrow-down-s-line ml-1"></i>
+                        </a>
+                        <div class="dropdown absolute top-full left-0 bg-white text-gray-800 shadow-lg rounded-md w-56 z-50">
+                            <div class="py-2">
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Tiểu học</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">THCS</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">THPT</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="relative dropdown-trigger">
+                        <a href="#" class="block px-4 py-3 bg-primary/80 hover:bg-primary/80 flex items-center">
+                            Tài liệu & Đề thi
+                            <i class="ri-arrow-down-s-line ml-1"></i>
+                        </a>
+                        <div class="dropdown absolute top-full left-0 bg-white text-gray-800 shadow-lg rounded-md w-56 z-50">
+                            <div class="py-2">
+                                <a href="#" class="block px-4 py-2 bg-primary/10 text-primary hover:bg-primary/20">Tất cả tài liệu</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Tiểu học</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">THCS</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">THPT</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="relative dropdown-trigger">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80 flex items-center">
+                            Tin tức
+                            <i class="ri-arrow-down-s-line ml-1"></i>
+                        </a>
+                        <div class="dropdown absolute top-full left-0 bg-white text-gray-800 shadow-lg rounded-md w-56 z-50">
+                            <div class="py-2">
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Thông tin tuyển sinh</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Tư vấn chọn trường</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Kinh nghiệm thi cử</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="relative">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80">Giáo viên & Trung tâm</a>
+                    </li>
+                    <li class="relative">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80">Liên hệ</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="bg-gray-100 py-3">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center text-sm text-gray-600">
+                <a href="#" class="hover:text-primary">Trang chủ</a>
+                <span class="mx-2">
+                    <i class="ri-arrow-right-s-line"></i>
+                </span>
+                <span class="text-primary font-medium">Tài liệu & Đề thi</span>
+            </div>
+        </div>
+    </div>
+    <!-- Hero Banner -->
+    <section class="relative overflow-hidden bg-gray-100">
+        <div class="container mx-auto px-4 py-6">
+            <div class="relative w-full overflow-hidden rounded-lg shadow-lg" style="height: 350px; background-image: url('images/bb4d0c34d4f0b44aedef392759b46b9d.jpg'); background-size: cover; background-position: center;">
+                <div class="absolute inset-0 bg-gradient-to-r from-primary/80 to-transparent"></div>
+                <div class="absolute inset-0 flex items-center">
+                    <div class="w-full container mx-auto px-4 md:px-10 flex">
+                        <div class="w-1/2 text-white">
+                            <h1 class="text-4xl font-bold mb-4">Tài liệu & Đề thi chuyển cấp</h1>
+                            <p class="text-lg mb-6">Kho tài liệu phong phú với hàng nghìn đề thi, bài tập và tài liệu ôn tập cho mọi cấp học từ tiểu học đến THPT</p>
+                            <div class="flex gap-4">
+                                <button class="px-6 py-3 bg-white text-primary font-medium rounded-button hover:bg-gray-100 transition-colors duration-200 whitespace-nowrap !rounded-button">Tìm tài liệu</button>
+                                <button class="px-6 py-3 bg-secondary text-white font-medium rounded-button hover:bg-secondary/90 transition-colors duration-200 whitespace-nowrap !rounded-button">Tải miễn phí</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="py-8 bg-white border-b border-gray-200">
+        <div class="container mx-auto px-4">
+            <!-- Quick Filter Tags -->
+            <div class="flex flex-wrap items-center gap-3 mb-6">
+                <span class="text-sm font-medium text-gray-700">Lọc nhanh:</span>
+                <button class="filter-tag px-4 py-2 bg-primary text-white text-sm rounded-full hover:bg-primary/90 transition-all duration-200">Tất cả</button>
+                <button class="filter-tag px-4 py-2 bg-gray-100 text-gray-700 text-sm rounded-full hover:bg-gray-200 transition-all duration-200">Miễn phí</button>
+                <button class="filter-tag px-4 py-2 bg-gray-100 text-gray-700 text-sm rounded-full hover:bg-gray-200 transition-all duration-200">Mới nhất</button>
+                <button class="filter-tag px-4 py-2 bg-gray-100 text-gray-700 text-sm rounded-full hover:bg-gray-200 transition-all duration-200">Phổ biến</button>
+            </div>
+
+            <!-- Advanced Filters -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <!-- Cấp học -->
+                <div class="relative">
+                    <select class="w-full py-2 px-3 border border-gray-200 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm">
+                        <option value="">Tất cả cấp học</option>
+                        <option value="tieu-hoc">Tiểu học</option>
+                        <option value="thcs">THCS</option>
+                        <option value="thpt">THPT</option>
+                    </select>
+                </div>
+
+                <!-- Môn học -->
+                <div class="relative">
+                    <select class="w-full py-2 px-3 border border-gray-200 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm">
+                        <option value="">Tất cả môn học</option>
+                        <option value="toan">Toán</option>
+                        <option value="van">Ngữ văn</option>
+                        <option value="anh">Tiếng Anh</option>
+                        <option value="ly">Vật lý</option>
+                        <option value="hoa">Hóa học</option>
+                        <option value="sinh">Sinh học</option>
+                        <option value="su">Lịch sử</option>
+                        <option value="dia">Địa lý</option>
+                    </select>
+                </div>
+
+                <!-- Loại tài liệu -->
+                <div class="relative">
+                    <select class="w-full py-2 px-3 border border-gray-200 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm">
+                        <option value="">Tất cả loại</option>
+                        <option value="de-thi">Đề thi</option>
+                        <option value="tai-lieu">Tài liệu ôn tập</option>
+                        <option value="bai-tap">Bài tập</option>
+                        <option value="giai-dap">Giải đáp</option>
+                    </select>
+                </div>
+
+                <!-- Sắp xếp -->
+                <div class="relative">
+                    <select class="w-full py-2 px-3 border border-gray-200 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm">
+                        <option value="newest">Mới nhất</option>
+                        <option value="popular">Phổ biến nhất</option>
+                        <option value="download">Nhiều lượt tải</option>
+                        <option value="name">Tên A-Z</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Document Grid Section -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <!-- Stats Bar -->
+            <div class="flex items-center justify-between mb-8">
+                <div class="flex items-center gap-4">
+                    <p class="text-gray-600">Tìm thấy <span class="font-semibold text-primary">2,847</span> tài liệu</p>
+                    <div class="flex items-center gap-2">
+                        <button class="p-2 border border-gray-200 rounded-button hover:bg-gray-100 transition-colors duration-200">
+                            <i class="ri-grid-line"></i>
+                        </button>
+                        <button class="p-2 border border-gray-200 rounded-button hover:bg-gray-100 transition-colors duration-200">
+                            <i class="ri-list-unordered"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 text-sm text-gray-600">
+                    <span>Hiển thị:</span>
+                    <select class="py-1 px-2 border border-gray-200 rounded text-sm">
+                        <option value="12">12</option>
+                        <option value="24">24</option>
+                        <option value="48">48</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Document Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+                <!-- Document Card 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300">
+                    <div class="h-40 bg-gray-100">
+                        <img src="images/a63d36922ba8edd9e7f86405d8809253.jpg" alt="Đề thi Toán lớp 1" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Toán</span>
+                            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Miễn phí</span>
+                        </div>
+                        <h3 class="font-medium mb-2 line-clamp-2 h-12">Bộ đề thi Toán vào lớp 1 - Trường Chu Văn An 2025</h3>
+                        <div class="flex items-center text-xs text-gray-500 mb-3">
+                            <span class="flex items-center mr-4">
+                                <i class="ri-download-line mr-1"></i> 1,542
+                            </span>
+                            <span class="flex items-center">
+                                <i class="ri-calendar-line mr-1"></i> 15/06/2025
+                            </span>
+                        </div>
+                        <button class="w-full py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition-colors duration-200 text-sm font-medium">Tải về</button>
+                    </div>
+                </div>
+
+                <!-- Document Card 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300">
+                    <div class="h-40 bg-gray-100">
+                        <img src="images/04a085532c182789a187a544499514e7.jpg" alt="Tài liệu Văn THCS" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">Văn</span>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">10,000 VND</span>
+                        </div>
+                        <h3 class="font-medium mb-2 line-clamp-2 h-12">Tuyển tập đề thi Văn vào lớp 6 - THCS chuyên</h3>
+                        <div class="flex items-center text-xs text-gray-500 mb-3">
+                            <span class="flex items-center mr-4">
+                                <i class="ri-download-line mr-1"></i> 856
+                            </span>
+                            <span class="flex items-center">
+                                <i class="ri-calendar-line mr-1"></i> 12/06/2025
+                            </span>
+                        </div>
+                        <button class="w-full py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition-colors duration-200 text-sm font-medium">Mua ngay</button>
+                    </div>
+                </div>
+
+                <!-- Document Card 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300">
+                    <div class="h-40 bg-gray-100">
+                        <img src="images/c81e3e4da2dd4a65cea3ee3c2e9c6599.jpg" alt="Đề thi Tiếng Anh" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">Tiếng Anh</span>
+                            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Miễn phí</span>
+                        </div>
+                        <h3 class="font-medium mb-2 line-clamp-2 h-12">Bộ đề thi Tiếng Anh vào lớp 10 - Có đáp án</h3>
+                        <div class="flex items-center text-xs text-gray-500 mb-3">
+                            <span class="flex items-center mr-4">
+                                <i class="ri-download-line mr-1"></i> 2,134
+                            </span>
+                            <span class="flex items-center">
+                                <i class="ri-calendar-line mr-1"></i> 10/06/2025
+                            </span>
+                        </div>
+                        <button class="w-full py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition-colors duration-200 text-sm font-medium">Tải về</button>
+                    </div>
+                </div>
+
+                <!-- Document Card 4 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300">
+                    <div class="h-40 bg-gray-100">
+                        <img src="images/e1be07de4afbf9bc2888c78863f5b3fd.jpg" alt="Tài liệu Toán THPT" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Toán</span>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">15,000 VND</span>
+                        </div>
+                        <h3 class="font-medium mb-2 line-clamp-2 h-12">Công thức Toán THPT - Tổng hợp đầy đủ</h3>
+                        <div class="flex items-center text-xs text-gray-500 mb-3">
+                            <span class="flex items-center mr-4">
+                                <i class="ri-download-line mr-1"></i> 967
+                            </span>
+                            <span class="flex items-center">
+                                <i class="ri-calendar-line mr-1"></i> 08/06/2025
+                            </span>
+                        </div>
+                        <button class="w-full py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition-colors duration-200 text-sm font-medium">Mua ngay</button>
+                    </div>
+                </div>
+                <!-- Document Card 5 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300">
+                    <div class="h-40 bg-gray-100">
+                        <img src="images/0668b9e8706c79925cfba198a4a0ff35.jpg" alt="Tài liệu Vật lý" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Vật lý</span>
+                            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Miễn phí</span>
+                        </div>
+                        <h3 class="font-medium mb-2 line-clamp-2 h-12">Đề thi Vật lý vào lớp 10 - Chuyên Lê Hồng Phong</h3>
+                        <div class="flex items-center text-xs text-gray-500 mb-3">
+                            <span class="flex items-center mr-4">
+                                <i class="ri-download-line mr-1"></i> 1,245
+                            </span>
+                            <span class="flex items-center">
+                                <i class="ri-calendar-line mr-1"></i> 05/06/2025
+                            </span>
+                        </div>
+                        <button class="w-full py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition-colors duration-200 text-sm font-medium">Tải về</button>
+                    </div>
+                </div>
+
+                <!-- Document Card 6 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300">
+                    <div class="h-40 bg-gray-100">
+                        <img src="images/2ea343b800b7ca44c1844291afa997e9.jpg" alt="Tài liệu Hóa học" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded-full">Hóa học</span>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">20,000 VND</span>
+                        </div>
+                        <h3 class="font-medium mb-2 line-clamp-2 h-12">Bài tập Hóa học 9 - Ôn thi vào 10</h3>
+                        <div class="flex items-center text-xs text-gray-500 mb-3">
+                            <span class="flex items-center mr-4">
+                                <i class="ri-download-line mr-1"></i> 723
+                            </span>
+                            <span class="flex items-center">
+                                <i class="ri-calendar-line mr-1"></i> 03/06/2025
+                            </span>
+                        </div>
+                        <button class="w-full py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition-colors duration-200 text-sm font-medium">Mua ngay</button>
+                    </div>
+                </div>
+
+                <!-- Document Card 7 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300">
+                    <div class="h-40 bg-gray-100">
+                        <img src="images/a63d36922ba8edd9e7f86405d8809253.jpg" alt="Tài liệu Sinh học" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="px-2 py-1 bg-teal-100 text-teal-800 text-xs rounded-full">Sinh học</span>
+                            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Miễn phí</span>
+                        </div>
+                        <h3 class="font-medium mb-2 line-clamp-2 h-12">Tóm tắt Sinh học 9 - Chuẩn bị thi lớp 10</h3>
+                        <div class="flex items-center text-xs text-gray-500 mb-3">
+                            <span class="flex items-center mr-4">
+                                <i class="ri-download-line mr-1"></i> 1,087
+                            </span>
+                            <span class="flex items-center">
+                                <i class="ri-calendar-line mr-1"></i> 01/06/2025
+                            </span>
+                        </div>
+                        <button class="w-full py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition-colors duration-200 text-sm font-medium">Tải về</button>
+                    </div>
+                </div>
+
+                <!-- Document Card 8 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300">
+                    <div class="h-40 bg-gray-100">
+                        <img src="images/04a085532c182789a187a544499514e7.jpg" alt="Tài liệu Lịch sử" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="px-2 py-1 bg-amber-100 text-amber-800 text-xs rounded-full">Lịch sử</span>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">12,000 VND</span>
+                        </div>
+                        <h3 class="font-medium mb-2 line-clamp-2 h-12">Đề cương Lịch sử 9 - Thi vào 10 năm 2025</h3>
+                        <div class="flex items-center text-xs text-gray-500 mb-3">
+                            <span class="flex items-center mr-4">
+                                <i class="ri-download-line mr-1"></i> 654
+                            </span>
+                            <span class="flex items-center">
+                                <i class="ri-calendar-line mr-1"></i> 28/05/2025
+                            </span>
+                        </div>
+                        <button class="w-full py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition-colors duration-200 text-sm font-medium">Mua ngay</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="flex items-center justify-center gap-2">
+                <button class="px-3 py-2 border border-gray-200 rounded-button hover:bg-gray-100 transition-colors duration-200" disabled>
+                    <i class="ri-arrow-left-line"></i>
+                </button>
+                <button class="px-3 py-2 bg-primary text-white rounded-button">1</button>
+                <button class="px-3 py-2 border border-gray-200 rounded-button hover:bg-gray-100 transition-colors duration-200">2</button>
+                <button class="px-3 py-2 border border-gray-200 rounded-button hover:bg-gray-100 transition-colors duration-200">3</button>
+                <span class="px-3 py-2 text-gray-500">...</span>
+                <button class="px-3 py-2 border border-gray-200 rounded-button hover:bg-gray-100 transition-colors duration-200">24</button>
+                <button class="px-3 py-2 border border-gray-200 rounded-button hover:bg-gray-100 transition-colors duration-200">
+                    <i class="ri-arrow-right-line"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-12 bg-primary text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-4">Không tìm thấy tài liệu phù hợp?</h2>
+            <p class="text-lg mb-6 opacity-90">Để lại yêu cầu của bạn, chúng tôi sẽ tìm kiếm và gửi tài liệu phù hợp nhất</p>
+            <button class="px-8 py-3 bg-white text-primary font-medium rounded-button hover:bg-gray-100 transition-colors duration-200">Gửi yêu cầu</button>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <!-- Column 1 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Về LT365</h3>
+                    <p class="text-gray-300 mb-4">Cung cấp thông tin, tài liệu và tư vấn chuyên sâu về thi chuyển cấp cho phụ huynh và học sinh trên toàn quốc.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition-colors duration-200">
+                            <i class="ri-facebook-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition-colors duration-200">
+                            <i class="ri-youtube-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition-colors duration-200">
+                            <i class="ri-instagram-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition-colors duration-200">
+                            <i class="ri-tiktok-fill"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Column 2 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Danh mục</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-white">Thi vào lớp 1</a></li>
+                        <li><a href="#" class="hover:text-white">Thi vào lớp 6</a></li>
+                        <li><a href="#" class="hover:text-white">Thi vào lớp 10</a></li>
+                        <li><a href="#" class="hover:text-white">Tài liệu ôn thi</a></li>
+                        <li><a href="#" class="hover:text-white">Tin tức tuyển sinh</a></li>
+                        <li><a href="#" class="hover:text-white">Giáo viên & Trung tâm</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Hỗ trợ</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-white">Câu hỏi thường gặp</a></li>
+                        <li><a href="#" class="hover:text-white">Hướng dẫn sử dụng</a></li>
+                        <li><a href="#" class="hover:text-white">Chính sách bảo mật</a></li>
+                        <li><a href="#" class="hover:text-white">Điều khoản sử dụng</a></li>
+                        <li><a href="#" class="hover:text-white">Quy định thanh toán</a></li>
+                        <li><a href="#" class="hover:text-white">Liên hệ hỗ trợ</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 4 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Liên hệ</h3>
+                    <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center text-primary mt-1 mr-2">
+                                <i class="ri-phone-fill"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium">Hotline</p>
+                                <p>0987 654 321</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center text-primary mt-1 mr-2">
+                                <i class="ri-mail-fill"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium">Email</p>
+                                <p>support@lt365.vn</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center text-primary mt-1 mr-2">
+                                <i class="ri-map-pin-fill"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium">Địa chỉ</p>
+                                <p>123 Đường ABC, Quận 1, TP.HCM</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Footer Bottom -->
+            <div class="border-t border-gray-700 pt-6">
+                <div class="flex flex-col md:flex-row items-center justify-between">
+                    <p class="text-gray-400 text-sm">© 2025 LT365. Tất cả quyền được bảo lưu.</p>
+                    <div class="flex items-center gap-4 mt-4 md:mt-0">
+                        <a href="#" class="text-gray-400 hover:text-white text-sm">Chính sách bảo mật</a>
+                        <span class="text-gray-600">|</span>
+                        <a href="#" class="text-gray-400 hover:text-white text-sm">Điều khoản sử dụng</a>
+                        <span class="text-gray-600">|</span>
+                        <a href="#" class="text-gray-400 hover:text-white text-sm">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Filter functionality
+            const filterTags = document.querySelectorAll('.filter-tag');
+            
+            filterTags.forEach(tag => {
+                tag.addEventListener('click', function() {
+                    // Remove active state from all tags
+                    filterTags.forEach(t => {
+                        t.classList.remove('bg-primary', 'text-white');
+                        t.classList.add('bg-gray-100', 'text-gray-700');
+                    });
+                    
+                    // Add active state to clicked tag
+                    this.classList.remove('bg-gray-100', 'text-gray-700');
+                    this.classList.add('bg-primary', 'text-white');
+                });
+            });
+
+            // Dropdown functionality
+            const dropdownTriggers = document.querySelectorAll('.dropdown-trigger');
+            
+            dropdownTriggers.forEach(trigger => {
+                trigger.addEventListener('mouseenter', function() {
+                    const dropdown = this.querySelector('.dropdown');
+                    if (dropdown) {
+                        dropdown.style.display = 'block';
+                    }
+                });
+                
+                trigger.addEventListener('mouseleave', function() {
+                    const dropdown = this.querySelector('.dropdown');
+                    if (dropdown) {
+                        dropdown.style.display = 'none';
+                    }
+                });
+            });
+
+            // Search functionality
+            const searchInput = document.querySelector('input[type="search"]');
+            if (searchInput) {
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        const searchTerm = this.value.trim();
+                        if (searchTerm) {
+                            console.log('Searching for:', searchTerm);
+                            // Add actual search functionality here
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

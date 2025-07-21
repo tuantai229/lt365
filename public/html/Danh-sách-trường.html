@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trường THCS - Danh sách trường Trung học cơ sở | LT365</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#4f46e5',secondary:'#f59e0b'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .dropdown {
+            display: none;
+        }
+        .dropdown-trigger:hover .dropdown {
+            display: block;
+        }
+        .nested-dropdown {
+            display: none;
+        }
+        .nested-dropdown-trigger:hover .nested-dropdown {
+            display: block;
+        }
+        .filter-checkbox:checked + .filter-label {
+            background-color: #4f46e5;
+            color: white;
+        }
+        .view-toggle.active {
+            background-color: #4f46e5;
+            color: white;
+        }
+        input[type="search"]::-webkit-search-decoration,
+        input[type="search"]::-webkit-search-cancel-button,
+        input[type="search"]::-webkit-search-results-button,
+        input[type="search"]::-webkit-search-results-decoration {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <!-- Top Header -->
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="font-['Pacifico'] text-2xl text-primary">LT365</a>
+            
+            <!-- Search Bar -->
+            <div class="w-2/5 relative">
+                <input type="search" placeholder="Tìm kiếm tài liệu, trường học..." class="w-full py-2 pl-10 pr-4 border border-gray-200 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm">
+                <div class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center text-gray-400">
+                    <i class="ri-search-line"></i>
+                </div>
+            </div>
+            
+            <!-- Right Section -->
+            <div class="flex items-center gap-6">
+                <!-- Hotline -->
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                        <i class="ri-phone-line"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500">Hotline</p>
+                        <p class="text-sm font-medium">0987 654 321</p>
+                    </div>
+                </div>
+                
+                <!-- Auth Buttons -->
+                <div class="flex items-center gap-3">
+                    <button class="px-4 py-2 text-primary border border-primary rounded-button hover:bg-primary/5 transition-colors duration-200 text-sm font-medium whitespace-nowrap !rounded-button">Đăng nhập</button>
+                    <button class="px-4 py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition-colors duration-200 text-sm font-medium whitespace-nowrap !rounded-button">Đăng ký</button>
+                </div>
+            </div>
+        </div>
+        <!-- Main Menu -->
+        <nav class="bg-primary text-white">
+            <div class="container mx-auto px-4">
+                <ul class="flex">
+                    <li class="relative">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80">Trang chủ</a>
+                    </li>
+                    <li class="relative dropdown-trigger">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80 flex items-center">
+                            Thi chuyển cấp
+                            <i class="ri-arrow-down-s-line ml-1"></i>
+                        </a>
+                        <div class="dropdown absolute top-full left-0 bg-white text-gray-800 shadow-lg rounded-md w-56 z-50">
+                            <div class="py-2">
+                                <div class="relative nested-dropdown-trigger">
+                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 flex items-center justify-between">
+                                        <span>Thi vào lớp 1</span>
+                                        <i class="ri-arrow-right-s-line"></i>
+                                    </a>
+                                    <div class="nested-dropdown absolute top-0 left-full bg-white text-gray-800 shadow-lg rounded-md w-56">
+                                        <div class="py-2">
+                                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Thông tin</a>
+                                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Danh sách</a>
+                                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Đề thi</a>
+                                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Tư vấn</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="relative nested-dropdown-trigger">
+                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 flex items-center justify-between">
+                                        <span>Thi vào lớp 6</span>
+                                        <i class="ri-arrow-right-s-line"></i>
+                                    </a>
+                                    <div class="nested-dropdown absolute top-0 left-full bg-white text-gray-800 shadow-lg rounded-md w-56">
+                                        <div class="py-2">
+                                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Thông tin</a>
+                                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Danh sách</a>
+                                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Đề thi</a>
+                                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Tư vấn</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="relative nested-dropdown-trigger">
+                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 flex items-center justify-between">
+                                        <span>Thi vào lớp 10</span>
+                                        <i class="ri-arrow-right-s-line"></i>
+                                    </a>
+                                    <div class="nested-dropdown absolute top-0 left-full bg-white text-gray-800 shadow-lg rounded-md w-56">
+                                        <div class="py-2">
+                                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Thông tin</a>
+                                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Danh sách</a>
+                                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Đề thi</a>
+                                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Tư vấn</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="relative dropdown-trigger">
+                        <a href="#" class="block px-4 py-3 bg-primary/80 hover:bg-primary/80 flex items-center">
+                            Trường học
+                            <i class="ri-arrow-down-s-line ml-1"></i>
+                        </a>
+                        <div class="dropdown absolute top-full left-0 bg-white text-gray-800 shadow-lg rounded-md w-56 z-50">
+                            <div class="py-2">
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Tiểu học</a>
+                                <a href="#" class="block px-4 py-2 bg-primary/10 text-primary hover:bg-primary/20">THCS</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">THPT</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="relative dropdown-trigger">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80 flex items-center">
+                            Tài liệu
+                            <i class="ri-arrow-down-s-line ml-1"></i>
+                        </a>
+                        <div class="dropdown absolute top-full left-0 bg-white text-gray-800 shadow-lg rounded-md w-56 z-50">
+                            <div class="py-2">
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Sách tham khảo</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Tài liệu ôn thi</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="relative dropdown-trigger">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80 flex items-center">
+                            Tin tức
+                            <i class="ri-arrow-down-s-line ml-1"></i>
+                        </a>
+                        <div class="dropdown absolute top-full left-0 bg-white text-gray-800 shadow-lg rounded-md w-56 z-50">
+                            <div class="py-2">
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Tin tuyển sinh</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Thành tích học sinh</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="relative dropdown-trigger">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80 flex items-center">
+                            Tư vấn
+                            <i class="ri-arrow-down-s-line ml-1"></i>
+                        </a>
+                        <div class="dropdown absolute top-full left-0 bg-white text-gray-800 shadow-lg rounded-md w-56 z-50">
+                            <div class="py-2">
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Tư vấn chọn trường</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Kinh nghiệm thi cử</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="relative">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80">Giáo viên & Trung tâm</a>
+                    </li>
+                    <li class="relative">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80">Liên hệ</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="bg-gray-100 py-3">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center text-sm text-gray-600">
+                <a href="#" class="hover:text-primary">Trang chủ</a>
+                <span class="mx-2">
+                    <i class="ri-arrow-right-s-line"></i>
+                </span>
+                <a href="#" class="hover:text-primary">Trường học</a>
+                <span class="mx-2">
+                    <i class="ri-arrow-right-s-line"></i>
+                </span>
+                <span class="text-primary font-medium">THCS</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Banner -->
+    <section class="relative overflow-hidden bg-gray-100">
+        <div class="container mx-auto px-4 py-6">
+            <div class="relative w-full overflow-hidden rounded-lg shadow-lg" style="height: 300px; background-image: url('images/3d7d5e0502820a5e09cf3fb76caa9d88.jpg'); background-size: cover; background-position: center;">
+                <div class="absolute inset-0 bg-gradient-to-r from-primary/80 to-transparent"></div>
+                <div class="absolute inset-0 flex items-center">
+                    <div class="w-full container mx-auto px-4 md:px-10 flex">
+                        <div class="w-2/3 text-white">
+                            <h1 class="text-3xl font-bold mb-3">Danh sách trường THCS</h1>
+                            <p class="text-lg mb-4">Khám phá và tìm hiểu thông tin chi tiết về các trường Trung học cơ sở chất lượng cao trên toàn quốc</p>
+                            <div class="flex items-center gap-6 text-sm">
+                                <div class="flex items-center gap-2">
+                                    <i class="ri-building-4-line text-lg"></i>
+                                    <span>1,200+ trường THCS</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i class="ri-map-pin-line text-lg"></i>
+                                    <span>34 tỉnh thành</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i class="ri-information-line text-lg"></i>
+                                    <span>Cập nhật 2025</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Filter & Search Section -->
+    <section class="py-8 bg-white border-b border-gray-200">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row gap-6">
+                <!-- Search Bar -->
+                <div class="flex-1">
+                    <div class="relative">
+                        <input type="search" placeholder="Tìm kiếm tên trường, địa chỉ..." class="w-full py-3 pl-12 pr-4 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
+                        <div class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center text-gray-400">
+                            <i class="ri-search-line"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quick Filters -->
+                <div class="flex flex-wrap gap-3">
+                    <!-- District Filter -->
+                    <div class="relative">
+                        <select class="appearance-none bg-white border border-gray-300 rounded-button px-4 py-3 pr-10 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
+                            <option value="">Tất cả cấp học</option>
+                            <option value="tieu-hoc">Tiểu học</option>
+                            <option value="thcs">THCS</option>
+                            <option value="thpt">THPT</option>
+                        </select>
+                        <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                            <i class="ri-arrow-down-s-line text-gray-400"></i>
+                        </div>
+                    </div>
+
+                    <!-- Location Filter -->
+                    <div class="relative">
+                        <select class="appearance-none bg-white border border-gray-300 rounded-button px-4 py-3 pr-10 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
+                            <option value="">Tỉnh/Thành phố</option>
+                            <option value="ha-noi">Hà Nội</option>
+                            <option value="ho-chi-minh">TP. Hồ Chí Minh</option>
+                            <option value="da-nang">Đà Nẵng</option>
+                            <option value="hai-phong">Hải Phòng</option>
+                            <option value="can-tho">Cần Thơ</option>
+                        </select>
+                        <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                            <i class="ri-arrow-down-s-line text-gray-400"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Type Filter -->
+                    <div class="relative">
+                        <select class="appearance-none bg-white border border-gray-300 rounded-button px-4 py-3 pr-10 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
+                            <option value="">Loại trường</option>
+                            <option value="cong-lap">Công lập</option>
+                            <option value="tu-thuc">Tư thục</option>
+                            <option value="dan-lap">Dân lập</option>
+                        </select>
+                        <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                            <i class="ri-arrow-down-s-line text-gray-400"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Search Button -->
+                    <button class="px-6 py-3 bg-primary text-white rounded-button hover:bg-primary/90 transition-colors duration-200 flex items-center gap-2 font-medium">
+                        <i class="ri-search-line"></i>
+                        <span>Tìm trường</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="py-8 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="bg-white rounded-lg shadow-sm p-6 text-center">
+                    <div class="text-3xl font-bold text-primary mb-2">1,234</div>
+                    <p class="text-gray-600">Trường THCS</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-sm p-6 text-center">
+                    <div class="text-3xl font-bold text-primary mb-2">63</div>
+                    <p class="text-gray-600">Tỉnh/Thành phố</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-sm p-6 text-center">
+                    <div class="text-3xl font-bold text-primary mb-2">850+</div>
+                    <p class="text-gray-600">Trường công lập</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-sm p-6 text-center">
+                    <div class="text-3xl font-bold text-primary mb-2">380+</div>
+                    <p class="text-gray-600">Trường tư thục</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Results Header & Sort -->
+    <section class="py-6 bg-white border-b border-gray-200">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <!-- Results Info -->
+                <div>
+                    <h2 class="text-xl font-bold text-gray-800">Tìm thấy 247 trường THCS</h2>
+                    <p class="text-sm text-gray-600 mt-1">Hiển thị kết quả cho: <span class="font-medium">Tất cả tỉnh thành</span></p>
+                </div>
+                
+                <!-- Sort & View Options -->
+                <div class="flex items-center gap-4">
+                    <!-- Sort -->
+                    <div class="flex items-center gap-2">
+                        <span class="text-sm text-gray-600">Sắp xếp:</span>
+                        <select class="appearance-none bg-white border border-gray-300 rounded-button px-3 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm">
+                            <option value="name">Tên trường A-Z</option>
+                            <option value="location">Khu vực</option>
+                            <option value="type">Loại trường</option>
+                            <option value="updated">Mới cập nhật</option>
+                        </select>
+                        <div class="absolute right-2 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                            <i class="ri-arrow-down-s-line text-gray-400 text-sm"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- View Toggle -->
+                    <div class="flex items-center border border-gray-300 rounded-button overflow-hidden">
+                        <button class="view-toggle active px-3 py-2 text-sm" onclick="switchView('grid')">
+                            <i class="ri-layout-grid-line"></i>
+                        </button>
+                        <button class="view-toggle px-3 py-2 text-sm border-l border-gray-300" onclick="switchView('list')">
+                            <i class="ri-list-unordered"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- School List Section -->
+    <section class="py-8 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div id="school-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- School Card 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300">
+                    <div class="h-40 bg-gray-100">
+                        <img src="images/62a2bfa0ddfca1caac1f5c907d2661e1.jpg" alt="THCS Nguyễn Tất Thành" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg mb-1">THCS Nguyễn Tất Thành</h3>
+                                <p class="text-sm text-gray-600 flex items-center">
+                                    <i class="ri-map-pin-line mr-1"></i>
+                                    Quận Cầu Giấy, Hà Nội
+                                </p>
+                            </div>
+                            <button class="text-gray-400 hover:text-red-500 transition-colors duration-200">
+                                <i class="ri-heart-line text-lg"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="flex gap-2 mb-4">
+                            <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Công lập</span>
+                            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Song ngữ</span>
+                            <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">STEM</span>
+                        </div>
+                        
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600 flex items-center">
+                                    <i class="ri-group-line mr-2 text-primary"></i>
+                                    Chỉ tiêu:
+                                </span>
+                                <span class="font-medium">320 học sinh</span>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600 flex items-center">
+                                    <i class="ri-money-dollar-circle-line mr-2 text-primary"></i>
+                                    Học phí:
+                                </span>
+                                <span class="font-medium text-green-600">Miễn phí</span>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600 flex items-center">
+                                    <i class="ri-calendar-line mr-2 text-primary"></i>
+                                    Tuyển sinh:
+                                </span>
+                                <span class="font-medium">Tháng 6/2025</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-2">
+                            <button class="flex-1 py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition-colors duration-200 text-sm font-medium">
+                                Xem chi tiết
+                            </button>
+                            <button class="px-3 py-2 border border-gray-300 rounded-button hover:bg-gray-50 transition-colors duration-200">
+                                <i class="ri-phone-line text-primary"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- School Card 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300">
+                    <div class="h-40 bg-gray-100">
+                        <img src="images/62a2bfa0ddfca1caac1f5c907d2661e1.jpg" alt="THCS Lê Quý Đôn" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg mb-1">THCS Lê Quý Đôn</h3>
+                                <p class="text-sm text-gray-600 flex items-center">
+                                    <i class="ri-map-pin-line mr-1"></i>
+                                    Quận Hai Bà Trưng, Hà Nội
+                                </p>
+                            </div>
+                            <button class="text-gray-400 hover:text-red-500 transition-colors duration-200">
+                                <i class="ri-heart-line text-lg"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="flex gap-2 mb-4">
+                            <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Công lập</span>
+                            <span class="px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded-full">Nghệ thuật</span>
+                        </div>
+                        
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600 flex items-center">
+                                    <i class="ri-group-line mr-2 text-primary"></i>
+                                    Chỉ tiêu:
+                                </span>
+                                <span class="font-medium">280 học sinh</span>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600 flex items-center">
+                                    <i class="ri-money-dollar-circle-line mr-2 text-primary"></i>
+                                    Học phí:
+                                </span>
+                                <span class="font-medium text-green-600">Miễn phí</span>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600 flex items-center">
+                                    <i class="ri-calendar-line mr-2 text-primary"></i>
+                                    Tuyển sinh:
+                                </span>
+                                <span class="font-medium">Tháng 6/2025</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-2">
+                            <button class="flex-1 py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition-colors duration-200 text-sm font-medium">
+                                Xem chi tiết
+                            </button>
+                            <button class="px-3 py-2 border border-gray-300 rounded-button hover:bg-gray-50 transition-colors duration-200">
+                                <i class="ri-phone-line text-primary"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- School Card 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300">
+                    <div class="h-40 bg-gray-100">
+                        <img src="images/62a2bfa0ddfca1caac1f5c907d2661e1.jpg" alt="THCS Vinschool" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg mb-1">THCS Vinschool</h3>
+                                <p class="text-sm text-gray-600 flex items-center">
+                                    <i class="ri-map-pin-line mr-1"></i>
+                                    Quận Nam Từ Liêm, Hà Nội
+                                </p>
+                            </div>
+                            <button class="text-red-500 hover:text-red-600 transition-colors duration-200">
+                                <i class="ri-heart-fill text-lg"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="flex gap-2 mb-4">
+                            <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">Tư thục</span>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Quốc tế</span>
+                            <span class="px-2 py-1 bg-teal-100 text-teal-800 text-xs rounded-full">Cambridge</span>
+                        </div>
+                        
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600 flex items-center">
+                                    <i class="ri-group-line mr-2 text-primary"></i>
+                                    Chỉ tiêu:
+                                </span>
+                                <span class="font-medium">180 học sinh</span>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600 flex items-center">
+                                    <i class="ri-money-dollar-circle-line mr-2 text-primary"></i>
+                                    Học phí:
+                                </span>
+                                <span class="font-medium text-orange-600">4.5 triệu/tháng</span>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600 flex items-center">
+                                    <i class="ri-calendar-line mr-2 text-primary"></i>
+                                    Tuyển sinh:
+                                </span>
+                                <span class="font-medium">Tháng 5/2025</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-2">
+                            <button class="flex-1 py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition-colors duration-200 text-sm font-medium">
+                                Xem chi tiết
+                            </button>
+                            <button class="px-3 py-2 border border-gray-300 rounded-button hover:bg-gray-50 transition-colors duration-200">
+                                <i class="ri-phone-line text-primary"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- School Card 4 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300">
+                    <div class="h-40 bg-gray-100">
+                        <img src="images/62a2bfa0ddfca1caac1f5c907d2661e1.jpg" alt="THCS Marie Curie" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg mb-1">THCS Marie Curie</h3>
+                                <p class="text-sm text-gray-600 flex items-center">
+                                    <i class="ri-map-pin-line mr-1"></i>
+                                    Quận 3, TP. Hồ Chí Minh
+                                </p>
+                            </div>
+                            <button class="text-gray-400 hover:text-red-500 transition-colors duration-200">
+                                <i class="ri-heart-line text-lg"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="flex gap-2 mb-4">
+                            <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">Tư thục</span>
+                            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Song ngữ</span>
+                            <span class="px-2 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full">Khoa học</span>
+                        </div>
+                        
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600 flex items-center">
+                                    <i class="ri-group-line mr-2 text-primary"></i>
+                                    Chỉ tiêu:
+                                </span>
+                                <span class="font-medium">200 học sinh</span>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600 flex items-center">
+                                    <i class="ri-money-dollar-circle-line mr-2 text-primary"></i>
+                                    Học phí:
+                                </span>
+                                <span class="font-medium text-orange-600">2.8 triệu/tháng</span>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600 flex items-center">
+                                    <i class="ri-calendar-line mr-2 text-primary"></i>
+                                    Tuyển sinh:
+                                </span>
+                                <span class="font-medium">Tháng 6/2025</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-2">
+                            <button class="flex-1 py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition-colors duration-200 text-sm font-medium">
+                                Xem chi tiết
+                            </button>
+                            <button class="px-3 py-2 border border-gray-300 rounded-button hover:bg-gray-50 transition-colors duration-200">
+                                <i class="ri-phone-line text-primary"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- School Card 5 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300">
+                    <div class="h-40 bg-gray-100">
+                        <img src="images/62a2bfa0ddfca1caac1f5c907d2661e1.jpg" alt="THCS Trần Phú" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg mb-1">THCS Trần Phú</h3>
+                                <p class="text-sm text-gray-600 flex items-center">
+                                    <i class="ri-map-pin-line mr-1"></i>
+                                    Quận Hoàn Kiếm, Hà Nội
+                                </p>
+                            </div>
+                            <button class="text-gray-400 hover:text-red-500 transition-colors duration-200">
+                                <i class="ri-heart-line text-lg"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="flex gap-2 mb-4">
+                            <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Công lập</span>
+                            <span class="px-2 py-1 bg-pink-100 text-pink-800 text-xs rounded-full">Thể thao</span>
+                        </div>
+                        
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600 flex items-center">
+                                    <i class="ri-group-line mr-2 text-primary"></i>
+                                    Chỉ tiêu:
+                                </span>
+                                <span class="font-medium">350 học sinh</span>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600 flex items-center">
+                                    <i class="ri-money-dollar-circle-line mr-2 text-primary"></i>
+                                    Học phí:
+                                </span>
+                                <span class="font-medium text-green-600">Miễn phí</span>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600 flex items-center">
+                                    <i class="ri-calendar-line mr-2 text-primary"></i>
+                                    Tuyển sinh:
+                                </span>
+                                <span class="font-medium">Tháng 7/2025</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-2">
+                            <button class="flex-1 py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition-colors duration-200 text-sm font-medium">
+                                Xem chi tiết
+                            </button>
+                            <button class="px-3 py-2 border border-gray-300 rounded-button hover:bg-gray-50 transition-colors duration-200">
+                                <i class="ri-phone-line text-primary"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- School Card 6 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300">
+                    <div class="h-40 bg-gray-100">
+                        <img src="images/62a2bfa0ddfca1caac1f5c907d2661e1.jpg" alt="THCS Archimedes Academy" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg mb-1">THCS Archimedes Academy</h3>
+                                <p class="text-sm text-gray-600 flex items-center">
+                                    <i class="ri-map-pin-line mr-1"></i>
+                                    Quận Thanh Xuân, Hà Nội
+                                </p>
+                            </div>
+                            <button class="text-gray-400 hover:text-red-500 transition-colors duration-200">
+                                <i class="ri-heart-line text-lg"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="flex gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded-full">Dân lập</span>
+                            <span class="px-2 py-1 bg-cyan-100 text-cyan-800 text-xs rounded-full">IB</span>
+                            <span class="px-2 py-1 bg-emerald-100 text-emerald-800 text-xs rounded-full">Toán học</span>
+                        </div>
+                        
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600 flex items-center">
+                                    <i class="ri-group-line mr-2 text-primary"></i>
+                                    Chỉ tiêu:
+                                </span>
+                                <span class="font-medium">120 học sinh</span>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600 flex items-center">
+                                    <i class="ri-money-dollar-circle-line mr-2 text-primary"></i>
+                                    Học phí:
+                                </span>
+                                <span class="font-medium text-red-600">8.5 triệu/tháng</span>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600 flex items-center">
+                                    <i class="ri-calendar-line mr-2 text-primary"></i>
+                                    Tuyển sinh:
+                                </span>
+                                <span class="font-medium">Tháng 4/2025</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-2">
+                            <button class="flex-1 py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition-colors duration-200 text-sm font-medium">
+                                Xem chi tiết
+                            </button>
+                            <button class="px-3 py-2 border border-gray-300 rounded-button hover:bg-gray-50 transition-colors duration-200">
+                                <i class="ri-phone-line text-primary"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Pagination -->
+    <section class="py-8 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col items-center">
+                <div class="flex items-center gap-2 mb-4">
+                    <button class="px-3 py-2 border border-gray-300 rounded-button hover:bg-gray-50 transition-colors duration-200" disabled>
+                        <i class="ri-arrow-left-line"></i>
+                    </button>
+                    <button class="px-3 py-2 bg-primary text-white rounded-button">1</button>
+                    <button class="px-3 py-2 border border-gray-300 rounded-button hover:bg-gray-50 transition-colors duration-200">2</button>
+                    <button class="px-3 py-2 border border-gray-300 rounded-button hover:bg-gray-50 transition-colors duration-200">3</button>
+                    <button class="px-3 py-2 border border-gray-300 rounded-button hover:bg-gray-50 transition-colors duration-200">4</button>
+                    <span class="px-3 py-2 text-gray-500">...</span>
+                    <button class="px-3 py-2 border border-gray-300 rounded-button hover:bg-gray-50 transition-colors duration-200">25</button>
+                    <button class="px-3 py-2 border border-gray-300 rounded-button hover:bg-gray-50 transition-colors duration-200">
+                        <i class="ri-arrow-right-line"></i>
+                    </button>
+                </div>
+                <p class="text-sm text-gray-600">Hiển thị 1-12 của 247 trường THCS</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call-to-Action Section -->
+    <section class="py-12 bg-gradient-to-r from-primary to-indigo-700 text-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-6">Không tìm thấy trường phù hợp?</h2>
+                <p class="text-lg mb-8 opacity-90">Để lại thông tin để được tư vấn miễn phí về việc chọn trường THCS phù hợp nhất cho con bạn</p>
+                
+                <div class="bg-white/10 rounded-xl p-8 max-w-2xl mx-auto">
+                    <form class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <input type="text" placeholder="Họ và tên phụ huynh" class="w-full p-3 rounded-button border-none focus:outline-none focus:ring-2 focus:ring-white/30 bg-white/10 text-white placeholder-white/70">
+                            <input type="tel" placeholder="Số điện thoại" class="w-full p-3 rounded-button border-none focus:outline-none focus:ring-2 focus:ring-white/30 bg-white/10 text-white placeholder-white/70">
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <select class="w-full p-3 rounded-button border-none focus:outline-none focus:ring-2 focus:ring-white/30 bg-white/10 text-white">
+                                <option value="">Tỉnh/Thành phố quan tâm</option>
+                                <option value="ha-noi">Hà Nội</option>
+                                <option value="ho-chi-minh">TP. Hồ Chí Minh</option>
+                                <option value="da-nang">Đà Nẵng</option>
+                            </select>
+                            <select class="w-full p-3 rounded-button border-none focus:outline-none focus:ring-2 focus:ring-white/30 bg-white/10 text-white">
+                                <option value="">Loại trường quan tâm</option>
+                                <option value="cong-lap">Công lập</option>
+                                <option value="tu-thuc">Tư thục</option>
+                                <option value="dan-lap">Dân lập</option>
+                            </select>
+                        </div>
+                        <textarea placeholder="Mô tả yêu cầu cụ thể về trường học..." rows="3" class="w-full p-3 rounded-button border-none focus:outline-none focus:ring-2 focus:ring-white/30 bg-white/10 text-white placeholder-white/70 resize-none"></textarea>
+                        <button type="submit" class="w-full py-3 bg-white text-primary font-medium rounded-button hover:bg-gray-100 transition-colors duration-200">
+                            Đăng ký tư vấn miễn phí
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="flex items-center justify-center gap-8 mt-8 text-sm opacity-90">
+                    <div class="flex items-center gap-2">
+                        <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                            <i class="ri-shield-check-line text-xl"></i>
+                        </div>
+                        <span class="font-medium">Tư vấn miễn phí 100%</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                            <i class="ri-user-heart-line text-xl"></i>
+                        </div>
+                        <span class="font-medium">2,000+ phụ huynh đã được tư vấn</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <!-- Column 1 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Về LT365</h3>
+                    <p class="text-gray-300 mb-4">Cung cấp thông tin, tài liệu và tư vấn chuyên sâu về thi chuyển cấp cho phụ huynh và học sinh trên toàn quốc.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition-colors duration-200">
+                            <i class="ri-facebook-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition-colors duration-200">
+                            <i class="ri-youtube-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition-colors duration-200">
+                            <i class="ri-instagram-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition-colors duration-200">
+                            <i class="ri-tiktok-fill"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Column 2 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Danh mục</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-white">Thi vào lớp 1</a></li>
+                        <li><a href="#" class="hover:text-white">Thi vào lớp 6</a></li>
+                        <li><a href="#" class="hover:text-white">Thi vào lớp 10</a></li>
+                        <li><a href="#" class="hover:text-white">Tài liệu ôn thi</a></li>
+                        <li><a href="#" class="hover:text-white">Tin tức tuyển sinh</a></li>
+                        <li><a href="#" class="hover:text-white">Giáo viên & Trung tâm</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Hỗ trợ</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-white">Câu hỏi thường gặp</a></li>
+                        <li><a href="#" class="hover:text-white">Hướng dẫn sử dụng</a></li>
+                        <li><a href="#" class="hover:text-white">Chính sách bảo mật</a></li>
+                        <li><a href="#" class="hover:text-white">Điều khoản sử dụng</a></li>
+                        <li><a href="#" class="hover:text-white">Quy định thanh toán</a></li>
+                        <li><a href="#" class="hover:text-white">Liên hệ hỗ trợ</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 4 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Liên hệ</h3>
+                    <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center text-primary mt-1 mr-2">
+                                <i class="ri-phone-fill"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium text-white">Hotline</p>
+                                <p>0987 654 321</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center text-primary mt-1 mr-2">
+                                <i class="ri-mail-fill"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium text-white">Email</p>
+                                <p>info@lt365.vn</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center text-primary mt-1 mr-2">
+                                <i class="ri-map-pin-fill"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium text-white">Địa chỉ</p>
+                                <p>Số 123 Đường Cầu Giấy, Quận Cầu Giấy, Hà Nội</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center text-primary mt-1 mr-2">
+                                <i class="ri-time-fill"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium text-white">Giờ làm việc</p>
+                                <p>8:00 - 17:30, Thứ Hai - Thứ Bảy</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-6">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2025 LT365. Tất cả quyền được bảo lưu.</p>
+                    <div class="flex items-center gap-4">
+                        <a href="#" class="text-gray-400 hover:text-white text-sm">Chính sách bảo mật</a>
+                        <span class="text-gray-600">|</span>
+                        <a href="#" class="text-gray-400 hover:text-white text-sm">Điều khoản sử dụng</a>
+                        <span class="text-gray-600">|</span>
+                        <a href="#" class="text-gray-400 hover:text-white text-sm">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Search Button Functionality
+            const searchButton = document.querySelector('button[class*="bg-primary"]');
+            if (searchButton) {
+                searchButton.addEventListener('click', function() {
+                    // Get all filter values
+                    const searchInput = document.querySelector('input[type="search"]').value;
+                    const province = document.querySelectorAll('select')[0].value;
+                    const district = document.querySelectorAll('select')[1].value;
+                    const schoolType = document.querySelectorAll('select')[2].value;
+                    
+                    // Implement search logic here
+                    console.log('Searching with:', {
+                        search: searchInput,
+                        province: province,
+                        district: district,
+                        type: schoolType
+                    });
+                    
+                    // You can add actual search functionality here
+                    alert('Đang tìm kiếm trường theo tiêu chí đã chọn...');
+                });
+            }
+
+            // View Toggle Functionality
+            window.switchView = function(viewType) {
+                const gridView = document.getElementById('school-grid');
+                const toggleButtons = document.querySelectorAll('.view-toggle');
+                
+                // Remove active class from all buttons
+                toggleButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                });
+
+                // Add active class to clicked button
+                event.target.classList.add('active');
+
+                if (viewType === 'list') {
+                    // Switch to list view
+                    gridView.classList.remove('grid-cols-1', 'md:grid-cols-2', 'lg:grid-cols-3');
+                    gridView.classList.add('grid-cols-1');
+                    
+                    // Modify card layout for list view
+                    const cards = gridView.querySelectorAll('.bg-white');
+                    cards.forEach(card => {
+                        card.classList.add('flex', 'flex-row');
+                        const img = card.querySelector('img').parentElement;
+                        img.classList.remove('h-40');
+                        img.classList.add('h-32', 'w-48', 'flex-shrink-0');
+                    });
+                } else {
+                    // Switch to grid view
+                    gridView.classList.remove('grid-cols-1');
+                    gridView.classList.add('grid-cols-1', 'md:grid-cols-2', 'lg:grid-cols-3');
+                    
+                    // Reset card layout for grid view
+                    const cards = gridView.querySelectorAll('.bg-white');
+                    cards.forEach(card => {
+                        card.classList.remove('flex', 'flex-row');
+                        const img = card.querySelector('img').parentElement;
+                        img.classList.remove('h-32', 'w-48', 'flex-shrink-0');
+                        img.classList.add('h-40');
+                    });
+                }
+            };
+
+            // Heart/Favorite Toggle
+            const heartButtons = document.querySelectorAll('[class*="ri-heart"]').forEach(button => {
+                button.closest('button').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const icon = this.querySelector('i');
+                    if (icon.classList.contains('ri-heart-line')) {
+                        icon.classList.remove('ri-heart-line');
+                        icon.classList.add('ri-heart-fill');
+                        this.classList.remove('text-gray-400', 'hover:text-red-500');
+                        this.classList.add('text-red-500', 'hover:text-red-600');
+                    } else {
+                        icon.classList.remove('ri-heart-fill');
+                        icon.classList.add('ri-heart-line');
+                        this.classList.remove('text-red-500', 'hover:text-red-600');
+                        this.classList.add('text-gray-400', 'hover:text-red-500');
+                    }
+                });
+            });
+
+            // Search functionality
+            const searchInput = document.querySelector('input[type="search"]');
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    // Implement search logic here
+                    console.log('Searching for:', this.value);
+                });
+            }
+
+            // Sort functionality
+            const sortSelect = document.querySelector('select');
+            if (sortSelect) {
+                sortSelect.addEventListener('change', function() {
+                    // Implement sort logic here
+                    console.log('Sorting by:', this.value);
+                });
+            }
+
+            // Form submission handling
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // Handle form submission
+                    if (this.querySelector('textarea')) {
+                        // Consultation form
+                        alert('Cảm ơn bạn đã đăng ký! Chúng tôi sẽ liên hệ với bạn trong 24h.');
+                    } else {
+                        // Filter form - implement filter logic
+                        console.log('Applying filters...');
+                    }
+                });
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Pagination functionality
+            const paginationButtons = document.querySelectorAll('[class*="px-3 py-2"]');
+            paginationButtons.forEach(button => {
+                if (button.textContent.match(/^\d+$/)) {
+                    button.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        // Remove active class from all pagination buttons
+                        paginationButtons.forEach(btn => {
+                            if (btn.textContent.match(/^\d+$/)) {
+                                btn.classList.remove('bg-primary', 'text-white');
+                                btn.classList.add('border', 'border-gray-300');
+                            }
+                        });
+                        // Add active class to clicked button
+                        this.classList.remove('border', 'border-gray-300');
+                        this.classList.add('bg-primary', 'text-white');
+                        
+                        // Scroll to top of results
+                        document.querySelector('#school-grid').scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    });
+                }
+            });
+
+            // Responsive menu handling for mobile
+            const menuButton = document.querySelector('.menu-toggle');
+            if (menuButton) {
+                menuButton.addEventListener('click', function() {
+                    const mobileMenu = document.querySelector('.mobile-menu');
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+
+            // Location dropdown dependency
+            const provinceSelect = document.querySelector('select[name="province"]');
+            const districtSelect = document.querySelector('select[name="district"]');
+            
+            if (provinceSelect && districtSelect) {
+                provinceSelect.addEventListener('change', function() {
+                    // Update district options based on selected province
+                    // This would typically fetch data from an API
+                    console.log('Province changed:', this.value);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

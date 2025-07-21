@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cô Nguyễn Thị Minh Tâm - Giáo viên Toán | LT365</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        .font-pacifico {
+            font-family: 'Pacifico', cursive;
+        }
+        :root {
+            --primary: #3B82F6;
+            --primary-dark: #2563EB;
+        }
+        .text-primary { color: var(--primary); }
+        .bg-primary { background-color: var(--primary); }
+        .border-primary { border-color: var(--primary); }
+        .bg-primary\/10 { background-color: rgb(59 130 246 / 0.1); }
+        .bg-primary\/80 { background-color: rgb(59 130 246 / 0.8); }
+        .hover\:bg-primary\/90:hover { background-color: rgb(59 130 246 / 0.9); }
+        .hover\:bg-primary\/5:hover { background-color: rgb(59 130 246 / 0.05); }
+        .hover\:bg-primary\/80:hover { background-color: rgb(59 130 246 / 0.8); }
+        .focus\:ring-primary\/20:focus { --tw-ring-color: rgb(59 130 246 / 0.2); }
+        .focus\:border-primary:focus { border-color: var(--primary); }
+        .rounded-button { border-radius: 0.5rem; }
+        .dropdown { display: none; }
+        .dropdown-trigger:hover .dropdown { display: block; }
+        .prose { max-width: none; }
+        .prose h2 { font-size: 1.5rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; }
+        .prose p { margin-bottom: 1rem; }
+        .prose ul { margin-bottom: 1rem; }
+        .prose li { display: flex; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.5rem; }
+        input[type="number"]::-moz-appearance {
+            textfield: none;
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <!-- Top Header -->
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="font-pacifico text-2xl text-primary">LT365</a>
+            
+            <!-- Search Bar -->
+            <div class="w-2/5 relative">
+                <input type="search" placeholder="Tìm kiếm tài liệu, trường học..." class="w-full py-2 pl-10 pr-4 border border-gray-200 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm">
+                <div class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center text-gray-400">
+                    <i class="ri-search-line"></i>
+                </div>
+            </div>
+            
+            <!-- Right Section -->
+            <div class="flex items-center gap-6">
+                <!-- Hotline -->
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                        <i class="ri-phone-line"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500">Hotline</p>
+                        <p class="text-sm font-medium">0987 654 321</p>
+                    </div>
+                </div>
+                
+                <!-- Auth Buttons -->
+                <div class="flex items-center gap-3">
+                    <button class="px-4 py-2 text-primary border border-primary rounded-button hover:bg-primary/5 transition-colors duration-200 text-sm font-medium whitespace-nowrap">Đăng nhập</button>
+                    <button class="px-4 py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition-colors duration-200 text-sm font-medium whitespace-nowrap">Đăng ký</button>
+                </div>
+            </div>
+        </div>
+        <!-- Main Menu -->
+        <nav class="bg-primary text-white">
+            <div class="container mx-auto px-4">
+                <ul class="flex">
+                    <li class="relative">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80">Trang chủ</a>
+                    </li>
+                    <li class="relative dropdown-trigger">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80 flex items-center">
+                            Thi chuyển cấp
+                            <i class="ri-arrow-down-s-line ml-1"></i>
+                        </a>
+                        <div class="dropdown absolute top-full left-0 bg-white text-gray-800 shadow-lg rounded-md w-48 z-50">
+                            <div class="py-2">
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Thi vào lớp 1</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Thi vào lớp 6</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Thi vào lớp 10</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="relative dropdown-trigger">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80 flex items-center">
+                            Tài liệu & Đề thi
+                            <i class="ri-arrow-down-s-line ml-1"></i>
+                        </a>
+                        <div class="dropdown absolute top-full left-0 bg-white text-gray-800 shadow-lg rounded-md w-48 z-50">
+                            <div class="py-2">
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Đề thi mẫu</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Tài liệu ôn tập</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Đáp án chi tiết</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="relative dropdown-trigger">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80 flex items-center">
+                            Trường học
+                            <i class="ri-arrow-down-s-line ml-1"></i>
+                        </a>
+                        <div class="dropdown absolute top-full left-0 bg-white text-gray-800 shadow-lg rounded-md w-48 z-50">
+                            <div class="py-2">
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Mầm non</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Tiểu học</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">THCS</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">THPT</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="relative dropdown-trigger">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80 flex items-center">
+                            Tin tức
+                            <i class="ri-arrow-down-s-line ml-1"></i>
+                        </a>
+                        <div class="dropdown absolute top-full left-0 bg-white text-gray-800 shadow-lg rounded-md w-56 z-50">
+                            <div class="py-2">
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Thông tin tuyển sinh</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Tư vấn chọn trường</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Kinh nghiệm thi cử</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="relative">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80 bg-primary/80">Giáo viên & Trung tâm</a>
+                    </li>
+                    <li class="relative">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80">Liên hệ</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="bg-gray-100 py-3">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center text-sm text-gray-600">
+                <a href="#" class="hover:text-primary">Trang chủ</a>
+                <span class="mx-2">
+                    <i class="ri-arrow-right-s-line"></i>
+                </span>
+                <a href="#" class="hover:text-primary">Giáo viên & Trung tâm</a>
+                <span class="mx-2">
+                    <i class="ri-arrow-right-s-line"></i>
+                </span>
+                <a href="#" class="hover:text-primary">Giáo viên</a>
+                <span class="mx-2">
+                    <i class="ri-arrow-right-s-line"></i>
+                </span>
+                <span class="text-primary font-medium">Cô Nguyễn Thị Minh Tâm</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="py-8 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Main Content -->
+                <div class="lg:col-span-2">
+                    <!-- Teacher Header -->
+                    <div class="flex flex-col md:flex-row gap-6 mb-8">
+                        <!-- Teacher Image -->
+                        <div class="md:w-1/3">
+                            <img src="images/f464b08c95c56053708d1bc74dde0dd7.jpg" alt="Cô Nguyễn Thị Minh Tâm" class="w-full h-64 object-cover object-top rounded-lg shadow-md">
+                        </div>
+                        
+                        <!-- Teacher Info -->
+                        <div class="md:w-2/3">
+                            <div class="flex items-start justify-between mb-3">
+                                <h1 class="text-3xl font-bold text-gray-900">Cô Nguyễn Thị Minh Tâm</h1>
+                                <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium whitespace-nowrap">15 năm kinh nghiệm</span>
+                            </div>
+                            
+                            <p class="text-lg text-gray-600 mb-4">Giáo viên Toán - Chuyên luyện thi vào lớp 10 chuyên Toán</p>
+                            
+                            <div class="space-y-2">
+                                <div class="flex items-center gap-2 text-gray-700">
+                                    <i class="ri-book-line text-primary"></i>
+                                    <span>Chuyên môn: Toán học</span>
+                                </div>
+                                <div class="flex items-center gap-2 text-gray-700">
+                                    <i class="ri-graduation-cap-line text-primary"></i>
+                                    <span>Đối tượng: Học sinh lớp 9, 10</span>
+                                </div>
+                                <div class="flex items-center gap-2 text-gray-700">
+                                    <i class="ri-map-pin-line text-primary"></i>
+                                    <span>Địa điểm: Hà Nội</span>
+                                </div>
+                                <div class="flex items-center gap-2 text-gray-700">
+                                    <i class="ri-award-line text-primary"></i>
+                                    <span>Chứng chỉ: Thạc sĩ Toán học - ĐH Sư phạm Hà Nội</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- About Section -->
+                    <div class="bg-white border border-gray-200 rounded-lg p-6 mb-6">
+                        <h2 class="text-2xl font-bold mb-4 text-gray-900">Giới thiệu</h2>
+                        <div class="prose max-w-none">
+                            <p class="text-gray-700 mb-4">
+                                Cô Nguyễn Thị Minh Tâm là giáo viên Toán với 15 năm kinh nghiệm giảng dạy, chuyên luyện thi vào lớp 10 chuyên Toán. 
+                                Cô đã giúp hàng trăm học sinh đạt được ước mơ vào các trường chuyên uy tín như THPT Chuyên Hà Nội Amsterdam, 
+                                THPT Chuyên Lê Hồng Phong, THPT Chu Văn An.
+                            </p>
+                            <p class="text-gray-700 mb-4">
+                                Với phong cách giảng dạy sinh động, dễ hiểu và luôn tạo động lực cho học sinh, cô Tâm không chỉ truyền đạt kiến thức 
+                                mà còn giúp các em xây dựng tư duy logic, khả năng phân tích và giải quyết vấn đề một cách sáng tạo.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Education & Experience -->
+                    <div class="bg-white border border-gray-200 rounded-lg p-6 mb-6">
+                        <h2 class="text-2xl font-bold mb-4 text-gray-900">Học vấn & Kinh nghiệm</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-3">
+                                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary mt-1">
+                                    <i class="ri-graduation-cap-line"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">Thạc sĩ Toán học</h4>
+                                    <p class="text-gray-600">Đại học Sư phạm Hà Nội (2008)</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-3">
+                                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary mt-1">
+                                    <i class="ri-medal-line"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">Chứng chỉ bồi dưỡng</h4>
+                                    <p class="text-gray-600">Phương pháp giảng dạy Toán hiện đại (2020)</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-3">
+                                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary mt-1">
+                                    <i class="ri-briefcase-line"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">15 năm giảng dạy</h4>
+                                    <p class="text-gray-600">Giáo viên tại THCS Chu Văn An (2009-2015), Trung tâm luyện thi Excellence (2015-nay)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Specialization -->
+                    <div class="bg-white border border-gray-200 rounded-lg p-6 mb-6">
+                        <h2 class="text-2xl font-bold mb-4 text-gray-900">Chuyên môn giảng dạy</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i class="ri-numbers-line text-2xl text-primary"></i>
+                                    <h4 class="font-medium">Toán cơ bản</h4>
+                                </div>
+                                <p class="text-sm text-gray-600">Giải tích, Hình học, Đại số cơ bản cho học sinh lớp 9</p>
+                            </div>
+                            
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i class="ri-function-line text-2xl text-primary"></i>
+                                    <h4 class="font-medium">Toán chuyên</h4>
+                                </div>
+                                <p class="text-sm text-gray-600">Luyện thi vào lớp 10 chuyên Toán các trường top</p>
+                            </div>
+                            
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i class="ri-trophy-line text-2xl text-primary"></i>
+                                    <h4 class="font-medium">Luyện thi HSG</h4>
+                                </div>
+                                <p class="text-sm text-gray-600">Chuẩn bị cho các kỳ thi học sinh giỏi cấp thành phố</p>
+                            </div>
+                            
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i class="ri-lightbulb-line text-2xl text-primary"></i>
+                                    <h4 class="font-medium">Tư duy logic</h4>
+                                </div>
+                                <p class="text-sm text-gray-600">Phát triển tư duy toán học và kỹ năng giải quyết vấn đề</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Teaching Methods -->
+                    <div class="bg-white border border-gray-200 rounded-lg p-6">
+                        <h2 class="text-2xl font-bold mb-4 text-gray-900">Phương pháp giảng dạy</h2>
+                        <div class="space-y-3">
+                            <div class="flex items-start gap-3">
+                                <div class="w-6 h-6 flex items-center justify-center text-primary mt-0.5">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span class="text-gray-700">Giảng dạy từ cơ bản đến nâng cao, đảm bảo học sinh nắm vững kiến thức nền tảng</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-6 h-6 flex items-center justify-center text-primary mt-0.5">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span class="text-gray-700">Sử dụng nhiều phương pháp giải khác nhau cho cùng một bài toán</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-6 h-6 flex items-center justify-center text-primary mt-0.5">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span class="text-gray-700">Tập trung phát triển tư duy logic và khả năng phân tích của học sinh</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-6 h-6 flex items-center justify-center text-primary mt-0.5">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span class="text-gray-700">Thường xuyên kiểm tra, đánh giá và điều chỉnh phương pháp học phù hợp</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sidebar -->
+                <div class="lg:col-span-1">
+                    <!-- Contact Card -->
+                    <div class="bg-white border border-gray-200 rounded-lg p-6 mb-6 sticky top-6">
+                        <h3 class="text-xl font-bold mb-4 text-gray-900">Liên hệ tư vấn</h3>
+                        
+                        <!-- Contact Info -->
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                                    <i class="ri-phone-line"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Điện thoại</p>
+                                    <p class="font-medium">0987 654 321</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                                    <i class="ri-mail-line"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Email</p>
+                                    <p class="font-medium">minhtam@lt365.vn</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                                    <i class="ri-map-pin-line"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Địa điểm dạy</p>
+                                    <p class="font-medium">Hà Nội</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- CTA Buttons -->
+                        <div class="space-y-3">
+                            <button class="w-full py-3 bg-primary text-white rounded-button hover:bg-primary/90 transition-colors duration-200 font-medium">
+                                <i class="ri-phone-line mr-2"></i>
+                                Liên hệ ngay
+                            </button>
+                            <button class="w-full py-3 border border-primary text-primary rounded-button hover:bg-primary/5 transition-colors duration-200 font-medium">
+                                <i class="ri-message-line mr-2"></i>
+                                Nhắn tin tư vấn
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Quick Info -->
+                    <div class="bg-white border border-gray-200 rounded-lg p-6 mb-6">
+                        <h3 class="text-xl font-bold mb-4 text-gray-900">Thông tin nhanh</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Kinh nghiệm:</span>
+                                <span class="font-medium">15 năm</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Chuyên môn:</span>
+                                <span class="font-medium">Toán học</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Đối tượng:</span>
+                                <span class="font-medium">Lớp 9, 10</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Hình thức:</span>
+                                <span class="font-medium">Kèm riêng/Nhóm</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Teaching Forms -->
+                    <div class="bg-white border border-gray-200 rounded-lg p-6">
+                        <h3 class="text-xl font-bold mb-4 text-gray-900">Hình thức học</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-3 p-3 border border-gray-200 rounded-lg">
+                                <i class="ri-home-line text-primary"></i>
+                                <span class="font-medium">Kèm riêng tại nhà</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 border border-gray-200 rounded-lg">
+                                <i class="ri-building-line text-primary"></i>
+                                <span class="font-medium">Học tại trung tâm</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 border border-gray-200 rounded-lg">
+                                <i class="ri-team-line text-primary"></i>
+                                <span class="font-medium">Học nhóm nhỏ</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 border border-gray-200 rounded-lg">
+                                <i class="ri-computer-line text-primary"></i>
+                                <span class="font-medium">Học online</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <!-- Column 1 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Về LT365</h3>
+                    <p class="text-gray-300 mb-4">Cung cấp thông tin, tài liệu và tư vấn chuyên sâu về thi chuyển cấp cho phụ huynh và học sinh trên toàn quốc.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition-colors duration-200">
+                            <i class="ri-facebook-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition-colors duration-200">
+                            <i class="ri-youtube-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition-colors duration-200">
+                            <i class="ri-instagram-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition-colors duration-200">
+                            <i class="ri-tiktok-fill"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Column 2 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Danh mục</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-white">Thi vào lớp 1</a></li>
+                        <li><a href="#" class="hover:text-white">Thi vào lớp 6</a></li>
+                        <li><a href="#" class="hover:text-white">Thi vào lớp 10</a></li>
+                        <li><a href="#" class="hover:text-white">Tài liệu ôn thi</a></li>
+                        <li><a href="#" class="hover:text-white">Tin tức tuyển sinh</a></li>
+                        <li><a href="#" class="hover:text-white">Giáo viên & Trung tâm</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Hỗ trợ</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-white">Câu hỏi thường gặp</a></li>
+                        <li><a href="#" class="hover:text-white">Hướng dẫn sử dụng</a></li>
+                        <li><a href="#" class="hover:text-white">Chính sách bảo mật</a></li>
+                        <li><a href="#" class="hover:text-white">Điều khoản sử dụng</a></li>
+                        <li><a href="#" class="hover:text-white">Quy định thanh toán</a></li>
+                        <li><a href="#" class="hover:text-white">Liên hệ hỗ trợ</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 4 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Liên hệ</h3>
+                    <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center text-primary mt-1 mr-2">
+                                <i class="ri-phone-fill"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm">Hotline</p>
+                                <p class="font-medium">0987 654 321</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center text-primary mt-1 mr-2">
+                                <i class="ri-mail-fill"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm">Email</p>
+                                <p class="font-medium">info@lt365.vn</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center text-primary mt-1 mr-2">
+                                <i class="ri-map-pin-fill"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm">Địa chỉ</p>
+                                <p class="font-medium">123 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-6 text-center text-gray-400">
+                <p>&copy; 2025 LT365. Tất cả quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trung tâm Excellence - Chi tiết trung tâm luyện thi | LT365</title>
+    <meta name="description" content="Thông tin chi tiết về Trung tâm Excellence - chuyên luyện thi vào lớp 10 với 8 năm kinh nghiệm. Địa chỉ: 123 Nguyễn Trãi, Thanh Xuân, Hà Nội.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#f59e0b'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    },
+                    borderRadius: {
+                        'button': '8px'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .dropdown {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+        .dropdown-trigger:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .nested-dropdown {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+        .nested-dropdown-trigger:hover .nested-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+        input[type="number"]::-moz-appearance {
+            -moz-appearance: textfield;
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <!-- Top Header -->
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="font-['Pacifico'] text-2xl text-primary">LT365</a>
+            
+            <!-- Search Bar -->
+            <div class="w-2/5 relative">
+                <input type="search" placeholder="Tìm kiếm tài liệu, trường học..." class="w-full py-2 pl-10 pr-4 border border-gray-200 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm">
+                <div class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center text-gray-400">
+                    <i class="ri-search-line"></i>
+                </div>
+            </div>
+            
+            <!-- Right Section -->
+            <div class="flex items-center gap-6">
+                <!-- Hotline -->
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                        <i class="ri-phone-line"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500">Hotline</p>
+                        <p class="text-sm font-medium">0987 654 321</p>
+                    </div>
+                </div>
+                
+                <!-- Auth Buttons -->
+                <div class="flex items-center gap-3">
+                    <button class="px-4 py-2 text-primary border border-primary rounded-button hover:bg-primary/5 transition-colors duration-200 text-sm font-medium whitespace-nowrap !rounded-button">Đăng nhập</button>
+                    <button class="px-4 py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition-colors duration-200 text-sm font-medium whitespace-nowrap !rounded-button">Đăng ký</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Menu -->
+        <nav class="bg-primary text-white">
+            <div class="container mx-auto px-4">
+                <ul class="flex">
+                    <li class="relative">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80">Trang chủ</a>
+                    </li>
+                    <li class="relative dropdown-trigger">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80 flex items-center">
+                            Trường học
+                            <i class="ri-arrow-down-s-line ml-1"></i>
+                        </a>
+                        <div class="dropdown absolute top-full left-0 bg-white text-gray-800 shadow-lg rounded-md w-56 z-50">
+                            <div class="py-2">
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">THCS</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">THPT</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="relative dropdown-trigger">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80 flex items-center">
+                            Tin tức
+                            <i class="ri-arrow-down-s-line ml-1"></i>
+                        </a>
+                        <div class="dropdown absolute top-full left-0 bg-white text-gray-800 shadow-lg rounded-md w-56 z-50">
+                            <div class="py-2">
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Thông tin tuyển sinh</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Tư vấn chọn trường</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">Kinh nghiệm thi cử</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="relative">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80 bg-primary/80">Giáo viên & Trung tâm</a>
+                    </li>
+                    <li class="relative">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80">Liên hệ</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- Breadcrumb -->
+    <div class="bg-gray-100 py-3">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center text-sm text-gray-600">
+                <a href="#" class="hover:text-primary">Trang chủ</a>
+                <span class="mx-2">
+                    <i class="ri-arrow-right-s-line"></i>
+                </span>
+                <a href="#" class="hover:text-primary">Giáo viên & Trung tâm</a>
+                <span class="mx-2">
+                    <i class="ri-arrow-right-s-line"></i>
+                </span>
+                <a href="#" class="hover:text-primary">Trung tâm</a>
+                <span class="mx-2">
+                    <i class="ri-arrow-right-s-line"></i>
+                </span>
+                <span class="text-primary font-medium">Trung tâm Excellence</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="py-8 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Main Content -->
+                <div class="lg:col-span-2">
+                    <!-- Center Header -->
+                    <div class="flex flex-col md:flex-row gap-6 mb-8">
+                        <!-- Center Image -->
+                        <div class="md:w-1/3">
+                            <img src="images/0668b9e8706c79925cfba198a4a0ff35.jpg" alt="Trung tâm Excellence" class="w-full h-48 object-cover rounded-lg shadow-md">
+                        </div>
+                        
+                        <!-- Center Info -->
+                        <div class="md:w-2/3">
+                            <div class="flex items-start justify-between mb-3">
+                                <h1 class="text-3xl font-bold text-gray-900">Trung tâm Excellence</h1>
+                                <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium whitespace-nowrap">8 năm kinh nghiệm</span>
+                            </div>
+                            
+                            <p class="text-lg text-gray-600 mb-4">Chuyên luyện thi vào lớp 10 - Cam kết chất lượng đào tạo</p>
+                            
+                            <div class="space-y-2">
+                                <div class="flex items-center gap-2 text-gray-700">
+                                    <i class="ri-map-pin-line text-primary"></i>
+                                    <span>123 Nguyễn Trãi, Thanh Xuân, Hà Nội</span>
+                                </div>
+                                <div class="flex items-center gap-2 text-gray-700">
+                                    <i class="ri-phone-line text-primary"></i>
+                                    <span>024 3568 7890</span>
+                                </div>
+                                <div class="flex items-center gap-2 text-gray-700">
+                                    <i class="ri-mail-line text-primary"></i>
+                                    <span>info@excellence.edu.vn</span>
+                                </div>
+                                <div class="flex items-center gap-2 text-gray-700">
+                                    <i class="ri-global-line text-primary"></i>
+                                    <span>www.excellence.edu.vn</span>
+                                </div>
+                            </div>
+                            
+                            <div class="flex gap-3 mt-4">
+                                <button class="px-6 py-3 bg-primary text-white rounded-button hover:bg-primary/90 transition-colors duration-200 font-medium flex items-center gap-2">
+                                    <i class="ri-phone-line"></i>
+                                    Gọi ngay
+                                </button>
+                                <button class="px-6 py-3 border border-primary text-primary rounded-button hover:bg-primary/5 transition-colors duration-200 font-medium flex items-center gap-2">
+                                    <i class="ri-message-line"></i>
+                                    Nhắn tin
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Center Details -->
+                    <div class="space-y-8">
+                        <!-- About Section -->
+                        <div class="bg-white border border-gray-200 rounded-lg p-6">
+                            <h2 class="text-2xl font-bold mb-4 text-gray-900">Giới thiệu chung</h2>
+                            <div class="prose max-w-none">
+                                <p class="text-gray-700 mb-4">
+                                    Trung tâm Excellence được thành lập năm 2017 với sứ mệnh đồng hành cùng các em học sinh trên con đường chinh phục ước mơ vào các trường THPT chất lượng cao. Với đội ngũ giáo viên giàu kinh nghiệm và phương pháp giảng dạy hiện đại, chúng tôi tự hào là địa chỉ tin cậy của hàng nghìn phụ huynh và học sinh tại Hà Nội.
+                                </p>
+                                
+                                <p class="text-gray-700 mb-4">
+                                    Trung tâm chuyên đào tạo luyện thi vào lớp 10, bao gồm các môn Toán, Ngữ văn, Tiếng Anh và các môn tự chọn. Chương trình học được thiết kế khoa học, từ cơ bản đến nâng cao, phù hợp với từng đối tượng học sinh.
+                                </p>
+                                
+                                <h3 class="text-lg font-semibold mb-3 text-gray-900">Tầm nhìn và sứ mệnh</h3>
+                                <ul class="list-disc list-inside space-y-2 text-gray-700 mb-4">
+                                    <li>Trở thành trung tâm luyện thi hàng đầu tại Hà Nội</li>
+                                    <li>Đào tạo thế hệ học sinh có tư duy logic và khả năng sáng tạo</li>
+                                    <li>Mang lại cơ hội học tập tốt nhất cho mọi học sinh</li>
+                                    <li>Xây dựng môi trường học tập tích cực và hiệu quả</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Specialties Section -->
+                        <div class="bg-white border border-gray-200 rounded-lg p-6">
+                            <h2 class="text-2xl font-bold mb-4 text-gray-900">Chuyên môn và dịch vụ</h2>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Cấp học -->
+                                <div>
+                                    <h3 class="text-lg font-semibold mb-3 text-gray-900">Cấp học chuyên biệt</h3>
+                                    <div class="space-y-2">
+                                        <div class="flex items-center gap-3 p-3 bg-blue-50 rounded-lg">
+                                            <i class="ri-graduation-cap-line text-blue-600"></i>
+                                            <span class="font-medium">Luyện thi vào lớp 10</span>
+                                        </div>
+                                        <div class="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
+                                            <i class="ri-book-line text-green-600"></i>
+                                            <span class="font-medium">Ôn thi học kỳ THCS</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Môn học -->
+                                <div>
+                                    <h3 class="text-lg font-semibold mb-3 text-gray-900">Môn học giảng dạy</h3>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <div class="flex items-center gap-2 p-2 bg-purple-50 rounded">
+                                            <i class="ri-calculator-line text-purple-600"></i>
+                                            <span class="text-sm">Toán học</span>
+                                        </div>
+                                        <div class="flex items-center gap-2 p-2 bg-red-50 rounded">
+                                            <i class="ri-quill-pen-line text-red-600"></i>
+                                            <span class="text-sm">Ngữ văn</span>
+                                        </div>
+                                        <div class="flex items-center gap-2 p-2 bg-blue-50 rounded">
+                                            <i class="ri-global-line text-blue-600"></i>
+                                            <span class="text-sm">Tiếng Anh</span>
+                                        </div>
+                                        <div class="flex items-center gap-2 p-2 bg-green-50 rounded">
+                                            <i class="ri-flask-line text-green-600"></i>
+                                            <span class="text-sm">Lý - Hóa</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Loại hình đào tạo -->
+                            <div class="mt-6">
+                                <h3 class="text-lg font-semibold mb-3 text-gray-900">Hình thức học tập</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div class="border border-gray-200 rounded-lg p-4 text-center">
+                                        <i class="ri-group-line text-2xl text-primary mb-2"></i>
+                                        <h4 class="font-medium mb-1">Lớp học nhóm</h4>
+                                        <p class="text-sm text-gray-600">8-12 học sinh/lớp</p>
+                                    </div>
+                                    <div class="border border-gray-200 rounded-lg p-4 text-center">
+                                        <i class="ri-user-line text-2xl text-primary mb-2"></i>
+                                        <h4 class="font-medium mb-1">Kèm riêng 1:1</h4>
+                                        <p class="text-sm text-gray-600">Theo yêu cầu</p>
+                                    </div>
+                                    <div class="border border-gray-200 rounded-lg p-4 text-center">
+                                        <i class="ri-computer-line text-2xl text-primary mb-2"></i>
+                                        <h4 class="font-medium mb-1">Học online</h4>
+                                        <p class="text-sm text-gray-600">Linh hoạt thời gian</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Gallery Section -->
+                        <div class="bg-white border border-gray-200 rounded-lg p-6">
+                            <h2 class="text-2xl font-bold mb-4 text-gray-900">Hình ảnh trung tâm</h2>
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                <img src="images/0668b9e8706c79925cfba198a4a0ff35.jpg" alt="Phòng học 1" class="w-full h-32 object-cover rounded-lg">
+                                <img src="images/2ea343b800b7ca44c1844291afa997e9.jpg" alt="Phòng học 2" class="w-full h-32 object-cover rounded-lg">
+                                <img src="images/3d7d5e0502820a5e09cf3fb76caa9d88.jpg" alt="Khu vực nghỉ ngơi" class="w-full h-32 object-cover rounded-lg">
+                                <img src="images/0668b9e8706c79925cfba198a4a0ff35.jpg" alt="Thư viện" class="w-full h-32 object-cover rounded-lg">
+                                <img src="images/2ea343b800b7ca44c1844291afa997e9.jpg" alt="Sảnh chính" class="w-full h-32 object-cover rounded-lg">
+                                <img src="images/3d7d5e0502820a5e09cf3fb76caa9d88.jpg" alt="Lớp học" class="w-full h-32 object-cover rounded-lg">
+                            </div>
+                        </div>
+
+                        <!-- News Section -->
+                        <div class="bg-white border border-gray-200 rounded-lg p-6">
+                            <h2 class="text-2xl font-bold mb-4 text-gray-900">Tin tức từ trung tâm</h2>
+                            <div class="space-y-4">
+                                <article class="border-b border-gray-200 pb-4">
+                                    <div class="flex items-start gap-4">
+                                        <img src="images/0668b9e8706c79925cfba198a4a0ff35.jpg" alt="Tin tức" class="w-20 h-16 object-cover rounded">
+                                        <div class="flex-1">
+                                            <h3 class="font-semibold mb-2 hover:text-primary cursor-pointer">Khai giảng khóa luyện thi chuyên Toán - Lý tháng 7/2025</h3>
+                                            <p class="text-sm text-gray-600 mb-2">Trung tâm Excellence thông báo khai giảng khóa học chuyên sâu dành cho học sinh có năng khiếu Toán - Lý...</p>
+                                            <div class="flex items-center text-xs text-gray-500">
+                                                <i class="ri-calendar-line mr-1"></i>
+                                                <span>25/06/2025</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                                
+                                <article class="border-b border-gray-200 pb-4">
+                                    <div class="flex items-start gap-4">
+                                        <img src="images/2ea343b800b7ca44c1844291afa997e9.jpg" alt="Tin tức" class="w-20 h-16 object-cover rounded">
+                                        <div class="flex-1">
+                                            <h3 class="font-semibold mb-2 hover:text-primary cursor-pointer">Chúc mừng 95% học sinh đậu vào trường THPT mong muốn</h3>
+                                            <p class="text-sm text-gray-600 mb-2">Kết quả tuyển sinh lớp 10 năm 2025 đã được công bố, 95% học sinh của trung tâm đạt kết quả như mong đợi...</p>
+                                            <div class="flex items-center text-xs text-gray-500">
+                                                <i class="ri-calendar-line mr-1"></i>
+                                                <span>20/06/2025</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                            <button class="mt-4 text-primary hover:underline text-sm font-medium">Xem tất cả tin tức</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="lg:col-span-1">
+                    <div class="sticky top-4 space-y-6">
+                        <!-- Contact Form -->
+                        <div class="bg-white border border-gray-200 rounded-lg p-6">
+                            <h3 class="text-xl font-bold mb-4 text-gray-900">Đăng ký tư vấn</h3>
+                            <form class="space-y-4">
+                                <div>
+                                    <input type="text" placeholder="Họ tên phụ huynh" class="w-full p-3 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
+                                </div>
+                                <div>
+                                    <input type="tel" placeholder="Số điện thoại" class="w-full p-3 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
+                                </div>
+                                <div>
+                                    <input type="text" placeholder="Tên con và năm sinh" class="w-full p-3 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
+                                </div>
+                                <div>
+                                    <select class="w-full p-3 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
+                                        <option value="">Cấp học quan tâm</option>
+                                        <option value="lop-10">Luyện thi vào lớp 10</option>
+                                        <option value="on-tap">Ôn tập học kỳ</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <textarea placeholder="Ghi chú hoặc câu hỏi" rows="3" class="w-full p-3 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary resize-none"></textarea>
+                                </div>
+                                <button type="submit" class="w-full py-3 bg-primary text-white rounded-button hover:bg-primary/90 transition-colors duration-200 font-medium">
+                                    Gửi yêu cầu tư vấn
+                                </button>
+                            </form>
+                            <p class="text-xs text-gray-500 mt-3">* Chúng tôi sẽ liên hệ với bạn trong vòng 24h</p>
+                        </div>
+                        <!-- Quick Contact -->
+                        <div class="bg-white border border-gray-200 rounded-lg p-6">
+                            <h3 class="text-xl font-bold mb-4 text-gray-900">Liên hệ nhanh</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-center gap-3 p-3 bg-blue-50 rounded-lg">
+                                    <i class="ri-phone-line text-blue-600"></i>
+                                    <div>
+                                        <p class="font-medium text-sm">Hotline tư vấn</p>
+                                        <p class="text-blue-600 font-semibold">024 3568 7890</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
+                                    <i class="ri-message-line text-green-600"></i>
+                                    <div>
+                                        <p class="font-medium text-sm">Zalo/Viber</p>
+                                        <p class="text-green-600 font-semibold">0987 654 321</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3 p-3 bg-red-50 rounded-lg">
+                                    <i class="ri-mail-line text-red-600"></i>
+                                    <div>
+                                        <p class="font-medium text-sm">Email</p>
+                                        <p class="text-red-600 font-semibold text-xs">info@excellence.edu.vn</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Map Section -->
+                        <div class="bg-white border border-gray-200 rounded-lg p-6">
+                            <h3 class="text-xl font-bold mb-4 text-gray-900">Vị trí trung tâm</h3>
+                            <div class="bg-gray-200 h-48 rounded-lg mb-4 flex items-center justify-center">
+                                <div class="text-center text-gray-500">
+                                    <i class="ri-map-pin-line text-3xl mb-2"></i>
+                                    <p class="text-sm">Bản đồ Google Maps</p>
+                                    <p class="text-xs">123 Nguyễn Trãi, Thanh Xuân, HN</p>
+                                </div>
+                            </div>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex items-center gap-2">
+                                    <i class="ri-bus-line text-primary"></i>
+                                    <span>Bus: Tuyến 01, 18, 32</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i class="ri-train-line text-primary"></i>
+                                    <span>Metro: Ga Thanh Xuân (500m)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Related Centers -->
+                        <div class="bg-white border border-gray-200 rounded-lg p-6">
+                            <h3 class="text-xl font-bold mb-4 text-gray-900">Trung tâm liên quan</h3>
+                            <div class="space-y-4">
+                                <div class="border border-gray-200 rounded-lg p-3">
+                                    <h4 class="font-medium mb-1">Trung tâm Thành Đạt</h4>
+                                    <p class="text-sm text-gray-600 mb-2">Luyện thi vào lớp 6 & 10</p>
+                                    <p class="text-xs text-gray-500">Láng Hạ, Đống Đa, HN</p>
+                                </div>
+                                <div class="border border-gray-200 rounded-lg p-3">
+                                    <h4 class="font-medium mb-1">Trung tâm Vinhomes</h4>
+                                    <p class="text-sm text-gray-600 mb-2">Chuyên luyện thi vào lớp 10</p>
+                                    <p class="text-xs text-gray-500">Times City, Hai Bà Trưng, HN</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <!-- Column 1 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Về LT365</h3>
+                    <p class="text-gray-300 mb-4">Cung cấp thông tin, tài liệu và tư vấn chuyên sâu về thi chuyển cấp cho phụ huynh và học sinh trên toàn quốc.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition-colors duration-200">
+                            <i class="ri-facebook-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition-colors duration-200">
+                            <i class="ri-youtube-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition-colors duration-200">
+                            <i class="ri-instagram-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition-colors duration-200">
+                            <i class="ri-tiktok-fill"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Column 2 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Danh mục</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-white">Thi vào lớp 1</a></li>
+                        <li><a href="#" class="hover:text-white">Thi vào lớp 6</a></li>
+                        <li><a href="#" class="hover:text-white">Thi vào lớp 10</a></li>
+                        <li><a href="#" class="hover:text-white">Tài liệu ôn thi</a></li>
+                        <li><a href="#" class="hover:text-white">Tin tức tuyển sinh</a></li>
+                        <li><a href="#" class="hover:text-white">Giáo viên & Trung tâm</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Hỗ trợ</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-white">Câu hỏi thường gặp</a></li>
+                        <li><a href="#" class="hover:text-white">Hướng dẫn sử dụng</a></li>
+                        <li><a href="#" class="hover:text-white">Chính sách bảo mật</a></li>
+                        <li><a href="#" class="hover:text-white">Điều khoản sử dụng</a></li>
+                        <li><a href="#" class="hover:text-white">Quy định thanh toán</a></li>
+                        <li><a href="#" class="hover:text-white">Liên hệ hỗ trợ</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 4 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Liên hệ</h3>
+                    <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center text-primary mt-1 mr-2">
+                                <i class="ri-map-pin-line"></i>
+                            </div>
+                            <span>Tầng 5, Tòa nhà ABC, 123 Nguyễn Trãi, Thanh Xuân, Hà Nội</span>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="w-5 h-5 flex items-center justify-center text-primary mr-2">
+                                <i class="ri-phone-line"></i>
+                            </div>
+                            <span>0987 654 321</span>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="w-5 h-5 flex items-center justify-center text-primary mr-2">
+                                <i class="ri-mail-line"></i>
+                            </div>
+                            <span>info@lt365.vn</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Copyright -->
+            <div class="border-t border-gray-700 pt-6 text-center">
+                <p class="text-gray-400">&copy; 2025 LT365. Tất cả quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

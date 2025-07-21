@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký tài khoản - LT365</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4f46e5',
+                        secondary: '#f59e0b'
+                    },
+                    borderRadius: {
+                        'button': '8px'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .auth-container {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .form-card {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        .input-focus:focus {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.1);
+        }
+        .password-strength {
+            height: 4px;
+            background: #e5e7eb;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .strength-weak { background: #ef4444; width: 33%; }
+        .strength-medium { background: #f59e0b; width: 66%; }
+        .strength-strong { background: #10b981; width: 100%; }
+    </style>
+</head>
+<body class="auth-container">
+    <!-- Header đơn giản -->
+    <header class="relative z-10 pt-6 pb-4">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                <!-- Back Button -->
+                <button onclick="history.back()" class="flex items-center gap-2 text-white/80 hover:text-white transition-colors duration-200">
+                    <i class="ri-arrow-left-line text-xl"></i>
+                    <span class="hidden sm:inline">Quay lại</span>
+                </button>
+                
+                <!-- Logo -->
+                <a href="/" class="font-['Pacifico'] text-3xl text-white">LT365</a>
+                
+                <!-- Spacer for center alignment -->
+                <div class="w-20"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content - Trang Đăng ký -->
+    <main class="flex-1 flex items-center justify-center px-4 py-8">
+        <div class="w-full max-w-md">
+            <!-- Form Card -->
+            <div class="form-card rounded-2xl p-8">
+                <!-- Header -->
+                <div class="text-center mb-8">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="ri-user-add-line text-2xl text-primary"></i>
+                    </div>
+                    <h1 class="text-2xl font-bold text-gray-900 mb-2">Tạo tài khoản mới</h1>
+                    <p class="text-gray-600">Gia nhập cộng đồng 20,000+ phụ huynh cùng LT365</p>
+                </div>
+
+                <!-- Form -->
+                <form id="registerForm" class="space-y-6">
+                    <!-- Họ và tên -->
+                    <div>
+                        <label for="fullName" class="block text-sm font-medium text-gray-700 mb-2">
+                            Họ và tên <span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <input type="text" id="fullName" name="fullName" required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 input-focus"
+                                placeholder="Nhập họ và tên đầy đủ">
+                            <div class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                                <i class="ri-user-line"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+                            Email <span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <input type="email" id="email" name="email" required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 input-focus"
+                                placeholder="example@email.com">
+                            <div class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                                <i class="ri-mail-line"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Số điện thoại -->
+                    <div>
+                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">
+                            Số điện thoại <span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <input type="tel" id="phone" name="phone" required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 input-focus"
+                                placeholder="0987 654 321">
+                            <div class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                                <i class="ri-phone-line"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Mật khẩu -->
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+                            Mật khẩu <span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <input type="password" id="password" name="password" required
+                                class="w-full px-4 py-3 pr-12 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 input-focus"
+                                placeholder="Tối thiểu 8 ký tự"
+                                onkeyup="checkPasswordStrength(this.value)">
+                            <button type="button" onclick="togglePassword('password', 'passwordIcon')" 
+                                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                                <i id="passwordIcon" class="ri-eye-line"></i>
+                            </button>
+                        </div>
+                        <!-- Password strength indicator -->
+                        <div class="mt-2">
+                            <div class="password-strength">
+                                <div id="strengthBar" class="h-full transition-all duration-300"></div>
+                            </div>
+                            <p id="strengthText" class="text-xs text-gray-500 mt-1">Nhập mật khẩu để kiểm tra độ mạnh</p>
+                        </div>
+                    </div>
+
+                    <!-- Xác nhận mật khẩu -->
+                    <div>
+                        <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-2">
+                            Xác nhận mật khẩu <span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <input type="password" id="confirmPassword" name="confirmPassword" required
+                                class="w-full px-4 py-3 pr-12 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 input-focus"
+                                placeholder="Nhập lại mật khẩu"
+                                onkeyup="checkPasswordMatch()">
+                            <button type="button" onclick="togglePassword('confirmPassword', 'confirmPasswordIcon')" 
+                                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                                <i id="confirmPasswordIcon" class="ri-eye-line"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Checkbox -->
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-3">
+                            <input type="checkbox" id="terms" name="terms" required
+                                class="mt-1 w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary/20">
+                            <label for="terms" class="text-sm text-gray-700">
+                                Tôi đồng ý với 
+                                <a href="#" class="text-primary hover:underline">Điều khoản sử dụng</a> 
+                                và 
+                                <a href="#" class="text-primary hover:underline">Chính sách bảo mật</a> 
+                                của LT365 <span class="text-red-500">*</span>
+                            </label>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <input type="checkbox" id="newsletter" name="newsletter"
+                                class="mt-1 w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary/20">
+                            <label for="newsletter" class="text-sm text-gray-700">
+                                Tôi muốn nhận email thông báo về tin tức tuyển sinh và tài liệu mới
+                            </label>
+                        </div>
+                    </div>
+                    <!-- Submit Button -->
+                    <button type="submit" id="submitBtn"
+                        class="w-full bg-primary text-white py-3 px-6 rounded-button font-medium hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <span id="submitText">Đăng ký tài khoản</span>
+                        <i id="submitIcon" class="ri-arrow-right-line ml-2 hidden"></i>
+                        <i id="loadingIcon" class="ri-loader-4-line animate-spin ml-2 hidden"></i>
+                    </button>
+
+                    <!-- Divider -->
+                    <div class="relative my-6">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-gray-300"></div>
+                        </div>
+                        <div class="relative flex justify-center text-sm">
+                            <span class="px-4 bg-white text-gray-500">hoặc</span>
+                        </div>
+                    </div>
+
+                    <!-- Login Link -->
+                    <div class="text-center">
+                        <p class="text-gray-600">
+                            Đã có tài khoản? 
+                            <a href="/dang-nhap" class="text-primary font-medium hover:underline">Đăng nhập ngay</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Additional Info -->
+            <div class="text-center mt-6 text-white/80 text-sm">
+                <p>🎉 Miễn phí 100% • 📚 20,000+ tài liệu • ⭐ Đánh giá 4.8/5</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- JavaScript cho trang đăng ký -->
+    <script>
+        // Password strength checker
+        function checkPasswordStrength(password) {
+            const strengthBar = document.getElementById('strengthBar');
+            const strengthText = document.getElementById('strengthText');
+            
+            let strength = 0;
+            const checks = [
+                /.{8,}/, // At least 8 characters
+                /[a-z]/, // Lowercase
+                /[A-Z]/, // Uppercase
+                /[0-9]/, // Numbers
+                /[^A-Za-z0-9]/ // Special characters
+            ];
+            
+            checks.forEach(check => {
+                if (check.test(password)) strength++;
+            });
+            
+            if (password.length === 0) {
+                strengthBar.className = 'h-full transition-all duration-300';
+                strengthText.textContent = 'Nhập mật khẩu để kiểm tra độ mạnh';
+                strengthText.className = 'text-xs text-gray-500 mt-1';
+            } else if (strength < 3) {
+                strengthBar.className = 'h-full transition-all duration-300 strength-weak';
+                strengthText.textContent = 'Mật khẩu yếu';
+                strengthText.className = 'text-xs text-red-500 mt-1';
+            } else if (strength < 5) {
+                strengthBar.className = 'h-full transition-all duration-300 strength-medium';
+                strengthText.textContent = 'Mật khẩu trung bình';
+                strengthText.className = 'text-xs text-yellow-600 mt-1';
+            } else {
+                strengthBar.className = 'h-full transition-all duration-300 strength-strong';
+                strengthText.textContent = 'Mật khẩu mạnh';
+                strengthText.className = 'text-xs text-green-600 mt-1';
+            }
+        }
+
+        // Password match checker
+        function checkPasswordMatch() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (confirmPassword.length > 0) {
+                if (password === confirmPassword) {
+                    showValidation('confirmPassword', '', true);
+                } else {
+                    showValidation('confirmPassword', 'Mật khẩu không khớp', false);
+                }
+            }
+        }
+
+        // Form submission
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const submitText = document.getElementById('submitText');
+            const loadingIcon = document.getElementById('loadingIcon');
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitText.textContent = 'Đang xử lý...';
+            loadingIcon.classList.remove('hidden');
+            
+            // Simulate form processing
+            setTimeout(() => {
+                // Redirect to verification page
+                window.location.href = '/xac-thuc-email';
+            }, 2000);
+        });
+    </script>
+
+    <!-- Footer tối giản -->
+    <footer class="relative z-10 py-8 text-center">
+        <div class="container mx-auto px-4">
+            <div class="text-white/60 text-sm space-y-3">
+                <p>&copy; 2025 LT365. Tất cả quyền được bảo lưu.</p>
+                <div class="flex justify-center gap-6">
+                    <a href="#" class="hover:text-white/80 transition-colors duration-200">Chính sách bảo mật</a>
+                    <a href="#" class="hover:text-white/80 transition-colors duration-200">Điều khoản sử dụng</a>
+                    <a href="#" class="hover:text-white/80 transition-colors duration-200">Hỗ trợ</a>
+                </div>
+                <div class="flex justify-center gap-4 mt-4">
+                    <a href="#" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors duration-200">
+                        <i class="ri-facebook-fill text-white/60"></i>
+                    </a>
+                    <a href="#" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors duration-200">
+                        <i class="ri-youtube-fill text-white/60"></i>
+                    </a>
+                    <a href="#" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors duration-200">
+                        <i class="ri-phone-line text-white/60"></i>
+                    </a>
+                </div>
+                <p class="text-xs">Hotline hỗ trợ: <span class="text-white/80 font-medium">0987 654 321</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript chung -->
+    <script>
+        // Toggle password visibility
+        function togglePassword(inputId, iconId) {
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('ri-eye-line');
+                icon.classList.add('ri-eye-off-line');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('ri-eye-off-line');
+                icon.classList.add('ri-eye-line');
+            }
+        }
+
+        // Form validation helper
+        function showValidation(inputId, message, isValid) {
+            const input = document.getElementById(inputId);
+            const errorDiv = input.parentNode.querySelector('.error-message');
+            
+            if (isValid) {
+                input.classList.remove('border-red-500', 'focus:ring-red-200');
+                input.classList.add('border-green-500', 'focus:ring-green-200');
+                if (errorDiv) errorDiv.remove();
+            } else {
+                input.classList.remove('border-green-500', 'focus:ring-green-200');
+                input.classList.add('border-red-500', 'focus:ring-red-200');
+                
+                if (!errorDiv) {
+                    const div = document.createElement('div');
+                    div.className = 'error-message text-red-500 text-sm mt-1';
+                    div.textContent = message;
+                    input.parentNode.appendChild(div);
+                }
+            }
+        }
+    </script>
+</body>
+</html>

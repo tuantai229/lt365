@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hướng dẫn sử dụng - LT365</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4f46e5',
+                        secondary: '#f59e0b'
+                    },
+                    borderRadius: {
+                        'button': '8px'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .dropdown {
+            display: none;
+        }
+        .dropdown-trigger:hover .dropdown {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <!-- Top Header -->
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="font-['Pacifico'] text-2xl text-primary">LT365</a>
+            
+            <!-- Search Bar -->
+            <div class="w-2/5 relative">
+                <input type="search" placeholder="Tìm kiếm tài liệu, trường học..." class="w-full py-2 pl-10 pr-4 border border-gray-200 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm">
+                <div class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center text-gray-400">
+                    <i class="ri-search-line"></i>
+                </div>
+            </div>
+            
+            <!-- Right Section -->
+            <div class="flex items-center gap-6">
+                <!-- Hotline -->
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                        <i class="ri-phone-line"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500">Hotline</p>
+                        <p class="text-sm font-medium">0987 654 321</p>
+                    </div>
+                </div>
+                
+                <!-- Auth Buttons -->
+                <div class="flex items-center gap-3">
+                    <button class="px-4 py-2 text-primary border border-primary rounded-button hover:bg-primary/5 transition-colors duration-200 text-sm font-medium whitespace-nowrap !rounded-button">Đăng nhập</button>
+                    <button class="px-4 py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition-colors duration-200 text-sm font-medium whitespace-nowrap !rounded-button">Đăng ký</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Menu -->
+        <nav class="bg-primary text-white">
+            <div class="container mx-auto px-4">
+                <ul class="flex">
+                    <li class="relative">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80">Trang chủ</a>
+                    </li>
+                    <li class="relative dropdown-trigger">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80 flex items-center gap-1">
+                            Thi chuyển cấp
+                            <i class="ri-arrow-down-s-line"></i>
+                        </a>
+                        <div class="dropdown absolute top-full left-0 bg-white text-gray-700 shadow-lg rounded-b-lg min-w-64 z-50">
+                            <a href="#" class="block px-6 py-3 hover:bg-gray-50">Thi vào lớp 1</a>
+                            <a href="#" class="block px-6 py-3 hover:bg-gray-50">Thi vào lớp 6</a>
+                            <a href="#" class="block px-6 py-3 hover:bg-gray-50">Thi vào lớp 10</a>
+                        </div>
+                    </li>
+                    <li class="relative dropdown-trigger">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80 flex items-center gap-1">
+                            Tài liệu & Đề thi
+                            <i class="ri-arrow-down-s-line"></i>
+                        </a>
+                        <div class="dropdown absolute top-full left-0 bg-white text-gray-700 shadow-lg rounded-b-lg min-w-64 z-50">
+                            <a href="#" class="block px-6 py-3 hover:bg-gray-50">Đề thi thử</a>
+                            <a href="#" class="block px-6 py-3 hover:bg-gray-50">Đề thi chính thức</a>
+                            <a href="#" class="block px-6 py-3 hover:bg-gray-50">Tài liệu ôn tập</a>
+                        </div>
+                    </li>
+                    <li class="relative">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80">Trường học</a>
+                    </li>
+                    <li class="relative">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80">Giáo viên & Trung tâm</a>
+                    </li>
+                    <li class="relative">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80">Tin tức</a>
+                    </li>
+                    <li class="relative">
+                        <a href="#" class="block px-4 py-3 hover:bg-primary/80">Liên hệ</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="bg-gray-100 py-3">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center text-sm text-gray-600">
+                <a href="#" class="hover:text-primary">Trang chủ</a>
+                <span class="mx-2">
+                    <i class="ri-arrow-right-s-line"></i>
+                </span>
+                <span class="text-primary font-medium">Hướng dẫn sử dụng</span>
+            </div>
+        </div>
+    </div>
+    <!-- Main Content -->
+    <section class="py-8 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Main Content (8 columns) -->
+                <article class="lg:col-span-8">
+                    <!-- Page Header -->
+                    <header class="mb-8">
+                        <h1 class="text-3xl font-bold text-gray-900 mb-4">Hướng dẫn sử dụng website LT365</h1>
+                        
+                        <!-- Meta Information -->
+                        <div class="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-6">
+                            <div class="flex items-center">
+                                <i class="ri-calendar-line mr-1"></i>
+                                <span>Cập nhật: 30/06/2025</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="ri-eye-line mr-1"></i>
+                                <span>1,245 lượt xem</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="ri-time-line mr-1"></i>
+                                <span>Thời gian đọc: 8 phút</span>
+                            </div>
+                        </div>
+                    </header>
+
+                    <!-- Content Body -->
+                    <div class="prose prose-lg max-w-none">
+                        <!-- Mục lục -->
+                        <div class="bg-gray-50 border-l-4 border-primary p-6 mb-8 rounded-r-lg">
+                            <h3 class="text-lg font-bold mb-4 flex items-center">
+                                <i class="ri-list-unordered mr-2 text-primary"></i>
+                                Mục lục
+                            </h3>
+                            <ul class="space-y-2 text-sm">
+                                <li><a href="#gioi-thieu" class="text-primary hover:underline">1. Giới thiệu về LT365</a></li>
+                                <li><a href="#dang-ky" class="text-primary hover:underline">2. Đăng ký tài khoản</a></li>
+                                <li><a href="#tim-kiem" class="text-primary hover:underline">3. Tìm kiếm tài liệu và đề thi</a></li>
+                                <li><a href="#tai-xuong" class="text-primary hover:underline">4. Tải xuống tài liệu</a></li>
+                                <li><a href="#truong-hoc" class="text-primary hover:underline">5. Tra cứu thông tin trường học</a></li>
+                                <li><a href="#lien-he" class="text-primary hover:underline">6. Liên hệ hỗ trợ</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Section 1 -->
+                        <section id="gioi-thieu" class="mb-8">
+                            <h2 class="text-2xl font-bold mb-4 text-gray-900">1. Giới thiệu về LT365</h2>
+                            <p class="mb-4">LT365 là nền tảng giáo dục trực tuyến chuyên cung cấp thông tin, tài liệu và đề thi phục vụ cho việc luyện thi chuyển cấp từ lớp 1 đến lớp 10. Website được thiết kế với giao diện thân thiện, dễ sử dụng nhằm hỗ trợ tối đa cho phụ huynh và học sinh.</p>
+                            
+                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+                                <h4 class="font-bold text-blue-800 mb-2">Tính năng chính:</h4>
+                                <ul class="text-blue-700 space-y-1">
+                                    <li>• Kho tài liệu đề thi phong phú, được cập nhật liên tục</li>
+                                    <li>• Thông tin chi tiết về các trường học</li>
+                                    <li>• Tin tức tuyển sinh mới nhất</li>
+                                    <li>• Hệ thống tìm kiếm thông minh</li>
+                                </ul>
+                            </div>
+                        </section>
+
+                        <!-- Section 2 -->
+                        <section id="dang-ky" class="mb-8">
+                            <h2 class="text-2xl font-bold mb-4 text-gray-900">2. Đăng ký tài khoản</h2>
+                            <p class="mb-4">Để sử dụng đầy đủ các tính năng của LT365, bạn cần tạo tài khoản miễn phí:</p>
+                            
+                            <div class="bg-gray-50 rounded-lg p-6 mb-4">
+                                <h4 class="font-bold mb-3">Các bước đăng ký:</h4>
+                                <ol class="space-y-2">
+                                    <li><strong>Bước 1:</strong> Click vào nút "Đăng ký" ở góc trên bên phải</li>
+                                    <li><strong>Bước 2:</strong> Điền đầy đủ thông tin cá nhân</li>
+                                    <li><strong>Bước 3:</strong> Xác nhận email đăng ký</li>
+                                    <li><strong>Bước 4:</strong> Hoàn tất và đăng nhập vào hệ thống</li>
+                                </ol>
+                            </div>
+                        </section>
+
+                        <!-- Section 3 -->
+                        <section id="tim-kiem" class="mb-8">
+                            <h2 class="text-2xl font-bold mb-4 text-gray-900">3. Tìm kiếm tài liệu và đề thi</h2>
+                            <p class="mb-4">LT365 cung cấp nhiều cách để bạn tìm kiếm tài liệu phù hợp:</p>
+                            
+                            <h4 class="font-bold mb-2">3.1. Tìm kiếm theo từ khóa</h4>
+                            <p class="mb-4">Sử dụng thanh tìm kiếm ở header để nhập từ khóa liên quan đến tài liệu bạn cần.</p>
+                            
+                            <h4 class="font-bold mb-2">3.2. Duyệt theo danh mục</h4>
+                            <p class="mb-4">Truy cập menu "Tài liệu & Đề thi" để xem các danh mục được phân loại theo cấp học và môn học.</p>
+                            
+                            <h4 class="font-bold mb-2">3.3. Lọc kết quả</h4>
+                            <p class="mb-4">Sử dụng các bộ lọc để thu hẹp kết quả tìm kiếm theo năm, môn học, hoặc loại tài liệu.</p>
+                        </section>
+
+                        <!-- Section 4 -->
+                        <section id="tai-xuong" class="mb-8">
+                            <h2 class="text-2xl font-bold mb-4 text-gray-900">4. Tải xuống tài liệu</h2>
+                            <p class="mb-4">Sau khi tìm được tài liệu mong muốn, bạn có thể tải xuống theo các bước sau:</p>
+                            
+                            <div class="border border-gray-200 rounded-lg p-4 mb-4">
+                                <ol class="space-y-2">
+                                    <li><strong>1.</strong> Click vào tài liệu muốn tải</li>
+                                    <li><strong>2.</strong> Xem trước nội dung tài liệu</li>
+                                    <li><strong>3.</strong> Click nút "Tải xuống" (yêu cầu đăng nhập)</li>
+                                    <li><strong>4.</strong> Chọn định dạng file phù hợp</li>
+                                </ol>
+                            </div>
+                            
+                            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                                <p class="text-yellow-800"><strong>Lưu ý:</strong> Một số tài liệu có thể yêu cầu tài khoản premium để tải xuống.</p>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <footer class="mt-8 pt-6 border-t border-gray-200">
+                        <div class="flex flex-wrap gap-4">
+                            <button class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-button hover:bg-green-700 transition-colors">
+                                <i class="ri-share-line"></i>
+                                <span>Chia sẻ</span>
+                            </button>
+                            <button class="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-button hover:bg-gray-700 transition-colors">
+                                <i class="ri-printer-line"></i>
+                                <span>In trang</span>
+                            </button>
+                        </div>
+                    </footer>
+                </article>
+                <!-- Sidebar (4 columns) -->
+                <aside class="lg:col-span-4">
+                    <!-- Widget 1: Liên kết nhanh -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-100 mb-6">
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold mb-4 flex items-center">
+                                <div class="w-6 h-6 rounded bg-primary/10 flex items-center justify-center text-primary mr-2">
+                                    <i class="ri-links-line"></i>
+                                </div>
+                                Liên kết nhanh
+                            </h3>
+                            
+                            <div class="space-y-3">
+                                <a href="#" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors">
+                                    <div class="w-8 h-8 rounded bg-blue-100 flex items-center justify-center text-blue-600">
+                                        <i class="ri-question-line"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-sm">Câu hỏi thường gặp</h4>
+                                        <p class="text-xs text-gray-500">FAQ & Hỗ trợ</p>
+                                    </div>
+                                </a>
+
+                                <a href="#" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors">
+                                    <div class="w-8 h-8 rounded bg-green-100 flex items-center justify-center text-green-600">
+                                        <i class="ri-phone-line"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-sm">Liên hệ hỗ trợ</h4>
+                                        <p class="text-xs text-gray-500">1900 xxxx</p>
+                                    </div>
+                                </a>
+
+                                <a href="#" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors">
+                                    <div class="w-8 h-8 rounded bg-purple-100 flex items-center justify-center text-purple-600">
+                                        <i class="ri-download-line"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-sm">Tài liệu mới nhất</h4>
+                                        <p class="text-xs text-gray-500">Cập nhật hàng ngày</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Widget 2: Thông tin hữu ích -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-100 mb-6">
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold mb-4 flex items-center">
+                                <div class="w-6 h-6 rounded bg-orange-100 flex items-center justify-center text-orange-600 mr-2">
+                                    <i class="ri-lightbulb-line"></i>
+                                </div>
+                                Mẹo sử dụng
+                            </h3>
+                            
+                            <div class="space-y-4">
+                                <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r">
+                                    <h4 class="font-medium text-sm mb-1">Tìm kiếm hiệu quả</h4>
+                                    <p class="text-xs text-gray-600">Sử dụng từ khóa cụ thể như "đề thi toán lớp 10" để có kết quả chính xác hơn.</p>
+                                </div>
+
+                                <div class="bg-green-50 border-l-4 border-green-400 p-4 rounded-r">
+                                    <h4 class="font-medium text-sm mb-1">Lưu tài liệu yêu thích</h4>
+                                    <p class="text-xs text-gray-600">Đăng nhập để lưu các tài liệu vào thư mục cá nhân của bạn.</p>
+                                </div>
+
+                                <div class="bg-purple-50 border-l-4 border-purple-400 p-4 rounded-r">
+                                    <h4 class="font-medium text-sm mb-1">Theo dõi cập nhật</h4>
+                                    <p class="text-xs text-gray-600">Bật thông báo để nhận tin tức mới nhất về tuyển sinh.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Widget 3: Thống kê -->
+                    <div class="bg-gradient-to-br from-primary to-green-600 text-white rounded-lg p-6">
+                        <h3 class="text-lg font-bold mb-4">Thống kê LT365</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold">15,000+</div>
+                                <div class="text-sm opacity-90">Tài liệu</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold">500+</div>
+                                <div class="text-sm opacity-90">Trường học</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold">50,000+</div>
+                                <div class="text-sm opacity-90">Người dùng</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold">1,000+</div>
+                                <div class="text-sm opacity-90">Tin tức</div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <!-- Column 1 -->
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="font-['Pacifico'] text-2xl text-primary mr-2">LT365</div>
+                    </div>
+                    <p class="text-gray-400 mb-4 text-sm leading-relaxed">Nền tảng uy tín hàng đầu cung cấp thông tin, tài liệu và tư vấn chuyên sâu về thi chuyển cấp cho phụ huynh và học sinh trên toàn quốc.</p>
+                    <div class="flex items-center gap-3">
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors duration-200 text-sm">
+                            <i class="ri-facebook-fill"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors duration-200 text-sm">
+                            <i class="ri-youtube-fill"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors duration-200 text-sm">
+                            <i class="ri-instagram-fill"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors duration-200 text-sm">
+                            <i class="ri-tiktok-fill"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Column 2 -->
+                <div>
+                    <h3 class="font-bold mb-4 text-white">Thi chuyển cấp</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Thi vào lớp 1</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Thi vào lớp 6</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Thi vào lớp 10</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Tài liệu ôn thi</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Đề thi thử</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3 -->
+                <div>
+                    <h3 class="font-bold mb-4 text-white">Hỗ trợ</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Hướng dẫn sử dụng</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Câu hỏi thường gặp</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Chính sách bảo mật</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Điều khoản sử dụng</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Liên hệ</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 4 -->
+                <div>
+                    <h3 class="font-bold mb-4 text-white">Liên hệ</h3>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex items-start gap-2">
+                            <i class="ri-map-pin-line text-primary mt-1"></i>
+                            <span class="text-gray-400">123 Đường ABC, Quận XYZ, Hà Nội</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="ri-phone-line text-primary"></i>
+                            <span class="text-gray-400">0987 654 321</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="ri-mail-line text-primary"></i>
+                            <span class="text-gray-400">info@lt365.edu.vn</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Copyright -->
+        <div class="border-t border-gray-800">
+            <div class="container mx-auto px-4 py-4">
+                <div class="flex flex-col md:flex-row justify-between items-center text-sm">
+                    <p class="text-gray-400 mb-2 md:mb-0">© 2025 LT365. Tất cả quyền được bảo lưu.</p>
+                    <div class="flex items-center gap-4">
+                        <a href="#" class="text-gray-400 hover:text-white text-sm">Chính sách bảo mật</a>
+                        <span class="text-gray-600">|</span>
+                        <a href="#" class="text-gray-400 hover:text-white text-sm">Điều khoản sử dụng</a>
+                        <span class="text-gray-600">|</span>
+                        <a href="#" class="text-gray-400 hover:text-white text-sm">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
