@@ -1,3 +1,68 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Global Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+:where([class^="ri-"])::before { 
+    content: "\f3c2"; 
+}
+
+/* Dropdown Menu */
+.dropdown {
+    display: none;
+}
+.dropdown-trigger:hover .dropdown {
+    display: block;
+}
+.nested-dropdown {
+    display: none;
+}
+.nested-dropdown-trigger:hover .nested-dropdown {
+    display: block;
+}
+
+/* Form Elements */
+.custom-checkbox {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #4f46e5;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.custom-checkbox::after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+.custom-checkbox.checked {
+    background-color: #4f46e5;
+}
+.custom-checkbox.checked::after {
+    display: block;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+    display: none;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
