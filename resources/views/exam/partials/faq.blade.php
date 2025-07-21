@@ -1,329 +1,206 @@
 <!-- FAQ -->
-<section class="py-12 bg-gray-50">
+<section class="py-12 bg-white">
     <div class="container mx-auto px-4">
         <h2 class="text-3xl font-bold text-center mb-10">Câu hỏi thường gặp</h2>
         
         <div class="max-w-3xl mx-auto">
             <div class="space-y-4">
                 <!-- FAQ 1 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100">
                     <div class="accordion-header p-5 flex justify-between items-center cursor-pointer">
-                        <h3 class="font-bold text-lg">Khi nào nên bắt đầu chuẩn bị cho kỳ thi chuyển cấp?</h3>
+                        <h3 class="font-bold text-lg">Con cần chuẩn bị những kỹ năng gì trước khi thi vào lớp 1?</h3>
                         <div class="w-6 h-6 flex items-center justify-center text-primary accordion-icon">
                             <i class="ri-add-line"></i>
                         </div>
                     </div>
                     <div class="accordion-content px-5 pb-5">
-                        <p class="text-gray-700">Thời gian chuẩn bị lý tưởng tùy thuộc vào từng cấp học:</p>
-                        <ul class="mt-2 space-y-1 text-gray-700">
+                        <p class="text-gray-700 mb-3">Trẻ cần chuẩn bị những kỹ năng cơ bản sau:</p>
+                        <ul class="space-y-2 text-gray-700">
                             <li class="flex items-start gap-2">
                                 <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
                                     <i class="ri-checkbox-circle-line"></i>
                                 </div>
-                                <span><strong>Lớp 1:</strong> Nên chuẩn bị trước 3-6 tháng, tập trung vào phát triển kỹ năng nhận thức và khả năng tập trung.</span>
+                                <span><strong>Kỹ năng ngôn ngữ:</strong> Nhận biết chữ cái, đọc được những từ đơn giản, kể lại câu chuyện ngắn.</span>
                             </li>
                             <li class="flex items-start gap-2">
                                 <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
                                     <i class="ri-checkbox-circle-line"></i>
                                 </div>
-                                <span><strong>Lớp 6:</strong> Nên bắt đầu từ học kỳ 2 lớp 4 hoặc đầu lớp 5, khoảng 6-12 tháng trước kỳ thi.</span>
+                                <span><strong>Kỹ năng toán học:</strong> Đếm số từ 1-20, nhận biết hình dạng cơ bản, so sánh lớn nhỏ, nhiều ít.</span>
                             </li>
                             <li class="flex items-start gap-2">
                                 <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
                                     <i class="ri-checkbox-circle-line"></i>
                                 </div>
-                                <span><strong>Lớp 10:</strong> Nên chuẩn bị từ lớp 8 hoặc đầu lớp 9, khoảng 12-18 tháng trước kỳ thi, đặc biệt nếu mục tiêu là trường chuyên.</span>
+                                <span><strong>Kỹ năng vận động:</strong> Cầm bút đúng cách, vẽ đường thẳng, tô màu trong khung.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
+                                    <i class="ri-checkbox-circle-line"></i>
+                                </div>
+                                <span><strong>Kỹ năng xã hội:</strong> Giao tiếp lịch sự, nghe theo hướng dẫn, ngồi yên trong thời gian ngắn.</span>
                             </li>
                         </ul>
                     </div>
                 </div>
                 
                 <!-- FAQ 2 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100">
                     <div class="accordion-header p-5 flex justify-between items-center cursor-pointer">
-                        <h3 class="font-bold text-lg">Làm thế nào để chọn trường phù hợp với con?</h3>
+                        <h3 class="font-bold text-lg">Quy trình thi vào lớp 1 diễn ra như thế nào?</h3>
                         <div class="w-6 h-6 flex items-center justify-center text-primary accordion-icon">
                             <i class="ri-add-line"></i>
                         </div>
                     </div>
                     <div class="accordion-content px-5 pb-5">
-                        <p class="text-gray-700">Để chọn trường phù hợp, phụ huynh nên cân nhắc các yếu tố sau:</p>
-                        <ul class="mt-2 space-y-1 text-gray-700">
+                        <p class="text-gray-700 mb-3">Quy trình thi vào lớp 1 thường bao gồm các bước sau:</p>
+                        <ul class="space-y-2 text-gray-700">
                             <li class="flex items-start gap-2">
                                 <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
                                     <i class="ri-checkbox-circle-line"></i>
                                 </div>
-                                <span><strong>Năng lực và sở thích của con:</strong> Đánh giá khả năng học tập, điểm mạnh, điểm yếu và sở thích của con.</span>
+                                <span><strong>Bước 1:</strong> Phụ huynh đăng ký và nộp hồ sơ theo thời gian quy định.</span>
                             </li>
                             <li class="flex items-start gap-2">
                                 <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
                                     <i class="ri-checkbox-circle-line"></i>
                                 </div>
-                                <span><strong>Chương trình học:</strong> Tìm hiểu về chương trình giảng dạy, các môn học đặc thù và phương pháp giáo dục.</span>
+                                <span><strong>Bước 2:</strong> Trường thông báo lịch thi và số báo danh cho từng thí sinh.</span>
                             </li>
                             <li class="flex items-start gap-2">
                                 <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
                                     <i class="ri-checkbox-circle-line"></i>
                                 </div>
-                                <span><strong>Vị trí địa lý:</strong> Cân nhắc khoảng cách từ nhà đến trường và phương tiện di chuyển.</span>
+                                <span><strong>Bước 3:</strong> Trẻ làm bài thi theo từng môn (thường 30-45 phút/môn).</span>
                             </li>
                             <li class="flex items-start gap-2">
                                 <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
                                     <i class="ri-checkbox-circle-line"></i>
                                 </div>
-                                <span><strong>Cơ sở vật chất và môi trường học tập:</strong> Tham quan trường, tìm hiểu về cơ sở vật chất và không khí học tập.</span>
+                                <span><strong>Bước 4:</strong> Phỏng vấn ngắn để đánh giá kỹ năng giao tiếp và tâm lý.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
+                                    <i class="ri-checkbox-circle-line"></i>
+                                </div>
+                                <span><strong>Bước 5:</strong> Công bố kết quả và danh sách trúng tuyển.</span>
                             </li>
                         </ul>
                     </div>
                 </div>
                 
                 <!-- FAQ 3 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100">
                     <div class="accordion-header p-5 flex justify-between items-center cursor-pointer">
-                        <h3 class="font-bold text-lg">Hồ sơ đăng ký thi chuyển cấp cần những gì?</h3>
+                        <h3 class="font-bold text-lg">Điều kiện dự thi vào lớp 1 là gì?</h3>
                         <div class="w-6 h-6 flex items-center justify-center text-primary accordion-icon">
                             <i class="ri-add-line"></i>
                         </div>
                     </div>
                     <div class="accordion-content px-5 pb-5">
-                        <p class="text-gray-700">Hồ sơ đăng ký thi chuyển cấp thường bao gồm:</p>
-                        <ul class="mt-2 space-y-1 text-gray-700">
+                        <p class="text-gray-700 mb-3">Điều kiện cơ bản để trẻ được dự thi vào lớp 1:</p>
+                        <ul class="space-y-2 text-gray-700">
                             <li class="flex items-start gap-2">
                                 <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
                                     <i class="ri-checkbox-circle-line"></i>
                                 </div>
-                                <span><strong>Đơn đăng ký dự thi:</strong> Theo mẫu của Sở GD&ĐT hoặc của trường.</span>
+                                <span><strong>Độ tuổi:</strong> Đủ 6 tuổi tính đến ngày 31/12 của năm học (sinh từ 01/01/2019 đến 31/12/2019).</span>
                             </li>
                             <li class="flex items-start gap-2">
                                 <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
                                     <i class="ri-checkbox-circle-line"></i>
                                 </div>
-                                <span><strong>Bản sao giấy khai sinh:</strong> Có công chứng hoặc xác nhận của cơ quan có thẩm quyền.</span>
+                                <span><strong>Sức khỏe:</strong> Đảm bảo sức khỏe tốt, có thể tham gia các hoạt động học tập.</span>
                             </li>
                             <li class="flex items-start gap-2">
                                 <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
                                     <i class="ri-checkbox-circle-line"></i>
                                 </div>
-                                <span><strong>Học bạ:</strong> Bản chính hoặc bản sao có công chứng.</span>
+                                <span><strong>Hồ sơ:</strong> Đầy đủ giấy tờ theo yêu cầu của từng trường.</span>
                             </li>
                             <li class="flex items-start gap-2">
                                 <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
                                     <i class="ri-checkbox-circle-line"></i>
                                 </div>
-                                <span><strong>Giấy chứng nhận tốt nghiệp tạm thời:</strong> Đối với học sinh thi vào lớp 10.</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
-                                    <i class="ri-checkbox-circle-line"></i>
-                                </div>
-                                <span><strong>Giấy chứng nhận ưu tiên:</strong> Nếu có (con thương binh, liệt sĩ, người có công...).</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
-                                    <i class="ri-checkbox-circle-line"></i>
-                                </div>
-                                <span><strong>Ảnh thẻ:</strong> Thường yêu cầu 2-4 ảnh 3x4 chụp trong vòng 6 tháng.</span>
+                                <span><strong>Đặc biệt:</strong> Một số trường có thể yêu cầu thêm về khu vực cư trú hoặc điều kiện ưu tiên.</span>
                             </li>
                         </ul>
                     </div>
                 </div>
                 
                 <!-- FAQ 4 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100">
                     <div class="accordion-header p-5 flex justify-between items-center cursor-pointer">
-                        <h3 class="font-bold text-lg">Chi phí cho việc thi chuyển cấp là bao nhiêu?</h3>
+                        <h3 class="font-bold text-lg">Nếu con không đỗ trường mong muốn thì có cơ hội nào khác?</h3>
                         <div class="w-6 h-6 flex items-center justify-center text-primary accordion-icon">
                             <i class="ri-add-line"></i>
                         </div>
                     </div>
                     <div class="accordion-content px-5 pb-5">
-                        <p class="text-gray-700">Chi phí cho việc thi chuyển cấp bao gồm nhiều khoản khác nhau:</p>
-                        <ul class="mt-2 space-y-1 text-gray-700">
+                        <p class="text-gray-700 mb-3">Nếu không trúng tuyển nguyện vọng đầu tiên, phụ huynh có thể:</p>
+                        <ul class="space-y-2 text-gray-700">
                             <li class="flex items-start gap-2">
                                 <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
                                     <i class="ri-checkbox-circle-line"></i>
                                 </div>
-                                <span><strong>Lệ phí thi:</strong> Từ 50.000đ - 200.000đ tùy trường và cấp học.</span>
+                                <span><strong>Xét tuyển bổ sung:</strong> Nhiều trường tổ chức vòng xét tuyển bổ sung nếu chưa đủ chỉ tiêu.</span>
                             </li>
                             <li class="flex items-start gap-2">
                                 <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
                                     <i class="ri-checkbox-circle-line"></i>
                                 </div>
-                                <span><strong>Tài liệu ôn tập:</strong> Từ 500.000đ - 2.000.000đ tùy số lượng và chất lượng.</span>
+                                <span><strong>Trường dự bị:</strong> Đăng ký các trường có chỉ tiêu còn trống hoặc yêu cầu thấp hơn.</span>
                             </li>
                             <li class="flex items-start gap-2">
                                 <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
                                     <i class="ri-checkbox-circle-line"></i>
                                 </div>
-                                <span><strong>Khóa học luyện thi:</strong> Từ 2.000.000đ - 10.000.000đ tùy thời gian và chất lượng.</span>
+                                <span><strong>Trường tư thục:</strong> Các trường tư thục thường có thời gian tuyển sinh dài hơn.</span>
                             </li>
                             <li class="flex items-start gap-2">
                                 <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
                                     <i class="ri-checkbox-circle-line"></i>
                                 </div>
-                                <span><strong>Gia sư:</strong> Từ 150.000đ - 400.000đ/giờ tùy trình độ và kinh nghiệm.</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
-                                    <i class="ri-checkbox-circle-line"></i>
-                                </div>
-                                <span><strong>Chi phí khác:</strong> Đi lại, ăn uống, photocopy tài liệu...</span>
+                                <span><strong>Trường gần nhà:</strong> Ưu tiên các trường trong khu vực cư trú để đảm bảo con có chỗ học.</span>
                             </li>
                         </ul>
                     </div>
                 </div>
                 
                 <!-- FAQ 5 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100">
                     <div class="accordion-header p-5 flex justify-between items-center cursor-pointer">
-                        <h3 class="font-bold text-lg">Nếu không đỗ trường mong muốn thì phải làm sao?</h3>
+                        <h3 class="font-bold text-lg">Chi phí chuẩn bị cho việc thi vào lớp 1 khoảng bao nhiêu?</h3>
                         <div class="w-6 h-6 flex items-center justify-center text-primary accordion-icon">
                             <i class="ri-add-line"></i>
                         </div>
                     </div>
                     <div class="accordion-content px-5 pb-5">
-                        <p class="text-gray-700">Nếu không đỗ trường mong muốn, phụ huynh và học sinh có thể:</p>
-                        <ul class="mt-2 space-y-1 text-gray-700">
+                        <p class="text-gray-700 mb-3">Chi phí chuẩn bị thi vào lớp 1 bao gồm:</p>
+                        <ul class="space-y-2 text-gray-700">
                             <li class="flex items-start gap-2">
                                 <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
                                     <i class="ri-checkbox-circle-line"></i>
                                 </div>
-                                <span><strong>Xét tuyển nguyện vọng 2, 3:</strong> Nếu đã đăng ký nhiều nguyện vọng, chờ kết quả xét tuyển các nguyện vọng tiếp theo.</span>
+                                <span><strong>Lệ phí thi:</strong> 50.000đ - 100.000đ tùy trường (một số trường miễn phí).</span>
                             </li>
                             <li class="flex items-start gap-2">
                                 <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
                                     <i class="ri-checkbox-circle-line"></i>
                                 </div>
-                                <span><strong>Xét tuyển bổ sung:</strong> Nhiều trường tổ chức xét tuyển bổ sung nếu chưa đủ chỉ tiêu.</span>
+                                <span><strong>Tài liệu ôn tập:</strong> 200.000đ - 500.000đ cho sách vở và đề thi mẫu.</span>
                             </li>
                             <li class="flex items-start gap-2">
                                 <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
                                     <i class="ri-checkbox-circle-line"></i>
                                 </div>
-                                <span><strong>Chọn trường tư thục:</strong> Các trường tư thường có thời gian tuyển sinh kéo dài hơn và yêu cầu đầu vào linh hoạt hơn.</span>
+                                <span><strong>Lớp học thêm:</strong> 1.000.000đ - 3.000.000đ nếu cho con học thêm để chuẩn bị.</span>
                             </li>
                             <li class="flex items-start gap-2">
                                 <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
                                     <i class="ri-checkbox-circle-line"></i>
                                 </div>
-                                <span><strong>Chuẩn bị cho năm sau:</strong> Đối với lớp 10, có thể học lớp 9 thêm một năm để chuẩn bị tốt hơn.</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <!-- FAQ 6 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="accordion-header p-5 flex justify-between items-center cursor-pointer">
-                        <h3 class="font-bold text-lg">Làm thế nào để giúp con giảm áp lực thi cử?</h3>
-                        <div class="w-6 h-6 flex items-center justify-center text-primary accordion-icon">
-                            <i class="ri-add-line"></i>
-                        </div>
-                    </div>
-                    <div class="accordion-content px-5 pb-5">
-                        <p class="text-gray-700">Để giúp con giảm áp lực thi cử, phụ huynh nên:</p>
-                        <ul class="mt-2 space-y-1 text-gray-700">
-                            <li class="flex items-start gap-2">
-                                <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
-                                    <i class="ri-checkbox-circle-line"></i>
-                                </div>
-                                <span><strong>Lập kế hoạch ôn tập hợp lý:</strong> Tránh học dồn, chia nhỏ nội dung và có thời gian nghỉ ngơi.</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
-                                    <i class="ri-checkbox-circle-line"></i>
-                                </div>
-                                <span><strong>Tạo môi trường học tập tích cực:</strong> Không so sánh con với người khác, tập trung vào sự tiến bộ của con.</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
-                                    <i class="ri-checkbox-circle-line"></i>
-                                </div>
-                                <span><strong>Chăm sóc sức khỏe thể chất:</strong> Đảm bảo con ngủ đủ giấc, ăn uống đầy đủ dinh dưỡng và tập thể dục đều đặn.</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
-                                    <i class="ri-checkbox-circle-line"></i>
-                                </div>
-                                <span><strong>Lắng nghe và động viên:</strong> Trò chuyện với con về lo lắng, áp lực và đưa ra lời khuyên, động viên kịp thời.</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <!-- FAQ 7 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="accordion-header p-5 flex justify-between items-center cursor-pointer">
-                        <h3 class="font-bold text-lg">Có nên cho con học thêm khi chuẩn bị thi chuyển cấp?</h3>
-                        <div class="w-6 h-6 flex items-center justify-center text-primary accordion-icon">
-                            <i class="ri-add-line"></i>
-                        </div>
-                    </div>
-                    <div class="accordion-content px-5 pb-5">
-                        <p class="text-gray-700">Việc cho con học thêm khi chuẩn bị thi chuyển cấp cần cân nhắc:</p>
-                        <ul class="mt-2 space-y-1 text-gray-700">
-                            <li class="flex items-start gap-2">
-                                <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
-                                    <i class="ri-checkbox-circle-line"></i>
-                                </div>
-                                <span><strong>Đánh giá năng lực hiện tại:</strong> Xác định môn học con yếu và cần bổ trợ.</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
-                                    <i class="ri-checkbox-circle-line"></i>
-                                </div>
-                                <span><strong>Chọn lớp học phù hợp:</strong> Ưu tiên lớp ít học sinh, giáo viên có kinh nghiệm luyện thi.</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
-                                    <i class="ri-checkbox-circle-line"></i>
-                                </div>
-                                <span><strong>Cân đối thời gian:</strong> Đảm bảo con vẫn có thời gian nghỉ ngơi, vui chơi và phát triển các kỹ năng khác.</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
-                                    <i class="ri-checkbox-circle-line"></i>
-                                </div>
-                                <span><strong>Theo dõi hiệu quả:</strong> Đánh giá thường xuyên xem việc học thêm có mang lại kết quả tích cực không.</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <!-- FAQ 8 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="accordion-header p-5 flex justify-between items-center cursor-pointer">
-                        <h3 class="font-bold text-lg">Có thể xin học bổng khi thi đầu vào không?</h3>
-                        <div class="w-6 h-6 flex items-center justify-center text-primary accordion-icon">
-                            <i class="ri-add-line"></i>
-                        </div>
-                    </div>
-                    <div class="accordion-content px-5 pb-5">
-                        <p class="text-gray-700">Về cơ hội học bổng khi thi đầu vào:</p>
-                        <ul class="mt-2 space-y-1 text-gray-700">
-                            <li class="flex items-start gap-2">
-                                <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
-                                    <i class="ri-checkbox-circle-line"></i>
-                                </div>
-                                <span><strong>Trường công lập:</strong> Thường không có học bổng đầu vào, nhưng có học bổng khuyến khích học tập sau khi nhập học.</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
-                                    <i class="ri-checkbox-circle-line"></i>
-                                </div>
-                                <span><strong>Trường tư thục:</strong> Nhiều trường có chính sách học bổng đầu vào cho học sinh có kết quả thi xuất sắc.</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
-                                    <i class="ri-checkbox-circle-line"></i>
-                                </div>
-                                <span><strong>Trường quốc tế:</strong> Thường có học bổng đầu vào cạnh tranh dựa trên kết quả thi và phỏng vấn.</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <div class="w-5 h-5 flex items-center justify-center text-primary mt-0.5">
-                                    <i class="ri-checkbox-circle-line"></i>
-                                </div>
-                                <span><strong>Học bổng tài năng:</strong> Một số trường có học bổng đặc biệt cho học sinh có tài năng nổi bật (âm nhạc, thể thao, nghệ thuật...).</span>
+                                <span><strong>Chi phí khác:</strong> Đi lại, chụp ảnh, photo tài liệu khoảng 100.000đ - 200.000đ.</span>
                             </li>
                         </ul>
                     </div>
