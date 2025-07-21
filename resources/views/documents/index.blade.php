@@ -10,24 +10,49 @@
 @endsection
 
 @push('scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Filter functionality
-            const filterTags = document.querySelectorAll('.filter-tag');
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const levelFilter = document.getElementById('level-filter');
+        const subjectFilter = document.getElementById('subject-filter');
+        const typeFilter = document.getElementById('type-filter');
+        const sortFilter = document.getElementById('sort-filter');
+
+        function buildUrl() {
+            let level = levelFilter.value;
+            let subject = subjectFilter.value;
+            let type = typeFilter.value;
+            let sort = sortFilter.value;
+
+            let parts = ['/tai-lieu'];
+            if (type) parts.push(type);
+            if (level) parts.push('cap-' + level);
+            if (subject) parts.push('mon-' + subject);
+
+            let url = parts.join('/');
             
-            filterTags.forEach(tag => {
-                tag.addEventListener('click', function() {
-                    // Remove active state from all tags
-                    filterTags.forEach(t => {
-                        t.classList.remove('bg-primary', 'text-white');
-                        t.classList.add('bg-gray-100', 'text-gray-700');
-                    });
-                    
-                    // Add active state to clicked tag
-                    this.classList.remove('bg-gray-100', 'text-gray-700');
-                    this.classList.add('bg-primary', 'text-white');
-                });
-            });
-        });
-    </script>
+            const queryParams = new URLSearchParams(window.location.search);
+            
+            if (sort) {
+                queryParams.set('sort', sort);
+            } else {
+                queryParams.delete('sort');
+            }
+            
+            // Remove filter if it exists, as it's handled by the URL path
+            queryParams.delete('filter');
+
+            const queryString = queryParams.toString();
+            return queryString ? url + '?' + queryString : url;
+        }
+
+        function applyFilters() {
+            window.location.href = buildUrl();
+        }
+
+        levelFilter.addEventListener('change', applyFilters);
+        subjectFilter.addEventListener('change', applyFilters);
+        typeFilter.addEventListener('change', applyFilters);
+        sortFilter.addEventListener('change', applyFilters);
+    });
+</script>
 @endpush

@@ -46,66 +46,40 @@ Route::prefix('thi-chuyen-cap')->name('exam.')->group(function () {
 
 // ===== 3. MODULE TÀI LIỆU (BỘ LỌC ĐA TIÊU CHÍ) =====
 Route::prefix('tai-lieu')->name('documents.')->group(function () {
-   // Danh sách tất cả tài liệu
-   Route::get('/', [DocumentController::class, 'index'])->name('index');
-   
-   // ===== FILTER 1 TIÊU CHÍ =====
-   
-   // Filter theo loại tài liệu
-   // VD: /tai-lieu/de-thi, /tai-lieu/bai-tap, /tai-lieu/tai-lieu-on-tap
-   Route::get('/{documentType:slug}', [DocumentController::class, 'byType'])
-       ->name('by-type');
-   
-   // Filter theo cấp học (sử dụng slug thực tế từ DB)
-   // VD: /tai-lieu/cap-lop-1, /tai-lieu/cap-tieu-hoc, /tai-lieu/cap-lop-10
-   Route::get('/cap-{level:slug}', [DocumentController::class, 'byLevel'])
-       ->name('by-level');
-   
-   // Filter theo môn học
-   // VD: /tai-lieu/mon-toan-hoc, /tai-lieu/mon-tieng-anh, /tai-lieu/mon-vat-ly
-   Route::get('/mon-{subject:slug}', [DocumentController::class, 'bySubject'])
-       ->name('by-subject');
-   
-   // ===== FILTER 2 TIÊU CHÍ =====
-   
-   // Loại tài liệu + Cấp học
-   // VD: /tai-lieu/de-thi/cap-lop-1, /tai-lieu/bai-tap/cap-tieu-hoc
-   Route::get('/{documentType:slug}/cap-{level:slug}', [DocumentController::class, 'byTypeAndLevel'])
-       ->name('by-type-level');
-   
-   // Loại tài liệu + Môn học
-   // VD: /tai-lieu/de-thi/mon-toan-hoc, /tai-lieu/bai-giang/mon-vat-ly
-   Route::get('/{documentType:slug}/mon-{subject:slug}', [DocumentController::class, 'byTypeAndSubject'])
-       ->name('by-type-subject');
-   
-   // Cấp học + Môn học (không có loại tài liệu cụ thể)
-   // VD: /tai-lieu/cap-lop-10/mon-toan-hoc, /tai-lieu/cap-tieu-hoc/mon-tieng-anh
-   Route::get('/cap-{level:slug}/mon-{subject:slug}', [DocumentController::class, 'byLevelAndSubject'])
-       ->name('by-level-subject');
-   
-   // ===== FILTER ĐẦY ĐỦ 3 TIÊU CHÍ =====
-   
-   // Loại tài liệu + Cấp học + Môn học
-   // VD: /tai-lieu/de-thi/cap-lop-10/mon-toan-hoc
-   Route::get('/{documentType:slug}/cap-{level:slug}/mon-{subject:slug}', [DocumentController::class, 'byAll'])
-       ->name('by-all');
-   
-   // ===== CHI TIẾT TÀI LIỆU =====
-   
-   // Chi tiết tài liệu: slug + ID + .html extension
-   // VD: /tai-lieu/de-thi-toan-hoc-lop-10-hoc-ky-1-2024-1234.html
-   Route::get('/{slug}-{id}.html', [DocumentController::class, 'show'])
-       ->name('show')
-       ->where('id', '[0-9]+')
-       ->where('slug', '[a-z0-9-]+');
-   
-   // Download tài liệu (yêu cầu đăng nhập)
-   // VD: /tai-lieu/de-thi-toan-hoc-lop-10-hoc-ky-1-2024-1234/download
-   Route::get('/{slug}-{id}/download', [DocumentController::class, 'download'])
-       ->name('download')
-       ->where('id', '[0-9]+')
-       ->where('slug', '[a-z0-9-]+')
-       ->middleware('auth');
+    // Danh sách tất cả tài liệu
+    Route::get('/', [DocumentController::class, 'index'])->name('index');
+
+    // CHI TIẾT & DOWNLOAD (Specific patterns, should be high priority)
+    Route::get('/{slug}-{id}.html', [DocumentController::class, 'show'])
+        ->name('show')
+        ->where('id', '[0-9]+')->where('slug', '[a-z0-9-]+');
+
+    Route::get('/{slug}-{id}/download', [DocumentController::class, 'download'])
+        ->name('download')
+        ->where('id', '[0-9]+')->where('slug', '[a-z0-9-]+')
+        ->middleware('auth');
+
+    // FILTER ĐẦY ĐỦ 3 TIÊU CHÍ
+    Route::get('/{typeSlug}/cap-{levelSlug}/mon-{subjectSlug}', [DocumentController::class, 'byAll'])
+        ->name('by-all');
+
+    // FILTER 2 TIÊU CHÍ
+    Route::get('/{typeSlug}/cap-{levelSlug}', [DocumentController::class, 'byTypeAndLevel'])
+        ->name('by-type-level');
+    Route::get('/{typeSlug}/mon-{subjectSlug}', [DocumentController::class, 'byTypeAndSubject'])
+        ->name('by-type-subject');
+    Route::get('/cap-{levelSlug}/mon-{subjectSlug}', [DocumentController::class, 'byLevelAndSubject'])
+        ->name('by-level-subject');
+
+    // FILTER 1 TIÊU CHÍ (Specific prefixes first)
+    Route::get('/cap-{levelSlug}', [DocumentController::class, 'byLevel'])
+        ->name('by-level');
+    Route::get('/mon-{subjectSlug}', [DocumentController::class, 'bySubject'])
+        ->name('by-subject');
+    
+    // FILTER 1 TIÊU CHÍ (Generic slug last)
+    Route::get('/{typeSlug}', [DocumentController::class, 'byType'])
+        ->name('by-type');
 });
 
 // ===== 4. MODULE TRƯỜNG HỌC (BỘ LỌC ĐA TIÊU CHÍ) =====

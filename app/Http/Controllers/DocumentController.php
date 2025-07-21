@@ -15,10 +15,44 @@ class DocumentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Placeholder for data retrieval
-        $documents = []; 
+        $query = Document::with(['level', 'subject', 'documentType', 'featuredImage'])->active();
+
+        // Quick filters
+        if ($request->has('filter')) {
+            switch ($request->get('filter')) {
+                case 'popular':
+                    $query->featured();
+                    break;
+                case 'free':
+                    $query->free();
+                    break;
+                case 'paid':
+                    $query->paid();
+                    break;
+            }
+        }
+
+        // Sorting
+        if ($request->has('sort')) {
+            switch ($request->get('sort')) {
+                case 'downloads':
+                    $query->orderBy('download_count', 'desc');
+                    break;
+                case 'name':
+                    $query->orderBy('name', 'asc');
+                    break;
+                default:
+                    $query->ordered();
+                    break;
+            }
+        } else {
+            $query->ordered();
+        }
+
+        $documents = $query->paginate(15)->withQueryString();
+            
         $levels = Level::active()->ordered()->get();
         $subjects = Subject::active()->ordered()->get();
         $documentTypes = DocumentType::active()->ordered()->get();
@@ -36,58 +70,193 @@ class DocumentController extends Controller
      */
     public function show(Request $request, $slug, $id)
     {
-        // Placeholder for data retrieval
-        $document = new \stdClass();
-        $document->name = 'Đề thi Toán vào lớp 10 - Trường THPT Chuyên Hà Nội Amsterdam 2025';
-        $document->description = 'Đề thi Toán chính thức vào lớp 10 trường THPT Chuyên Hà Nội Amsterdam năm học 2025-2026. Đề thi gồm 8 câu hỏi, thời gian làm bài 150 phút, phù hợp cho học sinh ôn luyện thi vào các trường chuyên.';
-        $document->image = 'images/2ea343b800b7ca44c1844291afa997e9.jpg';
-        $document->created_at = now();
-        $document->view_count = 3247;
-        $document->page_count = 8;
-        $document->file_size = '2.4 MB';
-        $document->difficulty = 'hard';
-        $document->tags = ['Đề thi Toán lớp 10', 'Chuyên Amsterdam', 'Hà Nội', '2025', 'Trường chuyên'];
-        $document->document_type = 'Đề thi chính thức';
+        $document = Document::with(['level', 'subject', 'documentType', 'difficultyLevel', 'school', 'tags', 'featuredImage'])
+            ->active()
+            ->findOrFail($id);
+
+        // Sidebar: Related documents
+        $relatedDocuments = Document::with(['featuredImage'])
+            ->active()
+            ->where('id', '!=', $document->id)
+            ->where(function ($query) use ($document) {
+                $query->where('level_id', $document->level_id)
+                    ->orWhere('subject_id', $document->subject_id)
+                    ->orWhere('document_type_id', $document->document_type_id);
+            })
+            ->ordered()
+            ->limit(5)
+            ->get();
+
+        // Sidebar: Most downloaded documents
+        $mostDownloaded = Document::with(['featuredImage'])
+            ->active()
+            ->where('id', '!=', $document->id)
+            ->orderByDesc('download_count')
+            ->limit(5)
+            ->get();
+
+        // Sidebar: Document categories
+        $documentCategories = DocumentType::withCount('documents')->active()->ordered()->get();
+
+        return view('documents.show', compact('document', 'relatedDocuments', 'mostDownloaded', 'documentCategories'));
+    }
+
+    public function byType(Request $request, $typeSlug)
+    {
+        $documentType = DocumentType::where('slug', $typeSlug)->first();
+        $filters = $documentType ? ['document_type_id' => $documentType->id] : [];
+        $documents = $this->getFilteredDocuments($request, $filters);
         
-        $relatedDocuments = [];
-
-        return view('documents.show', compact('document', 'relatedDocuments'));
+        return view('documents.index', [
+            'documents' => $documents,
+            'levels' => Level::active()->ordered()->get(),
+            'subjects' => Subject::active()->ordered()->get(),
+            'documentTypes' => DocumentType::active()->ordered()->get(),
+            'documentType' => $documentType,
+        ]);
     }
 
-    // Methods for filtering will be implemented later
-    public function byType(DocumentType $documentType)
+    public function byLevel(Request $request, $levelSlug)
     {
-        return $this->index();
+        $level = Level::where('slug', $levelSlug)->first();
+        $filters = $level ? ['level_id' => $level->id] : [];
+        $documents = $this->getFilteredDocuments($request, $filters);
+
+        return view('documents.index', [
+            'documents' => $documents,
+            'levels' => Level::active()->ordered()->get(),
+            'subjects' => Subject::active()->ordered()->get(),
+            'documentTypes' => DocumentType::active()->ordered()->get(),
+            'level' => $level,
+        ]);
     }
 
-    public function byLevel(Level $level)
+    public function bySubject(Request $request, $subjectSlug)
     {
-        return $this->index();
+        $subject = Subject::where('slug', $subjectSlug)->first();
+        $filters = $subject ? ['subject_id' => $subject->id] : [];
+        $documents = $this->getFilteredDocuments($request, $filters);
+
+        return view('documents.index', [
+            'documents' => $documents,
+            'levels' => Level::active()->ordered()->get(),
+            'subjects' => Subject::active()->ordered()->get(),
+            'documentTypes' => DocumentType::active()->ordered()->get(),
+            'subject' => $subject,
+        ]);
     }
 
-    public function bySubject(Subject $subject)
+    public function byTypeAndLevel(Request $request, $typeSlug, $levelSlug)
     {
-        return $this->index();
+        $documentType = DocumentType::where('slug', $typeSlug)->first();
+        $level = Level::where('slug', $levelSlug)->first();
+        $filters = ($documentType && $level) ? ['document_type_id' => $documentType->id, 'level_id' => $level->id] : [];
+        $documents = $this->getFilteredDocuments($request, $filters);
+
+        return view('documents.index', [
+            'documents' => $documents,
+            'levels' => Level::active()->ordered()->get(),
+            'subjects' => Subject::active()->ordered()->get(),
+            'documentTypes' => DocumentType::active()->ordered()->get(),
+            'documentType' => $documentType,
+            'level' => $level,
+        ]);
     }
 
-    public function byTypeAndLevel(DocumentType $documentType, Level $level)
+    public function byTypeAndSubject(Request $request, $typeSlug, $subjectSlug)
     {
-        return $this->index();
+        $documentType = DocumentType::where('slug', $typeSlug)->first();
+        $subject = Subject::where('slug', $subjectSlug)->first();
+        $filters = ($documentType && $subject) ? ['document_type_id' => $documentType->id, 'subject_id' => $subject->id] : [];
+        $documents = $this->getFilteredDocuments($request, $filters);
+
+        return view('documents.index', [
+            'documents' => $documents,
+            'levels' => Level::active()->ordered()->get(),
+            'subjects' => Subject::active()->ordered()->get(),
+            'documentTypes' => DocumentType::active()->ordered()->get(),
+            'documentType' => $documentType,
+            'subject' => $subject,
+        ]);
     }
 
-    public function byTypeAndSubject(DocumentType $documentType, Subject $subject)
+    public function byLevelAndSubject(Request $request, $levelSlug, $subjectSlug)
     {
-        return $this->index();
+        $level = Level::where('slug', $levelSlug)->first();
+        $subject = Subject::where('slug', $subjectSlug)->first();
+        $filters = ($level && $subject) ? ['level_id' => $level->id, 'subject_id' => $subject->id] : [];
+        $documents = $this->getFilteredDocuments($request, $filters);
+
+        return view('documents.index', [
+            'documents' => $documents,
+            'levels' => Level::active()->ordered()->get(),
+            'subjects' => Subject::active()->ordered()->get(),
+            'documentTypes' => DocumentType::active()->ordered()->get(),
+            'level' => $level,
+            'subject' => $subject,
+        ]);
     }
 
-    public function byLevelAndSubject(Level $level, Subject $subject)
+    public function byAll(Request $request, $typeSlug, $levelSlug, $subjectSlug)
     {
-        return $this->index();
+        $documentType = DocumentType::where('slug', $typeSlug)->first();
+        $level = Level::where('slug', $levelSlug)->first();
+        $subject = Subject::where('slug', $subjectSlug)->first();
+        $filters = ($documentType && $level && $subject) ? [
+            'document_type_id' => $documentType->id,
+            'level_id' => $level->id,
+            'subject_id' => $subject->id,
+        ] : [];
+        $documents = $this->getFilteredDocuments($request, $filters);
+
+        return view('documents.index', [
+            'documents' => $documents,
+            'levels' => Level::active()->ordered()->get(),
+            'subjects' => Subject::active()->ordered()->get(),
+            'documentTypes' => DocumentType::active()->ordered()->get(),
+            'documentType' => $documentType,
+            'level' => $level,
+            'subject' => $subject,
+        ]);
     }
 
-    public function byAll(DocumentType $documentType, Level $level, Subject $subject)
+    private function getFilteredDocuments(Request $request, array $filters)
     {
-        return $this->index();
+        $query = Document::with(['level', 'subject', 'documentType', 'featuredImage'])->active()->where($filters);
+
+        // Quick filters
+        if ($request->has('filter')) {
+            switch ($request->get('filter')) {
+                case 'popular':
+                    $query->featured();
+                    break;
+                case 'free':
+                    $query->free();
+                    break;
+                case 'paid':
+                    $query->paid();
+                    break;
+            }
+        }
+
+        // Sorting
+        if ($request->has('sort')) {
+            switch ($request->get('sort')) {
+                case 'downloads':
+                    $query->orderBy('download_count', 'desc');
+                    break;
+                case 'name':
+                    $query->orderBy('name', 'asc');
+                    break;
+                default:
+                    $query->ordered();
+                    break;
+            }
+        } else {
+            $query->ordered();
+        }
+
+        return $query->paginate(15)->withQueryString();
     }
 
     public function download(Request $request, $slug, $id)

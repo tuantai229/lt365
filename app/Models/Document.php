@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Facades\Storage;
-use Awcodes\Curator\Models\Media;
 
 class Document extends Model
 {
@@ -219,6 +218,24 @@ class Document extends Model
         return round($size, 2) . ' ' . $units[$i];
     }
 
+    public function getFormattedFileTypeAttribute(): string
+    {
+        if (!$this->file_type) return '';
+
+        return match($this->file_type) {
+            'application/pdf' => 'PDF',
+            'application/msword' => 'DOC',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => 'DOCX',
+            'application/vnd.ms-excel' => 'XLS',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' => 'XLSX',
+            'application/vnd.ms-powerpoint' => 'PPT',
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation' => 'PPTX',
+            'application/zip' => 'ZIP',
+            'application/x-rar-compressed' => 'RAR',
+            default => strtoupper(last(explode('/', $this->file_type))),
+        };
+    }
+
     public function getDownloadUrlAttribute(): string
     {
         return route('documents.download', $this);
@@ -232,6 +249,38 @@ class Document extends Model
             2 => 'Ẩn',
             default => 'Không xác định'
         };
+    }
+
+    public function getDifficultyAttribute(): string
+    {
+        return match($this->difficulty_level_id) {
+            1 => 'Dễ',
+            2 => 'Trung bình',
+            3 => 'Khó',
+            4 => 'Rất khó',
+            default => 'Không xác định'
+        };
+    }
+
+    public function getDifficultyClassAttribute(): string
+    {
+        return match($this->difficulty_level_id) {
+            1 => 'easy',
+            2 => 'medium',
+            3 => 'hard',
+            4 => 'hard', // Or a new class for very-hard if defined
+            default => ''
+        };
+    }
+
+    public function getFeaturedImageUrlAttribute()
+    {
+        if ($this->featuredImage) {
+            return Storage::url($this->featuredImage->path);
+        }
+
+        // Return a default image if no featured image is set
+        return '/images/default-document.jpg';
     }
 
     /**

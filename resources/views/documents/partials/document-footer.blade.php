@@ -4,7 +4,7 @@
         <h4 class="text-sm font-medium text-gray-700 mb-3">Từ khóa:</h4>
         <div class="flex flex-wrap gap-2">
             @foreach($document->tags as $tag)
-                <span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">{{ $tag }}</span>
+                <span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">{{ $tag->name }}</span>
             @endforeach
         </div>
     </div>

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class DocumentType extends Model
 {
@@ -33,6 +34,22 @@ class DocumentType extends Model
     public function documents(): HasMany
     {
         return $this->hasMany(Document::class);
+    }
+
+    /**
+     * Get all of the subjects for the document type through the documents.
+     */
+    public function subjects(): HasManyThrough
+    {
+        return $this->hasManyThrough(Subject::class, Document::class, 'document_type_id', 'id', 'id', 'subject_id');
+    }
+
+    /**
+     * Get all of the levels for the document type through the documents.
+     */
+    public function levels(): HasManyThrough
+    {
+        return $this->hasManyThrough(Level::class, Document::class, 'document_type_id', 'id', 'id', 'level_id');
     }
 
     /**

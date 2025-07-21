@@ -1,7 +1,7 @@
 <!-- Document Description -->
 <div class="mb-8">
     <div class="bg-blue-50 border-l-4 border-primary p-4 rounded-r-lg mb-6">
-        <h3 class="text-lg font-semibold text-primary mb-2">Thông tin đề thi</h3>
+        <h3 class="text-lg font-semibold text-primary mb-2">Thông tin tài liệu</h3>
         <p class="text-gray-700">{{ $document->description }}</p>
     </div>
 </div>
