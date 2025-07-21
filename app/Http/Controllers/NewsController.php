@@ -15,8 +15,15 @@ class NewsController extends Controller
      */
     public function index()
     {
-        // Logic to fetch all news will be added later
-        return view('news.index');
+        $news = News::active()
+            ->orderBy('is_featured', 'desc')
+            ->orderBy('sort_order', 'asc')
+            ->orderBy('created_at', 'desc')
+            ->paginate(12);
+
+        $categories = NewsCategory::active()->ordered()->get();
+
+        return view('news.index', compact('news', 'categories'));
     }
 
     /**
@@ -27,8 +34,16 @@ class NewsController extends Controller
      */
     public function byCategory(NewsCategory $category)
     {
-        // Logic to fetch news by category will be added later
-        return view('news.category', compact('category'));
+        $news = $category->news()
+            ->active()
+            ->orderBy('is_featured', 'desc')
+            ->orderBy('sort_order', 'asc')
+            ->orderBy('created_at', 'desc')
+            ->paginate(12);
+
+        $categories = NewsCategory::active()->ordered()->get();
+
+        return view('news.category', compact('category', 'news', 'categories'));
     }
 
     /**
@@ -39,8 +54,20 @@ class NewsController extends Controller
      */
     public function show($slug, $id)
     {
-        // Logic to fetch a single news item will be added later
-        $news = News::findOrFail($id);
-        return view('news.show', compact('news'));
+        $news = News::active()->findOrFail($id);
+
+        // Increment view count
+        $news->increment('view_count');
+
+        $relatedNews = News::active()
+            ->where('id', '!=', $news->id)
+            ->whereHas('categories', function ($query) use ($news) {
+                $query->whereIn('news_categories.id', $news->categories->pluck('id'));
+            })
+            ->inRandomOrder()
+            ->limit(5)
+            ->get();
+
+        return view('news.show', compact('news', 'relatedNews'));
     }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $news->title)
+@section('title', $news->name)
 
 @section('content')
 <!-- Breadcrumb -->
@@ -12,10 +12,16 @@
                 <i class="ri-arrow-right-s-line"></i>
             </span>
             <a href="{{ route('news.index') }}" class="hover:text-primary">Tin tức</a>
+            @if($news->categories->first())
             <span class="mx-2">
                 <i class="ri-arrow-right-s-line"></i>
             </span>
-            <span class="text-primary font-medium">{{ $news->title }}</span>
+            <a href="{{ route('news.by-category', $news->categories->first()->slug) }}" class="hover:text-primary">{{ $news->categories->first()->name }}</a>
+            @endif
+            <span class="mx-2">
+                <i class="ri-arrow-right-s-line"></i>
+            </span>
+            <span class="text-primary font-medium">{{ Str::limit($news->name, 50) }}</span>
         </div>
     </div>
 </div>
@@ -28,7 +34,7 @@
             <article class="lg:col-span-8">
                 <!-- Article Header -->
                 <header class="mb-8">
-                    <h1 class="text-3xl font-bold text-gray-900 mb-4">{{ $news->title }}</h1>
+                    <h1 class="text-3xl font-bold text-gray-900 mb-4">{{ $news->name }}</h1>
                     
                     <!-- Meta Information -->
                     <div class="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-6">
@@ -36,12 +42,16 @@
                             <i class="ri-calendar-line text-primary"></i>
                             <span>{{ $news->created_at->format('d/m/Y') }}</span>
                         </div>
+                        @if($news->categories->isNotEmpty())
                         <div class="flex items-center gap-2">
-                            <span class="bg-primary text-white px-2 py-1 rounded text-xs font-medium">Tuyển sinh</span>
+                            @foreach($news->categories as $category)
+                                <a href="{{ route('news.by-category', $category->slug) }}" class="bg-primary text-white px-2 py-1 rounded text-xs font-medium hover:bg-primary-dark">{{ $category->name }}</a>
+                            @endforeach
                         </div>
+                        @endif
                         <div class="flex items-center gap-2">
                             <i class="ri-eye-line text-primary"></i>
-                            <span>{{ $news->views ?? 0 }} lượt xem</span>
+                            <span>{{ $news->view_count }} lượt xem</span>
                         </div>
                         <div class="flex items-center gap-2">
                             <i class="ri-time-line text-primary"></i>
@@ -51,8 +61,8 @@
 
                     <!-- Featured Image -->
                     <div class="mb-8">
-                        <img src="{{ $news->image_url ?? '/images/0668b9e8706c79925cfba198a4a0ff35.jpg' }}" alt="{{ $news->title }}" class="w-full h-80 object-cover rounded-lg shadow-md">
-                        <p class="text-sm text-gray-500 mt-2 italic">{{ $news->image_caption }}</p>
+                        <img src="{{ $news->featured_image_url }}" alt="{{ $news->name }}" class="w-full h-80 object-cover rounded-lg shadow-md">
+                        {{-- <p class="text-sm text-gray-500 mt-2 italic">{{ $news->image_caption }}</p> --}}
                     </div>
                 </header>
                 <!-- Article Content -->
@@ -62,17 +72,17 @@
 
                 <!-- Article Footer -->
                 <footer class="mt-8 pt-6 border-t border-gray-200">
+                    @if($news->tags->isNotEmpty())
                     <!-- Tags -->
                     <div class="mb-6">
                         <h4 class="text-sm font-medium text-gray-700 mb-3">Từ khóa:</h4>
                         <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">Tuyển sinh 2025</span>
-                            <span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">Bộ GD&ĐT</span>
-                            <span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">Thi vào lớp 10</span>
-                            <span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">Kế hoạch tuyển sinh</span>
-                            <span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">Lịch thi</span>
+                            @foreach($news->tags as $tag)
+                            <a href="#" class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm hover:bg-primary/20">{{ $tag->name }}</a>
+                            @endforeach
                         </div>
                     </div>
+                    @endif
 
                     <!-- Share Buttons -->
                     <div class="mb-6">
@@ -110,175 +120,37 @@
                             Tin tức liên quan
                         </h3>
                         
+                        @if($relatedNews->isNotEmpty())
                         <div class="space-y-4">
+                            @foreach($relatedNews as $related)
                             <article class="flex gap-3">
-                                <div class="w-20 h-16 bg-gray-100 rounded overflow-hidden flex-shrink-0">
-                                    <img src="/images/dc78c9c0887200a40954cba8e72a3499.jpg" alt="Tin liên quan" class="w-full h-full object-cover">
-                                </div>
+                                <a href="{{ route('news.show', ['slug' => $related->slug, 'id' => $related->id]) }}" class="w-20 h-16 bg-gray-100 rounded overflow-hidden flex-shrink-0">
+                                    <img src="{{ $related->featured_image_url }}" alt="{{ $related->name }}" class="w-full h-full object-cover">
+                                </a>
                                 <div class="flex-1 min-w-0">
                                     <h4 class="font-medium text-sm line-clamp-2 mb-1">
-                                        <a href="#" class="hover:text-primary">Hà Nội công bố chỉ tiêu tuyển sinh lớp 10 các trường THPT công lập</a>
+                                        <a href="{{ route('news.show', ['slug' => $related->slug, 'id' => $related->id]) }}" class="hover:text-primary">{{ $related->name }}</a>
                                     </h4>
                                     <div class="text-xs text-gray-500 flex items-center gap-2">
-                                        <span>27/06/2025</span>
+                                        <span>{{ $related->created_at->format('d/m/Y') }}</span>
                                         <span>•</span>
-                                        <span>2,156 lượt xem</span>
+                                        <span>{{ $related->view_count }} lượt xem</span>
                                     </div>
                                 </div>
                             </article>
-
-                            <article class="flex gap-3">
-                                <div class="w-20 h-16 bg-gray-100 rounded overflow-hidden flex-shrink-0">
-                                    <img src="/images/bb4d0c34d4f0b44aedef392759b46b9d.jpg" alt="Tin liên quan" class="w-full h-full object-cover">
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <h4 class="font-medium text-sm line-clamp-2 mb-1">
-                                        <a href="#" class="hover:text-primary">TP.HCM điều chỉnh cấu trúc đề thi tuyển sinh lớp 10 năm 2025</a>
-                                    </h4>
-                                    <div class="text-xs text-gray-500 flex items-center gap-2">
-                                        <span>26/06/2025</span>
-                                        <span>•</span>
-                                        <span>1,834 lượt xem</span>
-                                    </div>
-                                </div>
-                            </article>
-
-                            <article class="flex gap-3">
-                                <div class="w-20 h-16 bg-gray-100 rounded overflow-hidden flex-shrink-0">
-                                    <img src="/images/2ea343b800b7ca44c1844291afa997e9.jpg" alt="Tin liên quan" class="w-full h-full object-cover">
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <h4 class="font-medium text-sm line-clamp-2 mb-1">
-                                        <a href="#" class="hover:text-primary">Lịch thi tuyển sinh vào các trường chuyên toàn quốc 2025</a>
-                                    </h4>
-                                    <div class="text-xs text-gray-500 flex items-center gap-2">
-                                        <span>25/06/2025</span>
-                                        <span>•</span>
-                                        <span>3,421 lượt xem</span>
-                                    </div>
-                                </div>
-                            </article>
-
-                            <article class="flex gap-3">
-                                <div class="w-20 h-16 bg-gray-100 rounded overflow-hidden flex-shrink-0">
-                                    <img src="/images/0668b9e8706c79925cfba198a4a0ff35.jpg" alt="Tin liên quan" class="w-full h-full object-cover">
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <h4 class="font-medium text-sm line-clamp-2 mb-1">
-                                        <a href="#" class="hover:text-primary">Điểm chuẩn các trường THPT Hà Nội dự báo tăng nhẹ năm 2025</a>
-                                    </h4>
-                                    <div class="text-xs text-gray-500 flex items-center gap-2">
-                                        <span>24/06/2025</span>
-                                        <span>•</span>
-                                        <span>2,987 lượt xem</span>
-                                    </div>
-                                </div>
-                            </article>
+                            @endforeach
                         </div>
-
+                        @if($news->categories->first())
                         <div class="mt-4 pt-4 border-t border-gray-100">
-                            <a href="#" class="text-primary text-sm font-medium hover:underline">Xem tất cả tin tuyển sinh →</a>
+                            <a href="{{ route('news.by-category', $news->categories->first()->slug) }}" class="text-primary text-sm font-medium hover:underline">Xem tất cả tin {{ $news->categories->first()->name }} →</a>
                         </div>
+                        @endif
+                        @else
+                        <p class="text-sm text-gray-500">Không có tin tức liên quan.</p>
+                        @endif
                     </div>
                 </div>
 
-                <!-- Widget 2: Tin nổi bật -->
-                <div class="bg-white rounded-lg shadow-sm border border-gray-100 mb-6">
-                    <div class="p-6">
-                        <h3 class="text-lg font-bold mb-4 flex items-center">
-                            <div class="w-6 h-6 rounded bg-red-100 flex items-center justify-center text-red-600 mr-2">
-                                <i class="ri-fire-line"></i>
-                            </div>
-                            Tin nổi bật
-                        </h3>
-                        
-                        <div class="space-y-4">
-                            <article>
-                                <div class="mb-2">
-                                    <span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs font-medium">HOT</span>
-                                </div>
-                                <h4 class="font-medium text-sm mb-2 line-clamp-2">
-                                    <a href="#" class="hover:text-primary">Học sinh Việt Nam đạt thành tích cao trong kỳ thi Toán quốc tế IMO 2025</a>
-                                </h4>
-                                <div class="text-xs text-gray-500 flex items-center gap-2">
-                                    <span>23/06/2025</span>
-                                    <span>•</span>
-                                    <span class="text-red-600 font-medium">15,432 lượt xem</span>
-                                </div>
-                            </article>
-
-                            <article>
-                                <div class="mb-2">
-                                    <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs font-medium">TRENDING</span>
-                                </div>
-                                <h4 class="font-medium text-sm mb-2 line-clamp-2">
-                                    <a href="#" class="hover:text-primary">Top 10 trường THPT có điểm chuẩn cao nhất Hà Nội 2024</a>
-                                </h4>
-                                <div class="text-xs text-gray-500 flex items-center gap-2">
-                                    <span>22/06/2025</span>
-                                    <span>•</span>
-                                    <span class="text-orange-600 font-medium">8,765 lượt xem</span>
-                                </div>
-                            </article>
-
-                            <article>
-                                <h4 class="font-medium text-sm mb-2 line-clamp-2">
-                                    <a href="#" class="hover:text-primary">Kinh nghiệm ôn thi vào lớp 10 từ học sinh đạt điểm cao</a>
-                                </h4>
-                                <div class="text-xs text-gray-500 flex items-center gap-2">
-                                    <span>21/06/2025</span>
-                                    <span>•</span>
-                                    <span>5,234 lượt xem</span>
-                                </div>
-                            </article>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Widget 3: Danh mục tin tức -->
-                <div class="bg-white rounded-lg shadow-sm border border-gray-100 mb-6">
-                    <div class="p-6">
-                        <h3 class="text-lg font-bold mb-4 flex items-center">
-                            <div class="w-6 h-6 rounded bg-green-100 flex items-center justify-center text-green-600 mr-2">
-                                <i class="ri-folder-line"></i>
-                            </div>
-                            Danh mục tin tức
-                        </h3>
-                        
-                        <ul class="space-y-2">
-                            <li>
-                                <a href="#" class="flex items-center justify-between py-2 px-3 rounded hover:bg-gray-50 transition-colors">
-                                    <span class="text-sm">Thông tin tuyển sinh</span>
-                                    <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">127</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="flex items-center justify-between py-2 px-3 rounded hover:bg-gray-50 transition-colors">
-                                    <span class="text-sm">Tư vấn chọn trường</span>
-                                    <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">89</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="flex items-center justify-between py-2 px-3 rounded hover:bg-gray-50 transition-colors">
-                                    <span class="text-sm">Kinh nghiệm thi cử</span>
-                                    <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">156</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="flex items-center justify-between py-2 px-3 rounded hover:bg-gray-50 transition-colors">
-                                    <span class="text-sm">Thành tích học sinh</span>
-                                    <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">43</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="flex items-center justify-between py-2 px-3 rounded hover:bg-gray-50 transition-colors">
-                                    <span class="text-sm">Chính sách giáo dục</span>
-                                    <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">67</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
             </aside>
         </div>
     </div>

@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Awcodes\Curator\Models\Media;
 
 class News extends Model
 {
@@ -79,5 +78,14 @@ class News extends Model
     public function scopeFeatured($query)
     {
         return $query->where('is_featured', true);
+    }
+
+    public function getFeaturedImageUrlAttribute()
+    {
+        if ($this->featuredImage) {
+            return $this->featuredImage->url;
+        }
+
+        return '/images/default-news.jpg';
     }
 }

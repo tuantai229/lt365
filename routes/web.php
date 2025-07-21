@@ -173,17 +173,17 @@ Route::prefix('tin-tuc')->name('news.')->group(function () {
    // Danh sách tất cả tin tức
    Route::get('/', [NewsController::class, 'index'])->name('index');
    
-   // Filter theo danh mục tin tức
-   // VD: /tin-tuc/tin-tuyen-sinh, /tin-tuc/tu-van-chon-truong, /tin-tuc/kinh-nghiem-thi-cu
-   Route::get('/{category:slug}', [NewsController::class, 'byCategory'])
-       ->name('by-category');
-   
    // Chi tiết tin tức: slug + ID + .html
    // VD: /tin-tuc/thong-tin-tuyen-sinh-lop-10-nam-2024-567.html
    Route::get('/{slug}-{id}.html', [NewsController::class, 'show'])
        ->name('show')
        ->where('id', '[0-9]+')
        ->where('slug', '[a-z0-9-]+');
+
+   // Filter theo danh mục tin tức
+   // VD: /tin-tuc/tin-tuyen-sinh, /tin-tuc/tu-van-chon-truong, /tin-tuc/kinh-nghiem-thi-cu
+   Route::get('/{category:slug}', [NewsController::class, 'byCategory'])
+       ->name('by-category');
 });
 
 // ===== 6. MODULE TRUNG TÂM (BỘ LỌC ĐA TIÊU CHÍ) =====
