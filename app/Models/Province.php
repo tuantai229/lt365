@@ -41,4 +41,10 @@ class Province extends Model
     {
         return $this->hasMany(Teacher::class);
     }
+
+    // Scope cho các tỉnh thành phố lớn
+    public function scopeMajorCities($query)
+    {
+        return $query->whereIn('id', [1, 4, 20, 21, 29, 33]);
+    }
 }

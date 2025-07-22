@@ -29,7 +29,7 @@
             <!-- Pagination -->
             @if($schools->hasPages())
                 <div class="mt-8">
-                    {{ $schools->appends(request()->query())->links('layouts.components.pagination') }}
+                    {{ $schools->links('vendor.pagination.custom') }}
                 </div>
             @endif
         @else

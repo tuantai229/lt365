@@ -33,14 +33,18 @@
             const type = document.getElementById('type-filter').value;
             const search = document.querySelector('input[name="search"]').value;
             
-            let url = window.location.pathname;
+            let parts = ['/truong-hoc'];
             
-            const queryParams = new URLSearchParams(window.location.search);
+            if (level) parts.push(level);
+            if (province) parts.push('tai-' + province);
+            if (type) parts.push('he-' + type);
+            
+            let url = parts.join('/');
+            
+            const queryParams = new URLSearchParams();
             
             if (search.trim()) {
                 queryParams.set('search', search.trim());
-            } else {
-                queryParams.delete('search');
             }
             
             const queryString = queryParams.toString();

@@ -1,12 +1,14 @@
 <!-- School Card -->
 <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300">
-    <div class="h-40 bg-gray-100">
+    <a href="{{ route('schools.show', [$school->slug ?? 'school', $school->id]) }}" class="block h-40 bg-gray-100">
         <img src="{{ $school->featured_image_url }}" alt="{{ $school->name }}" class="w-full h-full object-cover object-top">
-    </div>
+    </a>
     <div class="p-5">
         <div class="flex items-start justify-between mb-3">
             <div class="flex-1">
-                <h3 class="font-bold text-lg mb-1">{{ $school->name }}</h3>
+                <a href="{{ route('schools.show', [$school->slug ?? 'school', $school->id]) }}">
+                    <h3 class="font-bold text-lg mb-1 hover:text-primary transition-colors">{{ $school->name }}</h3>
+                </a>
                 <p class="text-sm text-gray-600 flex items-center">
                     <i class="ri-map-pin-line mr-1"></i>
                     {{ $school->province->name ?? 'Chưa xác định' }}

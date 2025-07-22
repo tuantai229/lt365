@@ -61,6 +61,12 @@ class Level extends Model
         return $query->orderBy('sort_order')->orderBy('name');
     }
 
+    // Scope cho các level cha
+    public function scopeParentOnly($query)
+    {
+        return $query->where('parent_id', 0);
+    }
+
     // Accessor để lấy trạng thái dạng text
     public function getStatusTextAttribute(): string
     {

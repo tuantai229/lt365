@@ -47,8 +47,8 @@ class SchoolController extends Controller
 
         $schools = $query->paginate(15)->withQueryString();
             
-        $levels = Level::active()->ordered()->get();
-        $provinces = Province::where('status', 1)->orderBy('name', 'asc')->get();
+        $levels = Level::active()->parentOnly()->ordered()->get();
+        $provinces = Province::majorCities()->orderBy('name', 'asc')->get();
         $schoolTypes = SchoolType::active()->ordered()->get();
 
         return view('schools.index', compact('schools', 'levels', 'provinces', 'schoolTypes'));
@@ -112,8 +112,8 @@ class SchoolController extends Controller
 
         return view('schools.index', [
             'schools' => $schools,
-            'levels' => Level::active()->ordered()->get(),
-            'provinces' => Province::where('status', 1)->orderBy('name', 'asc')->get(),
+            'levels' => Level::active()->parentOnly()->ordered()->get(),
+            'provinces' => Province::majorCities()->orderBy('name', 'asc')->get(),
             'schoolTypes' => SchoolType::active()->ordered()->get(),
             'level' => $level,
         ]);
@@ -127,8 +127,8 @@ class SchoolController extends Controller
 
         return view('schools.index', [
             'schools' => $schools,
-            'levels' => Level::active()->ordered()->get(),
-            'provinces' => Province::where('status', 1)->orderBy('name', 'asc')->get(),
+            'levels' => Level::active()->parentOnly()->ordered()->get(),
+            'provinces' => Province::majorCities()->orderBy('name', 'asc')->get(),
             'schoolTypes' => SchoolType::active()->ordered()->get(),
             'province' => $province,
         ]);
@@ -142,8 +142,8 @@ class SchoolController extends Controller
 
         return view('schools.index', [
             'schools' => $schools,
-            'levels' => Level::active()->ordered()->get(),
-            'provinces' => Province::where('status', 1)->orderBy('name', 'asc')->get(),
+            'levels' => Level::active()->parentOnly()->ordered()->get(),
+            'provinces' => Province::majorCities()->orderBy('name', 'asc')->get(),
             'schoolTypes' => SchoolType::active()->ordered()->get(),
             'schoolType' => $schoolType,
         ]);
@@ -161,8 +161,8 @@ class SchoolController extends Controller
 
         return view('schools.index', [
             'schools' => $schools,
-            'levels' => Level::active()->ordered()->get(),
-            'provinces' => Province::where('status', 1)->orderBy('name', 'asc')->get(),
+            'levels' => Level::active()->parentOnly()->ordered()->get(),
+            'provinces' => Province::majorCities()->orderBy('name', 'asc')->get(),
             'schoolTypes' => SchoolType::active()->ordered()->get(),
             'level' => $level,
             'province' => $province,
@@ -178,8 +178,8 @@ class SchoolController extends Controller
 
         return view('schools.index', [
             'schools' => $schools,
-            'levels' => Level::active()->ordered()->get(),
-            'provinces' => Province::where('status', 1)->orderBy('name', 'asc')->get(),
+            'levels' => Level::active()->parentOnly()->ordered()->get(),
+            'provinces' => Province::majorCities()->orderBy('name', 'asc')->get(),
             'schoolTypes' => SchoolType::active()->ordered()->get(),
             'level' => $level,
             'schoolType' => $schoolType,
@@ -195,8 +195,8 @@ class SchoolController extends Controller
 
         return view('schools.index', [
             'schools' => $schools,
-            'levels' => Level::active()->ordered()->get(),
-            'provinces' => Province::where('status', 1)->orderBy('name', 'asc')->get(),
+            'levels' => Level::active()->parentOnly()->ordered()->get(),
+            'provinces' => Province::majorCities()->orderBy('name', 'asc')->get(),
             'schoolTypes' => SchoolType::active()->ordered()->get(),
             'province' => $province,
             'schoolType' => $schoolType,
@@ -216,8 +216,8 @@ class SchoolController extends Controller
 
         return view('schools.index', [
             'schools' => $schools,
-            'levels' => Level::active()->ordered()->get(),
-            'provinces' => Province::where('status', 1)->orderBy('name', 'asc')->get(),
+            'levels' => Level::active()->parentOnly()->ordered()->get(),
+            'provinces' => Province::majorCities()->orderBy('name', 'asc')->get(),
             'schoolTypes' => SchoolType::active()->ordered()->get(),
             'level' => $level,
             'province' => $province,
