@@ -84,62 +84,35 @@ Route::prefix('tai-lieu')->name('documents.')->group(function () {
 
 // ===== 4. MODULE TRƯỜNG HỌC (BỘ LỌC ĐA TIÊU CHÍ) =====
 Route::prefix('truong-hoc')->name('schools.')->group(function () {
-   // Danh sách tất cả trường học
-   Route::get('/', [SchoolController::class, 'index'])->name('index');
-   
-   // ===== FILTER 1 TIÊU CHÍ =====
-   
-   // Filter theo cấp học
-   // VD: /truong-hoc/tieu-hoc, /truong-hoc/thcs, /truong-hoc/thpt
-   Route::get('/{level:slug}', [SchoolController::class, 'byLevel'])
-       ->name('by-level')
-       ->where('level', 'tieu-hoc|thcs|thpt|mam-non');
-   
-   // Filter theo tỉnh thành
-   // VD: /truong-hoc/tai-ha-noi, /truong-hoc/tai-da-nang, /truong-hoc/tai-tp-ho-chi-minh
-   Route::get('/tai-{province:slug}', [SchoolController::class, 'byProvince'])
-       ->name('by-province');
-   
-   // Filter theo loại trường
-   // VD: /truong-hoc/he-cong-lap, /truong-hoc/he-tu-thuc, /truong-hoc/he-chat-luong-cao
-   Route::get('/he-{schoolType:slug}', [SchoolController::class, 'byType'])
-       ->name('by-type');
-   
-   // ===== FILTER 2 TIÊU CHÍ =====
-   
-   // Cấp học + Tỉnh thành
-   // VD: /truong-hoc/tieu-hoc/tai-ha-noi, /truong-hoc/thpt/tai-da-nang
-   Route::get('/{level:slug}/tai-{province:slug}', [SchoolController::class, 'byLevelAndProvince'])
-       ->name('by-level-province')
-       ->where('level', 'tieu-hoc|thcs|thpt|mam-non');
-   
-   // Cấp học + Loại trường
-   // VD: /truong-hoc/tieu-hoc/he-cong-lap, /truong-hoc/thpt/he-tu-thuc
-   Route::get('/{level:slug}/he-{schoolType:slug}', [SchoolController::class, 'byLevelAndType'])
-       ->name('by-level-type')
-       ->where('level', 'tieu-hoc|thcs|thpt|mam-non');
-   
-   // Tỉnh thành + Loại trường
-   // VD: /truong-hoc/tai-ha-noi/he-cong-lap, /truong-hoc/tai-da-nang/he-tu-thuc
-   Route::get('/tai-{province:slug}/he-{schoolType:slug}', [SchoolController::class, 'byProvinceAndType'])
-       ->name('by-province-type');
-   
-   // ===== FILTER ĐẦY ĐỦ 3 TIÊU CHÍ =====
-   
-   // Cấp học + Tỉnh thành + Loại trường
-   // VD: /truong-hoc/tieu-hoc/tai-ha-noi/he-cong-lap
-   Route::get('/{level:slug}/tai-{province:slug}/he-{schoolType:slug}', [SchoolController::class, 'byAll'])
-       ->name('by-all')
-       ->where('level', 'tieu-hoc|thcs|thpt|mam-non');
-   
-   // ===== CHI TIẾT TRƯỜNG HỌC =====
-   
-   // Chi tiết trường học: slug + ID + .html
-   // VD: /truong-hoc/tieu-hoc-newton-ha-noi-123.html
-   Route::get('/{slug}-{id}.html', [SchoolController::class, 'show'])
-       ->name('show')
-       ->where('id', '[0-9]+')
-       ->where('slug', '[a-z0-9-]+');
+    // Danh sách tất cả trường học
+    Route::get('/', [SchoolController::class, 'index'])->name('index');
+
+    // CHI TIẾT TRƯỜNG HỌC (Specific patterns, should be high priority)
+    Route::get('/{slug}-{id}.html', [SchoolController::class, 'show'])
+        ->name('show')
+        ->where('id', '[0-9]+')->where('slug', '[a-z0-9-]+');
+
+    // FILTER ĐẦY ĐỦ 3 TIÊU CHÍ
+    Route::get('/{levelSlug}/tai-{provinceSlug}/he-{schoolTypeSlug}', [SchoolController::class, 'byAll'])
+        ->name('by-all');
+
+    // FILTER 2 TIÊU CHÍ
+    Route::get('/{levelSlug}/tai-{provinceSlug}', [SchoolController::class, 'byLevelAndProvince'])
+        ->name('by-level-province');
+    Route::get('/{levelSlug}/he-{schoolTypeSlug}', [SchoolController::class, 'byLevelAndType'])
+        ->name('by-level-type');
+    Route::get('/tai-{provinceSlug}/he-{schoolTypeSlug}', [SchoolController::class, 'byProvinceAndType'])
+        ->name('by-province-type');
+
+    // FILTER 1 TIÊU CHÍ (Specific prefixes first)
+    Route::get('/tai-{provinceSlug}', [SchoolController::class, 'byProvince'])
+        ->name('by-province');
+    Route::get('/he-{schoolTypeSlug}', [SchoolController::class, 'byType'])
+        ->name('by-type');
+    
+    // FILTER 1 TIÊU CHÍ (Generic slug last)
+    Route::get('/{levelSlug}', [SchoolController::class, 'byLevel'])
+        ->name('by-level');
 });
 
 // ===== 5. MODULE TIN TỨC & TƯ VẤN =====

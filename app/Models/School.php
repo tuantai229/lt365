@@ -93,8 +93,22 @@ class School extends Model
         return $this->hasMany(SchoolAdmissionStat::class);
     }
 
+    public function featuredImage(): BelongsTo
+    {
+        return $this->belongsTo(Media::class, 'featured_image_id');
+    }
+
     public function scopeActive($query)
     {
         return $query->where('status', 1);
+    }
+
+    public function getFeaturedImageUrlAttribute()
+    {
+        if ($this->featuredImage) {
+            return $this->featuredImage->url;
+        }
+
+        return '/images/default-school.jpg';
     }
 }
