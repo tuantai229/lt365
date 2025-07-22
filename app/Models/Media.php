@@ -13,4 +13,9 @@ class Media extends Model
     {
         return Storage::disk($this->disk)->url($this->path);
     }
+
+    public function getRelativePathAttribute(): string
+    {
+        return $this->path;
+    }
 }

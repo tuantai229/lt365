@@ -105,10 +105,7 @@ class School extends Model
 
     public function getFeaturedImageUrlAttribute()
     {
-        if ($this->featuredImage) {
-            return $this->featuredImage->url;
-        }
-
-        return '/images/default-school.jpg';
+        $path = $this->featuredImage->relative_path ?? null;
+        return get_image_url($path);
     }
 }

@@ -1,7 +1,7 @@
 <!-- School Card -->
 <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300">
     <a href="{{ route('schools.show', [$school->slug ?? 'school', $school->id]) }}" class="block h-40 bg-gray-100">
-        <img src="{{ $school->featured_image_url }}" alt="{{ $school->name }}" class="w-full h-full object-cover object-top">
+        <img src="{{ get_image_url($school->featured_image_url) }}" alt="{{ $school->name }}" class="w-full h-full object-cover object-top">
     </a>
     <div class="p-5">
         <div class="flex items-start justify-between mb-3">
