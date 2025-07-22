@@ -1,7 +1,7 @@
 <!-- Hero Banner -->
 <section class="relative overflow-hidden bg-gray-100">
     <div class="container mx-auto px-4 py-6">
-        <div class="relative w-full overflow-hidden rounded-lg shadow-lg" style="height: 300px; background-image: url('/public/html/images/3d7d5e0502820a5e09cf3fb76caa9d88.jpg'); background-size: cover; background-position: center;">
+        <div class="relative w-full overflow-hidden rounded-lg shadow-lg" style="height: 300px; background-image: url('{{ asset('html/images/3d7d5e0502820a5e09cf3fb76caa9d88.jpg') }}'); background-size: cover; background-position: center;">
             <div class="absolute inset-0 bg-gradient-to-r from-primary/80 to-transparent"></div>
             <div class="absolute inset-0 flex items-center">
                 <div class="w-full container mx-auto px-4 md:px-10 flex">
@@ -39,13 +39,13 @@
                                     @if(isset($province) && $province)
                                         {{ $province->name }}
                                     @else
-                                        63 tỉnh thành
+                                        34 tỉnh thành
                                     @endif
                                 </span>
                             </div>
                             <div class="flex items-center gap-2">
                                 <i class="ri-information-line text-lg"></i>
-                                <span>Cập nhật 2025</span>
+                                <span>Cập nhật {{ date('Y') }}</span>
                             </div>
                         </div>
                     </div>

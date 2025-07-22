@@ -1,115 +1,100 @@
 <!-- Filter & Search Section -->
 <section class="py-8 bg-white border-b border-gray-200">
     <div class="container mx-auto px-4">
-        <div class="flex flex-col lg:flex-row gap-6">
-            <!-- Search Bar -->
-            <div class="flex-1">
-                <div class="relative">
-                    <input 
-                        type="search" 
-                        name="search"
-                        placeholder="Tìm kiếm tên trường, địa chỉ..." 
-                        value="{{ request('search') }}"
-                        class="w-full py-3 pl-12 pr-4 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                    >
-                    <div class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center text-gray-400">
-                        <i class="ri-search-line"></i>
+        <form id="school-filter-form" method="GET">
+            <div class="flex flex-col lg:flex-row gap-6">
+                <!-- Search Bar -->
+                <div class="flex-1">
+                    <div class="relative">
+                        <input 
+                            type="search" 
+                            name="search"
+                            placeholder="Tìm kiếm theo tên trường..." 
+                            value="{{ request('search') }}"
+                            class="w-full py-3 pl-12 pr-4 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                        >
+                        <div class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center text-gray-400">
+                            <i class="ri-search-line"></i>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Quick Filters -->
-            <div class="flex flex-wrap gap-3">
-                <!-- Level Filter -->
-                <div class="relative">
-                    <select 
-                        id="level-filter" 
-                        name="level"
-                        class="appearance-none bg-white border border-gray-300 rounded-button px-4 py-3 pr-10 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                    >
-                        <option value="">Tất cả cấp học</option>
-                        @foreach($levels as $levelOption)
-                            <option 
-                                value="{{ $levelOption->slug }}"
-                                {{ (isset($level) && $level && $level->id == $levelOption->id) ? 'selected' : '' }}
-                            >
-                                {{ $levelOption->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                    <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                        <i class="ri-arrow-down-s-line text-gray-400"></i>
+                
+                <!-- Quick Filters -->
+                <div class="flex flex-wrap gap-3">
+                    <!-- Level Filter -->
+                    <div class="relative">
+                        <select 
+                            id="level-filter" 
+                            name="level"
+                            class="appearance-none bg-white border border-gray-300 rounded-button px-4 py-3 pr-10 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                        >
+                            <option value="">Tất cả cấp học</option>
+                            @foreach($levels as $levelOption)
+                                <option 
+                                    value="{{ $levelOption->slug }}"
+                                    {{ (isset($level) && $level && $level->id == $levelOption->id) ? 'selected' : '' }}
+                                >
+                                    {{ $levelOption->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                            <i class="ri-arrow-down-s-line text-gray-400"></i>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Province Filter -->
-                <div class="relative">
-                    <select 
-                        id="province-filter" 
-                        name="province"
-                        class="appearance-none bg-white border border-gray-300 rounded-button px-4 py-3 pr-10 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                    >
-                        <option value="">Tỉnh/Thành phố</option>
-                        @foreach($provinces as $provinceOption)
-                            <option 
-                                value="{{ $provinceOption->slug }}"
-                                {{ (isset($province) && $province && $province->id == $provinceOption->id) ? 'selected' : '' }}
-                            >
-                                {{ $provinceOption->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                    <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                        <i class="ri-arrow-down-s-line text-gray-400"></i>
+                    <!-- Province Filter -->
+                    <div class="relative">
+                        <select 
+                            id="province-filter" 
+                            name="province"
+                            class="appearance-none bg-white border border-gray-300 rounded-button px-4 py-3 pr-10 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                        >
+                            <option value="">Tỉnh/Thành phố</option>
+                            @foreach($provinces as $provinceOption)
+                                <option 
+                                    value="{{ $provinceOption->slug }}"
+                                    {{ (isset($province) && $province && $province->id == $provinceOption->id) ? 'selected' : '' }}
+                                >
+                                    {{ $provinceOption->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                            <i class="ri-arrow-down-s-line text-gray-400"></i>
+                        </div>
                     </div>
-                </div>
-                
-                <!-- School Type Filter -->
-                <div class="relative">
-                    <select 
-                        id="type-filter" 
-                        name="type"
-                        class="appearance-none bg-white border border-gray-300 rounded-button px-4 py-3 pr-10 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                    >
-                        <option value="">Loại trường</option>
-                        @foreach($schoolTypes as $typeOption)
-                            <option 
-                                value="{{ $typeOption->slug }}"
-                                {{ (isset($schoolType) && $schoolType && $schoolType->id == $typeOption->id) ? 'selected' : '' }}
-                            >
-                                {{ $typeOption->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                    <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                        <i class="ri-arrow-down-s-line text-gray-400"></i>
+                    
+                    <!-- School Type Filter -->
+                    <div class="relative">
+                        <select 
+                            id="type-filter" 
+                            name="type"
+                            class="appearance-none bg-white border border-gray-300 rounded-button px-4 py-3 pr-10 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                        >
+                            <option value="">Loại trường</option>
+                            @foreach($schoolTypes as $typeOption)
+                                <option 
+                                    value="{{ $typeOption->slug }}"
+                                    {{ (isset($schoolType) && $schoolType && $schoolType->id == $typeOption->id) ? 'selected' : '' }}
+                                >
+                                    {{ $typeOption->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                            <i class="ri-arrow-down-s-line text-gray-400"></i>
+                        </div>
                     </div>
+                    
+                    <!-- Search Button -->
+                    <button type="submit" class="search-btn px-6 py-3 bg-primary text-white rounded-button hover:bg-primary/90 transition-colors duration-200 flex items-center gap-2 font-medium">
+                        <i class="ri-search-line"></i>
+                        <span>Tìm trường</span>
+                    </button>
                 </div>
-                
-                <!-- Sort Filter -->
-                <div class="relative">
-                    <select 
-                        id="sort-filter" 
-                        name="sort"
-                        class="appearance-none bg-white border border-gray-300 rounded-button px-4 py-3 pr-10 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                    >
-                        <option value="">Sắp xếp</option>
-                        <option value="name" {{ request('sort') == 'name' ? 'selected' : '' }}>Tên A-Z</option>
-                        <option value="quota" {{ request('sort') == 'quota' ? 'selected' : '' }}>Chỉ tiêu cao</option>
-                        <option value="popular" {{ request('sort') == 'popular' ? 'selected' : '' }}>Phổ biến</option>
-                    </select>
-                    <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                        <i class="ri-arrow-down-s-line text-gray-400"></i>
-                    </div>
-                </div>
-                
-                <!-- Search Button -->
-                <button class="search-btn px-6 py-3 bg-primary text-white rounded-button hover:bg-primary/90 transition-colors duration-200 flex items-center gap-2 font-medium">
-                    <i class="ri-search-line"></i>
-                    <span>Tìm trường</span>
-                </button>
             </div>
-        </div>
+        </form>
 
         <!-- Active Filters Display -->
         @if(isset($level) || isset($province) || isset($schoolType) || request('search'))

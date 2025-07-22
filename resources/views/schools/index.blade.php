@@ -23,76 +23,29 @@
 @push('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const levelFilter = document.getElementById('level-filter');
-        const provinceFilter = document.getElementById('province-filter');
-        const typeFilter = document.getElementById('type-filter');
-        const sortFilter = document.getElementById('sort-filter');
-
-        function buildUrl() {
-            let level = levelFilter.value;
-            let province = provinceFilter.value;
-            let type = typeFilter.value;
-            let sort = sortFilter.value;
-
-            let parts = ['/truong-hoc'];
+        const filterForm = document.getElementById('school-filter-form');
+        
+        filterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            if (level) parts.push(level);
-            if (province) parts.push('tai-' + province);
-            if (type) parts.push('he-' + type);
-
-            let url = parts.join('/');
+            const level = document.getElementById('level-filter').value;
+            const province = document.getElementById('province-filter').value;
+            const type = document.getElementById('type-filter').value;
+            const search = document.querySelector('input[name="search"]').value;
+            
+            let url = window.location.pathname;
             
             const queryParams = new URLSearchParams(window.location.search);
             
-            if (sort) {
-                queryParams.set('sort', sort);
+            if (search.trim()) {
+                queryParams.set('search', search.trim());
             } else {
-                queryParams.delete('sort');
+                queryParams.delete('search');
             }
             
-            // Remove filter if it exists, as it's handled by the URL path
-            queryParams.delete('filter');
-
             const queryString = queryParams.toString();
-            return queryString ? url + '?' + queryString : url;
-        }
-
-        function applyFilters() {
-            window.location.href = buildUrl();
-        }
-
-        levelFilter.addEventListener('change', applyFilters);
-        provinceFilter.addEventListener('change', applyFilters);
-        typeFilter.addEventListener('change', applyFilters);
-        sortFilter.addEventListener('change', applyFilters);
-
-        // Search functionality
-        const searchButton = document.querySelector('.search-btn');
-        const searchInput = document.querySelector('input[type="search"]');
-        
-        if (searchButton && searchInput) {
-            searchButton.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                // Get current URL and add search parameter
-                const currentUrl = new URL(window.location);
-                if (searchInput.value.trim()) {
-                    currentUrl.searchParams.set('search', searchInput.value.trim());
-                } else {
-                    currentUrl.searchParams.delete('search');
-                }
-                
-                window.location.href = currentUrl.toString();
-            });
-
-            // Enter key search
-            searchInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    searchButton.click();
-                }
-            });
-        }
+            window.location.href = queryString ? url + '?' + queryString : url;
+        });
 
         // Heart/Favorite Toggle
         const heartButtons = document.querySelectorAll('[data-favorite-btn]');

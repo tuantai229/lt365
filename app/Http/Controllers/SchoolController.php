@@ -38,19 +38,12 @@ class SchoolController extends Controller
             }
         }
 
-        // Sorting
-        if ($request->has('sort')) {
-            switch ($request->get('sort')) {
-                case 'name':
-                    $query->orderBy('name', 'asc');
-                    break;
-                default:
-                    $query->orderBy('sort_order', 'asc')->orderBy('name', 'asc');
-                    break;
-            }
-        } else {
-            $query->orderBy('sort_order', 'asc')->orderBy('name', 'asc');
+        // Search by name
+        if ($request->has('search')) {
+            $query->where('name', 'like', '%' . $request->get('search') . '%');
         }
+        
+        $query->orderBy('sort_order', 'asc')->orderBy('name', 'asc');
 
         $schools = $query->paginate(15)->withQueryString();
             
@@ -264,19 +257,12 @@ class SchoolController extends Controller
             }
         }
 
-        // Sorting
-        if ($request->has('sort')) {
-            switch ($request->get('sort')) {
-                case 'name':
-                    $query->orderBy('name', 'asc');
-                    break;
-                default:
-                    $query->orderBy('sort_order', 'asc')->orderBy('name', 'asc');
-                    break;
-            }
-        } else {
-            $query->orderBy('sort_order', 'asc')->orderBy('name', 'asc');
+        // Search by name
+        if ($request->has('search')) {
+            $query->where('name', 'like', '%' . $request->get('search') . '%');
         }
+        
+        $query->orderBy('sort_order', 'asc')->orderBy('name', 'asc');
 
         return $query->paginate(15)->withQueryString();
     }
