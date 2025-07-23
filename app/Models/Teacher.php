@@ -48,6 +48,11 @@ class Teacher extends Model
         return $this->belongsTo(Commune::class);
     }
 
+    public function featuredImage(): BelongsTo
+    {
+        return $this->belongsTo(Media::class, 'featured_image_id');
+    }
+
     public function subjects(): BelongsToMany
     {
         return $this->belongsToMany(Subject::class, 'teacher_subject_links');
