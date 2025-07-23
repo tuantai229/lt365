@@ -7,11 +7,7 @@
                 <div class="flex flex-col md:flex-row gap-6 mb-8">
                     <!-- Teacher Image -->
                     <div class="md:w-1/3">
-                        @if($teacher->featuredImage)
-                            <img src="{{ asset('storage/' . $teacher->featuredImage->path) }}" alt="{{ $teacher->name }}" class="w-full h-64 object-cover object-top rounded-lg shadow-md">
-                        @else
-                            <img src="{{ asset('html/images/f464b08c95c56053708d1bc74dde0dd7.jpg') }}" alt="{{ $teacher->name }}" class="w-full h-64 object-cover object-top rounded-lg shadow-md">
-                        @endif
+                        <img src="{{ get_image_url($teacher->featured_image_url) }}" alt="{{ $teacher->name }}" class="w-full h-64 object-cover object-top rounded-lg shadow-md">
                     </div>
                     
                     <!-- Teacher Info -->
@@ -43,7 +39,12 @@
                             @if($teacher->province)
                                 <div class="flex items-center gap-2 text-gray-700">
                                     <i class="ri-map-pin-line text-primary"></i>
-                                    <span>Địa điểm: {{ $teacher->province->name }}</span>
+                                    <span>
+                                        Địa điểm: {{ $teacher->province->name }}
+                                        @if($teacher->commune_id > 0 && $teacher->commune)
+                                            ({{ $teacher->commune->name }})
+                                        @endif
+                                    </span>
                                 </div>
                             @endif
                             @if($teacher->phone)
@@ -61,7 +62,7 @@
                     <div class="bg-white border border-gray-200 rounded-lg p-6 mb-6">
                         <h2 class="text-2xl font-bold mb-4 text-gray-900">Giới thiệu</h2>
                         <div class="prose max-w-none text-gray-700">
-                            {!! nl2br(e($teacher->content)) !!}
+                            {!! $teacher->content !!}
                         </div>
                     </div>
                 @endif
@@ -106,7 +107,7 @@
             <!-- Sidebar -->
             <div class="lg:col-span-1">
                 <!-- Contact Card -->
-                <div class="bg-white border border-gray-200 rounded-lg p-6 mb-6 sticky top-6">
+                <div class="bg-white border border-gray-200 rounded-lg p-6 mb-6 top-6">
                     <h3 class="text-xl font-bold mb-4 text-gray-900">Liên hệ tư vấn</h3>
                     
                     <!-- Contact Info -->
@@ -142,7 +143,12 @@
                                 </div>
                                 <div>
                                     <p class="text-sm text-gray-500">Địa điểm dạy</p>
-                                    <p class="font-medium">{{ $teacher->province->name }}</p>
+                                    <p class="font-medium">
+                                        {{ $teacher->province->name }}
+                                        @if($teacher->commune_id > 0 && $teacher->commune)
+                                            ({{ $teacher->commune->name }})
+                                        @endif
+                                    </p>
                                 </div>
                             </div>
                         @endif
@@ -185,10 +191,6 @@
                                 <span class="font-medium">{{ $teacher->levels->pluck('name')->join(', ') }}</span>
                             </div>
                         @endif
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-600">Hình thức:</span>
-                            <span class="font-medium">Kèm riêng/Nhóm</span>
-                        </div>
                     </div>
                 </div>
 

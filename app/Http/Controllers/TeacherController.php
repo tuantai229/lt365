@@ -18,7 +18,7 @@ class TeacherController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Teacher::with(['levels', 'subjects', 'province', 'featuredImage'])->active();
+        $query = Teacher::with(['levels', 'subjects', 'province', 'commune', 'featuredImage'])->active();
 
         // Quick filters
         if ($request->has('filter')) {
@@ -62,7 +62,7 @@ class TeacherController extends Controller
     public function show(Request $request, $slug, $id)
     {
         $teacher = Teacher::with([
-            'levels', 'subjects', 'province', 'featuredImage'
+            'levels', 'subjects', 'province', 'commune', 'featuredImage'
         ])
         ->active()
         ->findOrFail($id);
@@ -211,7 +211,7 @@ class TeacherController extends Controller
 
     private function getFilteredTeachers(Request $request, array $filters, $level = null, $subject = null)
     {
-        $query = Teacher::with(['levels', 'subjects', 'province', 'featuredImage'])
+        $query = Teacher::with(['levels', 'subjects', 'province', 'commune', 'featuredImage'])
             ->active()
             ->where($filters);
 

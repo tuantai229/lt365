@@ -27,7 +27,12 @@
                                 @if($teacher->province)
                                     <p class="text-sm text-gray-600">
                                         <i class="ri-map-pin-line mr-2 text-primary"></i>
-                                        <span>{{ $teacher->province->name }}</span>
+                                        <span>
+                                            {{ $teacher->province->name }}
+                                            @if($teacher->commune_id > 0 && $teacher->commune)
+                                                ({{ $teacher->commune->name }})
+                                            @endif
+                                        </span>
                                     </p>
                                 @endif
         </div>
