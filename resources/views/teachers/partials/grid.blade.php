@@ -3,17 +3,15 @@
         @if($teachers->count() > 0)
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 @foreach($teachers as $teacher)
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300">
-                        <div class="p-6 text-center">
-                            <div class="w-20 h-20 rounded-full mx-auto mb-4 overflow-hidden bg-gray-100">
-                                @if($teacher->featuredImage)
-                                    <img src="{{ asset('storage/' . $teacher->featuredImage->path) }}" alt="{{ $teacher->name }}" class="w-full h-full object-cover">
-                                @else
-                                    <img src="{{ asset('html/images/0668b9e8706c79925cfba198a4a0ff35.jpg') }}" alt="{{ $teacher->name }}" class="w-full h-full object-cover">
-                                @endif
-                            </div>
-                            <h4 class="font-bold text-lg mb-2 text-primary">{{ $teacher->name }}</h4>
-                            <div class="space-y-2 mb-4">
+<div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300">
+    <a href="{{ route('teachers.show', [$teacher->slug, $teacher->id]) }}" class="block p-6 text-center">
+        <div class="w-20 h-20 rounded-full mx-auto mb-4 overflow-hidden bg-gray-100">
+            <img src="{{ get_image_url($teacher->featured_image_url) }}" alt="{{ $teacher->name }}" class="w-full h-full object-cover">
+        </div>
+        <h4 class="font-bold text-lg mb-2 text-primary hover:text-primary/80 transition-colors">{{ $teacher->name }}</h4>
+    </a>
+    <div class="px-6 pb-6 text-center">
+        <div class="space-y-2 mb-4">
                                 @if($teacher->subjects->count() > 0 && $teacher->levels->count() > 0)
                                     <p class="text-sm text-gray-600">
                                         <i class="ri-book-line mr-2 text-primary"></i>
@@ -32,20 +30,20 @@
                                         <span>{{ $teacher->province->name }}</span>
                                     </p>
                                 @endif
-                            </div>
-                            <a href="{{ route('teachers.show', [$teacher->slug, $teacher->id]) }}" 
-                               class="w-full inline-block py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors duration-200 text-sm font-medium">
-                                Xem chi tiết
-                            </a>
-                        </div>
-                    </div>
+        </div>
+        <a href="{{ route('teachers.show', [$teacher->slug, $teacher->id]) }}" 
+           class="w-full inline-block py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors duration-200 text-sm font-medium">
+            Xem chi tiết
+        </a>
+    </div>
+</div>
                 @endforeach
             </div>
 
             <!-- Pagination -->
             @if($teachers->hasPages())
-                <div class="flex justify-center mt-12">
-                    {{ $teachers->links() }}
+                <div class="mt-8">
+                    {{ $teachers->links('vendor.pagination.custom') }}
                 </div>
             @endif
         @else

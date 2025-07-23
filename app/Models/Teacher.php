@@ -82,4 +82,13 @@ class Teacher extends Model
     {
         return $query->where('status', 1);
     }
+
+    public function getFeaturedImageUrlAttribute(): ?string
+    {
+        if ($this->featuredImage) {
+            return 'storage/' . $this->featuredImage->path;
+        }
+
+        return null;
+    }
 }

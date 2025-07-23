@@ -195,62 +195,35 @@ Route::prefix('trung-tam')->name('centers.')->group(function () {
 
 // ===== 7. MODULE GIÁO VIÊN (BỘ LỌC ĐA TIÊU CHÍ) =====
 Route::prefix('giao-vien')->name('teachers.')->group(function () {
-   // Danh sách tất cả giáo viên
-   Route::get('/', [TeacherController::class, 'index'])->name('index');
-   
-   // ===== FILTER 1 TIÊU CHÍ =====
-   
-   // Filter theo cấp học
-   // VD: /giao-vien/tieu-hoc, /giao-vien/thcs, /giao-vien/thpt
-   Route::get('/{level:slug}', [TeacherController::class, 'byLevel'])
-       ->name('by-level')
-       ->where('level', 'tieu-hoc|thcs|thpt|mam-non');
-   
-   // Filter theo môn học
-   // VD: /giao-vien/mon-toan-hoc, /giao-vien/mon-tieng-anh, /giao-vien/mon-vat-ly
-   Route::get('/mon-{subject:slug}', [TeacherController::class, 'bySubject'])
-       ->name('by-subject');
-   
-   // Filter theo tỉnh thành
-   // VD: /giao-vien/tai-ha-noi, /giao-vien/tai-da-nang, /giao-vien/tai-tp-ho-chi-minh
-   Route::get('/tai-{province:slug}', [TeacherController::class, 'byProvince'])
-       ->name('by-province');
-   
-   // ===== FILTER 2 TIÊU CHÍ =====
-   
-   // Cấp học + Môn học
-   // VD: /giao-vien/tieu-hoc/mon-toan-hoc, /giao-vien/thpt/mon-vat-ly
-   Route::get('/{level:slug}/mon-{subject:slug}', [TeacherController::class, 'byLevelAndSubject'])
-       ->name('by-level-subject')
-       ->where('level', 'tieu-hoc|thcs|thpt|mam-non');
-   
-   // Cấp học + Tỉnh thành
-   // VD: /giao-vien/tieu-hoc/tai-ha-noi, /giao-vien/thpt/tai-da-nang
-   Route::get('/{level:slug}/tai-{province:slug}', [TeacherController::class, 'byLevelAndProvince'])
-       ->name('by-level-province')
-       ->where('level', 'tieu-hoc|thcs|thpt|mam-non');
-   
-   // Môn học + Tỉnh thành
-   // VD: /giao-vien/mon-toan-hoc/tai-ha-noi, /giao-vien/mon-tieng-anh/tai-da-nang
-   Route::get('/mon-{subject:slug}/tai-{province:slug}', [TeacherController::class, 'bySubjectAndProvince'])
-       ->name('by-subject-province');
-   
-   // ===== FILTER ĐẦY ĐỦ 3 TIÊU CHÍ =====
-   
-   // Cấp học + Môn học + Tỉnh thành
-   // VD: /giao-vien/tieu-hoc/mon-toan-hoc/tai-ha-noi
-   Route::get('/{level:slug}/mon-{subject:slug}/tai-{province:slug}', [TeacherController::class, 'byAll'])
-       ->name('by-all')
-       ->where('level', 'tieu-hoc|thcs|thpt|mam-non');
-   
-   // ===== CHI TIẾT GIÁO VIÊN =====
-   
-   // Chi tiết giáo viên: slug + ID + .html
-   // VD: /giao-vien/thay-nguyen-van-toan-giao-vien-toan-456.html
-   Route::get('/{slug}-{id}.html', [TeacherController::class, 'show'])
-       ->name('show')
-       ->where('id', '[0-9]+')
-       ->where('slug', '[a-z0-9-]+');
+    // Danh sách tất cả giáo viên
+    Route::get('/', [TeacherController::class, 'index'])->name('index');
+
+    // CHI TIẾT GIÁO VIÊN (Specific patterns, should be high priority)
+    Route::get('/{slug}-{id}.html', [TeacherController::class, 'show'])
+        ->name('show')
+        ->where('id', '[0-9]+')->where('slug', '[a-z0-9-]+');
+
+    // FILTER ĐẦY ĐỦ 3 TIÊU CHÍ
+    Route::get('/{levelSlug}/mon-{subjectSlug}/tai-{provinceSlug}', [TeacherController::class, 'byAll'])
+        ->name('by-all');
+
+    // FILTER 2 TIÊU CHÍ
+    Route::get('/{levelSlug}/mon-{subjectSlug}', [TeacherController::class, 'byLevelAndSubject'])
+        ->name('by-level-subject');
+    Route::get('/{levelSlug}/tai-{provinceSlug}', [TeacherController::class, 'byLevelAndProvince'])
+        ->name('by-level-province');
+    Route::get('/mon-{subjectSlug}/tai-{provinceSlug}', [TeacherController::class, 'bySubjectAndProvince'])
+        ->name('by-subject-province');
+
+    // FILTER 1 TIÊU CHÍ (Specific prefixes first)
+    Route::get('/mon-{subjectSlug}', [TeacherController::class, 'bySubject'])
+        ->name('by-subject');
+    Route::get('/tai-{provinceSlug}', [TeacherController::class, 'byProvince'])
+        ->name('by-province');
+    
+    // FILTER 1 TIÊU CHÍ (Generic slug last)
+    Route::get('/{levelSlug}', [TeacherController::class, 'byLevel'])
+        ->name('by-level');
 });
 
 // ===== 8. TÌM KIẾM & LỌC =====
