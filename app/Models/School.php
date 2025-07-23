@@ -93,6 +93,11 @@ class School extends Model
         return $this->hasMany(SchoolAdmissionStat::class);
     }
 
+    public function latestAdmission()
+    {
+        return $this->hasOne(SchoolAdmission::class)->latestOfMany('year');
+    }
+
     public function featuredImage(): BelongsTo
     {
         return $this->belongsTo(Media::class, 'featured_image_id');

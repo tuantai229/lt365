@@ -37,17 +37,17 @@
                     <i class="ri-group-line mr-2 text-primary"></i>
                     Chỉ tiêu:
                 </span>
-                <span class="font-medium">{{ number_format($school->admission_quota ?? 0) }} học sinh</span>
+                <span class="font-medium">{{ number_format($school->latestAdmission->total_students ?? 0) }} học sinh</span>
             </div>
             <div class="flex items-center justify-between text-sm">
                 <span class="text-gray-600 flex items-center">
                     <i class="ri-money-dollar-circle-line mr-2 text-primary"></i>
                     Học phí:
                 </span>
-                <span class="font-medium {{ $school->tuition_fee ? ($school->tuition_fee > 0 ? 'text-orange-600' : 'text-green-600') : 'text-gray-500' }}">
-                    @if($school->tuition_fee)
-                        @if($school->tuition_fee > 0)
-                            {{ number_format($school->tuition_fee) }}đ/tháng
+                <span class="font-medium {{ isset($school->latestAdmission->estimated_tuition_fee) ? ($school->latestAdmission->estimated_tuition_fee > 0 ? 'text-orange-600' : 'text-green-600') : 'text-gray-500' }}">
+                    @if(isset($school->latestAdmission->estimated_tuition_fee))
+                        @if($school->latestAdmission->estimated_tuition_fee > 0)
+                            {{ number_format($school->latestAdmission->estimated_tuition_fee) }}đ/tháng
                         @else
                             Miễn phí
                         @endif
@@ -62,8 +62,8 @@
                     Tuyển sinh:
                 </span>
                 <span class="font-medium">
-                    @if($school->admission_start_date)
-                        {{ \Carbon\Carbon::parse($school->admission_start_date)->format('m/Y') }}
+                    @if($school->latestAdmission && $school->latestAdmission->exam_date)
+                        {{ \Carbon\Carbon::parse($school->latestAdmission->exam_date)->format('d-m-Y') }}
                     @else
                         Chưa công bố
                     @endif

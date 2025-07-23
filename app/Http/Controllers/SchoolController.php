@@ -20,7 +20,7 @@ class SchoolController extends Controller
      */
     public function index(Request $request)
     {
-        $query = School::with(['level', 'province', 'schoolTypes', 'featuredImage'])->active();
+        $query = School::with(['level', 'province', 'schoolTypes', 'featuredImage', 'latestAdmission'])->active();
 
         // Quick filters
         if ($request->has('filter')) {
@@ -245,7 +245,7 @@ class SchoolController extends Controller
 
     private function getFilteredSchools(Request $request, array $filters, $schoolType = null)
     {
-        $query = School::with(['level', 'province', 'schoolTypes', 'featuredImage'])
+        $query = School::with(['level', 'province', 'schoolTypes', 'featuredImage', 'latestAdmission'])
             ->active()
             ->where($filters);
 
