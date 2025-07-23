@@ -73,8 +73,24 @@ class Center extends Model
         return $this->morphMany(Comment::class, 'commentable', 'type', 'type_id');
     }
 
+    public function featuredImage(): BelongsTo
+    {
+        return $this->belongsTo(Media::class, 'featured_image_id');
+    }
+
     public function scopeActive($query)
     {
         return $query->where('status', 1);
+    }
+
+    public function scopeOrdered($query)
+    {
+        return $query->orderBy('sort_order', 'asc')->orderBy('name', 'asc');
+    }
+
+    public function getFeaturedImageUrlAttribute()
+    {
+        $path = $this->featuredImage->relative_path ?? null;
+        return get_image_url($path);
     }
 }

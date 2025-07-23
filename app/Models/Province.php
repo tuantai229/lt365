@@ -47,4 +47,14 @@ class Province extends Model
     {
         return $query->whereIn('id', [1, 4, 20, 21, 29, 33]);
     }
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
+    }
+
+    public function scopeOrdered($query)
+    {
+        return $query->orderBy('sort_order', 'asc')->orderBy('name', 'asc');
+    }
 }
