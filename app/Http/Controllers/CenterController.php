@@ -99,7 +99,7 @@ class CenterController extends Controller
 
     public function byLevel(Request $request, $levelSlug)
     {
-        $level = Level::where('slug', $levelSlug)->first();
+        $level = Level::where('slug', $levelSlug)->firstOrFail();
         $centers = $this->getFilteredCenters($request, [], $level);
 
         return view('centers.index', [
@@ -113,7 +113,7 @@ class CenterController extends Controller
 
     public function bySubject(Request $request, $subjectSlug)
     {
-        $subject = Subject::where('slug', $subjectSlug)->first();
+        $subject = Subject::where('slug', $subjectSlug)->firstOrFail();
         $centers = $this->getFilteredCenters($request, [], null, $subject);
 
         return view('centers.index', [
@@ -127,8 +127,8 @@ class CenterController extends Controller
 
     public function byProvince(Request $request, $provinceSlug)
     {
-        $province = Province::where('slug', $provinceSlug)->first();
-        $filters = $province ? ['province_id' => $province->id] : [];
+        $province = Province::where('slug', $provinceSlug)->firstOrFail();
+        $filters = ['province_id' => $province->id];
         $centers = $this->getFilteredCenters($request, $filters);
 
         return view('centers.index', [
@@ -142,8 +142,8 @@ class CenterController extends Controller
 
     public function byLevelAndSubject(Request $request, $levelSlug, $subjectSlug)
     {
-        $level = Level::where('slug', $levelSlug)->first();
-        $subject = Subject::where('slug', $subjectSlug)->first();
+        $level = Level::where('slug', $levelSlug)->firstOrFail();
+        $subject = Subject::where('slug', $subjectSlug)->firstOrFail();
         $centers = $this->getFilteredCenters($request, [], $level, $subject);
 
         return view('centers.index', [
@@ -158,9 +158,9 @@ class CenterController extends Controller
 
     public function byLevelAndProvince(Request $request, $levelSlug, $provinceSlug)
     {
-        $level = Level::where('slug', $levelSlug)->first();
-        $province = Province::where('slug', $provinceSlug)->first();
-        $filters = $province ? ['province_id' => $province->id] : [];
+        $level = Level::where('slug', $levelSlug)->firstOrFail();
+        $province = Province::where('slug', $provinceSlug)->firstOrFail();
+        $filters = ['province_id' => $province->id];
         $centers = $this->getFilteredCenters($request, $filters, $level);
 
         return view('centers.index', [
@@ -175,9 +175,9 @@ class CenterController extends Controller
 
     public function bySubjectAndProvince(Request $request, $subjectSlug, $provinceSlug)
     {
-        $subject = Subject::where('slug', $subjectSlug)->first();
-        $province = Province::where('slug', $provinceSlug)->first();
-        $filters = $province ? ['province_id' => $province->id] : [];
+        $subject = Subject::where('slug', $subjectSlug)->firstOrFail();
+        $province = Province::where('slug', $provinceSlug)->firstOrFail();
+        $filters = ['province_id' => $province->id];
         $centers = $this->getFilteredCenters($request, $filters, null, $subject);
 
         return view('centers.index', [
@@ -192,10 +192,10 @@ class CenterController extends Controller
 
     public function byAll(Request $request, $levelSlug, $subjectSlug, $provinceSlug)
     {
-        $level = Level::where('slug', $levelSlug)->first();
-        $subject = Subject::where('slug', $subjectSlug)->first();
-        $province = Province::where('slug', $provinceSlug)->first();
-        $filters = $province ? ['province_id' => $province->id] : [];
+        $level = Level::where('slug', $levelSlug)->firstOrFail();
+        $subject = Subject::where('slug', $subjectSlug)->firstOrFail();
+        $province = Province::where('slug', $provinceSlug)->firstOrFail();
+        $filters = ['province_id' => $province->id];
         $centers = $this->getFilteredCenters($request, $filters, $level, $subject);
 
         return view('centers.index', [

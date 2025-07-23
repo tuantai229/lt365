@@ -135,62 +135,35 @@ Route::prefix('tin-tuc')->name('news.')->group(function () {
 
 // ===== 6. MODULE TRUNG TÂM (BỘ LỌC ĐA TIÊU CHÍ) =====
 Route::prefix('trung-tam')->name('centers.')->group(function () {
-   // Danh sách tất cả trung tâm
-   Route::get('/', [CenterController::class, 'index'])->name('index');
-   
-   // ===== FILTER 1 TIÊU CHÍ =====
-   
-   // Filter theo cấp học
-   // VD: /trung-tam/tieu-hoc, /trung-tam/thcs, /trung-tam/thpt
-   Route::get('/{level:slug}', [CenterController::class, 'byLevel'])
-       ->name('by-level')
-       ->where('level', 'tieu-hoc|thcs|thpt|mam-non');
-   
-   // Filter theo môn học
-   // VD: /trung-tam/mon-toan-hoc, /trung-tam/mon-tieng-anh, /trung-tam/mon-vat-ly
-   Route::get('/mon-{subject:slug}', [CenterController::class, 'bySubject'])
-       ->name('by-subject');
-   
-   // Filter theo tỉnh thành
-   // VD: /trung-tam/tai-ha-noi, /trung-tam/tai-da-nang, /trung-tam/tai-tp-ho-chi-minh
-   Route::get('/tai-{province:slug}', [CenterController::class, 'byProvince'])
-       ->name('by-province');
-   
-   // ===== FILTER 2 TIÊU CHÍ =====
-   
-   // Cấp học + Môn học
-   // VD: /trung-tam/tieu-hoc/mon-toan-hoc, /trung-tam/thpt/mon-vat-ly
-   Route::get('/{level:slug}/mon-{subject:slug}', [CenterController::class, 'byLevelAndSubject'])
-       ->name('by-level-subject')
-       ->where('level', 'tieu-hoc|thcs|thpt|mam-non');
-   
-   // Cấp học + Tỉnh thành
-   // VD: /trung-tam/tieu-hoc/tai-ha-noi, /trung-tam/thpt/tai-da-nang
-   Route::get('/{level:slug}/tai-{province:slug}', [CenterController::class, 'byLevelAndProvince'])
-       ->name('by-level-province')
-       ->where('level', 'tieu-hoc|thcs|thpt|mam-non');
-   
-   // Môn học + Tỉnh thành
-   // VD: /trung-tam/mon-toan-hoc/tai-ha-noi, /trung-tam/mon-tieng-anh/tai-da-nang
-   Route::get('/mon-{subject:slug}/tai-{province:slug}', [CenterController::class, 'bySubjectAndProvince'])
-       ->name('by-subject-province');
-   
-   // ===== FILTER ĐẦY ĐỦ 3 TIÊU CHÍ =====
-   
-   // Cấp học + Môn học + Tỉnh thành
-   // VD: /trung-tam/tieu-hoc/mon-toan-hoc/tai-ha-noi
-   Route::get('/{level:slug}/mon-{subject:slug}/tai-{province:slug}', [CenterController::class, 'byAll'])
-       ->name('by-all')
-       ->where('level', 'tieu-hoc|thcs|thpt|mam-non');
-   
-   // ===== CHI TIẾT TRUNG TÂM =====
-   
-   // Chi tiết trung tâm: slug + ID + .html
-   // VD: /trung-tam/trung-tam-luyen-thi-a-plus-ha-noi-89.html
-   Route::get('/{slug}-{id}.html', [CenterController::class, 'show'])
-       ->name('show')
-       ->where('id', '[0-9]+')
-       ->where('slug', '[a-z0-9-]+');
+    // Danh sách tất cả trung tâm
+    Route::get('/', [CenterController::class, 'index'])->name('index');
+
+    // CHI TIẾT TRUNG TÂM (Specific patterns, should be high priority)
+    Route::get('/{slug}-{id}.html', [CenterController::class, 'show'])
+        ->name('show')
+        ->where('id', '[0-9]+')->where('slug', '[a-z0-9-]+');
+
+    // FILTER ĐẦY ĐỦ 3 TIÊU CHÍ
+    Route::get('/{levelSlug}/mon-{subjectSlug}/tai-{provinceSlug}', [CenterController::class, 'byAll'])
+        ->name('by-all');
+
+    // FILTER 2 TIÊU CHÍ
+    Route::get('/{levelSlug}/mon-{subjectSlug}', [CenterController::class, 'byLevelAndSubject'])
+        ->name('by-level-subject');
+    Route::get('/{levelSlug}/tai-{provinceSlug}', [CenterController::class, 'byLevelAndProvince'])
+        ->name('by-level-province');
+    Route::get('/mon-{subjectSlug}/tai-{provinceSlug}', [CenterController::class, 'bySubjectAndProvince'])
+        ->name('by-subject-province');
+
+    // FILTER 1 TIÊU CHÍ (Specific prefixes first)
+    Route::get('/mon-{subjectSlug}', [CenterController::class, 'bySubject'])
+        ->name('by-subject');
+    Route::get('/tai-{provinceSlug}', [CenterController::class, 'byProvince'])
+        ->name('by-province');
+    
+    // FILTER 1 TIÊU CHÍ (Generic slug last)
+    Route::get('/{levelSlug}', [CenterController::class, 'byLevel'])
+        ->name('by-level');
 });
 
 // ===== 7. MODULE GIÁO VIÊN (BỘ LỌC ĐA TIÊU CHÍ) =====
