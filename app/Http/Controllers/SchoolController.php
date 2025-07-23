@@ -7,6 +7,9 @@ use App\Models\School;
 use App\Models\SchoolType;
 use App\Models\Level;
 use App\Models\Province;
+use App\Models\News;
+use App\Models\Document;
+use App\Models\SchoolAdmission;
 
 class SchoolController extends Controller
 {
@@ -65,11 +68,16 @@ class SchoolController extends Controller
     public function show(Request $request, $slug, $id)
     {
         $school = School::with([
-            'level', 'province', 'schoolTypes', 'admissionMethods', 
+            'level', 'province', 'schoolTypes', 'admissionMethods',
             'admissionStats', 'featuredImage'
         ])
         ->active()
         ->findOrFail($id);
+
+        // Get the latest admission info
+        $school->admissionInfo = SchoolAdmission::where('school_id', $school->id)
+            ->orderBy('year', 'desc')
+            ->first();
 
         // Sidebar: Related schools
         $relatedSchools = School::with(['featuredImage'])
@@ -83,24 +91,34 @@ class SchoolController extends Controller
             ->limit(5)
             ->get();
 
-        // Sidebar: Most popular schools
-        $popularSchools = School::with(['featuredImage'])
+        // Sidebar: Featured News
+        $featuredNews = News::with('featuredImage')
+            ->where('school_id', $school->id)
+            ->where('is_featured', 1)
             ->active()
-            ->where('id', '!=', $school->id)
-            ->where('sort_order', '<', 100)
-            ->orderBy('sort_order', 'asc')
+            ->latest()
             ->limit(5)
             ->get();
 
-        // Related news about this school
-        $relatedNews = collect(); // Will be populated when News module is implemented
+        // Tin tức về trường
+        $schoolNews = News::with('featuredImage')
+            ->where('school_id', $school->id)
+            ->active()
+            ->latest()
+            ->limit(6)
+            ->get();
 
-        // Related documents for this school level
-        $relatedDocuments = collect(); // Will be populated when Documents are linked
+        // Tài liệu thi tuyển
+        $schoolDocuments = Document::with('featuredImage')
+            ->where('school_id', $school->id)
+            ->active()
+            ->latest()
+            ->limit(6)
+            ->get();
 
         return view('schools.show', compact(
-            'school', 'relatedSchools', 'popularSchools', 
-            'relatedNews', 'relatedDocuments'
+            'school', 'relatedSchools', 'featuredNews',
+            'schoolNews', 'schoolDocuments'
         ));
     }
 

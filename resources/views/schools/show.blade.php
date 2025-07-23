@@ -5,7 +5,12 @@
 @section('content')
     @include('schools.partials.breadcrumb', ['school' => $school])
     @include('schools.partials.school-hero', ['school' => $school])
-    @include('schools.partials.school-content', ['school' => $school])
+    @include('schools.partials.school-content', [
+        'school' => $school, 
+        'featuredNews' => $featuredNews,
+        'schoolNews' => $schoolNews,
+        'schoolDocuments' => $schoolDocuments
+    ])
     @include('schools.partials.school-cta', ['school' => $school])
     @include('schools.partials.related-schools', ['relatedSchools' => $relatedSchools])
 @endsection

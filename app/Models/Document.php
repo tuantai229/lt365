@@ -275,12 +275,8 @@ class Document extends Model
 
     public function getFeaturedImageUrlAttribute()
     {
-        if ($this->featuredImage) {
-            return Storage::url($this->featuredImage->path);
-        }
-
-        // Return a default image if no featured image is set
-        return '/images/default-document.jpg';
+        $path = $this->featuredImage->path ?? null;
+        return get_image_url($path);
     }
 
     /**

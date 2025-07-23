@@ -25,7 +25,7 @@
                         </div>
                         
                         <h1 class="text-3xl font-bold text-gray-800 mb-2">{{ $school->name }}</h1>
-                        <p class="text-gray-600 mb-4">{{ $school->short_description ?? 'Trường học chất lượng cao với môi trường giáo dục hiện đại và chuyên nghiệp' }}</p>
+                        <p class="text-gray-600 mb-4">{{ $school->tagline ?? 'Trường học chất lượng cao với môi trường giáo dục hiện đại và chuyên nghiệp' }}</p>
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
                             <div class="flex items-center gap-2">
@@ -38,14 +38,16 @@
                                     <span class="text-gray-700">{{ $school->phone }}</span>
                                 </div>
                             @endif
-                            <div class="flex items-center gap-2">
-                                <i class="ri-group-line text-primary"></i>
-                                <span class="text-gray-700">{{ number_format($school->total_students ?? 0) }} học sinh</span>
-                            </div>
-                            @if($school->founded_year)
+                            @if($school->website)
                                 <div class="flex items-center gap-2">
-                                    <i class="ri-calendar-line text-primary"></i>
-                                    <span class="text-gray-700">Thành lập {{ $school->founded_year }}</span>
+                                    <i class="ri-global-line text-primary"></i>
+                                    <a href="{{ $school->website }}" target="_blank" class="text-gray-700 hover:text-primary">{{ $school->website }}</a>
+                                </div>
+                            @endif
+                            @if($school->email)
+                                <div class="flex items-center gap-2">
+                                    <i class="ri-mail-line text-primary"></i>
+                                    <a href="mailto:{{ $school->email }}" class="text-gray-700 hover:text-primary">{{ $school->email }}</a>
                                 </div>
                             @endif
                         </div>
@@ -55,24 +57,25 @@
             
             <!-- Sidebar -->
             <div class="space-y-6">
+                @if($school->admissionInfo)
                 <!-- Quick Stats -->
                 <div class="bg-gradient-to-br from-primary to-indigo-700 text-white p-6 rounded-lg">
-                    <h3 class="text-lg font-bold mb-4">Tuyển sinh 2025</h3>
+                    <h3 class="text-lg font-bold mb-4">Tuyển sinh {{ $school->admissionInfo->year }}</h3>
                     <div class="space-y-3">
                         <div class="flex justify-between">
                             <span>Chỉ tiêu:</span>
-                            <span class="font-bold">{{ number_format($school->admission_quota ?? 0) }} học sinh</span>
+                            <span class="font-bold">{{ number_format($school->admissionInfo->total_students ?? 0) }} học sinh</span>
                         </div>
-                        @if($school->admission_start_date)
+                        @if($school->admissionInfo->register_start_date)
                             <div class="flex justify-between">
                                 <span>Đăng ký:</span>
-                                <span class="font-bold">{{ \Carbon\Carbon::parse($school->admission_start_date)->format('d/m') }} - {{ \Carbon\Carbon::parse($school->admission_end_date ?? $school->admission_start_date)->format('d/m') }}</span>
+                                <span class="font-bold">{{ \Carbon\Carbon::parse($school->admissionInfo->register_start_date)->format('d/m') }} - {{ \Carbon\Carbon::parse($school->admissionInfo->register_end_date ?? $school->admissionInfo->register_start_date)->format('d/m') }}</span>
                             </div>
                         @endif
-                        @if($school->exam_date)
+                        @if($school->admissionInfo->exam_date)
                             <div class="flex justify-between">
                                 <span>Thi tuyển:</span>
-                                <span class="font-bold">{{ \Carbon\Carbon::parse($school->exam_date)->format('d/m/Y') }}</span>
+                                <span class="font-bold">{{ \Carbon\Carbon::parse($school->admissionInfo->exam_date)->format('d/m/Y') }}</span>
                             </div>
                         @endif
                     </div>
@@ -80,7 +83,7 @@
                         Tư vấn miễn phí
                     </button>
                 </div>
-
+                @endif
             </div>
         </div>
     </div>
