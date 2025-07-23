@@ -8,11 +8,7 @@
                 <div class="flex flex-col md:flex-row gap-6 mb-8">
                     <!-- Center Image -->
                     <div class="md:w-1/3">
-                        @if($center->featuredImage)
-                            <img src="{{ $center->featuredImage->url }}" alt="{{ $center->name }}" class="w-full h-48 object-cover rounded-lg shadow-md">
-                        @else
-                            <img src="{{ asset('html/images/0668b9e8706c79925cfba198a4a0ff35.jpg') }}" alt="{{ $center->name }}" class="w-full h-48 object-cover rounded-lg shadow-md">
-                        @endif
+                        <img src="{{ get_image_url($center->featured_image_url) }}" alt="{{ $center->name }}" class="w-full h-48 object-cover rounded-lg shadow-md">
                     </div>
                     
                     <!-- Center Info -->
@@ -133,41 +129,6 @@
                                 </div>
                             @endif
                         </div>
-                        
-                        <!-- Loại hình đào tạo -->
-                        <div class="mt-6">
-                            <h3 class="text-lg font-semibold mb-3 text-gray-900">Hình thức học tập</h3>
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <div class="border border-gray-200 rounded-lg p-4 text-center">
-                                    <i class="ri-group-line text-2xl text-primary mb-2"></i>
-                                    <h4 class="font-medium mb-1">Lớp học nhóm</h4>
-                                    <p class="text-sm text-gray-600">8-12 học sinh/lớp</p>
-                                </div>
-                                <div class="border border-gray-200 rounded-lg p-4 text-center">
-                                    <i class="ri-user-line text-2xl text-primary mb-2"></i>
-                                    <h4 class="font-medium mb-1">Kèm riêng 1:1</h4>
-                                    <p class="text-sm text-gray-600">Theo yêu cầu</p>
-                                </div>
-                                <div class="border border-gray-200 rounded-lg p-4 text-center">
-                                    <i class="ri-computer-line text-2xl text-primary mb-2"></i>
-                                    <h4 class="font-medium mb-1">Học online</h4>
-                                    <p class="text-sm text-gray-600">Linh hoạt thời gian</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Gallery Section -->
-                    <div class="bg-white border border-gray-200 rounded-lg p-6">
-                        <h2 class="text-2xl font-bold mb-4 text-gray-900">Hình ảnh trung tâm</h2>
-                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                            <img src="{{ asset('html/images/0668b9e8706c79925cfba198a4a0ff35.jpg') }}" alt="Phòng học 1" class="w-full h-32 object-cover rounded-lg">
-                            <img src="{{ asset('html/images/2ea343b800b7ca44c1844291afa997e9.jpg') }}" alt="Phòng học 2" class="w-full h-32 object-cover rounded-lg">
-                            <img src="{{ asset('html/images/3d7d5e0502820a5e09cf3fb76caa9d88.jpg') }}" alt="Khu vực nghỉ ngơi" class="w-full h-32 object-cover rounded-lg">
-                            <img src="{{ asset('html/images/0668b9e8706c79925cfba198a4a0ff35.jpg') }}" alt="Thư viện" class="w-full h-32 object-cover rounded-lg">
-                            <img src="{{ asset('html/images/2ea343b800b7ca44c1844291afa997e9.jpg') }}" alt="Sảnh chính" class="w-full h-32 object-cover rounded-lg">
-                            <img src="{{ asset('html/images/3d7d5e0502820a5e09cf3fb76caa9d88.jpg') }}" alt="Lớp học" class="w-full h-32 object-cover rounded-lg">
-                        </div>
                     </div>
 
                     <!-- News Section -->
@@ -279,16 +240,6 @@
                                 <i class="ri-map-pin-line text-3xl mb-2"></i>
                                 <p class="text-sm">Bản đồ Google Maps</p>
                                 <p class="text-xs">{{ $center->address }}</p>
-                            </div>
-                        </div>
-                        <div class="space-y-2 text-sm">
-                            <div class="flex items-center gap-2">
-                                <i class="ri-bus-line text-primary"></i>
-                                <span>Bus: Tuyến 01, 18, 32</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <i class="ri-train-line text-primary"></i>
-                                <span>Metro: Ga gần nhất (500m)</span>
                             </div>
                         </div>
                     </div>

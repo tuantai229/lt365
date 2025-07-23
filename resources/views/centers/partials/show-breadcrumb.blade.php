@@ -6,10 +6,6 @@
             <span class="mx-2">
                 <i class="ri-arrow-right-s-line"></i>
             </span>
-            <a href="#" class="hover:text-primary">Giáo viên & Trung tâm</a>
-            <span class="mx-2">
-                <i class="ri-arrow-right-s-line"></i>
-            </span>
             <a href="{{ route('centers.index') }}" class="hover:text-primary">Trung tâm</a>
             <span class="mx-2">
                 <i class="ri-arrow-right-s-line"></i>
