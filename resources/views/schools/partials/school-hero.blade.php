@@ -24,7 +24,12 @@
                             @endif
                         </div>
                         
-                        <h1 class="text-3xl font-bold text-gray-800 mb-2">{{ $school->name }}</h1>
+                        <div class="flex items-center justify-between">
+                            <h1 class="text-3xl font-bold text-gray-800">{{ $school->name }}</h1>
+                            <button class="text-gray-400 hover:text-red-500 transition-colors duration-200" data-favorite-btn data-school-id="{{ $school->id }}">
+                                <i class="ri-heart-line text-2xl"></i>
+                            </button>
+                        </div>
                         <p class="text-gray-600 mb-4">{{ $school->tagline ?? 'Trường học chất lượng cao với môi trường giáo dục hiện đại và chuyên nghiệp' }}</p>
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">

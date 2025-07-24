@@ -15,9 +15,14 @@
                     <div class="md:w-2/3">
                         <div class="flex items-start justify-between mb-3">
                             <h1 class="text-3xl font-bold text-gray-900">{{ $center->name }}</h1>
-                            @if($center->experience > 0)
-                                <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium whitespace-nowrap">{{ $center->experience }} năm kinh nghiệm</span>
-                            @endif
+                            <div class="flex items-center gap-2">
+                                @if($center->experience > 0)
+                                    <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium whitespace-nowrap">{{ $center->experience }} năm kinh nghiệm</span>
+                                @endif
+                                <button class="text-gray-400 hover:text-red-500 transition-colors duration-200" data-favorite-btn data-center-id="{{ $center->id }}">
+                                    <i class="ri-heart-line text-2xl"></i>
+                                </button>
+                            </div>
                         </div>
                         
                         @if($center->tagline)

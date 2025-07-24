@@ -165,7 +165,7 @@ class FavoritesManager {
         this.showMessage('Vui lòng đăng nhập để sử dụng tính năng yêu thích', 'info');
         // You can redirect to login or show login modal here
         setTimeout(() => {
-            window.location.href = '/auth/login';
+            window.location.href = '/auth/dang-nhap';
         }, 2000);
     }
 

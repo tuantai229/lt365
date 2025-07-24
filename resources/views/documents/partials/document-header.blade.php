@@ -1,5 +1,10 @@
 <header class="mb-8">
-    <h1 class="text-3xl font-bold text-gray-900 mb-4">{{ $document->name }}</h1>
+    <div class="flex items-center justify-between mb-4">
+        <h1 class="text-3xl font-bold text-gray-900">{{ $document->name }}</h1>
+        <button class="text-gray-400 hover:text-red-500 transition-colors duration-200" data-favorite-btn data-document-id="{{ $document->id }}">
+            <i class="ri-heart-line text-2xl"></i>
+        </button>
+    </div>
     
     <!-- Meta Information -->
     <div class="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-6">
