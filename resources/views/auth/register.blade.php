@@ -26,7 +26,7 @@
     @endif
 
     <!-- Form -->
-    <form method="POST" action="{{ route('auth.register') }}" class="space-y-6">
+    <form id="registerForm" method="POST" action="{{ route('auth.register') }}" class="space-y-6">
         @csrf
         
         <!-- Họ và tên -->
@@ -239,15 +239,25 @@
     }
 
     // Form submission
-    document.getElementById('registerForm')?.addEventListener('submit', function(e) {
-        const submitBtn = document.getElementById('submitBtn');
-        const submitText = document.getElementById('submitText');
-        const loadingIcon = document.getElementById('loadingIcon');
-        
-        // Show loading state
-        submitBtn.disabled = true;
-        submitText.textContent = 'Đang xử lý...';
-        loadingIcon.classList.remove('hidden');
-    });
+    const registerForm = document.getElementById('registerForm');
+    if (registerForm) {
+        registerForm.addEventListener('submit', function(e) {
+            const submitBtn = document.getElementById('submitBtn');
+            
+            // Prevent multiple submissions
+            if (submitBtn.disabled) {
+                e.preventDefault();
+                return;
+            }
+
+            const submitText = document.getElementById('submitText');
+            const loadingIcon = document.getElementById('loadingIcon');
+            
+            // Show loading state and disable button
+            submitBtn.disabled = true;
+            submitText.textContent = 'Đang xử lý...';
+            loadingIcon.classList.remove('hidden');
+        });
+    }
 </script>
 @endpush

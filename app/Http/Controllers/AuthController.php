@@ -211,6 +211,17 @@ class AuthController extends Controller
             return back()->with('info', 'Email đã được xác thực trước đó.');
         }
 
+        // Check rate limiting - prevent resending within 60 seconds
+        $lastSentKey = 'email_verification_sent_' . $user->id;
+        $lastSentTime = cache()->get($lastSentKey);
+        
+        if ($lastSentTime && now()->diffInSeconds($lastSentTime) < 60) {
+            $remainingSeconds = 60 - now()->diffInSeconds($lastSentTime);
+            return back()->withErrors([
+                'resend' => "Vui lòng đợi {$remainingSeconds} giây trước khi gửi lại email xác thực."
+            ]);
+        }
+
         // Generate new verification token
         $token = Str::random(60);
         $user->remember_token = $token;
@@ -218,6 +229,9 @@ class AuthController extends Controller
 
         // Send verification email
         $this->sendVerificationEmail($user, $token);
+
+        // Cache the sent time for rate limiting
+        cache()->put($lastSentKey, now(), 60);
 
         return back()->with('success', 'Email xác thực đã được gửi lại!');
     }

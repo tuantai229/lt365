@@ -35,13 +35,20 @@
         </p>
     </div>
 
+    <!-- Display resend errors -->
+    @error('resend')
+        <div class="bg-red-100 border border-red-300 text-red-700 px-4 py-3 rounded-lg mb-6 text-sm">
+            {{ $message }}
+        </div>
+    @enderror
+
     <!-- Action Buttons -->
     <div class="space-y-3">
-        <form method="POST" action="{{ route('auth.verify.resend') }}" class="inline-block w-full">
+        <form method="POST" action="{{ route('auth.verify.resend') }}" class="inline-block w-full" id="resendForm">
             @csrf
             <input type="hidden" name="email" value="{{ $email }}">
             <button type="submit" id="resendBtn" 
-                class="w-full bg-primary text-white py-3 px-6 rounded-button font-medium hover:bg-primary/90 transition-all duration-200 disabled:opacity-50">
+                class="w-full bg-primary text-white py-3 px-6 rounded-button font-medium hover:bg-primary/90 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
                 <i class="ri-refresh-line mr-2"></i>
                 <span id="resendText">Gửi lại email xác thực</span>
             </button>
@@ -68,75 +75,55 @@
 
 @push('scripts')
 <script>
-    let timeLeft = 60 * 60; // 60 minutes in seconds
-    let timerInterval;
-    let resendCooldown = 0;
-
-    // Start countdown timer
-    function startTimer() {
-        timerInterval = setInterval(() => {
-            timeLeft--;
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
-            document.getElementById('timer').textContent = 
-                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            
-            if (timeLeft <= 0) {
-                clearInterval(timerInterval);
-                showExpiredState();
+    document.addEventListener('DOMContentLoaded', function() {
+        let linkTimeLeft = 60 * 60; // 60 minutes for link expiration
+        const linkTimerEl = document.getElementById('timer');
+        
+        const linkTimerInterval = setInterval(() => {
+            linkTimeLeft--;
+            const minutes = Math.floor(linkTimeLeft / 60);
+            const seconds = linkTimeLeft % 60;
+            if (linkTimerEl) {
+                linkTimerEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+            if (linkTimeLeft <= 0) {
+                clearInterval(linkTimerInterval);
+                if (linkTimerEl) linkTimerEl.textContent = '00:00';
+                showAlert('Liên kết đã hết hạn. Vui lòng gửi lại email xác thực.', 'warning');
             }
         }, 1000);
-    }
 
-    // Show expired state
-    function showExpiredState() {
-        document.getElementById('timer').textContent = '00:00';
-        showAlert('Liên kết đã hết hạn. Vui lòng gửi lại email xác thực.', 'warning');
-    }
-
-    // Handle resend form
-    document.querySelector('form').addEventListener('submit', function(e) {
-        if (resendCooldown > 0) {
-            e.preventDefault();
-            return;
-        }
-        
         const resendBtn = document.getElementById('resendBtn');
         const resendText = document.getElementById('resendText');
-        
-        resendBtn.disabled = true;
-        resendText.textContent = 'Đang gửi...';
-        
-        // Start cooldown after form submission
-        setTimeout(() => {
-            timeLeft = 60 * 60; // Reset timer
-            resendCooldown = 60; // 1 minute cooldown
-            
-            startTimer();
-            
-            // Start cooldown
+        let resendCooldown = 60; // 60 seconds cooldown
+
+        function startResendCooldown() {
+            resendBtn.disabled = true;
             const cooldownInterval = setInterval(() => {
                 resendCooldown--;
                 resendText.textContent = `Gửi lại sau ${resendCooldown}s`;
-                
                 if (resendCooldown <= 0) {
                     clearInterval(cooldownInterval);
                     resendBtn.disabled = false;
                     resendText.textContent = 'Gửi lại email xác thực';
+                    resendCooldown = 60; // Reset for next click
                 }
             }, 1000);
-        }, 1000);
-    });
+        }
 
-    // Initialize
-    document.addEventListener('DOMContentLoaded', function() {
-        startTimer();
-        
-        // Check verification status periodically
-        const checkInterval = setInterval(() => {
-            // In a real implementation, this would be an API call to check verification status
-            // For now, we'll just keep the timer running
-        }, 5000);
+        // Start cooldown on page load
+        startResendCooldown();
+
+        // Handle form submission for resend
+        document.getElementById('resendForm').addEventListener('submit', function(e) {
+            const resendBtn = document.getElementById('resendBtn');
+            const resendText = document.getElementById('resendText');
+            
+            resendBtn.disabled = true;
+            resendText.textContent = 'Đang gửi...';
+
+            // After submission, the page will reload and the cooldown will restart
+        });
     });
 </script>
 @endpush
