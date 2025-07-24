@@ -91,4 +91,46 @@ class UserController extends Controller
             'recommendations'
         ));
     }
+
+    /**
+     * Display the user's profile form.
+     */
+    public function profile(): View
+    {
+        return view('user.profile', [
+            'user' => Auth::user(),
+        ]);
+    }
+
+    /**
+     * Update the user's profile information.
+     */
+    public function updateProfile(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        $user = Auth::user();
+
+        $validated = $request->validate([
+            'full_name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:15'],
+            'date_of_birth' => ['nullable', 'date', 'before:today'],
+            'gender' => ['nullable', 'in:male,female,other'],
+            'address' => ['nullable', 'string', 'max:500'],
+            'bio' => ['nullable', 'string', 'max:1000'],
+            'avatar' => ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:2048'],
+        ]);
+
+        // Handle avatar upload
+        if ($request->hasFile('avatar')) {
+            // Delete old avatar if it exists
+            if ($user->avatar) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($user->avatar);
+            }
+            $path = $request->file('avatar')->store('avatars', 'public');
+            $validated['avatar'] = $path;
+        }
+
+        $user->update($validated);
+
+        return back()->with('success', 'Hồ sơ đã được cập nhật thành công!');
+    }
 }
