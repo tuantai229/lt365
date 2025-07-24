@@ -217,4 +217,29 @@ class UserController extends Controller
 
         return $map[$type] ?? null;
     }
+
+    /**
+     * Display the change password form.
+     */
+    public function showChangePassword(): View
+    {
+        return view('user.change-password');
+    }
+
+    /**
+     * Update the user's password.
+     */
+    public function changePassword(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        $validated = $request->validate([
+            'current_password' => ['required', 'current_password'],
+            'password' => ['required', 'confirmed', \Illuminate\Validation\Rules\Password::defaults()],
+        ]);
+
+        $request->user()->update([
+            'password' => \Illuminate\Support\Facades\Hash::make($validated['password']),
+        ]);
+
+        return back()->with('success', 'Mật khẩu đã được thay đổi thành công!');
+    }
 }
