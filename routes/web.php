@@ -14,6 +14,8 @@ use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PasswordResetLinkController;
+use App\Http\Controllers\NewPasswordController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\RssController;
 
@@ -239,6 +241,23 @@ Route::prefix('auth')->name('auth.')->group(function () {
    
    // Đăng xuất
    Route::post('/dang-xuat', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+
+   // Quên mật khẩu
+    Route::get('quen-mat-khau', [PasswordResetLinkController::class, 'create'])
+                ->middleware('guest')
+                ->name('password.request');
+
+    Route::post('quen-mat-khau', [PasswordResetLinkController::class, 'store'])
+                ->middleware('guest')
+                ->name('password.email');
+
+    Route::get('dat-lai-mat-khau/{token}', [NewPasswordController::class, 'create'])
+                ->middleware('guest')
+                ->name('password.reset');
+
+    Route::post('dat-lai-mat-khau', [NewPasswordController::class, 'store'])
+                ->middleware('guest')
+                ->name('password.update');
 });
 
 // Alternative routes without auth prefix for shorter URLs

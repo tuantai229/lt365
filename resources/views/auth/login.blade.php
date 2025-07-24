@@ -71,7 +71,7 @@
                     {{ old('remember') ? 'checked' : '' }}>
                 <label for="remember" class="text-sm text-gray-700">Ghi nhớ đăng nhập</label>
             </div>
-            <a href="#" class="text-sm text-primary hover:underline">Quên mật khẩu?</a>
+            <a href="{{ route('auth.password.request') }}" class="text-sm text-primary hover:underline">Quên mật khẩu?</a>
         </div>
 
         <!-- Submit Button -->
