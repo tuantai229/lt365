@@ -6,9 +6,14 @@
         <div class="p-4">
             <div class="flex items-center justify-between mb-2">
                 <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">{{ $document->subject->name ?? 'N/A' }}</span>
-                <span class="px-2 py-1 {{ $document->is_free ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }} text-xs rounded-full">
-                    {{ $document->is_free ? 'Miễn phí' : number_format($document->price) . ' VND' }}
-                </span>
+                <div class="flex items-center gap-2">
+                    <span class="px-2 py-1 {{ $document->is_free ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }} text-xs rounded-full">
+                        {{ $document->is_free ? 'Miễn phí' : number_format($document->price) . ' VND' }}
+                    </span>
+                    <button class="text-gray-400 hover:text-red-500 transition-colors duration-200" data-favorite-btn data-document-id="{{ $document->id }}">
+                        <i class="ri-heart-line text-lg"></i>
+                    </button>
+                </div>
             </div>
             <h3 class="font-medium mb-2 line-clamp-2 h-12">{{ $document->name }}</h3>
             <div class="flex items-center text-xs text-gray-500 mb-3">

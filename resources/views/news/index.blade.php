@@ -116,9 +116,14 @@
                                     </span>
                                     @endif
                                 </div>
-                                <h3 class="text-lg font-bold mb-2">
-                                    <a href="{{ route('news.show', ['slug' => $item->slug, 'id' => $item->id]) }}" class="hover:text-primary">{{ $item->name }}</a>
-                                </h3>
+                                <div class="flex items-start justify-between mb-2">
+                                    <h3 class="text-lg font-bold flex-1">
+                                        <a href="{{ route('news.show', ['slug' => $item->slug, 'id' => $item->id]) }}" class="hover:text-primary">{{ $item->name }}</a>
+                                    </h3>
+                                    <button class="text-gray-400 hover:text-red-500 transition-colors duration-200 ml-2" data-favorite-btn data-news-id="{{ $item->id }}">
+                                        <i class="ri-heart-line text-lg"></i>
+                                    </button>
+                                </div>
                                 <p class="text-gray-600 mb-3">{{ Str::limit(strip_tags($item->content), 150) }}</p>
                                 <a href="{{ route('news.show', ['slug' => $item->slug, 'id' => $item->id]) }}" class="inline-flex items-center text-primary text-sm hover:underline">
                                     Đọc tiếp

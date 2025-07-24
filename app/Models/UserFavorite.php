@@ -27,34 +27,48 @@ class UserFavorite extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function favoritable(): MorphTo
+    public function favoritable()
     {
-        return $this->morphTo('type', 'type', 'type_id');
+        // Custom method to get the favorited item based on type
+        switch ($this->type) {
+            case 'document':
+                return $this->belongsTo(Document::class, 'type_id');
+            case 'news':
+                return $this->belongsTo(News::class, 'type_id');
+            case 'school':
+                return $this->belongsTo(School::class, 'type_id');
+            case 'center':
+                return $this->belongsTo(Center::class, 'type_id');
+            case 'teacher':
+                return $this->belongsTo(Teacher::class, 'type_id');
+            default:
+                return null;
+        }
     }
 
     // Helper methods để lấy đối tượng theo type
     public function document(): BelongsTo
     {
-        return $this->belongsTo(Document::class, 'type_id')->where('type', 'document');
+        return $this->belongsTo(Document::class, 'type_id');
     }
 
     public function news(): BelongsTo
     {
-        return $this->belongsTo(News::class, 'type_id')->where('type', 'news');
+        return $this->belongsTo(News::class, 'type_id');
     }
 
     public function school(): BelongsTo
     {
-        return $this->belongsTo(School::class, 'type_id')->where('type', 'school');
+        return $this->belongsTo(School::class, 'type_id');
     }
 
     public function center(): BelongsTo
     {
-        return $this->belongsTo(Center::class, 'type_id')->where('type', 'center');
+        return $this->belongsTo(Center::class, 'type_id');
     }
 
     public function teacher(): BelongsTo
     {
-        return $this->belongsTo(Teacher::class, 'type_id')->where('type', 'teacher');
+        return $this->belongsTo(Teacher::class, 'type_id');
     }
 }

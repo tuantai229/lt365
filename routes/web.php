@@ -18,6 +18,7 @@ use App\Http\Controllers\PasswordResetLinkController;
 use App\Http\Controllers\NewPasswordController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\RssController;
+use App\Http\Controllers\FavoriteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -214,6 +215,14 @@ Route::prefix('api')->name('api.')->middleware(['throttle:api'])->group(function
    Route::get('/centers/filter', [CenterController::class, 'filter'])->name('centers.filter');
    Route::get('/teachers/filter', [TeacherController::class, 'filter'])->name('teachers.filter');
    Route::get('/search/suggestions', [SearchController::class, 'suggestions'])->name('search.suggestions');
+   
+   // Favorites API
+   Route::middleware('auth')->group(function () {
+       Route::post('/favorites/toggle', [FavoriteController::class, 'toggle'])->name('favorites.toggle');
+       Route::post('/favorites/check', [FavoriteController::class, 'check'])->name('favorites.check');
+       Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
+       Route::delete('/favorites/{id}', [FavoriteController::class, 'destroy'])->name('favorites.destroy');
+   });
 });
 
 // ===== 9. LIÊN HỆ =====

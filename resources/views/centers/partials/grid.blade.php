@@ -27,9 +27,16 @@
                                 <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">{{ $center->experience }} năm KN</span>
                             @endif
                         </div>
-                        <a href="{{ route('centers.show', [$center->slug ?? 'center', $center->id]) }}">
-                            <h3 class="font-bold text-lg mb-2 hover:text-primary transition-colors">{{ $center->name }}</h3>
-                        </a>
+                        <div class="flex items-start justify-between mb-2">
+                            <div class="flex-1">
+                                <a href="{{ route('centers.show', [$center->slug ?? 'center', $center->id]) }}">
+                                    <h3 class="font-bold text-lg hover:text-primary transition-colors">{{ $center->name }}</h3>
+                                </a>
+                            </div>
+                            <button class="text-gray-400 hover:text-red-500 transition-colors duration-200" data-favorite-btn data-center-id="{{ $center->id }}">
+                                <i class="ri-heart-line text-lg"></i>
+                            </button>
+                        </div>
                         @if($center->tagline)
                             <p class="text-sm text-gray-600 mb-2">{{ $center->tagline }}</p>
                         @endif

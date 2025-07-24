@@ -23,9 +23,12 @@ class UserController extends Controller
         // Eager load relationships for performance
         $user->load([
             'downloads' => fn($q) => $q->latest('downloaded_at')->limit(5)->with('document'),
-            'favorites' => fn($q) => $q->latest()->limit(5)->with('favoritable'),
+            'favorites' => fn($q) => $q->latest()->limit(5),
             'comments' => fn($q) => $q->latest()->limit(5)->with('commentable'),
         ]);
+
+        // Load favorited items for dashboard
+        $this->loadFavoritedItems($user->favorites);
 
         // Stats Cards
         $stats = [
@@ -50,7 +53,7 @@ class UserController extends Controller
             return [
                 'type' => 'favorite',
                 'description' => 'Đã yêu thích:',
-                'model' => $item->favoritable,
+                'model' => $item->item ?? null,
                 'date' => $item->created_at,
                 'icon' => 'ri-heart-line',
                 'color' => 'text-red-500 bg-red-50',
@@ -155,9 +158,11 @@ class UserController extends Controller
     {
         $favorites = Auth::user()
             ->favorites()
-            ->with('favoritable') // Eager load the polymorphic relationship
             ->latest()
             ->paginate(10);
+
+        // Load the actual favorited items
+        $this->loadFavoritedItems($favorites->items());
 
         return view('user.favorites', compact('favorites'));
     }
@@ -181,8 +186,8 @@ class UserController extends Controller
         }
 
         $favorite = $user->favorites()
-            ->where('favoritable_type', $modelClass)
-            ->where('favoritable_id', $id)
+            ->where('type', $type)
+            ->where('type_id', $id)
             ->first();
 
         if ($favorite) {
@@ -190,8 +195,8 @@ class UserController extends Controller
             $status = 'removed';
         } else {
             $user->favorites()->create([
-                'favoritable_type' => $modelClass,
-                'favoritable_id' => $id,
+                'type' => $type,
+                'type_id' => $id,
             ]);
             $status = 'added';
         }
@@ -216,6 +221,69 @@ class UserController extends Controller
         ];
 
         return $map[$type] ?? null;
+    }
+
+    /**
+     * Load the actual favorited items (documents, news, etc.)
+     */
+    private function loadFavoritedItems($favorites)
+    {
+        $itemsByType = [];
+        
+        // Group items by type
+        foreach ($favorites as $favorite) {
+            if (!isset($itemsByType[$favorite->type])) {
+                $itemsByType[$favorite->type] = [];
+            }
+            $itemsByType[$favorite->type][] = $favorite->type_id;
+        }
+
+        // Load items for each type
+        foreach ($itemsByType as $type => $ids) {
+            $items = $this->getItemsByType($type, $ids);
+            
+            // Attach items to favorites
+            foreach ($favorites as $favorite) {
+                if ($favorite->type === $type) {
+                    $favorite->item = $items->firstWhere('id', $favorite->type_id);
+                }
+            }
+        }
+    }
+
+    /**
+     * Get items by type and IDs
+     */
+    private function getItemsByType(string $type, array $ids)
+    {
+        switch ($type) {
+            case 'document':
+                return Document::whereIn('id', $ids)
+                    ->with(['subject', 'level'])
+                    ->get();
+            
+            case 'news':
+                return \App\Models\News::whereIn('id', $ids)
+                    ->get();
+            
+            case 'school':
+                return \App\Models\School::whereIn('id', $ids)
+                    ->with(['province', 'level', 'schoolTypes'])
+                    ->get();
+            
+            case 'center':
+                return \App\Models\Center::whereIn('id', $ids)
+                    ->with(['province', 'levels', 'subjects'])
+                    ->get();
+            
+            case 'teacher':
+                return \App\Models\Teacher::whereIn('id', $ids)
+                    ->with(['province', 'commune', 'levels', 'subjects'])
+                    ->get();
+            
+            default:
+                return collect();
+        }
     }
 
     /**

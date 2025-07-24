@@ -8,7 +8,12 @@
         <div class="w-20 h-20 rounded-full mx-auto mb-4 overflow-hidden bg-gray-100">
             <img src="{{ get_image_url($teacher->featured_image_url) }}" alt="{{ $teacher->name }}" class="w-full h-full object-cover">
         </div>
-        <h4 class="font-bold text-lg mb-2 text-primary hover:text-primary/80 transition-colors">{{ $teacher->name }}</h4>
+        <div class="flex items-start justify-between mb-2">
+            <h4 class="font-bold text-lg text-primary hover:text-primary/80 transition-colors flex-1">{{ $teacher->name }}</h4>
+            <button class="text-gray-400 hover:text-red-500 transition-colors duration-200" data-favorite-btn data-teacher-id="{{ $teacher->id }}">
+                <i class="ri-heart-line text-lg"></i>
+            </button>
+        </div>
     </a>
     <div class="px-6 pb-6 text-center">
         <div class="space-y-2 mb-4">

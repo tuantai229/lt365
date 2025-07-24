@@ -8,10 +8,10 @@
 
     <div class="space-y-4">
         @forelse ($favorites as $favorite)
-            @if($favorite->favoritable)
+            @if($favorite->item)
                 @php
-                    $item = $favorite->favoritable;
-                    $type = \Illuminate\Support\Str::afterLast($favorite->favoritable_type, '\\');
+                    $item = $favorite->item;
+                    $type = ucfirst($favorite->type);
                     $details = [
                         'Document' => ['icon' => 'ri-file-text-line', 'label' => 'Tài liệu', 'route' => 'documents.show', 'params' => ['slug' => $item->slug, 'id' => $item->id]],
                         'School' => ['icon' => 'ri-school-line', 'label' => 'Trường học', 'route' => 'schools.show', 'params' => ['slug' => $item->slug, 'id' => $item->id]],
@@ -21,7 +21,7 @@
                     ][$type] ?? null;
                 @endphp
 
-                @if($details)
+                @if($details && $item)
                 <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50">
                     <div class="flex items-center gap-4">
                         <div class="w-10 h-10 rounded-md bg-gray-100 flex items-center justify-center text-gray-500">
@@ -39,13 +39,37 @@
                         </div>
                     </div>
                     <div>
-                        {{-- Unfavorite button can be implemented with JavaScript later --}}
-                        <button class="text-red-500 hover:text-red-700" title="Bỏ yêu thích">
+                        <button class="text-red-500 hover:text-red-700" 
+                                data-favorite-btn 
+                                data-{{ $favorite->type }}-id="{{ $favorite->type_id }}"
+                                title="Bỏ yêu thích">
                             <i class="ri-heart-fill text-xl"></i>
                         </button>
                     </div>
                 </div>
                 @endif
+            @else
+                {{-- Handle case where item was deleted --}}
+                <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg bg-gray-50">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-md bg-gray-100 flex items-center justify-center text-gray-400">
+                            <i class="ri-close-line text-xl"></i>
+                        </div>
+                        <div>
+                            <span class="font-semibold text-gray-500">{{ ucfirst($favorite->type) }} đã bị xóa</span>
+                            <div class="flex items-center gap-2 text-sm text-gray-400 mt-1">
+                                <span>Yêu thích lúc: {{ $favorite->created_at->format('d/m/Y') }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="text-gray-400 hover:text-gray-600" 
+                                onclick="this.closest('.flex').remove()"
+                                title="Xóa khỏi danh sách">
+                            <i class="ri-delete-bin-line text-xl"></i>
+                        </button>
+                    </div>
+                </div>
             @endif
         @empty
             <div class="text-center py-12 text-gray-500">
@@ -56,8 +80,8 @@
     </div>
 
     <!-- Pagination -->
-    <div class="mt-6">
-        {{ $favorites->links() }}
+    <div class="mt-12">
+        {{ $favorites->links('vendor.pagination.custom') }}
     </div>
 </div>
 @endsection
