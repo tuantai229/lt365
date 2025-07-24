@@ -4,7 +4,7 @@
             <!-- Column 1 -->
             <div>
                 <h3 class="text-xl font-bold mb-4">Về LT365</h3>
-                <p class="text-gray-300 mb-4">Cung cấp thông tin, tài liệu và tư vấn chuyên sâu về thi chuyển cấp cho phụ huynh và học sinh trên toàn quốc.</p>
+                <p class="text-gray-300 mb-4">{{ $general_settings['footer_intro'] ?? '' }}</p>
                 @include('layouts.components.social-links')
             </div>
             
@@ -12,12 +12,11 @@
             <div>
                 <h3 class="text-xl font-bold mb-4">Danh mục</h3>
                 <ul class="space-y-2 text-gray-300">
-                    <li><a href="#" class="hover:text-white">Thi vào lớp 1</a></li>
-                    <li><a href="#" class="hover:text-white">Thi vào lớp 6</a></li>
-                    <li><a href="#" class="hover:text-white">Thi vào lớp 10</a></li>
-                    <li><a href="#" class="hover:text-white">Tài liệu ôn thi</a></li>
-                    <li><a href="#" class="hover:text-white">Tin tức tuyển sinh</a></li>
-                    <li><a href="#" class="hover:text-white">Giáo viên & Trung tâm</a></li>
+                    @if(isset($footer_category_links) && is_array($footer_category_links))
+                        @foreach($footer_category_links as $link)
+                            <li><a href="{{ url($link['url']) }}" class="hover:text-white">{{ $link['title'] }}</a></li>
+                        @endforeach
+                    @endif
                 </ul>
             </div>
             
@@ -25,12 +24,11 @@
             <div>
                 <h3 class="text-xl font-bold mb-4">Hỗ trợ</h3>
                 <ul class="space-y-2 text-gray-300">
-                    <li><a href="#" class="hover:text-white">Câu hỏi thường gặp</a></li>
-                    <li><a href="#" class="hover:text-white">Hướng dẫn sử dụng</a></li>
-                    <li><a href="#" class="hover:text-white">Chính sách bảo mật</a></li>
-                    <li><a href="#" class="hover:text-white">Điều khoản sử dụng</a></li>
-                    <li><a href="#" class="hover:text-white">Quy định thanh toán</a></li>
-                    <li><a href="#" class="hover:text-white">Liên hệ hỗ trợ</a></li>
+                    @if(isset($footer_support_links) && is_array($footer_support_links))
+                        @foreach($footer_support_links as $link)
+                            <li><a href="{{ url($link['url']) }}" class="hover:text-white">{{ $link['title'] }}</a></li>
+                        @endforeach
+                    @endif
                 </ul>
             </div>
             
@@ -44,7 +42,7 @@
                         </div>
                         <div>
                             <p class="font-medium text-white">Hotline</p>
-                            <p>0987 654 321</p>
+                            <p>{{ $general_settings['hotline'] ?? '' }}</p>
                         </div>
                     </li>
                     <li class="flex items-start">
@@ -53,7 +51,7 @@
                         </div>
                         <div>
                             <p class="font-medium text-white">Email</p>
-                            <p>info@lt365.vn</p>
+                            <p>{{ $general_settings['email'] ?? '' }}</p>
                         </div>
                     </li>
                     <li class="flex items-start">
@@ -62,7 +60,7 @@
                         </div>
                         <div>
                             <p class="font-medium text-white">Địa chỉ</p>
-                            <p>Số 123 Đường Cầu Giấy, Quận Cầu Giấy, Hà Nội</p>
+                            <p>{{ $general_settings['address'] ?? '' }}</p>
                         </div>
                     </li>
                     <li class="flex items-start">
@@ -71,7 +69,7 @@
                         </div>
                         <div>
                             <p class="font-medium text-white">Giờ làm việc</p>
-                            <p>8:00 - 17:30, Thứ Hai - Thứ Bảy</p>
+                            <p>{{ $general_settings['working_hours'] ?? '' }}</p>
                         </div>
                     </li>
                 </ul>

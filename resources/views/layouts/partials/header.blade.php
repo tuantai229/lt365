@@ -16,7 +16,7 @@
                 </div>
                 <div>
                     <p class="text-xs text-gray-500">Hotline</p>
-                    <p class="text-sm font-medium">0987 654 321</p>
+                    <p class="text-sm font-medium">{{ $general_settings['hotline'] ?? '' }}</p>
                 </div>
             </div>
             
