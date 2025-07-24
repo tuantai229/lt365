@@ -65,11 +65,7 @@ class User extends Authenticatable
     {
         parent::boot();
         
-        // Auto update last_login_at when user authenticates
-        static::created(function ($user) {
-            $user->email_verified_at = now();
-            $user->save();
-        });
+        // Model events can be added here if needed
     }
 
     /**

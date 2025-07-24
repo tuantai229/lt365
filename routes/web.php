@@ -225,25 +225,32 @@ Route::prefix('lien-he')->name('contact.')->group(function () {
 // ===== 10. USER AUTHENTICATION =====
 Route::prefix('auth')->name('auth.')->group(function () {
    // Đăng nhập
-   Route::get('/dang-nhap', [AuthController::class, 'showLogin'])->name('login');
-   Route::post('/dang-nhap', [AuthController::class, 'login'])->name('login.post');
+   Route::get('/dang-nhap', [AuthController::class, 'showLogin'])->name('login')->middleware('guest');
+   Route::post('/dang-nhap', [AuthController::class, 'login'])->name('login')->middleware('guest');
    
    // Đăng ký
-   Route::get('/dang-ky', [AuthController::class, 'showRegister'])->name('register');
-   Route::post('/dang-ky', [AuthController::class, 'register'])->name('register.post');
+   Route::get('/dang-ky', [AuthController::class, 'showRegister'])->name('register')->middleware('guest');
+   Route::post('/dang-ky', [AuthController::class, 'register'])->name('register')->middleware('guest');
+   
+   // Email verification
+   Route::get('/xac-thuc-email', [AuthController::class, 'verifyNotice'])->name('verify.notice');
+   Route::get('/verify', [AuthController::class, 'verify'])->name('verify');
+   Route::post('/xac-thuc-gui-lai', [AuthController::class, 'resendVerification'])->name('verify.resend');
    
    // Đăng xuất
-   Route::post('/dang-xuat', [AuthController::class, 'logout'])->name('logout');
-   
-   // Quên mật khẩu
-   Route::get('/quen-mat-khau', [AuthController::class, 'showForgotPassword'])->name('forgot-password');
-   Route::post('/quen-mat-khau', [AuthController::class, 'sendResetLink'])->name('forgot-password.post');
-   Route::get('/reset-password/{token}', [AuthController::class, 'showResetPassword'])->name('reset-password');
-   Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('reset-password.post');
+   Route::post('/dang-xuat', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 });
 
-// ===== 11. USER DASHBOARD (Yêu cầu đăng nhập) =====
-Route::middleware('auth')->prefix('tai-khoan')->name('user.')->group(function () {
+// Alternative routes without auth prefix for shorter URLs
+Route::get('/dang-nhap', [AuthController::class, 'showLogin'])->name('login')->middleware('guest');
+Route::post('/dang-nhap', [AuthController::class, 'login'])->middleware('guest');
+Route::get('/dang-ky', [AuthController::class, 'showRegister'])->name('register.show')->middleware('guest');
+Route::post('/dang-ky', [AuthController::class, 'register'])->middleware('guest');
+Route::get('/xac-thuc-email', [AuthController::class, 'verifyNotice'])->name('verify.notice.alt');
+Route::post('/dang-xuat', [AuthController::class, 'logout'])->name('logout.alt')->middleware('auth');
+
+// ===== 11. USER DASHBOARD (Yêu cầu đăng nhập và xác thực email) =====
+Route::middleware(['auth', 'verified'])->prefix('tai-khoan')->name('user.')->group(function () {
    // Dashboard chính
    Route::get('/', [UserController::class, 'dashboard'])->name('dashboard');
    
