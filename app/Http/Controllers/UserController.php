@@ -133,4 +133,88 @@ class UserController extends Controller
 
         return back()->with('success', 'Hồ sơ đã được cập nhật thành công!');
     }
+
+    /**
+     * Display the user's downloaded documents.
+     */
+    public function downloads(): View
+    {
+        $downloads = Auth::user()
+            ->downloads()
+            ->with(['document.level', 'document.subject']) // Eager load document details
+            ->latest('downloaded_at')
+            ->paginate(10); // Paginate results
+
+        return view('user.downloads', compact('downloads'));
+    }
+
+    /**
+     * Display the user's favorite items.
+     */
+    public function favorites(): View
+    {
+        $favorites = Auth::user()
+            ->favorites()
+            ->with('favoritable') // Eager load the polymorphic relationship
+            ->latest()
+            ->paginate(10);
+
+        return view('user.favorites', compact('favorites'));
+    }
+
+    /**
+     * Toggle an item in the user's favorites.
+     */
+    public function toggleFavorite(Request $request, string $type, int $id): \Illuminate\Http\JsonResponse
+    {
+        $user = Auth::user();
+        $modelClass = $this->getFavoritableModelClass($type);
+
+        if (!$modelClass || !class_exists($modelClass)) {
+            return response()->json(['error' => 'Loại không hợp lệ.'], 400);
+        }
+
+        $model = $modelClass::find($id);
+
+        if (!$model) {
+            return response()->json(['error' => 'Không tìm thấy đối tượng.'], 404);
+        }
+
+        $favorite = $user->favorites()
+            ->where('favoritable_type', $modelClass)
+            ->where('favoritable_id', $id)
+            ->first();
+
+        if ($favorite) {
+            $favorite->delete();
+            $status = 'removed';
+        } else {
+            $user->favorites()->create([
+                'favoritable_type' => $modelClass,
+                'favoritable_id' => $id,
+            ]);
+            $status = 'added';
+        }
+
+        return response()->json([
+            'status' => $status,
+            'count' => $user->favorites()->count(),
+        ]);
+    }
+
+    /**
+     * Get the model class from a string type.
+     */
+    private function getFavoritableModelClass(string $type): ?string
+    {
+        $map = [
+            'document' => Document::class,
+            'school' => \App\Models\School::class,
+            'news' => \App\Models\News::class,
+            'center' => \App\Models\Center::class,
+            'teacher' => \App\Models\Teacher::class,
+        ];
+
+        return $map[$type] ?? null;
+    }
 }
