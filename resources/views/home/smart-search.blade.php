@@ -43,14 +43,15 @@
                         </div>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Xã/Phường</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Loại trường</label>
                         <div class="relative">
                             <select class="w-full p-3 border border-gray-200 rounded-button appearance-none focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary pr-8">
-                                <option value="">Chọn xã/phường</option>
-                                <option value="cau-giay">Cầu Giấy</option>
-                                <option value="hai-ba-trung">Hai Bà Trưng</option>
-                                <option value="hoan-kiem">Hoàn Kiếm</option>
-                                <option value="dong-da">Đống Đa</option>
+                                <option value="">Loại trường</option>
+                                <option value="chat-luong-cao">Chất lượng cao</option>
+                                <option value="cong-lap">Công lập</option>
+                                <option value="lien-cap">Liên cấp</option>
+                                <option value="song-ngu">Song ngữ</option>
+                                <option value="tu-thuc">Tư thục</option>
                             </select>
                             <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
                                 <i class="ri-arrow-down-s-line text-gray-400"></i>
@@ -100,14 +101,16 @@
                         </div>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Năm</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Loại tài liệu</label>
                         <div class="relative">
                             <select class="w-full p-3 border border-gray-200 rounded-button appearance-none focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary pr-8">
-                                <option value="">Chọn năm</option>
-                                <option value="2025">2025</option>
-                                <option value="2024">2024</option>
-                                <option value="2023">2023</option>
-                                <option value="2022">2022</option>
+                                <option value="">Tất cả loại</option>
+                                <option value="de-thi">Đề thi</option>
+                                <option value="tai-lieu-on-tap">Tài liệu ôn tập</option>
+                                <option value="bai-tap">Bài tập</option>
+                                <option value="bai-giang">Bài giảng</option>
+                                <option value="tong-hop-ly-thuyet">Tổng hợp lý thuyết</option>
+                                <option value="van-mau">Văn mẫu</option>
                             </select>
                             <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
                                 <i class="ri-arrow-down-s-line text-gray-400"></i>
