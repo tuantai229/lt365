@@ -1,5 +1,5 @@
 <!-- Hero Banner Slider -->
-<section class="relative overflow-hidden bg-gray-100">
+<section class="relative overflow-hidden bg-gray-100 hero-slider-wrapper">
     <div class="container mx-auto px-4 py-6">
         <div class="hero-slider-container relative w-full overflow-hidden rounded-lg shadow-lg" style="height: 450px;">
             
@@ -72,19 +72,19 @@
             </div>
             
             <!-- Navigation Arrows -->
-            <button class="slider-nav-btn absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/30 transition-colors duration-200 z-20" onclick="previousSlide()">
+            <button class="slider-nav-btn prev-btn absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/30 transition-colors duration-200 z-20">
                 <i class="ri-arrow-left-s-line text-2xl"></i>
             </button>
-            <button class="slider-nav-btn absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/30 transition-colors duration-200 z-20" onclick="nextSlide()">
+            <button class="slider-nav-btn next-btn absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/30 transition-colors duration-200 z-20">
                 <i class="ri-arrow-right-s-line text-2xl"></i>
             </button>
             
             <!-- Slider Indicators -->
             <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
-                <button class="slide-indicator w-3 h-3 rounded-full bg-white opacity-100" onclick="goToSlide(0)"></button>
-                <button class="slide-indicator w-3 h-3 rounded-full bg-white opacity-50" onclick="goToSlide(1)"></button>
-                <button class="slide-indicator w-3 h-3 rounded-full bg-white opacity-50" onclick="goToSlide(2)"></button>
-                <button class="slide-indicator w-3 h-3 rounded-full bg-white opacity-50" onclick="goToSlide(3)"></button>
+                <button class="slide-indicator w-3 h-3 rounded-full bg-white opacity-100"></button>
+                <button class="slide-indicator w-3 h-3 rounded-full bg-white opacity-50"></button>
+                <button class="slide-indicator w-3 h-3 rounded-full bg-white opacity-50"></button>
+                <button class="slide-indicator w-3 h-3 rounded-full bg-white opacity-50"></button>
             </div>
         </div>
     </div>

@@ -29,12 +29,17 @@ document.addEventListener('DOMContentLoaded', function() {
             updateSlide(nextIndex);
         }
 
+        function previousSlide() {
+            const prevIndex = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlide(prevIndex);
+        }
+
         // Auto-play slider
         setInterval(nextSlide, 5000);
 
         // Event listeners for manual control (if you add prev/next buttons)
-        // document.querySelector('.next-btn').addEventListener('click', nextSlide);
-        // document.querySelector('.prev-btn').addEventListener('click', previousSlide);
+        document.querySelector('.hero-slider-wrapper .prev-btn').addEventListener('click', previousSlide);
+        document.querySelector('.hero-slider-wrapper .next-btn').addEventListener('click', nextSlide);
         
         indicators.forEach((indicator, index) => {
             indicator.addEventListener('click', () => updateSlide(index));
