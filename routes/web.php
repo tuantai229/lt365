@@ -305,6 +305,10 @@ Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])
    ->name('newsletter.subscribe')
    ->middleware(['throttle:newsletter']);
 
+Route::post('/newsletter/unsubscribe', [NewsletterController::class, 'unsubscribe'])
+   ->name('newsletter.unsubscribe')
+   ->middleware(['throttle:newsletter']);
+
 // Sitemap cho SEO
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 Route::get('/sitemap/{type}.xml', [SitemapController::class, 'show'])
