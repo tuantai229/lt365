@@ -41,41 +41,61 @@
                 <div class="md:w-1/2 bg-white p-8">
                     <h3 class="text-xl font-bold text-gray-800 mb-6">Đăng ký tư vấn miễn phí</h3>
                     
-                    <form class="space-y-4" id="cta-form">
+                    <form action="{{ route('contact.store') }}" method="POST" class="cta-contact-form space-y-4">
+                        @csrf
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Họ và tên phụ huynh</label>
-                            <input type="text" placeholder="Nhập họ và tên" class="w-full p-3 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
+                            <label for="cta-name" class="block text-sm font-medium text-gray-700 mb-1">Họ và tên phụ huynh</label>
+                            <input type="text" id="cta-name" name="name" placeholder="Nhập họ và tên" class="w-full p-3 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary" required>
                         </div>
                         
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Số điện thoại</label>
-                            <input type="tel" placeholder="Nhập số điện thoại" class="w-full p-3 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
+                            <label for="cta-email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                            <input type="email" id="cta-email" name="email" placeholder="Nhập email" class="w-full p-3 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary" required>
+                        </div>
+                        
+                        <div>
+                            <label for="cta-phone" class="block text-sm font-medium text-gray-700 mb-1">Số điện thoại</label>
+                            <input type="tel" id="cta-phone" name="phone" placeholder="Nhập số điện thoại" class="w-full p-3 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary" required>
                         </div>
                         
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Cấp học quan tâm</label>
                             <div class="space-y-2">
-                                <div class="flex items-center gap-2">
-                                    <div class="custom-radio" id="radio-lop1"></div>
-                                    <label for="radio-lop1" class="cursor-pointer">Thi vào lớp 1</label>
-                                </div>
-                                <div class="flex items-center gap-2">
-                                    <div class="custom-radio" id="radio-lop6"></div>
-                                    <label for="radio-lop6" class="cursor-pointer">Thi vào lớp 6</label>
-                                </div>
-                                <div class="flex items-center gap-2">
-                                    <div class="custom-radio" id="radio-lop10"></div>
-                                    <label for="radio-lop10" class="cursor-pointer">Thi vào lớp 10</label>
-                                </div>
+                                <label for="cta-grade-1" class="flex items-center gap-2 cursor-pointer">
+                                    <input type="radio" id="cta-grade-1" name="grade" value="Thi vào lớp 1" class="form-radio text-primary focus:ring-primary/50">
+                                    <span>Thi vào lớp 1</span>
+                                </label>
+                                <label for="cta-grade-6" class="flex items-center gap-2 cursor-pointer">
+                                    <input type="radio" id="cta-grade-6" name="grade" value="Thi vào lớp 6" class="form-radio text-primary focus:ring-primary/50">
+                                    <span>Thi vào lớp 6</span>
+                                </label>
+                                <label for="cta-grade-10" class="flex items-center gap-2 cursor-pointer">
+                                    <input type="radio" id="cta-grade-10" name="grade" value="Thi vào lớp 10" class="form-radio text-primary focus:ring-primary/50">
+                                    <span>Thi vào lớp 10</span>
+                                </label>
                             </div>
                         </div>
                         
                         <div class="flex items-center gap-2">
-                            <div class="custom-checkbox" id="checkbox-agree"></div>
-                            <label for="checkbox-agree" class="text-sm cursor-pointer">Tôi đồng ý với <a href="#" class="text-primary hover:underline">điều khoản sử dụng</a> và <a href="#" class="text-primary hover:underline">chính sách bảo mật</a></label>
+                            <input type="checkbox" id="cta-agree" name="agree_terms" class="form-checkbox rounded text-primary focus:ring-primary/50" required>
+                            <label for="cta-agree" class="text-sm cursor-pointer">Tôi đồng ý với <a href="#" class="text-primary hover:underline">điều khoản sử dụng</a> và <a href="#" class="text-primary hover:underline">chính sách bảo mật</a></label>
+                        </div>
+
+                        <!-- Message display area -->
+                        <div class="cta-message hidden">
+                            <div class="p-3 rounded-lg text-sm font-medium"></div>
                         </div>
                         
-                        <button type="submit" class="w-full py-3 bg-primary text-white rounded-button hover:bg-primary/90 transition-colors duration-200 font-medium whitespace-nowrap !rounded-button">Đăng ký ngay</button>
+                        <button type="submit" class="cta-submit-btn w-full py-3 bg-primary text-white rounded-button hover:bg-primary/90 transition-colors duration-200 font-medium whitespace-nowrap !rounded-button">
+                            <span class="btn-text">Đăng ký ngay</span>
+                            <span class="loading-spinner hidden">
+                                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                                Đang xử lý...
+                            </span>
+                        </button>
                     </form>
                 </div>
             </div>

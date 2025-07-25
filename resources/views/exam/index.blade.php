@@ -28,4 +28,5 @@
 
 @push('scripts')
     <script src="{{ asset('js/exam.js') }}"></script>
+    <script src="{{ asset('js/cta-contact-form.js') }}" defer></script>
 @endpush

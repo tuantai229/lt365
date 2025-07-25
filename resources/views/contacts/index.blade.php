@@ -39,7 +39,7 @@
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <!-- Contact Form -->
-                <div class="bg-white rounded-lg shadow-lg p-8">
+                <div id="contact-form-section" class="bg-white rounded-lg shadow-lg p-8">
                     <h2 class="text-2xl font-bold mb-6 text-gray-900">Gửi yêu cầu tư vấn</h2>
                     <p class="text-gray-600 mb-6">Vui lòng điền thông tin bên dưới, chúng tôi sẽ liên hệ với bạn trong vòng 24 giờ</p>
                     
