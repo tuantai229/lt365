@@ -56,4 +56,5 @@
 
 @push('scripts')
     <script src="{{ asset('js/exam.js') }}"></script>
+    <script src="{{ asset('js/newsletter.js') }}" defer></script>
 @endpush
