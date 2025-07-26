@@ -66,13 +66,13 @@ Route::prefix('tai-lieu')->name('documents.')->group(function () {
     Route::get('/{typeSlug}/cap-{levelSlug}/mon-{subjectSlug}', [DocumentController::class, 'byAll'])
         ->name('by-all');
 
-    // FILTER 2 TIÊU CHÍ
+    // FILTER 2 TIÊU CHÍ (Specific prefixes first)
+    Route::get('/cap-{levelSlug}/mon-{subjectSlug}', [DocumentController::class, 'byLevelAndSubject'])
+        ->name('by-level-subject');
     Route::get('/{typeSlug}/cap-{levelSlug}', [DocumentController::class, 'byTypeAndLevel'])
         ->name('by-type-level');
     Route::get('/{typeSlug}/mon-{subjectSlug}', [DocumentController::class, 'byTypeAndSubject'])
         ->name('by-type-subject');
-    Route::get('/cap-{levelSlug}/mon-{subjectSlug}', [DocumentController::class, 'byLevelAndSubject'])
-        ->name('by-level-subject');
 
     // FILTER 1 TIÊU CHÍ (Specific prefixes first)
     Route::get('/cap-{levelSlug}', [DocumentController::class, 'byLevel'])
@@ -99,13 +99,13 @@ Route::prefix('truong-hoc')->name('schools.')->group(function () {
     Route::get('/{levelSlug}/tai-{provinceSlug}/he-{schoolTypeSlug}', [SchoolController::class, 'byAll'])
         ->name('by-all');
 
-    // FILTER 2 TIÊU CHÍ
+    // FILTER 2 TIÊU CHÍ (Specific prefixes first)
+    Route::get('/tai-{provinceSlug}/he-{schoolTypeSlug}', [SchoolController::class, 'byProvinceAndType'])
+        ->name('by-province-type');
     Route::get('/{levelSlug}/tai-{provinceSlug}', [SchoolController::class, 'byLevelAndProvince'])
         ->name('by-level-province');
     Route::get('/{levelSlug}/he-{schoolTypeSlug}', [SchoolController::class, 'byLevelAndType'])
         ->name('by-level-type');
-    Route::get('/tai-{provinceSlug}/he-{schoolTypeSlug}', [SchoolController::class, 'byProvinceAndType'])
-        ->name('by-province-type');
 
     // FILTER 1 TIÊU CHÍ (Specific prefixes first)
     Route::get('/tai-{provinceSlug}', [SchoolController::class, 'byProvince'])
@@ -150,13 +150,13 @@ Route::prefix('trung-tam')->name('centers.')->group(function () {
     Route::get('/{levelSlug}/mon-{subjectSlug}/tai-{provinceSlug}', [CenterController::class, 'byAll'])
         ->name('by-all');
 
-    // FILTER 2 TIÊU CHÍ
+    // FILTER 2 TIÊU CHÍ (Specific prefixes first)
+    Route::get('/mon-{subjectSlug}/tai-{provinceSlug}', [CenterController::class, 'bySubjectAndProvince'])
+        ->name('by-subject-province');
     Route::get('/{levelSlug}/mon-{subjectSlug}', [CenterController::class, 'byLevelAndSubject'])
         ->name('by-level-subject');
     Route::get('/{levelSlug}/tai-{provinceSlug}', [CenterController::class, 'byLevelAndProvince'])
         ->name('by-level-province');
-    Route::get('/mon-{subjectSlug}/tai-{provinceSlug}', [CenterController::class, 'bySubjectAndProvince'])
-        ->name('by-subject-province');
 
     // FILTER 1 TIÊU CHÍ (Specific prefixes first)
     Route::get('/mon-{subjectSlug}', [CenterController::class, 'bySubject'])
@@ -183,13 +183,13 @@ Route::prefix('giao-vien')->name('teachers.')->group(function () {
     Route::get('/{levelSlug}/mon-{subjectSlug}/tai-{provinceSlug}', [TeacherController::class, 'byAll'])
         ->name('by-all');
 
-    // FILTER 2 TIÊU CHÍ
+    // FILTER 2 TIÊU CHÍ (Specific prefixes first)
+    Route::get('/mon-{subjectSlug}/tai-{provinceSlug}', [TeacherController::class, 'bySubjectAndProvince'])
+        ->name('by-subject-province');
     Route::get('/{levelSlug}/mon-{subjectSlug}', [TeacherController::class, 'byLevelAndSubject'])
         ->name('by-level-subject');
     Route::get('/{levelSlug}/tai-{provinceSlug}', [TeacherController::class, 'byLevelAndProvince'])
         ->name('by-level-province');
-    Route::get('/mon-{subjectSlug}/tai-{provinceSlug}', [TeacherController::class, 'bySubjectAndProvince'])
-        ->name('by-subject-province');
 
     // FILTER 1 TIÊU CHÍ (Specific prefixes first)
     Route::get('/mon-{subjectSlug}', [TeacherController::class, 'bySubject'])
