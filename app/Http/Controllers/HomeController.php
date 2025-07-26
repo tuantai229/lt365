@@ -13,6 +13,7 @@ use App\Models\Province;
 use App\Models\SchoolType;
 use App\Models\Subject;
 use App\Models\DocumentType;
+use App\Models\Document;
 
 class HomeController extends Controller
 {
@@ -30,6 +31,19 @@ class HomeController extends Controller
         $schoolTypes = SchoolType::active()->ordered()->get();
         $subjects = Subject::active()->ordered()->get();
         $documentTypes = DocumentType::active()->ordered()->get();
+
+        // Featured documents
+        $featuredDocumentLevels = Level::active()->where('parent_id', 0)->ordered()->get();
+        $featuredDocuments = collect();
+        $featuredDocuments['latest'] = Document::with(['level', 'subject', 'documentType', 'featuredImage'])->active()->latest()->limit(4)->get();
+        foreach ($featuredDocumentLevels as $level) {
+            $featuredDocuments[$level->slug] = Document::with(['level', 'subject', 'documentType', 'featuredImage'])
+                ->active()
+                ->where('level_id', $level->id)
+                ->featured()
+                ->limit(4)
+                ->get();
+        }
 
         // Lấy tất cả cài đặt trang chủ
         $heroSlides = Setting::getHomeHeroSlides();
@@ -78,7 +92,9 @@ class HomeController extends Controller
             'provinces',
             'schoolTypes',
             'subjects',
-            'documentTypes'
+            'documentTypes',
+            'featuredDocumentLevels',
+            'featuredDocuments'
         ));
     }
 }

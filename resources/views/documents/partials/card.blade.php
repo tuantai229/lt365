@@ -24,6 +24,14 @@
                     <i class="ri-calendar-line mr-1"></i> {{ $document->created_at->format('d/m/Y') }}
                 </span>
             </div>
+            <div class="flex items-center justify-between mt-3">
+                <div class="flex items-center">
+                    <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                        <i class="ri-file-pdf-line"></i>
+                    </div>
+                    <span class="ml-1 text-sm text-gray-500">{{ $document->formatted_file_type }} | {{ $document->formatted_file_size }}</span>
+                </div>
+            </div>
         </div>
     </a>
 </div>

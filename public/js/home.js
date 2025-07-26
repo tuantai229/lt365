@@ -136,4 +136,35 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = url;
         });
     }
+
+    // Featured Documents Tabs
+    const tabsContainer = document.getElementById('featured-docs-tabs');
+    if (tabsContainer) {
+        const tabs = tabsContainer.querySelectorAll('button[data-tab]');
+        const panelsContainer = document.getElementById('featured-docs-panels');
+        const panels = panelsContainer.querySelectorAll('div[data-panel]');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.dataset.tab;
+
+                // Update tab styles
+                tabs.forEach(t => {
+                    t.classList.remove('bg-primary', 'text-white');
+                    t.classList.add('text-gray-700', 'hover:bg-gray-200');
+                });
+                tab.classList.add('bg-primary', 'text-white');
+                tab.classList.remove('text-gray-700', 'hover:bg-gray-200');
+
+                // Show/hide panels
+                panels.forEach(panel => {
+                    if (panel.dataset.panel === tabId) {
+                        panel.style.display = 'grid';
+                    } else {
+                        panel.style.display = 'none';
+                    }
+                });
+            });
+        });
+    }
 });
