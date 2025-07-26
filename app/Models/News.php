@@ -82,10 +82,7 @@ class News extends Model
 
     public function getFeaturedImageUrlAttribute()
     {
-        if ($this->featuredImage) {
-            return $this->featuredImage->url;
-        }
-
-        return '/images/default-news.jpg';
+        $path = $this->featuredImage->relative_path ?? null;
+        return get_image_url($path);
     }
 }

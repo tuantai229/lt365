@@ -18,7 +18,9 @@
                     <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
                         <div class="flex flex-col md:flex-row">
                             <div class="md:w-2/5">
-                                <img src="{{ asset($selectedNews[0]->featured_image_url ?? 'html/images/default-news.jpg') }}" alt="{{ $selectedNews[0]->name ?? '' }}" class="w-full h-full object-cover object-top">
+                                <a href="{{ route('news.show', ['slug' => $selectedNews[0]->slug, 'id' => $selectedNews[0]->id]) }}">
+                                    <img src="{{ get_image_url($selectedNews[0]->featured_image_url) }}" alt="{{ $selectedNews[0]->name ?? '' }}" class="w-full h-full object-cover object-top">
+                                </a>
                             </div>
                             <div class="md:w-3/5 p-6">
                                 <div class="flex items-center text-sm text-gray-500 mb-2">
@@ -32,7 +34,11 @@
                                         {{ $selectedNews[0]->view_count ?? 0 }} lượt xem
                                     </span>
                                 </div>
-                                <h4 class="text-lg font-bold mb-2">{{ $selectedNews[0]->name ?? '' }}</h4>
+                                <h4 class="text-lg font-bold mb-2">
+                                    <a href="{{ route('news.show', ['slug' => $selectedNews[0]->slug, 'id' => $selectedNews[0]->id]) }}" class="hover:text-primary transition-colors">
+                                        {{ $selectedNews[0]->name ?? '' }}
+                                    </a>
+                                </h4>
                                 <p class="text-gray-600 mb-4">{{ Str::limit(strip_tags($selectedNews[0]->content ?? ''), 150) }}</p>
                                 <a href="{{ route('news.show', ['slug' => $selectedNews[0]->slug, 'id' => $selectedNews[0]->id]) }}" class="inline-flex items-center text-primary font-medium hover:underline">
                                     Đọc tiếp
@@ -52,7 +58,11 @@
                                         <span class="mx-2">•</span>
                                         <span>{{ $news->categories->first()->name ?? 'Tuyển sinh' }}</span>
                                     </div>
-                                    <h4 class="font-medium mb-2 line-clamp-2">{{ $news->name ?? '' }}</h4>
+                                    <h4 class="font-medium mb-2 line-clamp-2">
+                                        <a href="{{ route('news.show', ['slug' => $news->slug, 'id' => $news->id]) }}" class="hover:text-primary transition-colors">
+                                            {{ $news->name ?? '' }}
+                                        </a>
+                                    </h4>
                                     <a href="{{ route('news.show', ['slug' => $news->slug, 'id' => $news->id]) }}" class="inline-flex items-center text-primary text-sm hover:underline">
                                         Đọc tiếp
                                         <i class="ri-arrow-right-line ml-1"></i>

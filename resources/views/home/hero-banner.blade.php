@@ -5,7 +5,7 @@
             
             @if(!empty($heroSlides) && count($heroSlides) > 0)
                 @foreach($heroSlides as $index => $slide)
-                    <div class="hero-slide {{ $index === 0 ? 'active' : '' }}" style="background-image: url('{{ get_image_url($slide['image'] ?? null) }}'); background-size: cover; background-position: center;">
+                    <div class="hero-slide {{ $index === 0 ? 'active' : '' }}" style="background-image: url('{{ get_image_url($slide['image']) }}'); background-size: cover; background-position: center;">
                         <div class="absolute inset-0 bg-gradient-to-r from-primary/80 to-transparent"></div>
                         <div class="absolute inset-0 flex items-center">
                             <div class="w-full container mx-auto px-4 md:px-10 flex">

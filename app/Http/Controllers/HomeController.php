@@ -33,7 +33,7 @@ class HomeController extends Controller
             })
             ->where('status', 1)
             ->orderBy('created_at', 'desc')
-            ->limit(6)
+            ->limit(5)
             ->get();
         }
 

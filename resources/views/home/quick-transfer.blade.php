@@ -8,7 +8,7 @@
                 @foreach($quickTransfer['boxes'] as $box)
                     <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300">
                         <div class="h-40 bg-blue-50 flex items-center justify-center">
-                            <img src="{{ get_image_url($box['image'] ?? null) }}" alt="{{ $box['title'] ?? '' }}" class="w-full h-full object-cover object-top">
+                            <img src="{{ get_image_url($box['image']) }}" alt="{{ $box['title'] ?? '' }}" class="w-full h-full object-cover object-top">
                         </div>
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-3 text-primary">{{ $box['title'] ?? '' }}</h3>

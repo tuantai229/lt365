@@ -13,7 +13,7 @@
                         @foreach($selectedCenters as $center)
                             <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 min-w-[280px]">
                                 <div class="h-40 bg-gray-100">
-                                    <img src="{{ asset($center->featured_image_url ?? 'html/images/default-center.jpg') }}" alt="{{ $center->name ?? '' }}" class="w-full h-full object-cover">
+                                    <img src="{{ get_image_url($center->featured_image_url) }}" alt="{{ $center->name ?? '' }}" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-4">
                                     <h4 class="font-bold mb-1">{{ $center->name ?? '' }}</h4>
@@ -46,7 +46,7 @@
                         @foreach($selectedTeachers as $teacher)
                             <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 min-w-[280px]">
                                 <div class="h-40 bg-gray-100">
-                                    <img src="{{ asset($teacher->featured_image_url ?? 'html/images/default-teacher.jpg') }}" alt="{{ $teacher->name ?? '' }}" class="w-full h-full object-cover object-top">
+                                    <img src="{{ get_image_url($teacher->featured_image_url) }}" alt="{{ $teacher->name ?? '' }}" class="w-full h-full object-cover object-top">
                                 </div>
                                 <div class="p-4">
                                     <h4 class="font-bold mb-1">{{ $teacher->name ?? '' }}</h4>

@@ -33,7 +33,7 @@
                         <div class="bg-white rounded-lg shadow-md p-6 min-w-[350px]">
                             <div class="flex items-center mb-4">
                                 <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-                                    <img src="{{ get_image_url($review['avatar'] ?? null) }}" alt="{{ $review['name'] ?? '' }}" class="w-full h-full object-cover object-top">
+                                    <img src="{{ get_image_url($review['avatar']) }}" alt="{{ $review['name'] ?? '' }}" class="w-full h-full object-cover object-top">
                                 </div>
                                 <div>
                                     <h4 class="font-bold">{{ $review['name'] ?? '' }}</h4>
