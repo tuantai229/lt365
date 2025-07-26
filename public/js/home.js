@@ -87,4 +87,53 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     ['centerSlider', 'teacherSlider', 'reviewSlider'].forEach(setupContentSlider);
+
+    // Smart Search Forms
+    const schoolForm = document.getElementById('smart-search-school-form');
+    if (schoolForm) {
+        schoolForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const level = document.getElementById('ss-school-level').value;
+            const province = document.getElementById('ss-school-province').value;
+            const type = document.getElementById('ss-school-type').value;
+            
+            let parts = ['/truong-hoc'];
+            
+            if (level) parts.push(level);
+            if (province) parts.push('tai-' + province);
+            if (type) parts.push('he-' + type);
+            
+            let url = parts.join('/');
+            
+            window.location.href = url;
+        });
+    }
+
+    const documentForm = document.getElementById('smart-search-document-form');
+    if (documentForm) {
+        documentForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const level = document.getElementById('ss-doc-level').value;
+            const subject = document.getElementById('ss-doc-subject').value;
+            const type = document.getElementById('ss-doc-type').value;
+            
+            let parts = ['/tai-lieu'];
+            
+            if (type) {
+                parts.push(type);
+            }
+            if (level) {
+                parts.push(`cap-${level}`);
+            }
+            if (subject) {
+                parts.push(`mon-${subject}`);
+            }
+
+            let url = parts.join('/');
+            
+            window.location.href = url;
+        });
+    }
 });

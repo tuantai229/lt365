@@ -8,6 +8,11 @@ use App\Models\NewsCategory;
 use App\Models\News;
 use App\Models\Center;
 use App\Models\Teacher;
+use App\Models\Level;
+use App\Models\Province;
+use App\Models\SchoolType;
+use App\Models\Subject;
+use App\Models\DocumentType;
 
 class HomeController extends Controller
 {
@@ -18,6 +23,14 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // Smart search data
+        $schoolLevels = Level::active()->parentOnly()->ordered()->get();
+        $documentLevels = Level::active()->ordered()->get();
+        $provinces = Province::majorCities()->orderBy('name', 'asc')->get();
+        $schoolTypes = SchoolType::active()->ordered()->get();
+        $subjects = Subject::active()->ordered()->get();
+        $documentTypes = DocumentType::active()->ordered()->get();
+
         // Lấy tất cả cài đặt trang chủ
         $heroSlides = Setting::getHomeHeroSlides();
         $quickTransfer = Setting::getHomeQuickTransfer();
@@ -59,7 +72,13 @@ class HomeController extends Controller
             'selectedNews',
             'selectedCenters',
             'selectedTeachers',
-            'statsReviews'
+            'statsReviews',
+            'schoolLevels',
+            'documentLevels',
+            'provinces',
+            'schoolTypes',
+            'subjects',
+            'documentTypes'
         ));
     }
 }
