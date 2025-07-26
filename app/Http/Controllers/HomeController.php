@@ -14,9 +14,12 @@ use App\Models\SchoolType;
 use App\Models\Subject;
 use App\Models\DocumentType;
 use App\Models\Document;
+use App\Models\SchoolAdmission;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
+    public $upcomingSchedules = [];
     /**
      * Show the application dashboard.
      *
@@ -80,6 +83,9 @@ class HomeController extends Controller
                 ->get();
         }
 
+        $this->getUpcomingSchedules();
+        $upcomingSchedules = $this->upcomingSchedules;
+
         return view('home', compact(
             'heroSlides',
             'quickTransfer',
@@ -94,7 +100,61 @@ class HomeController extends Controller
             'subjects',
             'documentTypes',
             'featuredDocumentLevels',
-            'featuredDocuments'
+            'featuredDocuments',
+            'upcomingSchedules'
         ));
+    }
+
+    private function getUpcomingSchedules()
+    {
+        $today = Carbon::today();
+        $admissions = SchoolAdmission::with('school')->get();
+        $events = [];
+
+        foreach ($admissions as $admission) {
+            if ($admission->register_start_date && $today->lte($admission->register_start_date)) {
+                $events[] = [
+                    'date' => Carbon::parse($admission->register_start_date),
+                    'title' => 'Bắt đầu đăng ký hồ sơ tuyển sinh',
+                    'school' => $admission->school->name,
+                    'school_slug' => $admission->school->slug,
+                    'school_id' => $admission->school->id,
+                ];
+            }
+            if ($admission->register_end_date && $today->lte($admission->register_end_date)) {
+                $events[] = [
+                    'date' => Carbon::parse($admission->register_end_date),
+                    'title' => 'Kết thúc đăng ký hồ sơ tuyển sinh',
+                    'school' => $admission->school->name,
+                    'school_slug' => $admission->school->slug,
+                    'school_id' => $admission->school->id,
+                ];
+            }
+            if ($admission->exam_date && $today->lte($admission->exam_date)) {
+                $events[] = [
+                    'date' => Carbon::parse($admission->exam_date),
+                    'title' => 'Thi tuyển sinh chính thức',
+                    'school' => $admission->school->name,
+                    'school_slug' => $admission->school->slug,
+                    'school_id' => $admission->school->id,
+                ];
+            }
+            if ($admission->result_announcement_date && $today->lte($admission->result_announcement_date)) {
+                $events[] = [
+                    'date' => Carbon::parse($admission->result_announcement_date),
+                    'title' => 'Công bố kết quả tuyển sinh',
+                    'school' => $admission->school->name,
+                    'school_slug' => $admission->school->slug,
+                    'school_id' => $admission->school->id,
+                ];
+            }
+        }
+
+        // Sort events by date
+        usort($events, function ($a, $b) {
+            return $a['date'] <=> $b['date'];
+        });
+
+        $this->upcomingSchedules = array_slice($events, 0, 5);
     }
 }

@@ -20,7 +20,7 @@
 
                 <!-- Admission Info -->
                 @if($school->admissionInfo)
-                    <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div id="admission-info" class="bg-white p-6 rounded-lg shadow-md">
                         <h2 class="text-2xl font-bold mb-4 text-primary">Thông tin tuyển sinh {{ $school->admissionInfo->year }}</h2>
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">

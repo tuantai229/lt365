@@ -84,84 +84,38 @@
                 </h3>
                 
                 <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="p-4 bg-primary text-white">
-                        <div class="flex justify-between items-center">
-                            <h4 class="font-bold">Tháng 7, 2025</h4>
-                            <div class="flex gap-2">
-                                <button class="w-8 h-8 rounded-full hover:bg-white/20 flex items-center justify-center">
-                                    <i class="ri-arrow-left-s-line"></i>
-                                </button>
-                                <button class="w-8 h-8 rounded-full hover:bg-white/20 flex items-center justify-center">
-                                    <i class="ri-arrow-right-s-line"></i>
-                                </button>
-                            </div>
+                    @if(!empty($upcomingSchedules))
+                        @php
+                            $colors = [
+                                ['bg' => 'bg-red-100', 'text' => 'text-red-600'],
+                                ['bg' => 'bg-orange-100', 'text' => 'text-orange-600'],
+                                ['bg' => 'bg-yellow-100', 'text' => 'text-yellow-600'],
+                                ['bg' => 'bg-green-100', 'text' => 'text-green-600'],
+                                ['bg' => 'bg-blue-100', 'text' => 'text-blue-600'],
+                            ];
+                        @endphp
+                        @foreach($upcomingSchedules as $index => $event)
+                            <a href="{{ route('schools.show', ['slug' => $event['school_slug'], 'id' => $event['school_id']]) }}#admission-info" class="block p-4 border-b hover:bg-gray-50">
+                                <div class="flex items-center">
+                                    @php
+                                        $color = $colors[$index % count($colors)];
+                                    @endphp
+                                    <div class="w-14 h-14 rounded-lg {{ $color['bg'] }} {{ $color['text'] }} flex flex-col items-center justify-center">
+                                        <span class="text-sm font-medium">T{{ $event['date']->dayOfWeek + 1 }}</span>
+                                        <span class="text-lg font-bold">{{ $event['date']->format('d') }}</span>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h5 class="font-medium">{{ $event['title'] }}</h5>
+                                        <p class="text-sm text-gray-500">{{ $event['school'] }}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        @endforeach
+                    @else
+                        <div class="p-4 text-center text-gray-500">
+                            Không có lịch thi nào sắp diễn ra.
                         </div>
-                    </div>
-                    
-                    <div class="p-4 border-b">
-                        <div class="flex items-center">
-                            <div class="w-14 h-14 rounded-lg bg-red-100 text-red-600 flex flex-col items-center justify-center">
-                                <span class="text-sm font-medium">T7</span>
-                                <span class="text-lg font-bold">05</span>
-                            </div>
-                            <div class="ml-4">
-                                <h5 class="font-medium">Thi tuyển sinh lớp 10 chuyên</h5>
-                                <p class="text-sm text-gray-500">THPT Chuyên Hà Nội - Amsterdam</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="p-4 border-b">
-                        <div class="flex items-center">
-                            <div class="w-14 h-14 rounded-lg bg-blue-100 text-blue-600 flex flex-col items-center justify-center">
-                                <span class="text-sm font-medium">CN</span>
-                                <span class="text-lg font-bold">06</span>
-                            </div>
-                            <div class="ml-4">
-                                <h5 class="font-medium">Thi tuyển sinh lớp 10 chuyên</h5>
-                                <p class="text-sm text-gray-500">THPT Chuyên Nguyễn Huệ</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="p-4 border-b">
-                        <div class="flex items-center">
-                            <div class="w-14 h-14 rounded-lg bg-gray-100 text-gray-600 flex flex-col items-center justify-center">
-                                <span class="text-sm font-medium">T2</span>
-                                <span class="text-lg font-bold">14</span>
-                            </div>
-                            <div class="ml-4">
-                                <h5 class="font-medium">Thi tuyển sinh lớp 6</h5>
-                                <p class="text-sm text-gray-500">THCS Cầu Giấy</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="p-4 border-b">
-                        <div class="flex items-center">
-                            <div class="w-14 h-14 rounded-lg bg-gray-100 text-gray-600 flex flex-col items-center justify-center">
-                                <span class="text-sm font-medium">T7</span>
-                                <span class="text-lg font-bold">19</span>
-                            </div>
-                            <div class="ml-4">
-                                <h5 class="font-medium">Thi tuyển sinh lớp 1</h5>
-                                <p class="text-sm text-gray-500">Tiểu học Thăng Long</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="p-4">
-                        <div class="flex items-center">
-                            <div class="w-14 h-14 rounded-lg bg-gray-100 text-gray-600 flex flex-col items-center justify-center">
-                                <span class="text-sm font-medium">CN</span>
-                                <span class="text-lg font-bold">20</span>
-                            </div>
-                            <div class="ml-4">
-                                <h5 class="font-medium">Thi tuyển sinh lớp 1</h5>
-                                <p class="text-sm text-gray-500">Tiểu học Nguyễn Siêu</p>
-                            </div>
-                        </div>
-                    </div>
+                    @endif
                 </div>
             </div>
         </div>
