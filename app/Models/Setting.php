@@ -86,11 +86,77 @@ class Setting extends Model
     }
 
     /**
+     * Get home hero slides
+     */
+    public static function getHomeHeroSlides(): array
+    {
+        return static::get('home_hero_slides', []);
+    }
+
+    /**
+     * Get home quick transfer settings
+     */
+    public static function getHomeQuickTransfer(): array
+    {
+        return static::get('home_quick_transfer', [
+            'title' => 'Đồng hành cùng con vào trường chuyên',
+            'boxes' => []
+        ]);
+    }
+
+    /**
+     * Get home news schedule settings
+     */
+    public static function getHomeNewsSchedule(): array
+    {
+        return static::get('home_news_schedule', [
+            'selected_category_id' => null
+        ]);
+    }
+
+    /**
+     * Get home teachers centers settings
+     */
+    public static function getHomeTeachersCenters(): array
+    {
+        return static::get('home_teachers_centers', [
+            'centers' => [],
+            'teachers' => []
+        ]);
+    }
+
+    /**
+     * Get home stats reviews settings
+     */
+    public static function getHomeStatsReviews(): array
+    {
+        return static::get('home_stats_reviews', [
+            'stats' => [
+                'documents' => '10,000+',
+                'schools' => '500+',
+                'members' => '50,000+',
+                'rating' => '4.8/5'
+            ],
+            'reviews' => []
+        ]);
+    }
+
+    /**
      * Clear all settings cache
      */
     public static function clearCache(): void
     {
-        $keys = ['general_settings', 'main_navigation', 'footer_category_links', 'footer_support_links'];
+        $keys = [
+            'general_settings', 
+            'main_navigation', 
+            'footer_category_links', 
+            'footer_support_links',
+            'home_hero_slides',
+            'home_quick_transfer',
+            'home_news_schedule',
+            'home_teachers_centers',
+            'home_stats_reviews'
+        ];
         
         foreach ($keys as $key) {
             Cache::forget("setting_{$key}");

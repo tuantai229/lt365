@@ -13,96 +13,55 @@
                     Tin tuyển sinh mới nhất
                 </h3>
                 
-                <!-- Tin nổi bật -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
-                    <div class="flex flex-col md:flex-row">
-                        <div class="md:w-2/5">
-                            <img src="{{ asset('html/images/0668b9e8706c79925cfba198a4a0ff35.jpg') }}" alt="Tin tuyển sinh" class="w-full h-full object-cover object-top">
-                        </div>
-                        <div class="md:w-3/5 p-6">
-                            <div class="flex items-center text-sm text-gray-500 mb-2">
-                                <span class="flex items-center">
-                                    <i class="ri-calendar-line mr-1"></i>
-                                    27/06/2025
-                                </span>
-                                <span class="mx-2">•</span>
-                                <span class="flex items-center">
-                                    <i class="ri-eye-line mr-1"></i>
-                                    1,245 lượt xem
-                                </span>
+                @if(!empty($selectedNews) && count($selectedNews) > 0)
+                    <!-- Tin nổi bật -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
+                        <div class="flex flex-col md:flex-row">
+                            <div class="md:w-2/5">
+                                <img src="{{ asset($selectedNews[0]->featured_image_url ?? 'html/images/default-news.jpg') }}" alt="{{ $selectedNews[0]->name ?? '' }}" class="w-full h-full object-cover object-top">
                             </div>
-                            <h4 class="text-lg font-bold mb-2">Hà Nội công bố kế hoạch tuyển sinh đầu cấp năm học 2025-2026</h4>
-                            <p class="text-gray-600 mb-4">Sở Giáo dục và Đào tạo Hà Nội vừa công bố kế hoạch tuyển sinh đầu cấp năm học 2025-2026 với nhiều điểm mới về phương thức xét tuyển và thời gian đăng ký.</p>
-                            <a href="#" class="inline-flex items-center text-primary font-medium hover:underline">
-                                Đọc tiếp
-                                <i class="ri-arrow-right-line ml-1"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Tin khác -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="bg-white rounded-lg shadow-sm overflow-hidden">
-                        <div class="p-4">
-                            <div class="flex items-center text-sm text-gray-500 mb-2">
-                                <span>25/06/2025</span>
-                                <span class="mx-2">•</span>
-                                <span>Tuyển sinh</span>
+                            <div class="md:w-3/5 p-6">
+                                <div class="flex items-center text-sm text-gray-500 mb-2">
+                                    <span class="flex items-center">
+                                        <i class="ri-calendar-line mr-1"></i>
+                                        {{ $selectedNews[0]->created_at->format('d/m/Y') }}
+                                    </span>
+                                    <span class="mx-2">•</span>
+                                    <span class="flex items-center">
+                                        <i class="ri-eye-line mr-1"></i>
+                                        {{ $selectedNews[0]->view_count ?? 0 }} lượt xem
+                                    </span>
+                                </div>
+                                <h4 class="text-lg font-bold mb-2">{{ $selectedNews[0]->name ?? '' }}</h4>
+                                <p class="text-gray-600 mb-4">{{ Str::limit(strip_tags($selectedNews[0]->content ?? ''), 150) }}</p>
+                                <a href="{{ route('news.show', ['slug' => $selectedNews[0]->slug, 'id' => $selectedNews[0]->id]) }}" class="inline-flex items-center text-primary font-medium hover:underline">
+                                    Đọc tiếp
+                                    <i class="ri-arrow-right-line ml-1"></i>
+                                </a>
                             </div>
-                            <h4 class="font-medium mb-2 line-clamp-2">Trường THCS Nguyễn Tất Thành công bố phương án tuyển sinh lớp 6 năm 2025</h4>
-                            <a href="#" class="inline-flex items-center text-primary text-sm hover:underline">
-                                Đọc tiếp
-                                <i class="ri-arrow-right-line ml-1"></i>
-                            </a>
                         </div>
                     </div>
                     
-                    <div class="bg-white rounded-lg shadow-sm overflow-hidden">
-                        <div class="p-4">
-                            <div class="flex items-center text-sm text-gray-500 mb-2">
-                                <span>24/06/2025</span>
-                                <span class="mx-2">•</span>
-                                <span>Tuyển sinh</span>
+                    <!-- Tin khác -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        @foreach($selectedNews->slice(1) as $news)
+                            <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                                <div class="p-4">
+                                    <div class="flex items-center text-sm text-gray-500 mb-2">
+                                        <span>{{ $news->created_at->format('d/m/Y') }}</span>
+                                        <span class="mx-2">•</span>
+                                        <span>{{ $news->categories->first()->name ?? 'Tuyển sinh' }}</span>
+                                    </div>
+                                    <h4 class="font-medium mb-2 line-clamp-2">{{ $news->name ?? '' }}</h4>
+                                    <a href="{{ route('news.show', ['slug' => $news->slug, 'id' => $news->id]) }}" class="inline-flex items-center text-primary text-sm hover:underline">
+                                        Đọc tiếp
+                                        <i class="ri-arrow-right-line ml-1"></i>
+                                    </a>
+                                </div>
                             </div>
-                            <h4 class="font-medium mb-2 line-clamp-2">Trường THPT chuyên Hà Nội - Amsterdam điều chỉnh cấu trúc đề thi lớp 10</h4>
-                            <a href="#" class="inline-flex items-center text-primary text-sm hover:underline">
-                                Đọc tiếp
-                                <i class="ri-arrow-right-line ml-1"></i>
-                            </a>
-                        </div>
+                        @endforeach
                     </div>
-                    
-                    <div class="bg-white rounded-lg shadow-sm overflow-hidden">
-                        <div class="p-4">
-                            <div class="flex items-center text-sm text-gray-500 mb-2">
-                                <span>23/06/2025</span>
-                                <span class="mx-2">•</span>
-                                <span>Thành tích</span>
-                            </div>
-                            <h4 class="font-medium mb-2 line-clamp-2">Học sinh Việt Nam đạt thành tích cao trong kỳ thi Toán quốc tế IMO 2025</h4>
-                            <a href="#" class="inline-flex items-center text-primary text-sm hover:underline">
-                                Đọc tiếp
-                                <i class="ri-arrow-right-line ml-1"></i>
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-white rounded-lg shadow-sm overflow-hidden">
-                        <div class="p-4">
-                            <div class="flex items-center text-sm text-gray-500 mb-2">
-                                <span>22/06/2025</span>
-                                <span class="mx-2">•</span>
-                                <span>Tuyển sinh</span>
-                            </div>
-                            <h4 class="font-medium mb-2 line-clamp-2">TP.HCM công bố chỉ tiêu tuyển sinh lớp 10 các trường THPT công lập</h4>
-                            <a href="#" class="inline-flex items-center text-primary text-sm hover:underline">
-                                Đọc tiếp
-                                <i class="ri-arrow-right-line ml-1"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                @endif
             </div>
             
             <!-- Lịch thi -->
