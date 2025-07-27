@@ -7,6 +7,7 @@ use App\Models\News;
 use App\Models\NewsCategory;
 use App\Models\School;
 use App\Models\SchoolAdmission;
+use App\Models\Document;
 use Carbon\Carbon;
 
 class ExamController extends Controller
@@ -36,8 +37,9 @@ class ExamController extends Controller
         $admissionNews = $this->getAdmissionNews(self::ELEMENTARY_LEVEL_ID);
         $upcomingSchedules = $this->getUpcomingSchedules(self::ELEMENTARY_LEVEL_ID);
         $featuredSchools = $this->getFeaturedSchools(self::ELEMENTARY_LEVEL_ID);
+        $documents = $this->getDocuments(self::ELEMENTARY_LEVEL_ID);
 
-        return view('exam.grade1', compact('admissionNews', 'upcomingSchedules', 'featuredSchools'));
+        return view('exam.grade1', compact('admissionNews', 'upcomingSchedules', 'featuredSchools', 'documents'));
     }
 
     /**
@@ -50,8 +52,9 @@ class ExamController extends Controller
         $admissionNews = $this->getAdmissionNews(self::JUNIOR_HIGH_LEVEL_ID);
         $upcomingSchedules = $this->getUpcomingSchedules(self::JUNIOR_HIGH_LEVEL_ID);
         $featuredSchools = $this->getFeaturedSchools(self::JUNIOR_HIGH_LEVEL_ID);
+        $documents = $this->getDocuments(self::JUNIOR_HIGH_LEVEL_ID);
 
-        return view('exam.grade6', compact('admissionNews', 'upcomingSchedules', 'featuredSchools'));
+        return view('exam.grade6', compact('admissionNews', 'upcomingSchedules', 'featuredSchools', 'documents'));
     }
 
     /**
@@ -64,8 +67,9 @@ class ExamController extends Controller
         $admissionNews = $this->getAdmissionNews(self::HIGH_SCHOOL_LEVEL_ID);
         $upcomingSchedules = $this->getUpcomingSchedules(self::HIGH_SCHOOL_LEVEL_ID);
         $featuredSchools = $this->getFeaturedSchools(self::HIGH_SCHOOL_LEVEL_ID);
+        $documents = $this->getDocuments(self::HIGH_SCHOOL_LEVEL_ID);
 
-        return view('exam.grade10', compact('admissionNews', 'upcomingSchedules', 'featuredSchools'));
+        return view('exam.grade10', compact('admissionNews', 'upcomingSchedules', 'featuredSchools', 'documents'));
     }
 
     /**
@@ -174,5 +178,35 @@ class ExamController extends Controller
             ->where('status', 1)
             ->orderBy('sort_order', 'asc')
             ->get();
+    }
+
+    /**
+     * Get latest and featured documents for specific level
+     *
+     * @param int $levelId
+     * @return array
+     */
+    private function getDocuments($levelId)
+    {
+        $documents = collect();
+
+        // Get latest documents
+        $documents['latest'] = Document::with(['featuredImage', 'documentType'])
+            ->where('level_id', $levelId)
+            ->where('status', 1)
+            ->latest() // Orders by created_at desc
+            ->limit(4)
+            ->get();
+
+        // Get featured documents (popular)
+        $documents['featured'] = Document::with(['featuredImage', 'documentType'])
+            ->where('level_id', $levelId)
+            ->where('is_featured', 1)
+            ->where('status', 1)
+            ->orderBy('sort_order', 'asc')
+            ->limit(4)
+            ->get();
+            
+        return $documents;
     }
 }
