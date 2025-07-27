@@ -44,7 +44,7 @@
     @include('exam.partials.admission-info', ['grade' => 10])
     @include('exam.partials.featured-schools', ['grade' => 10])
     @include('exam.partials.documents', ['grade' => 10])
-    @include('exam.partials.school-selection-advice', ['grade' => 10])
+    {{-- @include('exam.partials.school-selection-advice', ['grade' => 10]) --}}
     @include('exam.partials.preparation-timeline-grade10')
     @include('exam.partials.faq-grade10')
     @include('exam.partials.cta', ['grade' => 10])
