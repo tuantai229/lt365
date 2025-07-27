@@ -45,7 +45,7 @@
     @include('exam.partials.featured-schools', ['grade' => 1])
     @include('exam.partials.documents', ['grade' => 1])
     @include('exam.partials.school-selection-advice', ['grade' => 1])
-    @include('exam.partials.preparation-timeline', ['grade' => 1])
+    @include('exam.partials.preparation-timeline-grade1')
     @include('exam.partials.faq-grade1')
     @include('exam.partials.cta', ['grade' => 1])
 @endsection

@@ -12,7 +12,7 @@
                 $toYear = $currentYear + 1;
             }
         @endphp
-        <h2 class="text-3xl font-bold text-center mb-10">Lịch thi chuyển cấp {{ $fromYear }}-{{ $toYear }}</h2>
+        <h2 class="text-3xl font-bold text-center mb-10">Lịch thi chuyển cấp chung {{ $fromYear }}-{{ $toYear }}</h2>
         
         <div class="max-w-4xl mx-auto relative">
             <!-- Timeline line -->
@@ -20,104 +20,40 @@
             
             <!-- Timeline items -->
             <div class="ml-10 space-y-8">
-                <!-- Tháng 3 -->
-                <div class="relative timeline-item">
+                <!-- Tháng 3-4 -->
+                <div class="relative timeline-item" style="--timeline-color: #4f46e5;">
                     <div class="bg-white rounded-lg shadow-md p-6">
                         <div class="flex items-center mb-3">
                             <div class="w-12 h-12 rounded-lg bg-primary/10 flex flex-col items-center justify-center text-primary">
                                 <span class="text-sm font-medium">Tháng</span>
-                                <span class="text-lg font-bold">3</span>
+                                <span class="text-lg font-bold">3-4</span>
                             </div>
                             <div class="ml-4">
-                                <h4 class="text-lg font-bold">Công bố thông tin tuyển sinh</h4>
-                                <p class="text-gray-600">Các trường công bố kế hoạch, chỉ tiêu và phương thức tuyển sinh</p>
+                                <h4 class="text-lg font-bold text-primary">Công bố thông tin</h4>
+                                <p class="text-gray-600">Các trường công bố kế hoạch, chỉ tiêu, phương thức tuyển sinh.</p>
                             </div>
-                        </div>
-                        <div class="pl-16">
-                            <ul class="text-sm text-gray-700 space-y-1">
-                                <li class="flex items-center gap-2">
-                                    <div class="w-4 h-4 flex items-center justify-center text-primary">
-                                        <i class="ri-checkbox-circle-line"></i>
-                                    </div>
-                                    <span>Sở GD&ĐT công bố kế hoạch tuyển sinh chung</span>
-                                </li>
-                                <li class="flex items-center gap-2">
-                                    <div class="w-4 h-4 flex items-center justify-center text-primary">
-                                        <i class="ri-checkbox-circle-line"></i>
-                                    </div>
-                                    <span>Các trường công bố chỉ tiêu và phương thức xét tuyển</span>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Tháng 4 -->
-                <div class="relative timeline-item">
+                <!-- Tháng 4-5 -->
+                <div class="relative timeline-item" style="--timeline-color: #f59e0b;">
                     <div class="bg-white rounded-lg shadow-md p-6">
                         <div class="flex items-center mb-3">
-                            <div class="w-12 h-12 rounded-lg bg-primary/10 flex flex-col items-center justify-center text-primary">
+                            <div class="w-12 h-12 rounded-lg bg-secondary/10 flex flex-col items-center justify-center text-secondary">
                                 <span class="text-sm font-medium">Tháng</span>
-                                <span class="text-lg font-bold">4</span>
+                                <span class="text-lg font-bold">4-5</span>
                             </div>
                             <div class="ml-4">
-                                <h4 class="text-lg font-bold">Đăng ký dự tuyển đầu cấp</h4>
-                                <p class="text-gray-600">Phụ huynh và học sinh đăng ký nguyện vọng và nộp hồ sơ</p>
+                                <h4 class="text-lg font-bold text-secondary">Nộp hồ sơ</h4>
+                                <p class="text-gray-600">Phụ huynh và học sinh chuẩn bị và nộp hồ sơ đăng ký dự thi.</p>
                             </div>
-                        </div>
-                        <div class="pl-16">
-                            <ul class="text-sm text-gray-700 space-y-1">
-                                <li class="flex items-center gap-2">
-                                    <div class="w-4 h-4 flex items-center justify-center text-primary">
-                                        <i class="ri-checkbox-circle-line"></i>
-                                    </div>
-                                    <span>Mở cổng đăng ký trực tuyến và tiếp nhận hồ sơ</span>
-                                </li>
-                                <li class="flex items-center gap-2">
-                                    <div class="w-4 h-4 flex items-center justify-center text-primary">
-                                        <i class="ri-checkbox-circle-line"></i>
-                                    </div>
-                                    <span>Tư vấn chọn trường và nguyện vọng phù hợp</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Tháng 5 -->
-                <div class="relative timeline-item">
-                    <div class="bg-white rounded-lg shadow-md p-6">
-                        <div class="flex items-center mb-3">
-                            <div class="w-12 h-12 rounded-lg bg-primary/10 flex flex-col items-center justify-center text-primary">
-                                <span class="text-sm font-medium">Tháng</span>
-                                <span class="text-lg font-bold">5</span>
-                            </div>
-                            <div class="ml-4">
-                                <h4 class="text-lg font-bold">Ôn tập và luyện thi cuối kỳ</h4>
-                                <p class="text-gray-600">Giai đoạn ôn tập tập trung và làm quen với đề thi</p>
-                            </div>
-                        </div>
-                        <div class="pl-16">
-                            <ul class="text-sm text-gray-700 space-y-1">
-                                <li class="flex items-center gap-2">
-                                    <div class="w-4 h-4 flex items-center justify-center text-primary">
-                                        <i class="ri-checkbox-circle-line"></i>
-                                    </div>
-                                    <span>Ôn tập tập trung theo từng môn học</span>
-                                </li>
-                                <li class="flex items-center gap-2">
-                                    <div class="w-4 h-4 flex items-center justify-center text-primary">
-                                        <i class="ri-checkbox-circle-line"></i>
-                                    </div>
-                                    <span>Làm quen với cấu trúc đề thi và cách thức thi</span>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Tháng 6 -->
-                <div class="relative timeline-item">
+                <div class="relative timeline-item" style="--timeline-color: #ef4444;">
                     <div class="bg-white rounded-lg shadow-md p-6">
                         <div class="flex items-center mb-3">
                             <div class="w-12 h-12 rounded-lg bg-red-100 flex flex-col items-center justify-center text-red-600">
@@ -125,89 +61,41 @@
                                 <span class="text-lg font-bold">6</span>
                             </div>
                             <div class="ml-4">
-                                <h4 class="text-lg font-bold">Kỳ thi chính thức</h4>
-                                <p class="text-gray-600">Tổ chức thi tuyển sinh vào các lớp đầu cấp</p>
+                                <h4 class="text-lg font-bold text-red-600">Tổ chức thi</h4>
+                                <p class="text-gray-600">Các kỳ thi vào lớp 1, 6, 10 diễn ra, đặc biệt căng thẳng cho lớp 10.</p>
                             </div>
-                        </div>
-                        <div class="pl-16">
-                            <ul class="text-sm text-gray-700 space-y-1">
-                                <li class="flex items-center gap-2">
-                                    <div class="w-4 h-4 flex items-center justify-center text-primary">
-                                        <i class="ri-checkbox-circle-line"></i>
-                                    </div>
-                                    <span>Thi tuyển sinh vào lớp 10 THPT công lập</span>
-                                </li>
-                                <li class="flex items-center gap-2">
-                                    <div class="w-4 h-4 flex items-center justify-center text-primary">
-                                        <i class="ri-checkbox-circle-line"></i>
-                                    </div>
-                                    <span>Thi tuyển sinh vào các trường chuyên, trường chất lượng cao</span>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Tháng 7 -->
-                <div class="relative timeline-item">
+                <div class="relative timeline-item" style="--timeline-color: #10b981;">
                     <div class="bg-white rounded-lg shadow-md p-6">
                         <div class="flex items-center mb-3">
-                            <div class="w-12 h-12 rounded-lg bg-primary/10 flex flex-col items-center justify-center text-primary">
+                            <div class="w-12 h-12 rounded-lg bg-green-100 flex flex-col items-center justify-center text-green-600">
                                 <span class="text-sm font-medium">Tháng</span>
                                 <span class="text-lg font-bold">7</span>
                             </div>
                             <div class="ml-4">
-                                <h4 class="text-lg font-bold">Công bố kết quả và xét tuyển</h4>
-                                <p class="text-gray-600">Công bố điểm thi, điểm chuẩn và danh sách trúng tuyển</p>
+                                <h4 class="text-lg font-bold text-green-600">Công bố kết quả</h4>
+                                <p class="text-gray-600">Công bố điểm thi, điểm chuẩn và danh sách trúng tuyển.</p>
                             </div>
-                        </div>
-                        <div class="pl-16">
-                            <ul class="text-sm text-gray-700 space-y-1">
-                                <li class="flex items-center gap-2">
-                                    <div class="w-4 h-4 flex items-center justify-center text-primary">
-                                        <i class="ri-checkbox-circle-line"></i>
-                                    </div>
-                                    <span>Công bố điểm thi và điểm chuẩn các trường</span>
-                                </li>
-                                <li class="flex items-center gap-2">
-                                    <div class="w-4 h-4 flex items-center justify-center text-primary">
-                                        <i class="ri-checkbox-circle-line"></i>
-                                    </div>
-                                    <span>Công bố danh sách học sinh trúng tuyển</span>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Tháng 8 -->
-                <div class="relative timeline-item">
+                <div class="relative timeline-item" style="--timeline-color: #6b7280;">
                     <div class="bg-white rounded-lg shadow-md p-6">
                         <div class="flex items-center mb-3">
-                            <div class="w-12 h-12 rounded-lg bg-primary/10 flex flex-col items-center justify-center text-primary">
+                            <div class="w-12 h-12 rounded-lg bg-gray-200 flex flex-col items-center justify-center text-gray-600">
                                 <span class="text-sm font-medium">Tháng</span>
                                 <span class="text-lg font-bold">8</span>
                             </div>
                             <div class="ml-4">
-                                <h4 class="text-lg font-bold">Nhập học và chuẩn bị năm học mới</h4>
-                                <p class="text-gray-600">Làm thủ tục nhập học và chuẩn bị cho năm học mới</p>
+                                <h4 class="text-lg font-bold text-gray-600">Nhập học</h4>
+                                <p class="text-gray-600">Học sinh làm thủ tục nhập học và chuẩn bị cho năm học mới.</p>
                             </div>
-                        </div>
-                        <div class="pl-16">
-                            <ul class="text-sm text-gray-700 space-y-1">
-                                <li class="flex items-center gap-2">
-                                    <div class="w-4 h-4 flex items-center justify-center text-primary">
-                                        <i class="ri-checkbox-circle-line"></i>
-                                    </div>
-                                    <span>Làm thủ tục nhập học tại trường đã trúng tuyển</span>
-                                </li>
-                                <li class="flex items-center gap-2">
-                                    <div class="w-4 h-4 flex items-center justify-center text-primary">
-                                        <i class="ri-checkbox-circle-line"></i>
-                                    </div>
-                                    <span>Chuẩn bị sách vở, đồng phục và các vật dụng cần thiết</span>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>
