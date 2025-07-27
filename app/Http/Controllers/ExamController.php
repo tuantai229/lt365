@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\News;
 use App\Models\NewsCategory;
+use App\Models\School;
 use App\Models\SchoolAdmission;
 use Carbon\Carbon;
 
@@ -34,8 +35,9 @@ class ExamController extends Controller
     {
         $admissionNews = $this->getAdmissionNews(self::ELEMENTARY_LEVEL_ID);
         $upcomingSchedules = $this->getUpcomingSchedules(self::ELEMENTARY_LEVEL_ID);
+        $featuredSchools = $this->getFeaturedSchools(self::ELEMENTARY_LEVEL_ID);
 
-        return view('exam.grade1', compact('admissionNews', 'upcomingSchedules'));
+        return view('exam.grade1', compact('admissionNews', 'upcomingSchedules', 'featuredSchools'));
     }
 
     /**
@@ -47,8 +49,9 @@ class ExamController extends Controller
     {
         $admissionNews = $this->getAdmissionNews(self::JUNIOR_HIGH_LEVEL_ID);
         $upcomingSchedules = $this->getUpcomingSchedules(self::JUNIOR_HIGH_LEVEL_ID);
+        $featuredSchools = $this->getFeaturedSchools(self::JUNIOR_HIGH_LEVEL_ID);
 
-        return view('exam.grade6', compact('admissionNews', 'upcomingSchedules'));
+        return view('exam.grade6', compact('admissionNews', 'upcomingSchedules', 'featuredSchools'));
     }
 
     /**
@@ -60,8 +63,9 @@ class ExamController extends Controller
     {
         $admissionNews = $this->getAdmissionNews(self::HIGH_SCHOOL_LEVEL_ID);
         $upcomingSchedules = $this->getUpcomingSchedules(self::HIGH_SCHOOL_LEVEL_ID);
+        $featuredSchools = $this->getFeaturedSchools(self::HIGH_SCHOOL_LEVEL_ID);
 
-        return view('exam.grade10', compact('admissionNews', 'upcomingSchedules'));
+        return view('exam.grade10', compact('admissionNews', 'upcomingSchedules', 'featuredSchools'));
     }
 
     /**
@@ -154,5 +158,21 @@ class ExamController extends Controller
         });
 
         return array_slice($events, 0, 5);
+    }
+
+    /**
+     * Get featured schools for specific level
+     *
+     * @param int $levelId
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    private function getFeaturedSchools($levelId)
+    {
+        return School::with(['featuredImage', 'level', 'province', 'schoolTypes'])
+            ->where('level_id', $levelId)
+            ->where('is_featured', 1)
+            ->where('status', 1)
+            ->orderBy('sort_order', 'asc')
+            ->get();
     }
 }
