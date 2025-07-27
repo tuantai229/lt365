@@ -125,7 +125,12 @@ class SchoolController extends Controller
     public function byLevel(Request $request, $levelSlug)
     {
         $level = Level::where('slug', $levelSlug)->first();
-        $filters = $level ? ['level_id' => $level->id] : [];
+        $filters = [];
+        if ($level) {
+            $levelIds = $level->getAllChildrenIds();
+            $levelIds[] = $level->id;
+            $filters['level_id'] = $levelIds;
+        }
         $schools = $this->getFilteredSchools($request, $filters);
 
         return view('schools.index', [
@@ -171,10 +176,15 @@ class SchoolController extends Controller
     {
         $level = Level::where('slug', $levelSlug)->first();
         $province = Province::where('slug', $provinceSlug)->first();
-        $filters = ($level && $province) ? [
-            'level_id' => $level->id, 
-            'province_id' => $province->id
-        ] : [];
+        $filters = [];
+        if ($level) {
+            $levelIds = $level->getAllChildrenIds();
+            $levelIds[] = $level->id;
+            $filters['level_id'] = $levelIds;
+        }
+        if ($province) {
+            $filters['province_id'] = $province->id;
+        }
         $schools = $this->getFilteredSchools($request, $filters);
 
         return view('schools.index', [
@@ -191,7 +201,12 @@ class SchoolController extends Controller
     {
         $level = Level::where('slug', $levelSlug)->first();
         $schoolType = SchoolType::where('slug', $schoolTypeSlug)->first();
-        $filters = $level ? ['level_id' => $level->id] : [];
+        $filters = [];
+        if ($level) {
+            $levelIds = $level->getAllChildrenIds();
+            $levelIds[] = $level->id;
+            $filters['level_id'] = $levelIds;
+        }
         $schools = $this->getFilteredSchools($request, $filters, $schoolType);
 
         return view('schools.index', [
@@ -226,10 +241,15 @@ class SchoolController extends Controller
         $level = Level::where('slug', $levelSlug)->first();
         $province = Province::where('slug', $provinceSlug)->first();
         $schoolType = SchoolType::where('slug', $schoolTypeSlug)->first();
-        $filters = ($level && $province) ? [
-            'level_id' => $level->id,
-            'province_id' => $province->id,
-        ] : [];
+        $filters = [];
+        if ($level) {
+            $levelIds = $level->getAllChildrenIds();
+            $levelIds[] = $level->id;
+            $filters['level_id'] = $levelIds;
+        }
+        if ($province) {
+            $filters['province_id'] = $province->id;
+        }
         $schools = $this->getFilteredSchools($request, $filters, $schoolType);
 
         return view('schools.index', [
@@ -246,8 +266,15 @@ class SchoolController extends Controller
     private function getFilteredSchools(Request $request, array $filters, $schoolType = null)
     {
         $query = School::with(['level', 'province', 'schoolTypes', 'featuredImage', 'latestAdmission'])
-            ->active()
-            ->where($filters);
+            ->active();
+
+        foreach ($filters as $key => $value) {
+            if (is_array($value)) {
+                $query->whereIn($key, $value);
+            } else {
+                $query->where($key, $value);
+            }
+        }
 
         // Filter by school type if provided
         if ($schoolType) {

@@ -40,9 +40,11 @@ class HomeController extends Controller
         $featuredDocuments = collect();
         $featuredDocuments['latest'] = Document::with(['level', 'subject', 'documentType', 'featuredImage'])->active()->latest()->limit(4)->get();
         foreach ($featuredDocumentLevels as $level) {
+            $levelIds = $level->getAllChildrenIds();
+            $levelIds[] = $level->id;
             $featuredDocuments[$level->slug] = Document::with(['level', 'subject', 'documentType', 'featuredImage'])
                 ->active()
-                ->where('level_id', $level->id)
+                ->whereIn('level_id', $levelIds)
                 ->featured()
                 ->limit(4)
                 ->get();

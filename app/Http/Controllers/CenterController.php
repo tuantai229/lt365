@@ -217,8 +217,10 @@ class CenterController extends Controller
 
         // Filter by level if provided
         if ($level) {
-            $query->whereHas('levels', function($q) use ($level) {
-                $q->where('level_id', $level->id);
+            $levelIds = $level->getAllChildrenIds();
+            $levelIds[] = $level->id;
+            $query->whereHas('levels', function($q) use ($levelIds) {
+                $q->whereIn('level_id', $levelIds);
             });
         }
 

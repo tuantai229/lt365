@@ -119,7 +119,12 @@ class DocumentController extends Controller
     public function byLevel(Request $request, $levelSlug)
     {
         $level = Level::where('slug', $levelSlug)->first();
-        $filters = $level ? ['level_id' => $level->id] : [];
+        $filters = [];
+        if ($level) {
+            $levelIds = $level->getAllChildrenIds();
+            $levelIds[] = $level->id;
+            $filters['level_id'] = $levelIds;
+        }
         $documents = $this->getFilteredDocuments($request, $filters);
 
         return view('documents.index', [
@@ -150,7 +155,15 @@ class DocumentController extends Controller
     {
         $documentType = DocumentType::where('slug', $typeSlug)->first();
         $level = Level::where('slug', $levelSlug)->first();
-        $filters = ($documentType && $level) ? ['document_type_id' => $documentType->id, 'level_id' => $level->id] : [];
+        $filters = [];
+        if ($documentType) {
+            $filters['document_type_id'] = $documentType->id;
+        }
+        if ($level) {
+            $levelIds = $level->getAllChildrenIds();
+            $levelIds[] = $level->id;
+            $filters['level_id'] = $levelIds;
+        }
         $documents = $this->getFilteredDocuments($request, $filters);
 
         return view('documents.index', [
@@ -184,7 +197,15 @@ class DocumentController extends Controller
     {
         $level = Level::where('slug', $levelSlug)->first();
         $subject = Subject::where('slug', $subjectSlug)->first();
-        $filters = ($level && $subject) ? ['level_id' => $level->id, 'subject_id' => $subject->id] : [];
+        $filters = [];
+        if ($level) {
+            $levelIds = $level->getAllChildrenIds();
+            $levelIds[] = $level->id;
+            $filters['level_id'] = $levelIds;
+        }
+        if ($subject) {
+            $filters['subject_id'] = $subject->id;
+        }
         $documents = $this->getFilteredDocuments($request, $filters);
 
         return view('documents.index', [
@@ -202,11 +223,18 @@ class DocumentController extends Controller
         $documentType = DocumentType::where('slug', $typeSlug)->first();
         $level = Level::where('slug', $levelSlug)->first();
         $subject = Subject::where('slug', $subjectSlug)->first();
-        $filters = ($documentType && $level && $subject) ? [
-            'document_type_id' => $documentType->id,
-            'level_id' => $level->id,
-            'subject_id' => $subject->id,
-        ] : [];
+        $filters = [];
+        if ($documentType) {
+            $filters['document_type_id'] = $documentType->id;
+        }
+        if ($level) {
+            $levelIds = $level->getAllChildrenIds();
+            $levelIds[] = $level->id;
+            $filters['level_id'] = $levelIds;
+        }
+        if ($subject) {
+            $filters['subject_id'] = $subject->id;
+        }
         $documents = $this->getFilteredDocuments($request, $filters);
 
         return view('documents.index', [
@@ -222,7 +250,15 @@ class DocumentController extends Controller
 
     private function getFilteredDocuments(Request $request, array $filters)
     {
-        $query = Document::with(['level', 'subject', 'documentType', 'featuredImage'])->active()->where($filters);
+        $query = Document::with(['level', 'subject', 'documentType', 'featuredImage'])->active();
+
+        foreach ($filters as $key => $value) {
+            if (is_array($value)) {
+                $query->whereIn($key, $value);
+            } else {
+                $query->where($key, $value);
+            }
+        }
 
         // Quick filters
         if ($request->has('filter')) {

@@ -8,6 +8,7 @@ use App\Models\NewsCategory;
 use App\Models\School;
 use App\Models\SchoolAdmission;
 use App\Models\Document;
+use App\Models\Level;
 use Carbon\Carbon;
 
 class ExamController extends Controller
@@ -34,10 +35,14 @@ class ExamController extends Controller
      */
     public function grade1()
     {
-        $admissionNews = $this->getAdmissionNews(self::ELEMENTARY_LEVEL_ID);
-        $upcomingSchedules = $this->getUpcomingSchedules(self::ELEMENTARY_LEVEL_ID);
-        $featuredSchools = $this->getFeaturedSchools(self::ELEMENTARY_LEVEL_ID);
-        $documents = $this->getDocuments(self::ELEMENTARY_LEVEL_ID);
+        $level = Level::find(self::ELEMENTARY_LEVEL_ID);
+        $levelIds = $level ? $level->getAllChildrenIds() : [];
+        $levelIds[] = self::ELEMENTARY_LEVEL_ID;
+
+        $admissionNews = $this->getAdmissionNews($levelIds);
+        $upcomingSchedules = $this->getUpcomingSchedules($levelIds);
+        $featuredSchools = $this->getFeaturedSchools($levelIds);
+        $documents = $this->getDocuments($levelIds);
 
         return view('exam.grade1', compact('admissionNews', 'upcomingSchedules', 'featuredSchools', 'documents'));
     }
@@ -49,10 +54,14 @@ class ExamController extends Controller
      */
     public function grade6()
     {
-        $admissionNews = $this->getAdmissionNews(self::JUNIOR_HIGH_LEVEL_ID);
-        $upcomingSchedules = $this->getUpcomingSchedules(self::JUNIOR_HIGH_LEVEL_ID);
-        $featuredSchools = $this->getFeaturedSchools(self::JUNIOR_HIGH_LEVEL_ID);
-        $documents = $this->getDocuments(self::JUNIOR_HIGH_LEVEL_ID);
+        $level = Level::find(self::JUNIOR_HIGH_LEVEL_ID);
+        $levelIds = $level ? $level->getAllChildrenIds() : [];
+        $levelIds[] = self::JUNIOR_HIGH_LEVEL_ID;
+
+        $admissionNews = $this->getAdmissionNews($levelIds);
+        $upcomingSchedules = $this->getUpcomingSchedules($levelIds);
+        $featuredSchools = $this->getFeaturedSchools($levelIds);
+        $documents = $this->getDocuments($levelIds);
 
         return view('exam.grade6', compact('admissionNews', 'upcomingSchedules', 'featuredSchools', 'documents'));
     }
@@ -64,10 +73,14 @@ class ExamController extends Controller
      */
     public function grade10()
     {
-        $admissionNews = $this->getAdmissionNews(self::HIGH_SCHOOL_LEVEL_ID);
-        $upcomingSchedules = $this->getUpcomingSchedules(self::HIGH_SCHOOL_LEVEL_ID);
-        $featuredSchools = $this->getFeaturedSchools(self::HIGH_SCHOOL_LEVEL_ID);
-        $documents = $this->getDocuments(self::HIGH_SCHOOL_LEVEL_ID);
+        $level = Level::find(self::HIGH_SCHOOL_LEVEL_ID);
+        $levelIds = $level ? $level->getAllChildrenIds() : [];
+        $levelIds[] = self::HIGH_SCHOOL_LEVEL_ID;
+
+        $admissionNews = $this->getAdmissionNews($levelIds);
+        $upcomingSchedules = $this->getUpcomingSchedules($levelIds);
+        $featuredSchools = $this->getFeaturedSchools($levelIds);
+        $documents = $this->getDocuments($levelIds);
 
         return view('exam.grade10', compact('admissionNews', 'upcomingSchedules', 'featuredSchools', 'documents'));
     }
@@ -78,7 +91,7 @@ class ExamController extends Controller
      * @param int $levelId
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    private function getAdmissionNews($levelId)
+    private function getAdmissionNews($levelIds)
     {
         // Get the admission news category ID (assumes it's already set up)
         $admissionCategory = NewsCategory::where('slug', 'tin-tuyen-sinh')->first();
@@ -91,8 +104,8 @@ class ExamController extends Controller
             ->whereHas('categories', function($query) use ($admissionCategory) {
                 $query->where('news_categories.id', $admissionCategory->id);
             })
-            ->whereHas('school', function($query) use ($levelId) {
-                $query->where('level_id', $levelId);
+            ->whereHas('school', function($query) use ($levelIds) {
+                $query->whereIn('level_id', $levelIds);
             })
             ->where('status', 1)
             ->orderBy('created_at', 'desc')
@@ -106,12 +119,12 @@ class ExamController extends Controller
      * @param int $levelId
      * @return array
      */
-    private function getUpcomingSchedules($levelId)
+    private function getUpcomingSchedules($levelIds)
     {
         $today = Carbon::today();
         $admissions = SchoolAdmission::with(['school', 'school.level'])
-            ->whereHas('school', function($query) use ($levelId) {
-                $query->where('level_id', $levelId);
+            ->whereHas('school', function($query) use ($levelIds) {
+                $query->whereIn('level_id', $levelIds);
             })
             ->get();
         
@@ -170,10 +183,10 @@ class ExamController extends Controller
      * @param int $levelId
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    private function getFeaturedSchools($levelId)
+    private function getFeaturedSchools($levelIds)
     {
         return School::with(['featuredImage', 'level', 'province', 'schoolTypes'])
-            ->where('level_id', $levelId)
+            ->whereIn('level_id', $levelIds)
             ->where('is_featured', 1)
             ->where('status', 1)
             ->orderBy('sort_order', 'asc')
@@ -186,13 +199,13 @@ class ExamController extends Controller
      * @param int $levelId
      * @return array
      */
-    private function getDocuments($levelId)
+    private function getDocuments($levelIds)
     {
         $documents = collect();
 
         // Get latest documents
         $documents['latest'] = Document::with(['featuredImage', 'documentType'])
-            ->where('level_id', $levelId)
+            ->whereIn('level_id', $levelIds)
             ->where('status', 1)
             ->latest() // Orders by created_at desc
             ->limit(4)
@@ -200,7 +213,7 @@ class ExamController extends Controller
 
         // Get featured documents (popular)
         $documents['featured'] = Document::with(['featuredImage', 'documentType'])
-            ->where('level_id', $levelId)
+            ->whereIn('level_id', $levelIds)
             ->where('is_featured', 1)
             ->where('status', 1)
             ->orderBy('sort_order', 'asc')

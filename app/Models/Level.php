@@ -37,6 +37,18 @@ class Level extends Model
         return $this->hasMany(Level::class, 'parent_id');
     }
 
+    // Lấy tất cả ID của các cấp độ con (bao gồm cả các cấp con sâu hơn)
+    public function getAllChildrenIds()
+    {
+        $ids = collect();
+        $children = $this->children;
+        while ($children->isNotEmpty()) {
+            $ids = $ids->merge($children->pluck('id'));
+            $children = Level::whereIn('parent_id', $children->pluck('id'))->get();
+        }
+        return $ids->all();
+    }
+
     // Quan hệ với documents
     public function documents(): HasMany
     {
