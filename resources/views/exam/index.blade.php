@@ -17,8 +17,8 @@
     @include('exam.partials.timeline')
     @include('exam.partials.comparison-table')
     @include('exam.partials.preparation-steps')
-    @include('exam.partials.free-documents')
-    @include('exam.partials.faq')
+    {{-- @include('exam.partials.free-documents') --}}
+    @include('exam.partials.faq-index')
     @include('exam.partials.cta-form')
 @endsection
 

@@ -1,7 +1,18 @@
 <!-- Timeline Lịch thi -->
 <section class="py-12 bg-gray-50">
     <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-10">Lịch thi chuyển cấp 2025-2026</h2>
+        @php
+            $currentMonth = now()->month;
+            $currentYear = now()->year;
+            if ($currentMonth < 8) {
+                $fromYear = $currentYear - 1;
+                $toYear = $currentYear;
+            } else {
+                $fromYear = $currentYear;
+                $toYear = $currentYear + 1;
+            }
+        @endphp
+        <h2 class="text-3xl font-bold text-center mb-10">Lịch thi chuyển cấp {{ $fromYear }}-{{ $toYear }}</h2>
         
         <div class="max-w-4xl mx-auto relative">
             <!-- Timeline line -->
