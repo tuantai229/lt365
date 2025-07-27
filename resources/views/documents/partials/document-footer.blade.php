@@ -26,7 +26,7 @@
         </div>
         <button class="flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded-button hover:bg-green-700 transition-colors font-medium">
             <i class="ri-download-cloud-line"></i>
-            <span>Tải xuống miễn phí</span>
+            <span>Tải xuống</span>
         </button>
     </div>
 

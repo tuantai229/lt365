@@ -6,6 +6,7 @@
     </div>
 </div>
 
+@if ($document->file_type === 'application/pdf' && $document->file_path)
 <!-- PDF Viewer Section -->
 <div class="mb-8">
     <div class="pdf-viewer">
@@ -38,7 +39,7 @@
         <!-- PDF Embed -->
         <div class="relative">
             <iframe 
-                src="{{ asset('html/De-thi-Anh-Ams-2024.pdf') }}" 
+                src="{{ $document->displayable_file_url }}" 
                 width="100%" 
                 height="800" 
                 class="border-0"
@@ -59,3 +60,4 @@
         </div>
     </div>
 </div>
+@endif

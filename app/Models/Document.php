@@ -279,6 +279,16 @@ class Document extends Model
         return get_image_url($path);
     }
 
+    public function getDisplayableFileUrlAttribute(): string
+    {
+        if (!$this->file_path) {
+            return '';
+        }
+
+        // The get_image_url helper can be reused as it correctly prepends the admin domain.
+        return get_image_url($this->file_path);
+    }
+
     /**
      * Mutators
      */
