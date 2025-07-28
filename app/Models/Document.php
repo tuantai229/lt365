@@ -334,4 +334,36 @@ class Document extends Model
     {
         $this->increment('download_count');
     }
+
+    /**
+     * Get average rating for this document
+     */
+    public function getAverageRating(): float
+    {
+        return $this->ratings()->where('status', 1)->avg('rating') ?: 0;
+    }
+
+    /**
+     * Get total rating count for this document
+     */
+    public function getTotalRatings(): int
+    {
+        return $this->ratings()->where('status', 1)->count();
+    }
+
+    /**
+     * Check if a user has rated this document
+     */
+    public function isRatedByUser($userId): bool
+    {
+        return $this->ratings()->where('user_id', $userId)->exists();
+    }
+
+    /**
+     * Get user's rating for this document
+     */
+    public function getUserRating($userId)
+    {
+        return $this->ratings()->where('user_id', $userId)->first();
+    }
 }

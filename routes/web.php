@@ -223,6 +223,18 @@ Route::prefix('api')->name('api.')->middleware(['throttle:api'])->group(function
        Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
        Route::delete('/favorites/{id}', [FavoriteController::class, 'destroy'])->name('favorites.destroy');
    });
+
+   // Ratings API
+   Route::prefix('ratings')->name('ratings.')->group(function () {
+       Route::get('/stats', [\App\Http\Controllers\RatingController::class, 'getStats'])->name('stats');
+       Route::get('/list', [\App\Http\Controllers\RatingController::class, 'getRatings'])->name('list');
+       
+       Route::middleware('auth')->group(function () {
+           Route::post('/submit', [\App\Http\Controllers\RatingController::class, 'submit'])->name('submit');
+           Route::put('/update', [\App\Http\Controllers\RatingController::class, 'update'])->name('update');
+           Route::delete('/delete', [\App\Http\Controllers\RatingController::class, 'delete'])->name('delete');
+       });
+   });
 });
 
 // ===== 9. LIÊN HỆ =====

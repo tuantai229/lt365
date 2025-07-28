@@ -7,6 +7,9 @@ use App\Models\Document;
 use App\Models\DocumentType;
 use App\Models\Level;
 use App\Models\Subject;
+use App\Services\RatingService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 
 class DocumentController extends Controller
 {
@@ -68,11 +71,28 @@ class DocumentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $slug, $id)
+    public function show(Request $request, $slug, $id, RatingService $ratingService)
     {
         $document = Document::with(['level', 'subject', 'documentType', 'difficultyLevel', 'school', 'tags', 'featuredImage'])
             ->active()
             ->findOrFail($id);
+
+        // Rating data
+        $ratingStats = $ratingService->getRatingStats('document', $document->id);
+        $userRating = null;
+        if (Auth::check()) {
+            $userRating = $ratingService->getUserRating(Auth::user(), 'document', $document->id);
+        }
+
+        // Get ratings with pagination
+        $ratings = \App\Models\Rating::with('user')
+            ->where('type', 'document')
+            ->where('type_id', $document->id)
+            ->where('status', 1)
+            ->whereNotNull('review')
+            ->where('review', '!=', '')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10, ['*'], 'ratings_page');
 
         // Sidebar: Related documents
         $relatedDocuments = Document::with(['featuredImage'])
@@ -98,7 +118,7 @@ class DocumentController extends Controller
         // Sidebar: Document categories
         $documentCategories = DocumentType::withCount('documents')->active()->ordered()->get();
 
-        return view('documents.show', compact('document', 'relatedDocuments', 'mostDownloaded', 'documentCategories'));
+        return view('documents.show', compact('document', 'relatedDocuments', 'mostDownloaded', 'documentCategories', 'ratingStats', 'userRating', 'ratings'));
     }
 
     public function byType(Request $request, $typeSlug)
