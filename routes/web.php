@@ -235,6 +235,17 @@ Route::prefix('api')->name('api.')->middleware(['throttle:api'])->group(function
            Route::delete('/delete', [\App\Http\Controllers\RatingController::class, 'delete'])->name('delete');
        });
    });
+
+   // Comments API
+   Route::prefix('comments')->name('comments.')->group(function () {
+       Route::get('/', [\App\Http\Controllers\CommentController::class, 'index'])->name('index');
+       Route::get('/load-more', [\App\Http\Controllers\CommentController::class, 'loadMore'])->name('load-more');
+       Route::get('/{comment}/replies', [\App\Http\Controllers\CommentController::class, 'replies'])->name('replies');
+       
+       Route::middleware('auth')->group(function () {
+           Route::post('/', [\App\Http\Controllers\CommentController::class, 'store'])->name('store');
+       });
+   });
 });
 
 // ===== 9. LIÊN HỆ =====

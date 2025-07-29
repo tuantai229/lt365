@@ -1,0 +1,688 @@
+Tôi đã hoàn thành phần quản trị website admin-lt365, tôi vừa mới khởi tạo dự án frontend lt365 trên Laravel 11.
+Một số file giao diện html cũng đã được đẩy lên `/lt365/blob/main/public/html/`.
+Tôi chưa có nhiều kinh nghiệm thực hiện code trên Laravel, dự án cũng rất nhiều thành phần nên chưa biết nên bắt đầu từ đâu.
+Hãy đọc kỹ cấu trúc dự án, đọc kỹ các file giao diện, đặc biệt là giao diện trang chủ `/lt365/blob/main/public/html/Trang-Chủ-LT365.html`
+Đề xuất phương án bắt đầu code tính năng frontend lt365.
+Lưu ý chỉ phân tích, đề xuất, đưa ra kế hoạch chưa thực hiện code chi tiết.
+
+Bước đầu tiên mà bạn đề xuất "Tạo Models với relationships", hãy xem lại phần models đã dùng cho ứng dụng admin-lt365 ở `/admin-lt365/app/Models`, nếu tạo models với relationships cho frontend lt365 thì các models có tương tự không, code có giống để chỉ cần copy sang không?
+Lưu ý tôi chưa yêu cầu code chi tiết, chúng ta chỉ đang phân tích, trao đổi.
+
+Tạm thời tôi đã copy các models từ admin-lt365 sang lt365, chi tiết các models có thể chỉnh sửa sau khi thực hiện tính năng.
+Bây giờ hãy đi sâu phân tích về bước tiếp theo mà bạn đã đề xuất: Thiết lập Layout & Components cơ bản
+- Tạo master layout từ HTML template
+- Component header với menu đa cấp
+- Component footer
+- Component sidebar/breadcrumb
+- Component pagination, search
+
+
+Bạn là một chuyên gia phát triển website 10 năm kinh nghiệm.
+Tôi nhận được file giao diện html để thực hiện code frontend cho dự án website có một số link như sau:
+```
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+```
+Trong thực tế phát triển dự án, tôi có nên download các file script, css, font từ các link trực tuyến này về lưu thành các files trên dự án không, hay cứ sử dụng link trực tuyến thôi.
+Cách nào tốt và hay được các nhà phát triển website chuyên nghiệp sử dụng hơn.
+
+Đọc kỹ các file giao diện ở `/lt365/public/html/`, đặc biệt là giao diện trang chủ `/lt365/public/html/Trang-Chủ-LT365.html`
+Chuyển đổi sang Laravel Blade, tạo master layout structure như sau:
+resources/views/layouts/
+├── app.blade.php (master layout)
+├── partials/
+│   ├── header.blade.php
+│   ├── navigation.blade.php  
+│   ├── footer.blade.php
+│   ├── breadcrumb.blade.php
+└── components/
+    ├── search-bar.blade.php
+    ├── pagination.blade.php
+    ├── newsletter-form.blade.php(Danh-sách-tin.html)
+    └── social-links.blade.php(Chi-tiết-tin.html)
+
+Với bước "Implement trang chủ cơ bản", tôi chưa quen với Laravel cho lắm, hãy đưa ra một hướng dẫn tổng quan về cách tạo và cấu trúc cho phần routes, controller
+
+Tôi đã tiến hành tạo xong master layout structure như bạn đề xuất:
+```
+resources/views/layouts/
+├── app.blade.php (master layout)
+├── partials/
+│   ├── header.blade.php
+│   ├── navigation.blade.php  
+│   ├── footer.blade.php
+│   ├── breadcrumb.blade.php
+└── components/
+    ├── search-bar.blade.php
+    ├── pagination.blade.php
+    ├── newsletter-form.blade.php(Danh-sách-tin.html)
+    └── social-links.blade.php(Chi-tiết-tin.html)
+```
+Hãy đưa ra một prompt thật ngắn gọn để yêu cầu trợ lý AI Cline trên VS Code thực hiện tạo route, controller, view cho trang chủ (Home) để hiển thị lên giao diện html như file `/lt365/public/html/Trang-Chủ-LT365.html` (chưa cần load dữ liệu)
+
+Tạo route, controller và view cho trang chủ LT365:
+
+1. Tạo HomeController với method index() đơn giản
+2. Tạo route GET '/' → HomeController@index, name 'home'  
+3. Tạo view home.blade.php extend từ layouts.app
+4. Convert HTML từ /public/html/Trang-Chủ-LT365.html thành Blade template
+5. Chỉ cần HTML tĩnh, chưa load dữ liệu dynamic
+6. Đảm bảo CSS/JS paths đúng với Vite
+7. Include các partials: header, navigation, footer đã có
+
+Files cần tạo:
+- app/Http/Controllers/HomeController.php
+- routes/web.php (update)
+- resources/views/home.blade.php
+
+Giữ nguyên design và styling, chỉ chuyển đổi sang Blade syntax.
+
+Lỗi vẫn chưa được fix, dưới đây là thông tin log từ laravel.log
+[2025-07-20 15:42:21] local.ERROR: Vite manifest not found at: /Users/tuantai229/Herd/lt365/public/build/manifest.json (View: /Users/tuantai229/Herd/lt365/resources/views/layouts/app.blade.php) (View: /Users/tuantai229/Herd/lt365/resources/views/layouts/app.blade.php) {"exception":"[object] (Illuminate\\View\\ViewException(code: 0): Vite manifest not found at: /Users/tuantai229/Herd/lt365/public/build/manifest.json (View: /Users/tuantai229/Herd/lt365/resources/views/layouts/app.blade.php) (View: /Users/tuantai229/Herd/lt365/resources/views/layouts/app.blade.php) at /Users/tuantai229/Herd/lt365/vendor/laravel/framework/src/Illuminate/Foundation/Vite.php:934)
+
+Blade master layout structure and home layout
+
+
+Hãy đọc thông tin file `/lt365/resources/views/home.blade.php` và đánh giá xem, các thành phần của trang chủ có cần chia nhỏ không.
+Nếu không trả lời thật ngắn gọn kèm lý do.
+Nếu có thì trả lời thật ngắn gọn nên chia như thế nào.
+
+Có vẻ như bạn đề xuất thiếu, tôi muốn chia đầy đủ thành 7 components thay vì 4 components như của bạn, 7 components bao gồm:
+Hero Banner Slider
+Khối Chuyển Cấp Nhanh
+Tìm kiếm thông minh
+Tài liệu nổi bật
+Tin tức & Lịch thi
+Giáo viên & Trung tâm
+Thống kê & Đánh giá
+Hãy đưa ra một prompt thật ngắn gọn để yêu cầu trợ lý AI Cline trên VS Code thực hiện công việc chia này
+
+Bạn là một chuyên gia phát triển website trên nền tảng Laravel giàu kinh nhiệm.
+Dưới đây là mô tả chi tiết về các trang tính năng trên frontend dự án lt365:
+* Các trang liệt kê theo giao diện menu như sau:
+- Trang chủ
+- Thi chuyển cấp: Landing Page chung cho Thi chuyển cấp
+    - Thi vào lớp 1: Landing Page Thi chuyển cấp vào lớp 1
+    - Thi vào lớp 6: Landing Page Thi chuyển cấp vào lớp 6
+    - Thi vào lớp 10: Landing Page Thi chuyển cấp vào lớp 10
+- Trường học: Danh sách trường học cho bảng schools
+    - Tiểu học: Danh sách trường học cho bảng schools theo cấp học(bảng levels) tiểu học
+    - THCS: Danh sách trường học cho bảng schools theo cấp học(bảng levels) THCS
+    - THPT: Danh sách trường học cho bảng schools theo cấp học(bảng levels) THPT
+    (Lưu ý bảng levels lưu cấp học nhưng là 2 cấp, ví dụ cấp cha Tiểu học có các cấp con như Lớp 1, Lớp 2, Lớp 3, Lớp 4, Lớp 5, các cấp con sẽ không có trang riêng, nên gần như sẽ fix 3 trang danh sách trường con này)
+- Tài liệu: Danh sách tài liệu cho bảng documents
+    - Đề thi: Danh sách tài liệu cho bảng documents theo loại tài liệu(bảng document_types)
+    - ... Các loại tài liệu khác
+- Tin tức & Tư vấn: Danh sách tin tức cho bảng news
+    - Tin tuyển sinh: Danh sách tin tức cho bảng news theo danh mục(bảng news_categories)
+    - ... Các danh mục news khác
+- Trung tâm: Danh sách trung tâm cho bảng centers
+- Giáo viên: Danh sách giáo viên cho bảng teachers
+- Liên hệ: Trang chứa tính năng form liên hệ
+* Các trang chi tiết của các module bao gồm: Chi tiết trường học, chi tiết tài liệu, chi tiết tin tức, chi tiết trung tâm, chi tiết giáo viên, ...
+* Trang chi tiết trang đơn cho bảng pages (chứa các thông tin như điều khoản sử dụng, chính sách bảo mật, hướng dẫn thanh toán, ...)
+* Các trang tính năng phần users như: đăng nhập, đăng ký, đổi mật khẩu, hồ sơ cá nhân, ...
+* Các trang tính năng khác như tìm kiếm chung, lọc tìm trong các module.
+Dựa vào mô tả chi tiết trên, hãy đề xuất cách bố trí routes cho dự án để thân thiện với SEO, tránh xung đột, tối ưu hóa hiệu năng khi dữ liệu phình to, hay các yếu tố khác mà các chuyên gia phát triển website thường chú ý.
+Lưu ý rằng các bảng dữ liệu đề có trường slug.
+
+Ở module Tài liệu có 3 dữ liệu filter bao gồm: Loại tài liệu, Môn học, Cấp học.
+Như vậy chiến lược route hiện tại đã đáp ứng được bộ lọc cho 3 dữ liệu này chưa, trường hợp người dùng chỉ lọc 1 tiêu chí (2 tiêu chí còn lại để tất cả), hoặc lọc 2 tiêu chí hoặc lọc cả 3 tiêu chí thì sẽ như thế nào.
+
+Phương án 1 mà bạn đề xuất rất tốt, tôi cũng muốn đi theo hướng này, tuy nhiên phần Cấp học có vẻ không ổn với slug hiện tại, hãy xem dữ liệu thực tế của 3 dữ liệu này để đưa ra phương án chính xác:
+
+Cấp học (levels)
+id	parent_id	name	slug
+1	0	Mầm non	mam-non
+2	0	Tiểu học	tieu-hoc
+3	0	Trung học cơ sở	trung-hoc-co-so
+4	0	Trung học phổ thông	trung-hoc-pho-thong
+5	2	Lớp 1	lop-1
+6	2	Lớp 2	lop-2
+7	2	Lớp 3	lop-3
+8	2	Lớp 4	lop-4
+9	2	Lớp 5	lop-5
+10	3	Lớp 6	lop-6
+11	3	Lớp 7	lop-7
+12	3	Lớp 8	lop-8
+13	3	Lớp 9	lop-9
+14	4	Lớp 10	lop-10
+15	4	Lớp 11	lop-11
+16	4	Lớp 12	lop-12
+
+Môn học (subjects)
+id	name	slug
+1	Toán học	toan-hoc
+2	Ngữ văn	ngu-van
+3	Tiếng Anh	tieng-anh
+4	Vật lý	vat-ly
+5	Hóa học	hoa-hoc
+6	Sinh học	sinh-hoc
+7	Lịch sử	lich-su
+8	Địa lý	dia-ly
+9	Giáo dục công dân	giao-duc-cong-dan
+10	Công nghệ	cong-nghe
+
+Loại tài liệu (document_types)
+id	name	slug
+1	Đề thi	de-thi
+2	Tài liệu ôn tập	tai-lieu-on-tap
+3	Bài tập	bai-tap
+4	Bài giảng	bai-giang
+5	Tổng hợp lý thuyết	tong-hop-ly-thuyet
+6	Văn mẫu	van-mau
+
+
+Đối với link chi tiết tài liệu, nếu để dạng `/tai-lieu/{document:slug}-{document:id}.html` thì có hợp lý không, truy vấn bằng id sẽ tối ưu hơn slug.
+Các module khác link chi tiết cũng tương tự, thêm id vào cuối trước .html
+Bạn thấy sao về ý tưởng này, chỉ phân tích về ý tưởng của tôi, không viết lại code gì khi tôi chưa yêu cầu.
+
+Sửa lại routes cho phần MODULE TRƯỜNG HỌC để có bộ FILTER tương tự như phần tài liệu với 3 tiêu chí:
+- Cấp học: sẽ liên kết với bảng levels, cho những link như /truong-hoc/tieu-hoc, /truong-hoc/thcs, /truong-hoc/thpt
+- Tỉnh thành: sẽ liên kết với bảng provinces, prefix dùng `tai-` (tại), cho những link như /truong-hoc/tai-ha-noi, /truong-hoc/tai-da-nang, /truong-hoc/tai-tp-ho-chi-minh
+- Loại trường: sẽ liên kết với bảng school_types, prefix dùng `he-` (hệ), cho những link như /truong-hoc/he-cong-lap, /truong-hoc/he-tu-thuc, /truong-hoc/he-chat-luong-cao
+Có filter kết hợp 2 tiêu chí, 3 tiêu chí.
+```
+// ===== 4. MODULE TRƯỜNG HỌC =====
+Route::prefix('truong-hoc')->name('schools.')->group(function () {
+   // Danh sách tất cả trường học
+   Route::get('/', [SchoolController::class, 'index'])->name('index');
+   
+   // Filter theo cấp học (3 trang chính)
+   // VD: /truong-hoc/tieu-hoc, /truong-hoc/thcs, /truong-hoc/thpt
+   Route::get('/tieu-hoc', [SchoolController::class, 'primary'])->name('primary');
+   Route::get('/thcs', [SchoolController::class, 'secondary'])->name('secondary');
+   Route::get('/thpt', [SchoolController::class, 'high'])->name('high');
+   
+   // Chi tiết trường học: slug + ID + .html
+   // VD: /truong-hoc/tieu-hoc-newton-ha-noi-123.html
+   Route::get('/{slug}-{id}.html', [SchoolController::class, 'show'])
+       ->name('show')
+       ->where('id', '[0-9]+')
+       ->where('slug', '[a-z0-9-]+');
+});
+```
+Tương tự, sửa routes cho cả phần MODULE TRUNG TÂM và MODULE GIÁO VIÊN để có bộ FILTER tương tự yêu cầu trên với 3 tiêu chí:
+- Cấp học
+- Môn học: prefix dùng `mon-` (môn)
+- Tỉnh thành: prefix dùng `tai-` (tại)
+```
+// ===== 6. MODULE TRUNG TÂM =====
+Route::prefix('trung-tam')->name('centers.')->group(function () {
+   // Danh sách tất cả trung tâm
+   Route::get('/', [CenterController::class, 'index'])->name('index');
+   
+   // Chi tiết trung tâm: slug + ID + .html
+   // VD: /trung-tam/trung-tam-luyen-thi-a-plus-ha-noi-89.html
+   Route::get('/{slug}-{id}.html', [CenterController::class, 'show'])
+       ->name('show')
+       ->where('id', '[0-9]+')
+       ->where('slug', '[a-z0-9-]+');
+});
+
+// ===== 7. MODULE GIÁO VIÊN =====
+Route::prefix('giao-vien')->name('teachers.')->group(function () {
+   // Danh sách tất cả giáo viên
+   Route::get('/', [TeacherController::class, 'index'])->name('index');
+   
+   // Chi tiết giáo viên: slug + ID + .html
+   // VD: /giao-vien/thay-nguyen-van-toan-giao-vien-toan-456.html
+   Route::get('/{slug}-{id}.html', [TeacherController::class, 'show'])
+       ->name('show')
+       ->where('id', '[0-9]+')
+       ->where('slug', '[a-z0-9-]+');
+});
+```
+Link chi tiết vẫn giữ nguyên.
+
+Sửa phần route cho Trang tĩnh, tôi muốn để để sang dạng /trang/chinh-sach-bao-mat.html, /trang/dieu-khoan-su-dung.html, /trang/huong-dan-thanh-toan.html, ...
+```
+// ===== 13. TRANG TĨNH (Pages) =====
+// Đặt cuối cùng để tránh conflict với các routes khác
+// VD: /chinh-sach-bao-mat, /dieu-khoan-su-dung, /huong-dan-thanh-toan
+Route::get('/{page:slug}', [PageController::class, 'show'])
+   ->name('page.show')
+   ->where('page', '^(?!api|admin|auth|tai-khoan|sitemap|rss).*'); // Exclude reserved paths
+```
+
+
+=====
+Đọc thông tin:
+- Routes `lt365/routes/web.php` phần "4. MODULE TRƯỜNG HỌC (BỘ LỌC ĐA TIÊU CHÍ)".
+- Thông tin giao diện `/lt365/public/html/Danh-sách-trường.html`, `/lt365/public/html/Chi-tiết-trường.html`.
+- Các thông tin về cách bố trí các Controllers, views, css, js của các module như home, documents để tuân thu tính nhất quán khoa học của cấu trúc dự án.
+Hãy viết code Controller, views cho danh mục trường học và chi tiết trường học.
+Lưu ý chỉ thực hiện chia giao diện để sẵn sàng cho truy vấn, chưa truy vấn. Đảm bảo giao diện có đủ các css, js được chèn vào đúng cấu trúc. Chia các thành phần views khoa học để tái sử dụng.
+
+
+Xem lại phần css, js có vẻ bị thiếu. Một số giao diện bị vỡ, một số tính năng js không hoạt động. Hãy bố trí theo cấu trúc giống với phần home và exam.index đã làm
+
+
+Hệ thống website LT365, với backend `/admin-lt365` và frontend `/lt365`
+Đọc thông tin:
+- Routes `/lt365/routes/web.php` phần "4. MODULE TRƯỜNG HỌC (BỘ LỌC ĐA TIÊU CHÍ)" rồi tìm vào các Controller, view tương ứng để khám phá hiện trạng.
+- Thông tin đã thực hiện cho quản trị `/admin-lt365/app/Filament/Resources/SchoolResource.php`, `/admin-lt365/app/Filament/Resources/LevelResource.php`, `/admin-lt365/app/Filament/Resources/SchoolTypeResource.php` để tìm hiểu cấu trúc bảng database.
+Hãy viết code thực hiện truy vấn database và đổ dữ liệu cho danh mục trường học và chi tiết trường học.
+Lưu ý phần ảnh đại diện featured_image_id ở frontend model `/lt365/app/Models/School.php` đang sử dụng Awcodes\Curator\Models\Media được copy từ backend model, trong khi frontend không cài đặt thư viện Awcodes\Curator, tham khảo cách đã sửa phần này theo cách đã làm với `/lt365/app/Models/News.php`
+
+Lỗi tiếp theo `Class "Awcodes\Curator\Models\Media" not found`, Awcodes\Curator là một package plugin của Filament được cái trên backend, frontend không cài các thư viện này. Fix lỗi với giải pháp không cài đặt các thư viện này cho phần hiển thị featured image
+
+Code tính năng cho phần Pagination ở danh sách tài liệu
+
+Code tính năng cho phần lọc tìm (documents.partials.filters).
+Đối với phần "Lọc nhanh" sử dụng get param, để các giá trị: Tất cả(mặc định), Phổ biến, Miễn Phí, Có phí
+Đối với phần dropdown list "Sắp xếp" sử dụng get param, để các giá trị: Mới nhất(mặc định), Nhiều lượt tải, Tên A-Z
+Phần dropdown cho "Cấp học", "Môn học", "Loại tài liệu" sử dụng các url filter đã thiết kế ở routes
+
+
+Chỉnh sửa tính năng phần lọc tìm này để đảm bảo các phần đang được chọn thể hiện trạng thái active/selected tiêu chí đang chọn, thay đổi active/selected nếu người dùng thay đổi cùng tiêu chí, giữ nguyên và selected thêm nếu người dùng thêm tiêu chí mới, kể cả khi truy cập url theo cấu trúc lọc tìm (không chọn từ form) cũng phải active/selected đúng cấu trúc
+
+
+Chỉnh sửa và fix lỗi phần chi tiết tài liệu:
+- Hiển thị loại tài liệu `$document->document_type` đang bị null
+- Bỏ phần số trang `$document->page_count` vì không có thông tin từ thiết kế database
+- Hiển thị độ khó tài liệu `$document->difficulty` đang bị null (Có 4 độ khó từ database: 1-Dễ, 2-Trung bình, 3-Khó, 4-Rất khó)
+- Từ khóa đang hiển thị toàn bộ dữ liệu json của tag
+- Sidebar "Tải nhiều nhất" đưa ra dữ liệu các tài liệu tải nhiều nhất cùng loại, cùng cấp học, cùng môn học
+- Sidebar "Danh mục tài liệu" đưa ra danh sách kèm link của "Loại tài liệu"
+Lưu ý phần Sidebar tham khảo lại giao diện ở `/lt365/public/html/Chi-tiết-tài-liệu.html` nếu cần.
+
+Không bỏ phần "Tài liệu liên quan" đã làm trước đó ở sidebar. Đọc lại giao diện ở `/lt365/public/html/Chi-tiết-tài-liệu.html` để đảm bảo đúng với giao diện mẫu (ví dụ: thẻ hiển thị độ khó tài liệu `.difficulty-badge` chưa hiển thị màu, các đề mục ở sidebar không có icon, ...)
+
+Phần tài Tài liệu liên quan và Tải nhiều nhất vẫn chưa đúng với giao diện mẫu, hãy đọc lại file giao diện ở `/lt365/public/html/Chi-tiết-tài-liệu.html` để tìm hiểu thông tin và chỉnh sửa.
+Tài liệu liên quan: bị thiếu difficulty-badge
+Tải nhiều nhất: chưa đánh số từ 1-5 ở danh sách, chưa có thông tin lượt tải
+
+Hãy đưa ra một prompt thật ngắn gọn để yêu cầu trợ lý AI Cline trên VS Code thực hiện công việc này
+
+
+Fix lỗi giao diện trang chi tiết trường học phần sidebar, các box "Thông tin liên hệ" và "Thông tin cơ bản" không nằm trong Hero Section như hiện tại, mà phải nằm trong Main Content
+
+Sửa tính năng Lọc tìm của module danh sách Trường học (giao diện ở schools.partials.filters):
+- Bỏ tính năng sắp xếp
+- Không tự động load trang khi chọn các select mà phải bấm vào nút "Tìm trường"
+- Thêm tính năng tìm kiếm cho input search bằng search like theo tên trường
+
+Code lại giao diện và tính năng phần Pagination của module "Trường học" giống với module "Tài liệu"
+
+Sửa lại dữ liệu cho phần bộ lọc của module "Trường học":
+- Đối với cấp học: chỉ lấy cấp học cha (parent_id = 0)
+- Đối với tỉnh thành: tạm fix lấy các tỉnh thành có id = 1,4,20,21,29,33 (là các thành phố lớn, có dữ liệu)
+Đưa cách lấy dữ liệu này vào scope của Model để dễ dàng thay đổi về sau
+
+
+Phần ảnh đại diện của danh sách Trường học đang bị lỗi do ảnh được upload từ admin có domain khác, hãy code 1 giải pháp dễ dàng thay thế về sau domain ảnh (tạo một config cho domain ảnh ở config), giải pháp này sẽ được áp dụng cho các module tiếp theo
+Có thê nghiên cứu tạo một Helper tương tự như cách đã làm trong `/admin-lt365/app/Helpers`
+Hiện tại domain đang chứa ảnh là: http://admin-lt365.test/
+
+Đọc các file `lt365-db-structure.sql` để hiểu rõ cấu trúc database 
+Chỉnh sửa trang chi tiết tài liệu (module schools):
+* Phần school-hero: 
+- short_description phải là tagline
+- các thông tin không có gồm total_students và founded_year đổi thành website và email chú ý đổi icon hợp lý
+- Quick Stats: tiêu đề lấy thông tin "year" đưa vào thay vì "2025", kiểm tra lại các thông tin chi tiết để thay đổi nếu chưa đúng
+* Phần school-content:
+- "Giới thiệu về trường" phải là content thay vì description
+- Xem lại giao diện `public/html/Chi-tiết-trường.html` nắm rõ phần "Thông tin tuyển sinh 2025" và "Thống kê tuyển sinh" dưới phần "Giới thiệu về trường", sử dụng các thông tin của bảng school_admissions, school_admission_methods, school_admission_stats để đổ thông tin, lưu ý rằng các thông tin ở các bảng này có thể không có do chưa nhập dữ liệu.
+- Sidebar: bỏ các box "Thông tin cơ bản", "Tài liệu quan trọng" vì không có đầy đủ dữ liệu từ thiết kế database. Box "Tin nổi bật" lấy các news có school_id tương ứng với is_featured=1
+* Giao diện tính năng còn thiếu: Xem lại giao diện `public/html/Chi-tiết-trường.html` phần "Tin tức về trường" và "Tài liệu thi tuyển"
+- "Tin tức về trường" lấy các news mới nhất có school_id tương ứng
+- "Tài liệu thi tuyển" lấy các documents mới nhất có school_id tương ứng (Link "Tải xuống" là click vào chi tiết tài liệu)
+
+Giao diện của "Tin tức về trường" và "Tài liệu thi tuyển" chưa đúng yêu cầu, hãy đọc file giao diện `public/html/Chi-tiết-trường.html` để tìm hiểu và chỉnh sửa cho giống
+
+Kiểm tra lỗi `Class "App\Helpers\ImageHelper" not found` (resources/views/schools/partials/school-documents.blade.php :22)
+Lưu ý rằng phần ImageHelper và lấy thông tin ảnh mới chỉnh sửa cho module School, hãy đọc cách làm từ các file app/Helpers/ImageHelper.php, app/Models/Media.php, app/Models/School.php, resources/views/schools/partials/school-card.blade.php để hiểu cách sử dụng
+
+Hãy dùng cách gọi ảnh bằng hàm get_image_url như đã dùng ở resources/views/schools/partials/school-card.blade.php, tham khảo cách viết $school->featured_image_url từ app/Models/School.php
+
+Chỉnh sửa lại các thông tin về Chỉ tiêu, Học phí, Tuyển sinh ở resources/views/schools/partials/school-card.blade.php cho chính xác với những gì đã chỉnh sửa ở trang chi tiết
+
+
+Đọc thông tin:
+- Routes `lt365/routes/web.php` phần "7. MODULE GIÁO VIÊN (BỘ LỌC ĐA TIÊU CHÍ)".
+- Thông tin giao diện danh sách `/lt365/public/html/Danh-sách-giáo-viên.html`, chi tiết `/lt365/public/html/Chi-tiết-giáo-viên.html`.
+- File cấu trúc database `lt365-db-structure.sql` 
+- Các thông tin về cách bố trí các Controllers, views, css, js của module centers(Trung tâm) để tuân thu tính nhất quán khoa học của cấu trúc dự án.
+Hãy viết code Controller, views cho danh mục và chi tiết giáo viên.
+Về cơ bản công việc sẽ gần như copy toàn bộ phần centers sang teachers. Tính năng, cấu trúc dữ liệu, cách truy vấn, cách chia views sẽ giống hệt module centers(Trung tâm), chỉ khác về từ ngữ cố định, cách hiển thị ảnh đại diện, số lượng item ở danh sách.
+Lưu ý:
+- Đọc kỹ và tham khảo các thông tin yêu cầu trước khi thực hiện.
+- Phần bộ lọc tìm kiếm ở trang danh sách làm giống 100% giao diện và cách thức đã làm của module centers
+- Thay hoặc bỏ các thông tin giao diện không chính xác với cấu trúc dữ liệu.
+
+Chỉnh sửa giao diện phần Lọc tìm ở trang danh sách Trung tâm cho giống với Lọc tìm ở trang danh sách Trường học:
+- Bỏ các label phía trên select đi
+- Đưa input search lên đầu tiên, tiếp theo là thứ tự tỉnh thành - cấp học - môn học giữ nguyên
+- Đưa nút "Tìm kiếm" lên cùng 1 hàng với các input và select
+- Bỏ nút "Đặt lại đi"
+- Thêm thông tin "Bộ lọc hiện tại: ..." khi tính năng hoạt động
+
+Fix lỗi hiển thị ảnh của các trung tâm trong trang danh sách Trung tâm, hãy tham khảo cách gọi ảnh ở trang danh sách Trường học (tìm lên model, controller, helpers để tìm hiểu)
+các trung tâm trong trang danh sách Trung tâm, hãy bỏ luôn dòng chữ cố định "Phương pháp: Đào tạo chuyên sâu", thêm link có thể click cho cả ảnh và tên trung tâm thay vì chỉ click ở nút "Xem chi tiết"
+
+chỉnh sửa phần phân trang Pagination ở danh sách Trung tâm cho giống với trang danh sách Trường học
+
+Chỉnh sửa phần Lọc tìm Giáo viên resources/views/teachers/partials/filters.blade.php giống hệt với giao diện và tính năng của phần Lọc tìm Trung tâm resources/views/centers/partials/filters.blade.php
+
+Fix lỗi hiển thị ảnh của các Giáo viên trong trang danh sách Giáo viên, hãy tham khảo cách gọi ảnh ở trang danh sách Trung tâm (tìm lên model, controller, helpers để tìm hiểu)
+Ngoài ra hãy thêm link có thể click cho cả ảnh và tên Giáo viên thay vì chỉ click ở nút "Xem chi tiết"
+
+chỉnh sửa phần phân trang Pagination ở danh sách Giáo viên cho giống với trang danh sách Trung tâm
+
+Tìm nguyên nhân và Fix lỗi 404 ở các link filter theo tiêu chí của module Giáo viên. Có thể do cách sắp xếp route từ trên xuống như hiện tại bị xung đột một số url, hãy tham khảo cách sắp xếp route của phần "3. MODULE TÀI LIỆU (BỘ LỌC ĐA TIÊU CHÍ)" đã làm rất tốt.
+
+Fix lỗi ở trang chi tiết Giáo viên: lỗi hiển thị ảnh đại diện và lỗi hiển thị các thẻ html trong phần Giới thiệu (content)
+
+Kiểm tra thông tin communue_id của Giáo viên, nếu khác 0 thì lấy thông tin về xã/phường và đưa thêm vào thông tin về địa điểm(hiện tại đang để tỉnh thành), sử dụng dấu ngoặc đơn, ví dụ: Hà Nội (Xuân Phương)
+
+Đọc thông tin:
+- Routes `lt365/routes/web.php` phần "13. TRANG TĨNH (Pages)".
+- Thông tin giao diện `/lt365/public/html/Trang-đơn.html`.
+- File cấu trúc database `lt365-db-structure.sql` 
+- Các thông tin về cách bố trí các Controllers, views, css, js của các module như news để tuân thu tính nhất quán khoa học của cấu trúc dự án.
+Hãy viết code Controller, views cho trang đơn.
+Lưu ý các phần html chưa có dữ liệu từ database hãy cứ giữ nguyên html tĩnh từ giao diện.
+
+Hãy viết lại một hướng dẫn chi tiết dưới dạng file markdown, tôi sẽ dùng hướng dẫn này để lưu vào thư mục dự án và yêu cầu trợ lý AI Cline trên VS Code thực hiện code, các thông tin bổ sung và các thay đổi so với dề xuất của bạn bao gồm:
+- Bỏ phần database indexes
+- Bỏ tính năng phân loại (select name="category"), chỉ để tính năng search chung
+- Bỏ tính năng suggest
+- Route đã có `Route::get('/tim-kiem', [SearchController::class, 'index'])->name('search');`
+- Giao diện search form đã có ở phần header của giao diện nên không cần hướng dẫn lại
+- Chưa có giao diện cho trang Search Results nên cần hướng dẫn chung chung, yêu cầu tuân thủ giao diện và sử dụng các thư viện frontend đang dùng
+- Bỏ qua các phần để đơn giản hóa: Search Widget Component, Performance Optimization, Mobile Optimization, Analytics và Monitoring, Usage Examples
+
+
+Đọc hướng dẫn và yêu cầu ở file SearchImplement.md sau đó code tính năng tìm kiếm
+
+
+Hiện tại frontend dự án lt365 tôi đã cơ bản hoàn thành các module như tin tức, tài liệu, trường học, trung tâm, giáo viên, trang đơn, tìm kiếm.
+Tôi muốn tiếp tục thực hiện phần users đăng ký đăng nhập.
+Tôi đã có sẵn giao diện html các trang như đăng ký, xác thực đăng ký, đăng nhập.
+Hãy đề xuất giải pháp thực hiện tính năng phần users đăng ký đăng nhập này trên dự án.
+Lưu ý chỉ đưa ra giải pháp, cách làm ở tầng lý thuyết hệ thống, luồng một cách tổng quan, code ví dụ ngắn gọn nếu cần. Chưa code chi tiết.
+
+Phần "Xác thực email" trong trường hợp hiện tại tôi đang sử dụng môi trường Herd trên MacOS thì có thể test gửi mail bằng cách nào. Tương lai khi đẩy dự án lên server thực tế sẽ có những giải pháp nào ổn định cho phần email này.
+Lưu ý chỉ thảo luận, đưa ra code ví dụ nếu cần, tôi chưa yêu cầu code chi tiết.
+
+
+
+Thực hiện code tính năng đăng ký, đăng nhập cho users với các thông tin và yêu cầu cụ thể như sau:
+- Luồng xử lý chính: Đăng ký → Xác thực email → Kích hoạt tài khoản → Đăng nhập → Url trước khi chuyển vào luồng (hoặc trang chủ)
+- Đã có migration từ hệ thống admin nên không cần tạo lại, File cấu trúc database: lt365-db-structure.sql
+- User model chưa chính xác hoàn toàn: app/Models/User.php
+- Giao diện đăng ký, xác thực, đăng nhập: public/html/Đăng-ký.html, public/html/Xác-thực-đăng-ký.html, public/html/Đăng-nhập.html (Lưu ý các giao diện này đơn giản, nên tạo layout view riêng, không sử dụng lại layout app)
+- Controller xử lý Authentication với các method: showLogin, login, showRegister, register, logout, verify
+- Luồng xử lý chi tiết
+    - Đăng ký
+        - User điền form → Validate dữ liệu
+        - Hash password → Lưu DB với status = 0 (chưa kích hoạt)
+        - Gửi email xác thực → Redirect trang thông báo
+    - Xác thực email
+        - User click link trong email
+        - Kiểm tra token hợp lệ → Cập nhật email_verified_at + status = 1
+        - Redirect trang đăng nhập với thông báo thành công
+    - Đăng nhập
+        - Validate email/password
+        - Kiểm tra status = 1 (đã kích hoạt)
+        - Cập nhật last_login_at → Redirect
+
+Dự án chạy trên Herd đã có domain http://lt365.test, nếu bạn cần kiểm tra hay test thử gì có thể yêu cầu tôi, tôi sẽ thực hiện và cung cấp lại thông tin cho bạn.
+
+
+Thêm link cho phần Auth Buttons ở resources/views/layouts/partials/header.blade.php, nếu users đã đăng nhập hiển thị thông tin user (avatar + full_name) click vào dashboard kèm dropdown menu cho hồ sơ, tài liệu đã tải, yêu thích, thoát
+
+Chỉnh sửa tính năng "Gửi lại email xác thực", ngay sau khi chuyển đến trang /auth/xac-thuc-email thì chưa cho phép click nút này ngay (đếm ngược 60s), các lần gửi tiếp theo cũng cần đếm ngược 60s mới cho click nút gửi lại. Đảm bảo check cả phía server để không bị gửi lại email xác thực liên tục.
+
+Fix lỗi ở trang đăng ký khi double click (click nhanh): SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'test5@luyenthi365.com' for key 'users.users_email_unique' (Connection: mysql, SQL: insert into `users` (`full_name`, `email`, `phone`, `password`, `status`, `updated_at`, `created_at`) values (Test 5, test5@luyenthi365.com, 123456789, $2y$12$Em2fKi7Siy7y0SSByUygruW7TmZkKaXW5n9llOuRnYOedTBYrGBKO, 0, 2025-07-24 09:51:18, 2025-07-24 09:51:18))
+
+Hãy code tính năng quên mật khẩu cho dự án, bao gồm gửi email reset và form đặt lại mật khẩu.
+Giao diện quên mật khẩu tham khảo ở public/html/Quên-mật-khẩu.html
+
+Đề xuất giao diện và các tính năng cho phần tài khoản người dùng của dự án bao gồm: Dashboard, Hồ sơ cá nhân, Tài liệu đã tải, Yêu thích, Đổi mật khẩu
+
+
+Code tiếp tính năng Đổi mật khẩu (/tai-khoan/doi-mat-khau)
+Mục tiêu: Cho phép người dùng cập nhật mật khẩu một cách an toàn
+
+
+
+Code đổ dữ liệu cấu hình chung cho tất cả các trang ra giao diện.
+Đọc file `settings.sql` trong thư mục dự án, là file tôi đã dump bảng settings từ database ra để hiểu rõ thông tin và cấu trúc.
+Thực hiện truy vấn ở controller chung app/Http/Controllers/Controller.php vì các controller khác đã extends nó, cache thông tin trong 5 phút và share với tất cả views.
+Đưa dữ liệu thích hợp vào các layouts chung ở resources/views/layouts/partials
+
+Vẫn lỗi tương tự, vui lòng tham khảo thông tin từ các file quản trị cho phần settings này `/admin-lt365/app/Filament/Resources/GeneralSettingsResource.php`, `/admin-lt365/app/Filament/Resources/MenuSettingsResource.php`
+
+Code tính năng cho trang Liên hệ (contacts).
+Đọc thông tin:
+- Thông tin giao diện `/lt365/public/html/Liên-hệ.html`.
+- File cấu trúc database `lt365-db-structure.sql` 
+- Các thông tin về cách bố trí các Controllers, views, css, js của các module như news để tuân thu tính nhất quán khoa học của cấu trúc dự án.
+Lưu ý các thông tin liên hệ tham khảo cấu hình vừa thực hiện, các phần html chưa có dữ liệu từ database hãy cứ giữ nguyên html tĩnh từ giao diện.
+
+
+Code tính năng yêu thích các tài liệu, trường học, tin tức, trung tâm, giáo viên ở trang danh sách các module này cho người dùng đã đăng nhập.
+Dữ liệu sẽ lưu vào bảng user_favorites, tham khảo file cấu trúc database `lt365-db-structure.sql`.
+Giao diện của nút yêu thích (trái tim) đã có ở views của module trường học `resources/views/schools/partials/school-card.blade.php` phần html `<button class="text-gray-400 hover:text-red-500 transition-colors duration-200" data-favorite-btn data-school-id="{{ $school->id }}"><i class="ri-heart-line text-lg"></i></button>`
+Các module khác chưa có nút giao diện này, hãy thêm vào tương tự (ở cuối, cùng hàng với tiêu đề)
+Yêu cầu sắp xếp tính năng dùng chung thông minh, tái sử dụng code js.
+Các nút khi hiển thị phải check được trạng thái user đang đăng nhập đã yêu thích chưa.
+
+
+
+Đọc thông tin:
+- File cấu trúc database `lt365-db-structure.sql` 
+- Các thông tin về cách bố trí các Controllers, views, css, js để tuân thu tính nhất quán khoa học của cấu trúc dự án.
+Hãy code tính năng đăng ký nhận bản tin newsletters ở trang chủ (giao diện tính năng ở resources/views/layouts/components/newsletter-form.blade.php)
+
+
+Tôi xác nhận bảng newsletters đã được tạo từ hệ thống admin của web rồi.
+Tôi cũng đã test thử tính năng và thấy đã chạy thành công.
+Bây giờ hãy thêm tính năng này vào các form đăng ký nhận bản tin khác ở các views: resources/views/exam/partials/cta.blade.php, resources/views/partials/cta-newsletter.blade.php
+
+Code tính năng cho form "Đăng ký tư vấn miễn phí" ở resources/views/exam/partials/cta-form.blade.php
+Khi click coi như hành động liên hệ giống form liên hệ ở trang `/lien-he`, 3 trường Họ và tên phụ huynh, Email, Số điện thoại đã có sẵn, trường subject để là "Đăng ký tư vấn từ trang Thi chuyển cấp của $(Họ và tên phụ huynh)", trường content để là: "Cấp học quan tâm: Thi vào lớp x(x là lớp mà người dùng chọn)"
+
+Fix lỗi ở trang chủ phần Hero Banner Slider, hai nút next và previous đang không hoạt động. Console khi click như sau:
+Uncaught ReferenceError: previousSlide is not defined
+    at HTMLButtonElement.onclick ((index):271:271)
+onclick @ (index):271
+(index):274  Uncaught ReferenceError: nextSlide is not defined
+    at HTMLButtonElement.onclick ((index):274:268)
+
+
+Code tính năng cho nút "Gửi yêu cầu" ở view resources/views/partials/cta-request.blade.php
+Khi click nút này sẽ popup lên 1 form thông tin bao gồm các trường Họ và tên, email, số điện thoại và nội dung yêu cầu
+Khi gửi đi sẽ có tính năng tương tự như tính năng của form "Đăng ký tư vấn miễn phí" ở resources/views/exam/partials/cta-form.blade.php
+Trường subject(trường ẩn, không hiển thị với người dùng) để là "Yêu cầu tìm tài liệu từ $(Họ và tên)"
+
+Kiểm tra lại tính năng, khi tôi nhập đủ thông tin và Gửi yêu cầu thì form không hoạt động, sau đây là console:
+cdn.min.js:1 
+ Alpine Expression Error: submit is not defined
+Expression: "submit()"
+cdn.min.js:5 
+ Uncaught ReferenceError: submit is not defined
+
+
+Form vẫn chưa hoạt động, ngay khi load trang thì console như sau:
+ cdn.min.js:5 
+ Uncaught ReferenceError: requestForm is not defined
+cdn.min.js:5 
+ Uncaught ReferenceError: init is not defined
+
+Sau khi nhập đủ thông tin và Gửi yêu cầu thì console thêm các dòng:
+Alpine Expression Error: handleSubmit is not defined
+Expression: "handleSubmit()"
+ <form x-ref=​"form" @submit.prevent=​"handleSubmit()​" action=​"http:​/​/​lt365.test/​lien-he" method=​"POST" class=​"space-y-4">​…​</form>​
+re @ cdn.min.js:1
+(anonymous) @ cdn.min.js:5
+Promise.catch
+(anonymous) @ cdn.min.js:5
+or @ cdn.min.js:1
+(anonymous) @ cdn.min.js:5
+o @ cdn.min.js:5
+(anonymous) @ cdn.min.js:5
+(anonymous) @ cdn.min.js:5
+cdn.min.js:5  Uncaught ReferenceError: handleSubmit is not defined
+
+
+
+Hệ thống website LT365, với trang frontend `/Users/tuantai229/Herd/lt365` và trang quản trị `/Users/tuantai229/Herd/admin-lt365` trong workspace này.
+Hãy code tính năng "Cài đặt trang chủ" cho trang quản trị `/admin-lt365` với cách thức và yêu cầu như sau:
+- Đọc các file `/admin-lt365/app/Filament/Resources/GeneralSettingsResource.php`, `/admin-lt365/app/Filament/Resources/MenuSettingsResource.php` để tham khảo cách thức code các trang cài đặt
+- Đọc file `/lt365/lt365-db-structure.sql` để hiểu cấu trúc database của dự án.
+- Đọc các views của trang chủ ở thư mục `/lt365/resources/views/home` để hiểu giao diện frontend.
+- Cấu hình giao diện cho phần `/lt365/resources/views/home/hero-banner.blade.php` bao gồm nút "Thêm slide", khi thêm sẽ tạo ra 1 box cấu hình 1 slide (có nút xóa ở góc) bao gồm: nút upload ảnh, tiêu đề chính, mô tả ngắn, nút 1, nút 2 (chọn class cho màu nút và class cho màu chữ), link cho từng nút.
+- Cấu hình giao diện cho phần `/lt365/resources/views/home/quick-transfer.blade.php` bao gồm: tiêu đề phần, 3 box thông tin mỗi box gồm upload ảnh, tiêu đề box, textarea mô tả box(xuốn dòng với mỗi thông tin), link cho nút xem thêm
+- Cấu hình cho phần `/lt365/resources/views/home/news-schedule.blade.php` Tin tức & Lịch thi, phần này chỉ cần để 1 select "Chọn danh mục tin tuyển sinh mới nhất" cho phép chọn 1 danh mục từ news_categories rồi lưu lại thông tin id để frontend phần này biết danh mục nào cần query
+- Cấu hình cho phần `/lt365/resources/views/home/teachers-centers.blade.php` bao gồm 2 phần: Trung tâm luyện thi và Giáo viên nổi bật. Mỗi phần sẽ bao gồm 1 input search để suggest ra item tương ứng (tìm theo tên, suggest ra ảnh - tên - tagline) cho phép người dùng chọn item, đổ vào danh sách cấu hình (các item trong danh sách cấu hình có nút xóa)
+- Cấu hình cho phần `/lt365/resources/views/home/stats-reviews.blade.php` bao gồm các input text nhập thông tin cho các phần như: Tài liệu, Trường học, Thành Viên ... và phần cấu hình "Phụ huynh nói gì về chúng tôi" có nút "Thêm phu huynh" khi click sẽ tạo ra 1 box cấu hình(có nút xóa ở góc) có các thông upload ảnh, tên phụ huynh, số sao đánh giá, nội dung đánh giá.
+- Tất cả các cấu hình phải có chú thích hoặc helpertext ngắn gọn hướng dẫn dễ hiểu,để placeholder thông minh.
+
+Fix lỗi :
+BadMethodCallException
+Method App\Filament\Resources\HomeSettingsResource\Pages\ManageHomeSettings::getCachedFormActions does not exist.
+resources/views/filament/pages/manage-home-settings.blade.php :5
+
+
+
+Hãy thêm một seeder dữ liệu cho phần cấu hình trang chủ này vào seeders trang quản trị `/Users/tuantai229/Herd/admin-lt365/database/seeders` với dữ liệu giống hệt như dữ liệu tĩnh ở các views ở frontend cần cấu hình (/lt365/resources/views/home)
+
+Tôi đã chạy seeder cho HomeSettingsSeeder và thấy dữ liệu đã thêm vào bảng settings, tôi cũng đã dump bảng settings ra `/Users/tuantai229/Herd/admin-lt365/settings.sql` bạn có thể đọc. Tuy nhiên tôi không thấy dữ liệu hiển thị ở các thành phần của trang `/admin/home-settings`, hãy kiểm tra và fix vấn đề này
+
+Đã hiển thị được dữ liệu, bây giờ hãy tiến hành truy vấn các cài đặt ở `/Users/tuantai229/Herd/lt365/app/Http/Controllers/HomeController.php` để đổ dữ liệu vào các views
+
+Fix lỗi trang `/admin/home-settings`, bỏ validation.url ở các link nút của cấu hình Cấu hình Hero Banner Slider, chỉ để text thông thường, vì có thể cho phép nhập các đường dẫn tương đối ví dụ `/lien-he`
+
+Kiểm tra lại cách gọi ảnh khi đổ cấu hình dữ liệu ra trang chủ, các ảnh đang bị lỗi do ảnh upload lên domain admin thay vì frontend, hãy dựa vào cách gọi ảnh đã làm với các trang khác, ví dụ tin tức news
+
+Sửa lại phần "Tin tuyển sinh mới nhất" lấy 5 tin thay vì 6 tin như hiện tại, xem lại xem đã lấy đúng tin mới nhất chưa, cho phép click đến link chi tiết vào ảnh và tiêu đề thay vì chỉ nút "Đọc tiếp" như hiện tại
+
+
+Sửa lại bộ lọc filters ở trang danh sách Tài liệu `/Users/tuantai229/Herd/lt365/resources/views/documents/index.blade.php` cho giống với bộ lọc ở trang danh sách trường học `/Users/tuantai229/Herd/lt365/resources/views/schools/index.blade.php` về cách thức xử lý
+Đưa select "Sắp xếp" ra ngoài form, để cùng hàng với phần lọc nhanh.
+Form chỉ bao gồm 3 select: Cấp học, Môn học, Loại tài liệu.
+Thêm nút submit "Tìm tài liệu" thay vì load trang ngay khi chọn lại các select.
+
+Kiểm tra và fix lỗi bộ lọc ở trang tài liệu, khi chọn kết hợp giữa "Cấp học" và "Môn học" ví dụ `/tai-lieu/cap-trung-hoc-co-so/mon-toan-hoc` thì phần select của "Cấp học" không có selected vừa chọn, chỉ có selected của "Môn học", thông tin Bộ lọc hiện tại cũng chỉ hiển thị tên môn học, như trong ví dụ là "Toán học", dữ liệu đổ ra thì là tất cả tài liệu.
+Bộ lọc kết hợp giữa "Cấp học" và "Loại tài liệu" vẫn hoạt động bình thường.
+Các bộ lọc 1 tiêu chí và 3 tiêu chí vẫn hoạt động bình thường.
+Có khả năng bộ lọc này xung đột với route download tài liệu không, nếu đúng là xung đột thì có thể route download thành dạng `/download/{slug}-{id}`
+
+Code tính năng, đổ dữ liệu cho form "Tìm kiếm thông minh" ở trang chủ `/Users/tuantai229/Herd/lt365/resources/views/home/smart-search.blade.php`
+Tham khảo cách lấy dữ liệu từ `/Users/tuantai229/Herd/lt365/resources/views/schools/partials/filters.blade.php` và `/Users/tuantai229/Herd/lt365/resources/views/documents/partials/filters.blade.php`
+Lưu ý khi submit các url phải đúng với cách mà form ở filters đã làm, không sử dụng get params.
+Script của 2 phần này tham khảo tại `/Users/tuantai229/Herd/lt365/resources/views/schools/index.blade.php` và `/Users/tuantai229/Herd/lt365/resources/views/documents/index.blade.php`
+
+Code tính năng cho phần "Tài liệu nổi bật" `/Users/tuantai229/Herd/lt365/resources/views/home/featured-documents.blade.php`
+Đưa tab "Mới nhất" mặc định lên đầu tiên, lấy các tài liệu mới được thêm. Các tab còn lại lấy tài liệu nổi bật của cấp học (levels) có parent_id=0
+Mỗi tab vẫn để 4 item như hiện tại, thay thông tin về số trang của các item thành thông tin loại file và size giống `/Users/tuantai229/Herd/lt365/resources/views/documents/partials/document-header.blade.php`
+Link vào route tài liệu cho link "Xem tất cả tài liệu" ở dưới cùng.
+
+Code tính năng cho phần "Lịch thi sắp diễn ra" `/Users/tuantai229/Herd/lt365/resources/views/home/news-schedule.blade.php` dựa vào thông tin của bảng school_admissions
+Đọc file `/lt365/lt365-db-structure.sql` để hiểu cấu trúc database.
+Các thời gian được sắp xếp theo thứ tự tương lai gần nhất với ngày hiện tại đan xen giữa các trường thời gian và đan xen thông tin giữa các school bao gồm trường với tiêu đề tương ứng như sau:
+- register_start_date: Bắt đầu đăng ký hồ sơ tuyển sinh
+- register_end_date: Kết thúc đăng ký hồ sơ tuyển sinh
+- exam_date: Thi tuyển sinh chính thức
+- result_announcement_date: Công bố kết quả tuyển sinh
+
+
+Tham khảo script tại `/Users/tuantai229/Herd/lt365/resources/views/schools/index.blade.php` và `/Users/tuantai229/Herd/lt365/resources/views/documents/index.blade.php`
+
+Hiện tại các nội dung câu hỏi thường gặp ở các trang thi chuyển cấp `/Users/tuantai229/Herd/lt365/resources/views/exam/partials/faq.blade.php` chưa chính xác và tối ưu cho từng trang, bao gồm:
+/Users/tuantai229/Herd/lt365/resources/views/exam/index.blade.php
+/Users/tuantai229/Herd/lt365/resources/views/exam/grade1.blade.php
+/Users/tuantai229/Herd/lt365/resources/views/exam/grade6.blade.php
+/Users/tuantai229/Herd/lt365/resources/views/exam/grade10.blade.php
+Hãy tách nội dung cho từng trang, viết lại nội dung cho phù hớp với từng trang: thi chuyển cấp nói chung, thi vào lớp 1, thi vào lớp 6 và thi vào lớp 10.
+
+Tương tự hãy tách riêng và cá nhân hóa nội dung cho phần `/Users/tuantai229/Herd/lt365/resources/views/exam/partials/preparation-timeline.blade.php` với mỗi khối lớp. Về cơ bản giữ nguyên giao diện và số lượng item(hoặc thêm nếu cần thiết), thay đổi nội dung cho phù hợp với đặc thù về "Lộ trình chuẩn bị thi", các khối lớp lớn hơn cần một lộ trình dài hơn hơn, vào lớp 1 là lộ trình 1 năm, lớp 6 là lộ trình 2 năm, lớp 10 là lộ trình 3 năm.
+
+
+Code tính năng cho phần "Thông tin tuyển sinh lớp x" `/Users/tuantai229/Herd/lt365/resources/views/exam/partials/admission-info.blade.php` với yêu cầu như sau:
+- Truy vấn thông tin ở  `/Users/tuantai229/Herd/lt365/app/Http/Controllers/ExamController.php`
+- Cách truy vấn và dữ liệu tương tự với cách đã làm của phần "Tin tức & Lịch thi" `/Users/tuantai229/Herd/lt365/resources/views/home/news-schedule.blade.php` ở trang chủ `/Users/tuantai229/Herd/lt365/app/Http/Controllers/HomeController.php` (danh mục Tin tuyển sinh đã được cài đặt)
+- Với phần tin tuyển sinh ở mỗi trang, phải thêm điều kiện tin phải thuộc trường học(bảng schools liên kết bằng school_id) mà trường học đó ở đúng cấp độ(bảng levels liên kết bằng level_id):
+    - Với "Tin tuyển sinh lớp 1" lấy tin của các trường thuộc cấp Tiểu học fix(hard-code) schools.id = 2
+    - Với "Tin tuyển sinh lớp 6" lấy tin của các trường thuộc cấp Trung học cơ sở fix(hard-code) schools.id = 3
+    - Với "Tin tuyển sinh lớp 10" lấy tin của các trường thuộc cấp Trung học phổ thông fix(hard-code) schools.id = 4
+- Với phần lịch thi sắp diễn ra cũng thêm điều kiện tương tự, thông tin tuyển sinh của các trường thuộc cấp độ tương tự cách fix như phần tin tuyển sinh nêu trên(nên đưa thông tin id hard-code này lên hằng số ở controller).
+Lưu ý tham khảo kỹ code đã có sẵn, có thể tham khảo thêm cấu trúc database tại file `/Users/tuantai229/Herd/lt365/lt365-db-structure.sql`, cấu trúc các models tại `/Users/tuantai229/Herd/lt365/app/Models` nếu cần.
+
+
+Tiếp tục code tính năng cho phần "Trường học nổi bật" `/Users/tuantai229/Herd/lt365/resources/views/exam/partials/featured-schools.blade.php`, truy vấn ở `/Users/tuantai229/Herd/lt365/app/Http/Controllers/ExamController.php` dựa vào "Constants for level IDs" đã hard-code, điều kiện thêm của schools là có is_featured=1, sắp xếp theo sort_order ASC.
+Phần các item sử dụng view của module trường học đã tối ưu sẵn `/Users/tuantai229/Herd/lt365/resources/views/schools/partials/school-card.blade.php`
+
+
+Tiếp tục code tính năng cho phần "Đề thi và tài liệu lớp x" `/Users/tuantai229/Herd/lt365/resources/views/exam/partials/documents.blade.php`, truy vấn ở `/Users/tuantai229/Herd/lt365/app/Http/Controllers/ExamController.php` dựa vào "Constants for level IDs" đã hard-code, mới nhất sắp xếp theo ngày đăng, phổ biến có is_featured=1.
+Phần giao diện làm giống phần "Tài liệu nổi bật" ở trang chủ `/Users/tuantai229/Herd/lt365/resources/views/home/featured-documents.blade.php`
+
+Ở trang tài liệu(documents) `/tai-lieu` phần bộ lọc với tiêu chí cấp học(levels), hãy sửa đổi cách lấy dữ liệu với các cấp học cha.
+Dữ liệu thực tế của bảng levels như sau:
+```
+id	parent_id	name
+1	0	Mầm non
+2	0	Tiểu học
+3	0	Trung học cơ sở
+4	0	Trung học phổ thông
+5	2	Lớp 1
+6	2	Lớp 2
+7	2	Lớp 3
+8	2	Lớp 4
+9	2	Lớp 5
+10	3	Lớp 6
+11	3	Lớp 7
+12	3	Lớp 8
+13	3	Lớp 9
+14	4	Lớp 10
+15	4	Lớp 11
+16	4	Lớp 12
+```
+Tôi muốn khi lọc cấp học, nếu là danh mục tra thì sẽ lấy tất cả các tài liệu của chính nó và các danh mục con, thay vì chỉ lấy các tài liệu của chính nó như hiện tại.
+Ví dụ người dùng chọn "Trung học phổ thông" thì sẽ hiển thị các tài liệu của cấp độ: Trung học phổ thông, Lớp 10, Lớp 11, Lớp 12.
+
+
+
+
+
+Chỉnh sửa phần nội dung trang chi tiết tài liệu `/Users/tuantai229/Herd/lt365/resources/views/documents/partials/document-content.blade.php` phần "PDF Viewer Section", kiểm tra xem nếu loại tài liệu là PDF thì hiển thị phần này với đúng link file_path
+
+Hãy phân tích để bắt đầu thực hiện tính năng đánh giá (ratings).
+Tính năng đánh giá sẽ được áp dụng cho các module như tài liệu, trường học, trung tâm, giáo viên.
+Bảng ratings trong database có trường type lưu tên bảng được đánh giá, type_id là giá trị id của dữ liệu trên bảng tương ứng được đánh giá.
+Hiện tại giao diện phần đánh giá mới chỉ có duy nhất phần hiển thị đánh giá ở `/Users/tuantai229/Herd/lt365/resources/views/documents/partials/document-footer.blade.php`
+Lưu ý rằng chỉ phân tích, đề xuất, đưa thông tin, trao đổi. Chưa đi vào code chi tiết.
+
+Hãy đưa ra một prompt thật ngắn gọn để yêu cầu trợ lý AI Cline trên VS Code thực hiện code module này trước hết cho phần tài liệu.
+
+
+Code tính năng đánh giá (ratings) cho module tài liệu(documents):
+1. RatingService để handle logic đánh giá 
+2. API endpoints
+3. Components: rating-display.blade.php, rating-form.blade.php  
+4. JavaScript widget cho star rating interactive
+5. Cập nhật document-footer.blade.php với rating thực từ DB
+6. Validation: chỉ user đăng nhập, mỗi user rate 1 lần, rating 1-5
+Database ratings table đã có sẵn với cấu trúc: user_id, type, type_id, rating, review, status (Đọc file `/lt365/lt365-db-structure.sql` để hiểu cấu trúc database).
+Model Rating đã tồn tại. Tích hợp vào documents.show route trước.
+
+
+Chia lại giao diện phần "<!-- Rating & Actions -->":
+- Đưa chữ "Đánh giá" lên trên cùng 1 hàng, giống như tiêu đề "Từ khóa" của phần tags bên trên
+- Chia body phần này thành 2 cột, phần nhỏ hơn là thông tin đánh giá như hiện tại (partials.rating-display), phần còn lại là form đánh giá(đưa <!-- Rating Form --> lên) thay cho nút "Tải xuống"(bỏ nút Tải xuống đi)
+Dưới phần "<!-- Rating & Actions -->" hiển thị danh sách các đánh giá có phân trang, mỗi thông tin bao gồm các thông tin cơ bản: user (avatar - tên), sao, thời điểm, nhận xét
+
+
+
+***
+- Preview & Download document
+- Đánh giá
+- Bình luận
+
