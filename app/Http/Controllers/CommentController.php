@@ -146,10 +146,24 @@ class CommentController extends Controller
         // If replying to a comment, validate the parent comment belongs to this item
         if ($parentId > 0) {
             $parentComment = Comment::find($parentId);
-            if (!$parentComment || $parentComment->type !== $type || $parentComment->type_id !== $typeId) {
+            if (!$parentComment || $parentComment->type !== $type || $parentComment->type_id != $typeId) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Bình luận gốc không hợp lệ.'
+                    'message' => 'Bình luận gốc không hợp lệ.',
+                    'debug' => [
+                        'parent_comment' => $parentComment ? [
+                            'id' => $parentComment->id,
+                            'type' => $parentComment->type,
+                            'type_id' => $parentComment->type_id,
+                            'parent_id' => $parentComment->parent_id,
+                            'status' => $parentComment->status,
+                        ] : null,
+                        'request_data' => [
+                            'type' => $type,
+                            'type_id' => $typeId,
+                            'parent_id' => $parentId,
+                        ]
+                    ]
                 ], 400);
             }
 
