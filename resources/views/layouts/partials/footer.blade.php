@@ -81,6 +81,8 @@
                 <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2025 LT365. Tất cả quyền được bảo lưu.</p>
                 <div class="flex items-center gap-4">
                     <a href="{{ route('sitemap') }}" class="text-gray-400 hover:text-white text-sm">Sitemap</a>
+                    <span class="text-gray-500">|</span>
+                    <a href="{{ route('rss') }}" class="text-gray-400 hover:text-white text-sm">RSS</a>
                 </div>
             </div>
         </div>

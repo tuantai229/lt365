@@ -5,15 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Filament\Models\Contracts\FilamentUser;
-use Filament\Panel;
-use Spatie\Permission\Traits\HasRoles;
-
-class AdminUser extends Authenticatable implements FilamentUser
+class AdminUser extends Authenticatable
 {
-    use HasFactory, Notifiable, HasRoles;
-
-    protected $guard_name = 'admin';
+    use HasFactory, Notifiable;
 
     protected $fillable = [
         'name',
@@ -38,8 +32,4 @@ class AdminUser extends Authenticatable implements FilamentUser
         ];
     }
 
-    public function canAccessPanel(Panel $panel): bool
-    {
-        return $this->status === 1;
-    }
 }
