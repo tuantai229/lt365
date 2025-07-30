@@ -113,10 +113,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (data.success) {
                     if (!append) {
                         commentsContainer.innerHTML = '';
+                        // Chỉ update count khi load lần đầu, không update khi load more
+                        updateCommentsCount(data.data.total_count || data.data.comments.total);
                     }
                     
                     renderComments(data.data.comments.data, append);
-                    updateCommentsCount(data.data.total_count || data.data.comments.total);
                     
                     hasMore = data.data.has_more || data.data.comments.has_more_pages;
                     toggleLoadMoreButton();
