@@ -101,18 +101,22 @@
     <div class="mb-6">
         <h4 class="text-sm font-medium text-gray-700 mb-3">Chia sẻ tài liệu:</h4>
         <div class="flex gap-3">
-            <button class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-button hover:bg-blue-700 transition-colors">
+            <button class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-button hover:bg-blue-700 transition-colors" data-share="facebook">
                 <i class="ri-facebook-fill"></i>
                 <span>Facebook</span>
             </button>
-            <button class="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-button hover:bg-blue-600 transition-colors">
+            <button class="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-button hover:bg-blue-600 transition-colors" data-share="zalo">
                 <i class="ri-message-line"></i>
                 <span>Zalo</span>
             </button>
-            <button class="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-button hover:bg-gray-700 transition-colors">
+            <button class="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-button hover:bg-gray-700 transition-colors" data-share="copy">
                 <i class="ri-link"></i>
                 <span>Copy link</span>
             </button>
         </div>
     </div>
 </footer>
+
+@push('scripts')
+<script src="{{ asset('js/share.js') }}"></script>
+@endpush
