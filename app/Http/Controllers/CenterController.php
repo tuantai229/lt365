@@ -62,7 +62,7 @@ class CenterController extends Controller
     public function show(Request $request, $slug, $id)
     {
         $center = Center::with([
-            'levels', 'subjects', 'province', 'featuredImage'
+            'levels', 'subjects', 'province', 'featuredImage', 'metaSeo'
         ])
         ->active()
         ->findOrFail($id);
@@ -92,9 +92,11 @@ class CenterController extends Controller
             ->limit(5)
             ->get();
 
-        return view('centers.show', compact(
+        $data = compact(
             'center', 'relatedCenters', 'featuredNews'
-        ));
+        );
+
+        return $this->viewWithSeo('centers.show', 'centers.show', $data, $center);
     }
 
     public function byLevel(Request $request, $levelSlug)

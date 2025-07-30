@@ -8,6 +8,7 @@ use App\Models\News;
 use App\Models\School;
 use App\Models\Center;
 use App\Models\Teacher;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
@@ -16,31 +17,16 @@ use Illuminate\Validation\ValidationException;
 class CommentController extends Controller
 {
     /**
-     * Get supported model types
-     */
-    private function getSupportedTypes(): array
-    {
-        return [
-            'documents' => Document::class,
-            'news' => News::class,
-            'schools' => School::class,
-            'centers' => Center::class,
-            'teachers' => Teacher::class,
-        ];
-    }
-
-    /**
-     * Get model instance by type and id
+     * Get model instance by morph alias and id
      */
     private function getModel(string $type, int $typeId)
     {
-        $supportedTypes = $this->getSupportedTypes();
-        
-        if (!array_key_exists($type, $supportedTypes)) {
+        $modelClass = Relation::getMorphedModel($type);
+
+        if (!$modelClass) {
             abort(400, 'Loại nội dung không được hỗ trợ.');
         }
 
-        $modelClass = $supportedTypes[$type];
         return $modelClass::findOrFail($typeId);
     }
 
@@ -50,7 +36,7 @@ class CommentController extends Controller
     public function index(Request $request)
     {
         $request->validate([
-            'type' => 'required|string|in:documents,news,schools,centers,teachers',
+            'type' => 'required|string|in:' . implode(',', array_keys(Relation::morphMap())),
             'type_id' => 'required|integer'
         ]);
 
@@ -122,7 +108,7 @@ class CommentController extends Controller
 
         // Validate request
         $request->validate([
-            'type' => 'required|string|in:documents,news,schools,centers,teachers',
+            'type' => 'required|string|in:' . implode(',', array_keys(Relation::morphMap())),
             'type_id' => 'required|integer',
             'content' => 'required|string|max:1000',
             'parent_id' => 'nullable|integer|exists:comments,id'
@@ -244,7 +230,7 @@ class CommentController extends Controller
     public function loadMore(Request $request)
     {
         $request->validate([
-            'type' => 'required|string|in:documents,news,schools,centers,teachers',
+            'type' => 'required|string|in:' . implode(',', array_keys(Relation::morphMap())),
             'type_id' => 'required|integer',
             'page' => 'nullable|integer|min:1'
         ]);

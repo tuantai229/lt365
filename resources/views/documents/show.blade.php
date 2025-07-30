@@ -17,7 +17,7 @@
                     <!-- Comments Section -->
                     <div class="mt-12 pt-8 border-t border-gray-200">
                         <x-comments.comment-list 
-                            type="documents" 
+                            type="document" 
                             :type-id="$document->id" 
                         />
                     </div>

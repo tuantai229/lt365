@@ -62,7 +62,7 @@ class TeacherController extends Controller
     public function show(Request $request, $slug, $id)
     {
         $teacher = Teacher::with([
-            'levels', 'subjects', 'province', 'commune', 'featuredImage'
+            'levels', 'subjects', 'province', 'commune', 'featuredImage', 'metaSeo'
         ])
         ->active()
         ->findOrFail($id);
@@ -92,9 +92,11 @@ class TeacherController extends Controller
             ->limit(5)
             ->get();
 
-        return view('teachers.show', compact(
+        $data = compact(
             'teacher', 'relatedTeachers', 'featuredNews'
-        ));
+        );
+
+        return $this->viewWithSeo('teachers.show', 'teachers.show', $data, $teacher);
     }
 
     public function byLevel(Request $request, $levelSlug)

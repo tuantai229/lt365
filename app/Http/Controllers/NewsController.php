@@ -56,7 +56,7 @@ class NewsController extends Controller
      */
     public function show(Request $request, $slug, $id)
     {
-        $news = News::active()->findOrFail($id);
+        $news = News::with('metaSeo')->active()->findOrFail($id);
 
         // Increment view count with session-based throttling
         $viewedPosts = $request->session()->get('viewed_posts', []);
@@ -77,6 +77,8 @@ class NewsController extends Controller
             ->limit(5)
             ->get();
 
-        return view('news.show', compact('news', 'relatedNews'));
+        $data = compact('news', 'relatedNews');
+
+        return $this->viewWithSeo('news.show', 'news.show', $data, $news);
     }
 }

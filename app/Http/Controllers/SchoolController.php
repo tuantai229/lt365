@@ -69,7 +69,7 @@ class SchoolController extends Controller
     {
         $school = School::with([
             'level', 'province', 'schoolTypes', 'admissionMethods',
-            'admissionStats', 'featuredImage'
+            'admissionStats', 'featuredImage', 'metaSeo'
         ])
         ->active()
         ->findOrFail($id);
@@ -116,10 +116,12 @@ class SchoolController extends Controller
             ->limit(6)
             ->get();
 
-        return view('schools.show', compact(
+        $data = compact(
             'school', 'relatedSchools', 'featuredNews',
             'schoolNews', 'schoolDocuments'
-        ));
+        );
+
+        return $this->viewWithSeo('schools.show', 'schools.show', $data, $school);
     }
 
     public function byLevel(Request $request, $levelSlug)
