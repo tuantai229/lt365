@@ -25,7 +25,7 @@ class ExamController extends Controller
      */
     public function index()
     {
-        return view('exam.index');
+        return $this->viewWithSeo('exam.index', 'exam.index');
     }
 
     /**
@@ -44,7 +44,11 @@ class ExamController extends Controller
         $featuredSchools = $this->getFeaturedSchools($levelIds);
         $documents = $this->getDocuments($levelIds);
 
-        return view('exam.grade1', compact('admissionNews', 'upcomingSchedules', 'featuredSchools', 'documents'));
+        $data = compact('admissionNews', 'upcomingSchedules', 'featuredSchools', 'documents');
+        $additionalData = ['total_documents' => Document::whereIn('level_id', $levelIds)->active()->count()];
+        $data = array_merge($data, $additionalData);
+
+        return $this->viewWithSeo('exam.grade1', 'exam.grade1', $data);
     }
 
     /**
@@ -63,7 +67,11 @@ class ExamController extends Controller
         $featuredSchools = $this->getFeaturedSchools($levelIds);
         $documents = $this->getDocuments($levelIds);
 
-        return view('exam.grade6', compact('admissionNews', 'upcomingSchedules', 'featuredSchools', 'documents'));
+        $data = compact('admissionNews', 'upcomingSchedules', 'featuredSchools', 'documents');
+        $additionalData = ['total_documents' => Document::whereIn('level_id', $levelIds)->active()->count()];
+        $data = array_merge($data, $additionalData);
+
+        return $this->viewWithSeo('exam.grade6', 'exam.grade6', $data);
     }
 
     /**
@@ -82,7 +90,11 @@ class ExamController extends Controller
         $featuredSchools = $this->getFeaturedSchools($levelIds);
         $documents = $this->getDocuments($levelIds);
 
-        return view('exam.grade10', compact('admissionNews', 'upcomingSchedules', 'featuredSchools', 'documents'));
+        $data = compact('admissionNews', 'upcomingSchedules', 'featuredSchools', 'documents');
+        $additionalData = ['total_documents' => Document::whereIn('level_id', $levelIds)->active()->count()];
+        $data = array_merge($data, $additionalData);
+
+        return $this->viewWithSeo('exam.grade10', 'exam.grade10', $data);
     }
 
     /**

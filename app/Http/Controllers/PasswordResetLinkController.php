@@ -18,7 +18,7 @@ class PasswordResetLinkController extends Controller
      */
     public function create(): View
     {
-        return view('auth.forgot-password');
+        return $this->viewWithSeo('auth.forgot-password', 'password.request');
     }
 
     /**

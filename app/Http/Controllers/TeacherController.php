@@ -48,7 +48,9 @@ class TeacherController extends Controller
         $provinces = Province::majorCities()->orderBy('name', 'asc')->get();
         $subjects = Subject::active()->ordered()->get();
 
-        return view('teachers.index', compact('teachers', 'levels', 'provinces', 'subjects'));
+        $data = compact('teachers', 'levels', 'provinces', 'subjects');
+
+        return $this->viewWithSeo('teachers.index', 'teachers.index', $data);
     }
 
     /**
@@ -104,13 +106,15 @@ class TeacherController extends Controller
         $level = Level::where('slug', $levelSlug)->firstOrFail();
         $teachers = $this->getFilteredTeachers($request, [], $level);
 
-        return view('teachers.index', [
+        $data = [
             'teachers' => $teachers,
             'levels' => Level::active()->parentOnly()->ordered()->get(),
             'provinces' => Province::majorCities()->orderBy('name', 'asc')->get(),
             'subjects' => Subject::active()->ordered()->get(),
             'level' => $level,
-        ]);
+        ];
+
+        return $this->viewWithSeo('teachers.index', 'teachers.by-level', $data);
     }
 
     public function bySubject(Request $request, $subjectSlug)
@@ -118,13 +122,15 @@ class TeacherController extends Controller
         $subject = Subject::where('slug', $subjectSlug)->firstOrFail();
         $teachers = $this->getFilteredTeachers($request, [], null, $subject);
 
-        return view('teachers.index', [
+        $data = [
             'teachers' => $teachers,
             'levels' => Level::active()->parentOnly()->ordered()->get(),
             'provinces' => Province::majorCities()->orderBy('name', 'asc')->get(),
             'subjects' => Subject::active()->ordered()->get(),
             'subject' => $subject,
-        ]);
+        ];
+
+        return $this->viewWithSeo('teachers.index', 'teachers.by-subject', $data);
     }
 
     public function byProvince(Request $request, $provinceSlug)
@@ -133,13 +139,15 @@ class TeacherController extends Controller
         $filters = ['province_id' => $province->id];
         $teachers = $this->getFilteredTeachers($request, $filters);
 
-        return view('teachers.index', [
+        $data = [
             'teachers' => $teachers,
             'levels' => Level::active()->parentOnly()->ordered()->get(),
             'provinces' => Province::majorCities()->orderBy('name', 'asc')->get(),
             'subjects' => Subject::active()->ordered()->get(),
             'province' => $province,
-        ]);
+        ];
+
+        return $this->viewWithSeo('teachers.index', 'teachers.by-province', $data);
     }
 
     public function byLevelAndSubject(Request $request, $levelSlug, $subjectSlug)
@@ -148,14 +156,16 @@ class TeacherController extends Controller
         $subject = Subject::where('slug', $subjectSlug)->firstOrFail();
         $teachers = $this->getFilteredTeachers($request, [], $level, $subject);
 
-        return view('teachers.index', [
+        $data = [
             'teachers' => $teachers,
             'levels' => Level::active()->parentOnly()->ordered()->get(),
             'provinces' => Province::majorCities()->orderBy('name', 'asc')->get(),
             'subjects' => Subject::active()->ordered()->get(),
             'level' => $level,
             'subject' => $subject,
-        ]);
+        ];
+
+        return $this->viewWithSeo('teachers.index', 'teachers.by-level-subject', $data);
     }
 
     public function byLevelAndProvince(Request $request, $levelSlug, $provinceSlug)
@@ -165,14 +175,16 @@ class TeacherController extends Controller
         $filters = ['province_id' => $province->id];
         $teachers = $this->getFilteredTeachers($request, $filters, $level);
 
-        return view('teachers.index', [
+        $data = [
             'teachers' => $teachers,
             'levels' => Level::active()->parentOnly()->ordered()->get(),
             'provinces' => Province::majorCities()->orderBy('name', 'asc')->get(),
             'subjects' => Subject::active()->ordered()->get(),
             'level' => $level,
             'province' => $province,
-        ]);
+        ];
+
+        return $this->viewWithSeo('teachers.index', 'teachers.by-level-province', $data);
     }
 
     public function bySubjectAndProvince(Request $request, $subjectSlug, $provinceSlug)
@@ -182,14 +194,16 @@ class TeacherController extends Controller
         $filters = ['province_id' => $province->id];
         $teachers = $this->getFilteredTeachers($request, $filters, null, $subject);
 
-        return view('teachers.index', [
+        $data = [
             'teachers' => $teachers,
             'levels' => Level::active()->parentOnly()->ordered()->get(),
             'provinces' => Province::majorCities()->orderBy('name', 'asc')->get(),
             'subjects' => Subject::active()->ordered()->get(),
             'subject' => $subject,
             'province' => $province,
-        ]);
+        ];
+
+        return $this->viewWithSeo('teachers.index', 'teachers.by-subject-province', $data);
     }
 
     public function byAll(Request $request, $levelSlug, $subjectSlug, $provinceSlug)
@@ -200,7 +214,7 @@ class TeacherController extends Controller
         $filters = ['province_id' => $province->id];
         $teachers = $this->getFilteredTeachers($request, $filters, $level, $subject);
 
-        return view('teachers.index', [
+        $data = [
             'teachers' => $teachers,
             'levels' => Level::active()->parentOnly()->ordered()->get(),
             'provinces' => Province::majorCities()->orderBy('name', 'asc')->get(),
@@ -208,7 +222,9 @@ class TeacherController extends Controller
             'level' => $level,
             'subject' => $subject,
             'province' => $province,
-        ]);
+        ];
+
+        return $this->viewWithSeo('teachers.index', 'teachers.by-all', $data);
     }
 
     private function getFilteredTeachers(Request $request, array $filters, $level = null, $subject = null)

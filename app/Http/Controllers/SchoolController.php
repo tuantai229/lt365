@@ -54,7 +54,9 @@ class SchoolController extends Controller
         $provinces = Province::majorCities()->orderBy('name', 'asc')->get();
         $schoolTypes = SchoolType::active()->ordered()->get();
 
-        return view('schools.index', compact('schools', 'levels', 'provinces', 'schoolTypes'));
+        $data = compact('schools', 'levels', 'provinces', 'schoolTypes');
+
+        return $this->viewWithSeo('schools.index', 'schools.index', $data);
     }
 
     /**
@@ -126,135 +128,144 @@ class SchoolController extends Controller
 
     public function byLevel(Request $request, $levelSlug)
     {
-        $level = Level::where('slug', $levelSlug)->first();
+        $level = Level::where('slug', $levelSlug)->firstOrFail();
         $filters = [];
-        if ($level) {
-            $levelIds = $level->getAllChildrenIds();
-            $levelIds[] = $level->id;
-            $filters['level_id'] = $levelIds;
-        }
+        $levelIds = $level->getAllChildrenIds();
+        $levelIds[] = $level->id;
+        $filters['level_id'] = $levelIds;
         $schools = $this->getFilteredSchools($request, $filters);
 
-        return view('schools.index', [
+        $data = [
             'schools' => $schools,
             'levels' => Level::active()->parentOnly()->ordered()->get(),
             'provinces' => Province::majorCities()->orderBy('name', 'asc')->get(),
             'schoolTypes' => SchoolType::active()->ordered()->get(),
             'level' => $level,
-        ]);
+            'level_name' => $level->name,
+        ];
+
+        return $this->viewWithSeo('schools.index', 'schools.by-level', $data);
     }
 
     public function byProvince(Request $request, $provinceSlug)
     {
-        $province = Province::where('slug', $provinceSlug)->first();
-        $filters = $province ? ['province_id' => $province->id] : [];
+        $province = Province::where('slug', $provinceSlug)->firstOrFail();
+        $filters = ['province_id' => $province->id];
         $schools = $this->getFilteredSchools($request, $filters);
 
-        return view('schools.index', [
+        $data = [
             'schools' => $schools,
             'levels' => Level::active()->parentOnly()->ordered()->get(),
             'provinces' => Province::majorCities()->orderBy('name', 'asc')->get(),
             'schoolTypes' => SchoolType::active()->ordered()->get(),
             'province' => $province,
-        ]);
+            'province_name' => $province->name,
+        ];
+
+        return $this->viewWithSeo('schools.index', 'schools.by-province', $data);
     }
 
     public function byType(Request $request, $schoolTypeSlug)
     {
-        $schoolType = SchoolType::where('slug', $schoolTypeSlug)->first();
+        $schoolType = SchoolType::where('slug', $schoolTypeSlug)->firstOrFail();
         $filters = [];
         $schools = $this->getFilteredSchools($request, $filters, $schoolType);
 
-        return view('schools.index', [
+        $data = [
             'schools' => $schools,
             'levels' => Level::active()->parentOnly()->ordered()->get(),
             'provinces' => Province::majorCities()->orderBy('name', 'asc')->get(),
             'schoolTypes' => SchoolType::active()->ordered()->get(),
             'schoolType' => $schoolType,
-        ]);
+            'school_type_name' => $schoolType->name,
+        ];
+
+        return $this->viewWithSeo('schools.index', 'schools.by-type', $data);
     }
 
     public function byLevelAndProvince(Request $request, $levelSlug, $provinceSlug)
     {
-        $level = Level::where('slug', $levelSlug)->first();
-        $province = Province::where('slug', $provinceSlug)->first();
+        $level = Level::where('slug', $levelSlug)->firstOrFail();
+        $province = Province::where('slug', $provinceSlug)->firstOrFail();
         $filters = [];
-        if ($level) {
-            $levelIds = $level->getAllChildrenIds();
-            $levelIds[] = $level->id;
-            $filters['level_id'] = $levelIds;
-        }
-        if ($province) {
-            $filters['province_id'] = $province->id;
-        }
+        $levelIds = $level->getAllChildrenIds();
+        $levelIds[] = $level->id;
+        $filters['level_id'] = $levelIds;
+        $filters['province_id'] = $province->id;
         $schools = $this->getFilteredSchools($request, $filters);
 
-        return view('schools.index', [
+        $data = [
             'schools' => $schools,
             'levels' => Level::active()->parentOnly()->ordered()->get(),
             'provinces' => Province::majorCities()->orderBy('name', 'asc')->get(),
             'schoolTypes' => SchoolType::active()->ordered()->get(),
             'level' => $level,
             'province' => $province,
-        ]);
+            'level_name' => $level->name,
+            'province_name' => $province->name,
+        ];
+
+        return $this->viewWithSeo('schools.index', 'schools.by-level-province', $data);
     }
 
     public function byLevelAndType(Request $request, $levelSlug, $schoolTypeSlug)
     {
-        $level = Level::where('slug', $levelSlug)->first();
-        $schoolType = SchoolType::where('slug', $schoolTypeSlug)->first();
+        $level = Level::where('slug', $levelSlug)->firstOrFail();
+        $schoolType = SchoolType::where('slug', $schoolTypeSlug)->firstOrFail();
         $filters = [];
-        if ($level) {
-            $levelIds = $level->getAllChildrenIds();
-            $levelIds[] = $level->id;
-            $filters['level_id'] = $levelIds;
-        }
+        $levelIds = $level->getAllChildrenIds();
+        $levelIds[] = $level->id;
+        $filters['level_id'] = $levelIds;
         $schools = $this->getFilteredSchools($request, $filters, $schoolType);
 
-        return view('schools.index', [
+        $data = [
             'schools' => $schools,
             'levels' => Level::active()->parentOnly()->ordered()->get(),
             'provinces' => Province::majorCities()->orderBy('name', 'asc')->get(),
             'schoolTypes' => SchoolType::active()->ordered()->get(),
             'level' => $level,
             'schoolType' => $schoolType,
-        ]);
+            'level_name' => $level->name,
+            'school_type_name' => $schoolType->name,
+        ];
+
+        return $this->viewWithSeo('schools.index', 'schools.by-level-type', $data);
     }
 
     public function byProvinceAndType(Request $request, $provinceSlug, $schoolTypeSlug)
     {
-        $province = Province::where('slug', $provinceSlug)->first();
-        $schoolType = SchoolType::where('slug', $schoolTypeSlug)->first();
-        $filters = $province ? ['province_id' => $province->id] : [];
+        $province = Province::where('slug', $provinceSlug)->firstOrFail();
+        $schoolType = SchoolType::where('slug', $schoolTypeSlug)->firstOrFail();
+        $filters = ['province_id' => $province->id];
         $schools = $this->getFilteredSchools($request, $filters, $schoolType);
 
-        return view('schools.index', [
+        $data = [
             'schools' => $schools,
             'levels' => Level::active()->parentOnly()->ordered()->get(),
             'provinces' => Province::majorCities()->orderBy('name', 'asc')->get(),
             'schoolTypes' => SchoolType::active()->ordered()->get(),
             'province' => $province,
             'schoolType' => $schoolType,
-        ]);
+            'province_name' => $province->name,
+            'school_type_name' => $schoolType->name,
+        ];
+
+        return $this->viewWithSeo('schools.index', 'schools.by-province-type', $data);
     }
 
     public function byAll(Request $request, $levelSlug, $provinceSlug, $schoolTypeSlug)
     {
-        $level = Level::where('slug', $levelSlug)->first();
-        $province = Province::where('slug', $provinceSlug)->first();
-        $schoolType = SchoolType::where('slug', $schoolTypeSlug)->first();
+        $level = Level::where('slug', $levelSlug)->firstOrFail();
+        $province = Province::where('slug', $provinceSlug)->firstOrFail();
+        $schoolType = SchoolType::where('slug', $schoolTypeSlug)->firstOrFail();
         $filters = [];
-        if ($level) {
-            $levelIds = $level->getAllChildrenIds();
-            $levelIds[] = $level->id;
-            $filters['level_id'] = $levelIds;
-        }
-        if ($province) {
-            $filters['province_id'] = $province->id;
-        }
+        $levelIds = $level->getAllChildrenIds();
+        $levelIds[] = $level->id;
+        $filters['level_id'] = $levelIds;
+        $filters['province_id'] = $province->id;
         $schools = $this->getFilteredSchools($request, $filters, $schoolType);
 
-        return view('schools.index', [
+        $data = [
             'schools' => $schools,
             'levels' => Level::active()->parentOnly()->ordered()->get(),
             'provinces' => Province::majorCities()->orderBy('name', 'asc')->get(),
@@ -262,7 +273,12 @@ class SchoolController extends Controller
             'level' => $level,
             'province' => $province,
             'schoolType' => $schoolType,
-        ]);
+            'level_name' => $level->name,
+            'province_name' => $province->name,
+            'school_type_name' => $schoolType->name,
+        ];
+
+        return $this->viewWithSeo('schools.index', 'schools.by-all', $data);
     }
 
     private function getFilteredSchools(Request $request, array $filters, $schoolType = null)

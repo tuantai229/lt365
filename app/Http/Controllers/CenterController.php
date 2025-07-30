@@ -48,7 +48,9 @@ class CenterController extends Controller
         $provinces = Province::majorCities()->orderBy('name', 'asc')->get();
         $subjects = Subject::active()->ordered()->get();
 
-        return view('centers.index', compact('centers', 'levels', 'provinces', 'subjects'));
+        $data = compact('centers', 'levels', 'provinces', 'subjects');
+
+        return $this->viewWithSeo('centers.index', 'centers.index', $data);
     }
 
     /**
@@ -104,13 +106,15 @@ class CenterController extends Controller
         $level = Level::where('slug', $levelSlug)->firstOrFail();
         $centers = $this->getFilteredCenters($request, [], $level);
 
-        return view('centers.index', [
+        $data = [
             'centers' => $centers,
             'levels' => Level::active()->parentOnly()->ordered()->get(),
             'provinces' => Province::majorCities()->orderBy('name', 'asc')->get(),
             'subjects' => Subject::active()->ordered()->get(),
             'level' => $level,
-        ]);
+        ];
+
+        return $this->viewWithSeo('centers.index', 'centers.by-level', $data);
     }
 
     public function bySubject(Request $request, $subjectSlug)
@@ -118,13 +122,15 @@ class CenterController extends Controller
         $subject = Subject::where('slug', $subjectSlug)->firstOrFail();
         $centers = $this->getFilteredCenters($request, [], null, $subject);
 
-        return view('centers.index', [
+        $data = [
             'centers' => $centers,
             'levels' => Level::active()->parentOnly()->ordered()->get(),
             'provinces' => Province::majorCities()->orderBy('name', 'asc')->get(),
             'subjects' => Subject::active()->ordered()->get(),
             'subject' => $subject,
-        ]);
+        ];
+
+        return $this->viewWithSeo('centers.index', 'centers.by-subject', $data);
     }
 
     public function byProvince(Request $request, $provinceSlug)
@@ -133,13 +139,15 @@ class CenterController extends Controller
         $filters = ['province_id' => $province->id];
         $centers = $this->getFilteredCenters($request, $filters);
 
-        return view('centers.index', [
+        $data = [
             'centers' => $centers,
             'levels' => Level::active()->parentOnly()->ordered()->get(),
             'provinces' => Province::majorCities()->orderBy('name', 'asc')->get(),
             'subjects' => Subject::active()->ordered()->get(),
             'province' => $province,
-        ]);
+        ];
+
+        return $this->viewWithSeo('centers.index', 'centers.by-province', $data);
     }
 
     public function byLevelAndSubject(Request $request, $levelSlug, $subjectSlug)
@@ -148,14 +156,16 @@ class CenterController extends Controller
         $subject = Subject::where('slug', $subjectSlug)->firstOrFail();
         $centers = $this->getFilteredCenters($request, [], $level, $subject);
 
-        return view('centers.index', [
+        $data = [
             'centers' => $centers,
             'levels' => Level::active()->parentOnly()->ordered()->get(),
             'provinces' => Province::majorCities()->orderBy('name', 'asc')->get(),
             'subjects' => Subject::active()->ordered()->get(),
             'level' => $level,
             'subject' => $subject,
-        ]);
+        ];
+
+        return $this->viewWithSeo('centers.index', 'centers.by-level-subject', $data);
     }
 
     public function byLevelAndProvince(Request $request, $levelSlug, $provinceSlug)
@@ -165,14 +175,16 @@ class CenterController extends Controller
         $filters = ['province_id' => $province->id];
         $centers = $this->getFilteredCenters($request, $filters, $level);
 
-        return view('centers.index', [
+        $data = [
             'centers' => $centers,
             'levels' => Level::active()->parentOnly()->ordered()->get(),
             'provinces' => Province::majorCities()->orderBy('name', 'asc')->get(),
             'subjects' => Subject::active()->ordered()->get(),
             'level' => $level,
             'province' => $province,
-        ]);
+        ];
+
+        return $this->viewWithSeo('centers.index', 'centers.by-level-province', $data);
     }
 
     public function bySubjectAndProvince(Request $request, $subjectSlug, $provinceSlug)
@@ -182,14 +194,16 @@ class CenterController extends Controller
         $filters = ['province_id' => $province->id];
         $centers = $this->getFilteredCenters($request, $filters, null, $subject);
 
-        return view('centers.index', [
+        $data = [
             'centers' => $centers,
             'levels' => Level::active()->parentOnly()->ordered()->get(),
             'provinces' => Province::majorCities()->orderBy('name', 'asc')->get(),
             'subjects' => Subject::active()->ordered()->get(),
             'subject' => $subject,
             'province' => $province,
-        ]);
+        ];
+
+        return $this->viewWithSeo('centers.index', 'centers.by-subject-province', $data);
     }
 
     public function byAll(Request $request, $levelSlug, $subjectSlug, $provinceSlug)
@@ -200,7 +214,7 @@ class CenterController extends Controller
         $filters = ['province_id' => $province->id];
         $centers = $this->getFilteredCenters($request, $filters, $level, $subject);
 
-        return view('centers.index', [
+        $data = [
             'centers' => $centers,
             'levels' => Level::active()->parentOnly()->ordered()->get(),
             'provinces' => Province::majorCities()->orderBy('name', 'asc')->get(),
@@ -208,7 +222,9 @@ class CenterController extends Controller
             'level' => $level,
             'subject' => $subject,
             'province' => $province,
-        ]);
+        ];
+
+        return $this->viewWithSeo('centers.index', 'centers.by-all', $data);
     }
 
     private function getFilteredCenters(Request $request, array $filters, $level = null, $subject = null)

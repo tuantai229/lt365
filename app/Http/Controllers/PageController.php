@@ -20,6 +20,6 @@ class PageController extends Controller
             abort(404);
         }
 
-        return view('pages.show', compact('page'));
+        return $this->viewWithSeo('pages.show', 'page.show', compact('page'), $page);
     }
 }

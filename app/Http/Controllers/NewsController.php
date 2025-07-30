@@ -23,7 +23,9 @@ class NewsController extends Controller
 
         $categories = NewsCategory::active()->ordered()->get();
 
-        return view('news.index', compact('news', 'categories'));
+        $data = compact('news', 'categories');
+
+        return $this->viewWithSeo('news.index', 'news.index', $data);
     }
 
     /**
@@ -43,7 +45,14 @@ class NewsController extends Controller
 
         $categories = NewsCategory::active()->ordered()->get();
 
-        return view('news.category', compact('category', 'news', 'categories'));
+        $data = compact('category', 'news', 'categories');
+        $additionalData = [
+            'category_name' => $category->name,
+            'total_news' => $news->total(),
+        ];
+        $data = array_merge($data, $additionalData);
+
+        return $this->viewWithSeo('news.category', 'news.by-category', $data);
     }
 
     /**

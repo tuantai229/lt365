@@ -60,7 +60,9 @@ class DocumentController extends Controller
         $subjects = Subject::active()->ordered()->get();
         $documentTypes = DocumentType::active()->ordered()->get();
 
-        return view('documents.index', compact('documents', 'levels', 'subjects', 'documentTypes'));
+        $data = compact('documents', 'levels', 'subjects', 'documentTypes');
+
+        return $this->viewWithSeo('documents.index', 'documents.index', $data);
     }
 
     /**
@@ -125,141 +127,146 @@ class DocumentController extends Controller
 
     public function byType(Request $request, $typeSlug)
     {
-        $documentType = DocumentType::where('slug', $typeSlug)->first();
-        $filters = $documentType ? ['document_type_id' => $documentType->id] : [];
+        $documentType = DocumentType::where('slug', $typeSlug)->firstOrFail();
+        $filters = ['document_type_id' => $documentType->id];
         $documents = $this->getFilteredDocuments($request, $filters);
         
-        return view('documents.index', [
+        $data = [
             'documents' => $documents,
             'levels' => Level::active()->ordered()->get(),
             'subjects' => Subject::active()->ordered()->get(),
             'documentTypes' => DocumentType::active()->ordered()->get(),
             'documentType' => $documentType,
-        ]);
+            'document_type_name' => $documentType->name,
+        ];
+
+        return $this->viewWithSeo('documents.index', 'documents.by-type', $data);
     }
 
     public function byLevel(Request $request, $levelSlug)
     {
-        $level = Level::where('slug', $levelSlug)->first();
+        $level = Level::where('slug', $levelSlug)->firstOrFail();
         $filters = [];
-        if ($level) {
-            $levelIds = $level->getAllChildrenIds();
-            $levelIds[] = $level->id;
-            $filters['level_id'] = $levelIds;
-        }
+        $levelIds = $level->getAllChildrenIds();
+        $levelIds[] = $level->id;
+        $filters['level_id'] = $levelIds;
         $documents = $this->getFilteredDocuments($request, $filters);
 
-        return view('documents.index', [
+        $data = [
             'documents' => $documents,
             'levels' => Level::active()->ordered()->get(),
             'subjects' => Subject::active()->ordered()->get(),
             'documentTypes' => DocumentType::active()->ordered()->get(),
             'level' => $level,
-        ]);
+            'level_name' => $level->name,
+        ];
+
+        return $this->viewWithSeo('documents.index', 'documents.by-level', $data);
     }
 
     public function bySubject(Request $request, $subjectSlug)
     {
-        $subject = Subject::where('slug', $subjectSlug)->first();
-        $filters = $subject ? ['subject_id' => $subject->id] : [];
+        $subject = Subject::where('slug', $subjectSlug)->firstOrFail();
+        $filters = ['subject_id' => $subject->id];
         $documents = $this->getFilteredDocuments($request, $filters);
 
-        return view('documents.index', [
+        $data = [
             'documents' => $documents,
             'levels' => Level::active()->ordered()->get(),
             'subjects' => Subject::active()->ordered()->get(),
             'documentTypes' => DocumentType::active()->ordered()->get(),
             'subject' => $subject,
-        ]);
+            'subject_name' => $subject->name,
+        ];
+
+        return $this->viewWithSeo('documents.index', 'documents.by-subject', $data);
     }
 
     public function byTypeAndLevel(Request $request, $typeSlug, $levelSlug)
     {
-        $documentType = DocumentType::where('slug', $typeSlug)->first();
-        $level = Level::where('slug', $levelSlug)->first();
+        $documentType = DocumentType::where('slug', $typeSlug)->firstOrFail();
+        $level = Level::where('slug', $levelSlug)->firstOrFail();
         $filters = [];
-        if ($documentType) {
-            $filters['document_type_id'] = $documentType->id;
-        }
-        if ($level) {
-            $levelIds = $level->getAllChildrenIds();
-            $levelIds[] = $level->id;
-            $filters['level_id'] = $levelIds;
-        }
+        $filters['document_type_id'] = $documentType->id;
+        $levelIds = $level->getAllChildrenIds();
+        $levelIds[] = $level->id;
+        $filters['level_id'] = $levelIds;
         $documents = $this->getFilteredDocuments($request, $filters);
 
-        return view('documents.index', [
+        $data = [
             'documents' => $documents,
             'levels' => Level::active()->ordered()->get(),
             'subjects' => Subject::active()->ordered()->get(),
             'documentTypes' => DocumentType::active()->ordered()->get(),
             'documentType' => $documentType,
             'level' => $level,
-        ]);
+            'document_type_name' => $documentType->name,
+            'level_name' => $level->name,
+        ];
+
+        return $this->viewWithSeo('documents.index', 'documents.by-type-level', $data);
     }
 
     public function byTypeAndSubject(Request $request, $typeSlug, $subjectSlug)
     {
-        $documentType = DocumentType::where('slug', $typeSlug)->first();
-        $subject = Subject::where('slug', $subjectSlug)->first();
-        $filters = ($documentType && $subject) ? ['document_type_id' => $documentType->id, 'subject_id' => $subject->id] : [];
+        $documentType = DocumentType::where('slug', $typeSlug)->firstOrFail();
+        $subject = Subject::where('slug', $subjectSlug)->firstOrFail();
+        $filters = ['document_type_id' => $documentType->id, 'subject_id' => $subject->id];
         $documents = $this->getFilteredDocuments($request, $filters);
 
-        return view('documents.index', [
+        $data = [
             'documents' => $documents,
             'levels' => Level::active()->ordered()->get(),
             'subjects' => Subject::active()->ordered()->get(),
             'documentTypes' => DocumentType::active()->ordered()->get(),
             'documentType' => $documentType,
             'subject' => $subject,
-        ]);
+            'document_type_name' => $documentType->name,
+            'subject_name' => $subject->name,
+        ];
+
+        return $this->viewWithSeo('documents.index', 'documents.by-type-subject', $data);
     }
 
     public function byLevelAndSubject(Request $request, $levelSlug, $subjectSlug)
     {
-        $level = Level::where('slug', $levelSlug)->first();
-        $subject = Subject::where('slug', $subjectSlug)->first();
+        $level = Level::where('slug', $levelSlug)->firstOrFail();
+        $subject = Subject::where('slug', $subjectSlug)->firstOrFail();
         $filters = [];
-        if ($level) {
-            $levelIds = $level->getAllChildrenIds();
-            $levelIds[] = $level->id;
-            $filters['level_id'] = $levelIds;
-        }
-        if ($subject) {
-            $filters['subject_id'] = $subject->id;
-        }
+        $levelIds = $level->getAllChildrenIds();
+        $levelIds[] = $level->id;
+        $filters['level_id'] = $levelIds;
+        $filters['subject_id'] = $subject->id;
         $documents = $this->getFilteredDocuments($request, $filters);
 
-        return view('documents.index', [
+        $data = [
             'documents' => $documents,
             'levels' => Level::active()->ordered()->get(),
             'subjects' => Subject::active()->ordered()->get(),
             'documentTypes' => DocumentType::active()->ordered()->get(),
             'level' => $level,
             'subject' => $subject,
-        ]);
+            'level_name' => $level->name,
+            'subject_name' => $subject->name,
+        ];
+
+        return $this->viewWithSeo('documents.index', 'documents.by-level-subject', $data);
     }
 
     public function byAll(Request $request, $typeSlug, $levelSlug, $subjectSlug)
     {
-        $documentType = DocumentType::where('slug', $typeSlug)->first();
-        $level = Level::where('slug', $levelSlug)->first();
-        $subject = Subject::where('slug', $subjectSlug)->first();
+        $documentType = DocumentType::where('slug', $typeSlug)->firstOrFail();
+        $level = Level::where('slug', $levelSlug)->firstOrFail();
+        $subject = Subject::where('slug', $subjectSlug)->firstOrFail();
         $filters = [];
-        if ($documentType) {
-            $filters['document_type_id'] = $documentType->id;
-        }
-        if ($level) {
-            $levelIds = $level->getAllChildrenIds();
-            $levelIds[] = $level->id;
-            $filters['level_id'] = $levelIds;
-        }
-        if ($subject) {
-            $filters['subject_id'] = $subject->id;
-        }
+        $filters['document_type_id'] = $documentType->id;
+        $levelIds = $level->getAllChildrenIds();
+        $levelIds[] = $level->id;
+        $filters['level_id'] = $levelIds;
+        $filters['subject_id'] = $subject->id;
         $documents = $this->getFilteredDocuments($request, $filters);
 
-        return view('documents.index', [
+        $data = [
             'documents' => $documents,
             'levels' => Level::active()->ordered()->get(),
             'subjects' => Subject::active()->ordered()->get(),
@@ -267,7 +274,12 @@ class DocumentController extends Controller
             'documentType' => $documentType,
             'level' => $level,
             'subject' => $subject,
-        ]);
+            'document_type_name' => $documentType->name,
+            'level_name' => $level->name,
+            'subject_name' => $subject->name,
+        ];
+
+        return $this->viewWithSeo('documents.index', 'documents.by-all', $data);
     }
 
     private function getFilteredDocuments(Request $request, array $filters)

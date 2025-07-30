@@ -22,6 +22,13 @@ class SearchController extends Controller
         // Perform search
         $results = $this->searchService->search($query, $page);
 
-        return view('search.index', compact('results', 'query'));
+        $data = compact('results', 'query');
+        $additionalData = [
+            'query' => $query,
+            'total_results' => $results->total(),
+        ];
+        $data = array_merge($data, $additionalData);
+
+        return $this->viewWithSeo('search.index', 'search', $data);
     }
 }

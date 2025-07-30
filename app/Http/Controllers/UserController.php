@@ -103,12 +103,14 @@ class UserController extends Controller
             ->take(5)
             ->get();
 
-        return view('user.dashboard', compact(
+        $data = compact(
             'user',
             'stats',
             'activityTimeline',
             'recommendations'
-        ));
+        );
+
+        return $this->viewWithSeo('user.dashboard', 'user.dashboard', $data);
     }
 
     /**
@@ -116,7 +118,7 @@ class UserController extends Controller
      */
     public function profile(): View
     {
-        return view('user.profile', [
+        return $this->viewWithSeo('user.profile', 'user.profile', [
             'user' => Auth::user(),
         ]);
     }
@@ -164,7 +166,7 @@ class UserController extends Controller
             ->latest('downloaded_at')
             ->paginate(10); // Paginate results
 
-        return view('user.downloads', compact('downloads'));
+        return $this->viewWithSeo('user.downloads', 'user.downloads', compact('downloads'));
     }
 
     /**
@@ -180,7 +182,7 @@ class UserController extends Controller
         // Load the actual favorited items
         $this->loadFavoritedItems($favorites->items());
 
-        return view('user.favorites', compact('favorites'));
+        return $this->viewWithSeo('user.favorites', 'user.favorites', compact('favorites'));
     }
 
     /**
@@ -305,7 +307,7 @@ class UserController extends Controller
      */
     public function showChangePassword(): View
     {
-        return view('user.change-password');
+        return $this->viewWithSeo('user.change-password', 'user.change-password');
     }
 
     /**

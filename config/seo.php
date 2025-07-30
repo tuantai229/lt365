@@ -12,8 +12,8 @@ return [
         // === ROUTE: home ===
         'home' => [
             'title' => 'LT365 - Website ôn thi chuyển cấp hàng đầu Việt Nam',
-            'description' => 'Tải miễn phí hàng nghìn đề thi, tài liệu ôn thi vào lớp 1, 6, 10. Thông tin tuyển sinh các trường top đầu.',
-            'keywords' => 'ôn thi chuyển cấp, đề thi vào lớp 1, đề thi vào lớp 6, đề thi vào lớp 10, LT365',
+            'description' => 'Tải miễn phí hàng nghìn đề thi, tài liệu ôn thi chuyển cấp vào lớp 1, 6, 10. Thông tin tuyển sinh các trường top đầu. Thông tin các trung tâm, giáo viên uy tín.',
+            'keywords' => 'ôn thi chuyển cấp, đề thi vào lớp 6, đề thi vào lớp 10, LT365',
         ],
 
         // === ROUTE: exam.* ===
@@ -22,26 +22,50 @@ return [
             'description' => 'Tổng hợp kinh nghiệm, chiến lược ôn thi chuyển cấp hiệu quả. Lịch thi, đề thi mẫu.',
         ],
         'exam.grade1' => [
-            'title' => 'Ôn thi vào lớp 1 - {total_documents} đề thi mẫu miễn phí | LT365',
-            'description' => 'Chuẩn bị thi vào lớp 1 với {total_documents} đề thi mẫu từ các trường uy tín.',
+            'title' => 'Ôn thi vào lớp 1 - {total_documents} tài liệu, đề thi mẫu miễn phí | LT365',
+            'description' => 'Chuẩn bị thi vào lớp 1 với {total_documents} tài liệu, đề thi mẫu từ các trường uy tín.',
         ],
         'exam.grade6' => [
-            'title' => 'Ôn thi vào lớp 6 - {total_documents} đề thi chuyên miễn phí | LT365',
-            'description' => 'Tổng hợp {total_documents} đề thi vào lớp 6 các trường THCS chuyên.',
+            'title' => 'Ôn thi vào lớp 6 - {total_documents} tài liệu, đề thi chuyên miễn phí | LT365',
+            'description' => 'Tổng hợp {total_documents} tài liệu, đề thi vào lớp 6 các trường THCS chuyên.',
         ],
         'exam.grade10' => [
-            'title' => 'Ôn thi vào lớp 10 - {total_documents} đề thi THPT miễn phí | LT365',
-            'description' => 'Kho tài liệu ôn thi vào lớp 10 với {total_documents} đề thi THPT.',
+            'title' => 'Ôn thi vào lớp 10 - {total_documents} tài liệu, đề thi THPT miễn phí | LT365',
+            'description' => 'Kho tài liệu ôn thi vào lớp 10 với {total_documents} tài liệu, đề thi THPT.',
         ],
 
         // === ROUTE: documents.* ===
         'documents.index' => [
-            'title' => 'Tài liệu ôn thi - {total_documents} đề thi miễn phí | LT365',
-            'description' => 'Tải miễn phí {total_documents} tài liệu ôn thi chuyển cấp từ các trường top đầu.',
+            'title' => 'Tài liệu, đề thi, bài tập, bài giảng, ... ôn thi chuyển cấp miễn phí | LT365',
+            'description' => 'Tải miễn phí hàng nghìn tài liệu, đề thi, bài tập, bài giảng, ... ôn thi chuyển cấp vào lớp 1, 6, 10 từ các trường top đầu.',
         ],
-        'documents.category' => [
-            'title' => 'Đề thi {subject} lớp {level} - {total_documents} tài liệu | LT365',
-            'description' => 'Tổng hợp {total_documents} đề thi {subject} lớp {level} có lời giải chi tiết.',
+        'documents.by-type' => [
+            'title' => '{document_type_name} - Ôn thi chuyển cấp | LT365',
+            'description' => 'Danh sách {document_type_name} ôn thi chuyển cấp. Tải miễn phí tài liệu, đề thi, bài tập, bài giảng, ...',
+        ],
+        'documents.by-level' => [
+            'title' => 'Tài liệu, đề thi, bài tập, bài giảng {level_name} | LT365',
+            'description' => 'Tổng hợp tài liệu, đề thi, bài tập, bài giảng {level_name} các môn.',
+        ],
+        'documents.by-subject' => [
+            'title' => 'Tài liệu, đề thi, bài tập, bài giảng môn {subject_name} | LT365',
+            'description' => 'Tổng hợp tài liệu và đề thi ôn thi chuyển cấp môn {subject_name}.',
+        ],
+        'documents.by-level-subject' => [
+            'title' => 'Tài liệu, đề thi, bài tập, bài giảng môn {subject_name} {level_name} | LT365',
+            'description' => 'Tổng hợp tài liệu, đề thi, bài tập, bài giảng, ... ôn thi chuyển cấp môn {subject_name} {level_name}.',
+        ],
+        'documents.by-type-level' => [
+            'title' => '{document_type_name} {level_name} | LT365',
+            'description' => 'Danh sách {document_type_name} ôn thi {level_name} chi tiết.',
+        ],
+        'documents.by-type-subject' => [
+            'title' => '{document_type_name} môn {subject_name} | LT365',
+            'description' => 'Danh sách {document_type_name} ôn thi chuyển cấp môn {subject_name}.',
+        ],
+        'documents.by-all' => [
+            'title' => '{document_type_name} môn {subject_name} {level_name} | LT365',
+            'description' => 'Danh sách {document_type_name} môn {subject_name} {level_name}. Tải miễn phí {document_type_name} tại LT365.',
         ],
         'documents.show' => [
             'title' => '{name} - Đề thi {subject} lớp {level} | LT365',
@@ -50,12 +74,36 @@ return [
 
         // === ROUTE: schools.* ===
         'schools.index' => [
-            'title' => 'Thông tin {total_schools} trường học - Tuyển sinh {current_year} | LT365',
-            'description' => 'Cập nhật thông tin tuyển sinh {current_year} của {total_schools} trường học.',
+            'title' => 'Danh sách trường học tại Việt Nam - Tuyển sinh {current_year} | LT365',
+            'description' => 'Cập nhật thông tin tuyển sinh, điểm chuẩn, học phí năm {current_year} của các trường học trên cả nước.',
         ],
-        'schools.category' => [
-            'title' => 'Trường {level} tại {province} - {total_schools} trường | LT365',
-            'description' => 'Danh sách {total_schools} trường {level} tại {province}. Thông tin tuyển sinh {current_year}.',
+        'schools.by-level' => [
+            'title' => 'Danh sách trường {level_name} - Tuyển sinh {current_year} | LT365',
+            'description' => 'Danh sách các trường {level_name} trên cả nước và thông tin tuyển sinh năm {current_year}.',
+        ],
+        'schools.by-province' => [
+            'title' => 'Danh sách trường học tại {province_name} - Tuyển sinh {current_year} | LT365',
+            'description' => 'Danh sách các trường học tại {province_name} và thông tin tuyển sinh năm {current_year}.',
+        ],
+        'schools.by-type' => [
+            'title' => 'Danh sách trường {school_type_name} - Tuyển sinh {current_year} | LT365',
+            'description' => 'Danh sách các trường {school_type_name} trên cả nước và thông tin tuyển sinh năm {current_year}.',
+        ],
+        'schools.by-level-province' => [
+            'title' => 'Danh sách trường {level_name} tại {province_name} | LT365',
+            'description' => 'Danh sách các trường {level_name} tại {province_name} và thông tin tuyển sinh năm {current_year}.',
+        ],
+        'schools.by-level-type' => [
+            'title' => 'Danh sách trường {level_name} {school_type_name} | LT365',
+            'description' => 'Danh sách các trường {level_name} {school_type_name} và thông tin tuyển sinh năm {current_year}.',
+        ],
+        'schools.by-province-type' => [
+            'title' => 'Danh sách trường {school_type_name} tại {province_name} | LT365',
+            'description' => 'Danh sách các trường {school_type_name} tại {province_name} và thông tin tuyển sinh năm {current_year}.',
+        ],
+        'schools.by-all' => [
+            'title' => 'Danh sách trường {level_name} {school_type_name} tại {province_name} | LT365',
+            'description' => 'Danh sách các trường {level_name} {school_type_name} tại {province_name} và thông tin tuyển sinh năm {current_year}.',
         ],
         'schools.show' => [
             'title' => 'Trường {name} - {province} | Tuyển sinh {current_year} | LT365',
@@ -67,9 +115,9 @@ return [
             'title' => 'Tin tức giáo dục - Cập nhật chính sách tuyển sinh | LT365',
             'description' => 'Tin tức giáo dục mới nhất về chính sách tuyển sinh, lịch thi, thông báo trường học.',
         ],
-        'news.category' => [
-            'title' => 'Tin tức {category} - {total_news} bài viết | LT365',
-            'description' => 'Tổng hợp {total_news} tin tức {category} mới nhất từ các nguồn uy tín.',
+        'news.by-category' => [
+            'title' => 'Tin tức {category_name} - {total_news} bài viết | LT365',
+            'description' => 'Tổng hợp {total_news} tin tức {category_name} mới nhất từ các nguồn uy tín.',
         ],
         'news.show' => [
             'title' => '{name} | LT365',
@@ -100,6 +148,62 @@ return [
         'search' => [
             'title' => 'Tìm kiếm "{query}" - {total_results} kết quả | LT365',
             'description' => 'Kết quả tìm kiếm cho "{query}". Tìm thấy {total_results} kết quả phù hợp.',
+        ],
+
+        // === ROUTE: contact ===
+        'contact.index' => [
+            'title' => 'Liên hệ - LT365',
+            'description' => 'Liên hệ với chúng tôi để được hỗ trợ và giải đáp thắc mắc.',
+        ],
+
+        // === ROUTE: auth ===
+        'login' => [
+            'title' => 'Đăng nhập - LT365',
+            'description' => 'Đăng nhập vào tài khoản của bạn để truy cập các tính năng độc quyền.',
+        ],
+        'register.show' => [
+            'title' => 'Đăng ký - LT365',
+            'description' => 'Tạo tài khoản mới để tham gia cộng đồng và tải tài liệu.',
+        ],
+        'password.request' => [
+            'title' => 'Quên mật khẩu - LT365',
+            'description' => 'Yêu cầu đặt lại mật khẩu cho tài khoản của bạn.',
+        ],
+        'password.reset' => [
+            'title' => 'Đặt lại mật khẩu - LT365',
+            'description' => 'Tạo mật khẩu mới cho tài khoản của bạn.',
+        ],
+        'verify.notice' => [
+            'title' => 'Xác thực Email - LT365',
+            'description' => 'Vui lòng kiểm tra email và xác thực tài khoản của bạn.',
+        ],
+
+        // === ROUTE: user dashboard ===
+        'user.dashboard' => [
+            'title' => 'Bảng điều khiển - LT365',
+            'description' => 'Quản lý thông tin cá nhân và hoạt động của bạn trên LT365.',
+        ],
+        'user.profile' => [
+            'title' => 'Hồ sơ cá nhân - LT365',
+            'description' => 'Cập nhật thông tin cá nhân của bạn.',
+        ],
+        'user.downloads' => [
+            'title' => 'Tài liệu đã tải - LT365',
+            'description' => 'Danh sách các tài liệu bạn đã tải xuống.',
+        ],
+        'user.favorites' => [
+            'title' => 'Danh sách yêu thích - LT365',
+            'description' => 'Quản lý danh sách các nội dung bạn đã yêu thích.',
+        ],
+        'user.change-password' => [
+            'title' => 'Đổi mật khẩu - LT365',
+            'description' => 'Thay đổi mật khẩu tài khoản của bạn.',
+        ],
+
+        // === ROUTE: static pages ===
+        'page.show' => [
+            'title' => '{name} | LT365',
+            'description' => 'Thông tin về {name} tại LT365.',
         ],
     ],
 

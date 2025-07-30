@@ -21,7 +21,7 @@ class AuthController extends Controller
      */
     public function showLogin(Request $request): View
     {
-        return view('auth.login');
+        return $this->viewWithSeo('auth.login', 'login');
     }
 
     /**
@@ -79,7 +79,7 @@ class AuthController extends Controller
      */
     public function showRegister(): View
     {
-        return view('auth.register');
+        return $this->viewWithSeo('auth.register', 'register.show');
     }
 
     /**
@@ -142,7 +142,7 @@ class AuthController extends Controller
     public function verifyNotice(Request $request): View
     {
         $email = $request->session()->get('email', 'your-email@example.com');
-        return view('auth.verify-notice', compact('email'));
+        return $this->viewWithSeo('auth.verify-notice', 'verify.notice', compact('email'));
     }
 
     /**
