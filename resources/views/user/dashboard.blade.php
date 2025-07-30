@@ -57,10 +57,16 @@
                             <div>
                                 <p class="text-sm text-gray-800">
                                     {{ $activity['description'] }}
-                                    @if ($activity['model'])
-                                        <a href="#" class="font-semibold text-primary hover:underline">
-                                            {{ $activity['model']->name ?? Str::limit($activity['content'], 30) }}
+                                    @if (isset($activity['url']) && $activity['url'])
+                                        <a href="{{ $activity['url'] }}" class="font-semibold text-primary hover:underline">
+                                            {{ $activity['title'] ?? ($activity['model']->name ?? Str::limit($activity['content'] ?? '', 30)) }}
                                         </a>
+                                    @elseif ($activity['model'])
+                                        <span class="font-semibold text-gray-700">
+                                            {{ $activity['title'] ?? ($activity['model']->name ?? Str::limit($activity['content'] ?? '', 30)) }}
+                                        </span>
+                                    @else
+                                        <span class="font-semibold text-gray-500">Không xác định</span>
                                     @endif
                                 </p>
                                 <p class="text-xs text-gray-500 mt-1">{{ $activity['date']->diffForHumans() }}</p>

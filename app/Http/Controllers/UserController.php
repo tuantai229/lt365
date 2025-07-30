@@ -29,6 +29,7 @@ class UserController extends Controller
 
         // Load favorited items for dashboard
         $this->loadFavoritedItems($user->favorites);
+        $this->loadCommentableItems($user->comments);
 
         // Stats Cards
         $stats = [
@@ -39,10 +40,15 @@ class UserController extends Controller
 
         // Combine activities into a timeline
         $downloads = $user->downloads->map(function ($item) {
+            $url = $item->document ? route('documents.show', ['slug' => $item->document->slug, 'id' => $item->document->id]) : null;
+            $title = $item->document ? $item->document->name : 'Tài liệu không xác định';
+            
             return [
                 'type' => 'download',
                 'description' => 'Đã tải xuống tài liệu:',
                 'model' => $item->document,
+                'title' => $title,
+                'url' => $url,
                 'date' => $item->downloaded_at,
                 'icon' => 'ri-download-2-line',
                 'color' => 'text-blue-500 bg-blue-50',
@@ -50,10 +56,15 @@ class UserController extends Controller
         });
 
         $favorites = $user->favorites->map(function ($item) {
+            $url = $this->generateItemUrl($item->type, $item->item);
+            $title = $this->getItemTitle($item->type, $item->item);
+            
             return [
                 'type' => 'favorite',
                 'description' => 'Đã yêu thích:',
                 'model' => $item->item ?? null,
+                'title' => $title,
+                'url' => $url,
                 'date' => $item->created_at,
                 'icon' => 'ri-heart-line',
                 'color' => 'text-red-500 bg-red-50',
@@ -61,10 +72,15 @@ class UserController extends Controller
         });
 
         $comments = $user->comments->map(function ($item) {
+            $url = $this->generateCommentableUrl($item->commentable);
+            $title = $this->getCommentableTitle($item->commentable);
+            
             return [
                 'type' => 'comment',
                 'description' => 'Đã bình luận về:',
                 'model' => $item->commentable,
+                'title' => $title,
+                'url' => $url,
                 'content' => Str::limit($item->content, 50),
                 'date' => $item->created_at,
                 'icon' => 'ri-message-2-line',
@@ -256,34 +272,32 @@ class UserController extends Controller
      */
     private function getItemsByType(string $type, array $ids)
     {
-        switch ($type) {
-            case 'document':
-                return Document::whereIn('id', $ids)
-                    ->with(['subject', 'level'])
-                    ->get();
-            
-            case 'news':
-                return \App\Models\News::whereIn('id', $ids)
-                    ->get();
-            
-            case 'school':
-                return \App\Models\School::whereIn('id', $ids)
-                    ->with(['province', 'level', 'schoolTypes'])
-                    ->get();
-            
-            case 'center':
-                return \App\Models\Center::whereIn('id', $ids)
-                    ->with(['province', 'levels', 'subjects'])
-                    ->get();
-            
-            case 'teacher':
-                return \App\Models\Teacher::whereIn('id', $ids)
-                    ->with(['province', 'commune', 'levels', 'subjects'])
-                    ->get();
-            
-            default:
+        $modelClass = $this->getFavoritableModelClass($type);
+
+        if (!$modelClass || !class_exists($modelClass)) {
+            // Fallback for plural vs singular (e.g., 'documents' vs 'document')
+            $singularType = \Illuminate\Support\Str::singular($type);
+            $modelClass = $this->getFavoritableModelClass($singularType);
+
+            if (!$modelClass || !class_exists($modelClass)) {
                 return collect();
+            }
         }
+
+        $query = $modelClass::whereIn('id', $ids);
+
+        // Eager load relationships based on model type for better performance
+        if ($modelClass === Document::class) {
+            $query->with(['subject', 'level']);
+        } elseif ($modelClass === \App\Models\School::class) {
+            $query->with(['province', 'level', 'schoolTypes']);
+        } elseif ($modelClass === \App\Models\Center::class) {
+            $query->with(['province', 'levels', 'subjects']);
+        } elseif ($modelClass === \App\Models\Teacher::class) {
+            $query->with(['province', 'commune', 'levels', 'subjects']);
+        }
+
+        return $query->get();
     }
 
     /**
@@ -309,5 +323,129 @@ class UserController extends Controller
         ]);
 
         return back()->with('success', 'Mật khẩu đã được thay đổi thành công!');
+    }
+
+    /**
+     * Generate URL for favorited item
+     */
+    private function generateItemUrl(string $type, $item): ?string
+    {
+        if (!$item) return null;
+
+        switch ($type) {
+            case 'document':
+                return route('documents.show', ['slug' => $item->slug, 'id' => $item->id]);
+            case 'news':
+                return route('news.show', ['slug' => $item->slug, 'id' => $item->id]);
+            case 'school':
+                return route('schools.show', ['slug' => $item->slug, 'id' => $item->id]);
+            case 'center':
+                return route('centers.show', ['slug' => $item->slug, 'id' => $item->id]);
+            case 'teacher':
+                return route('teachers.show', ['slug' => $item->slug, 'id' => $item->id]);
+            default:
+                return null;
+        }
+    }
+
+    /**
+     * Get title for favorited item
+     */
+    private function getItemTitle(string $type, $item): ?string
+    {
+        if (!$item) return 'Không xác định';
+
+        switch ($type) {
+            case 'document':
+                return $item->name ?? 'Tài liệu không xác định';
+            case 'news':
+                return $item->name ?? 'Tin tức không xác định';
+            case 'school':
+                return $item->name ?? 'Trường học không xác định';
+            case 'center':
+                return $item->name ?? 'Trung tâm không xác định';
+            case 'teacher':
+                return $item->name ?? 'Giáo viên không xác định';
+            default:
+                return 'Không xác định';
+        }
+    }
+
+    /**
+     * Generate URL for commentable item
+     */
+    private function generateCommentableUrl($commentable): ?string
+    {
+        if (!$commentable) return null;
+
+        $className = get_class($commentable);
+        
+        switch ($className) {
+            case 'App\\Models\\Document':
+                return route('documents.show', ['slug' => $commentable->slug, 'id' => $commentable->id]);
+            case 'App\\Models\\News':
+                return route('news.show', ['slug' => $commentable->slug, 'id' => $commentable->id]);
+            case 'App\\Models\\School':
+                return route('schools.show', ['slug' => $commentable->slug, 'id' => $commentable->id]);
+            case 'App\\Models\\Center':
+                return route('centers.show', ['slug' => $commentable->slug, 'id' => $commentable->id]);
+            case 'App\\Models\\Teacher':
+                return route('teachers.show', ['slug' => $commentable->slug, 'id' => $commentable->id]);
+            default:
+                return null;
+        }
+    }
+
+    /**
+     * Get title for commentable item
+     */
+    private function getCommentableTitle($commentable): ?string
+    {
+        if (!$commentable) return 'Không xác định';
+
+        $className = get_class($commentable);
+        
+        switch ($className) {
+            case 'App\\Models\\Document':
+                return $commentable->name ?? 'Tài liệu không xác định';
+            case 'App\\Models\\News':
+                return $commentable->name ?? 'Tin tức không xác định';
+            case 'App\\Models\\School':
+                return $commentable->name ?? 'Trường học không xác định';
+            case 'App\\Models\\Center':
+                return $commentable->name ?? 'Trung tâm không xác định';
+            case 'App\\Models\\Teacher':
+                return $commentable->name ?? 'Giáo viên không xác định';
+            default:
+                return 'Không xác định';
+        }
+    }
+
+    /**
+     * Load the actual commentable items (documents, news, etc.)
+     */
+    private function loadCommentableItems($comments)
+    {
+        $itemsByType = [];
+        
+        // Group items by type
+        foreach ($comments as $comment) {
+            if (!isset($itemsByType[$comment->type])) {
+                $itemsByType[$comment->type] = [];
+            }
+            $itemsByType[$comment->type][] = $comment->type_id;
+        }
+
+        // Load items for each type
+        foreach ($itemsByType as $type => $ids) {
+            $items = $this->getItemsByType($type, $ids);
+            
+            // Attach items to comments
+            foreach ($comments as $comment) {
+                if ($comment->type === $type) {
+                    $comment->commentable = $items->firstWhere('id', $comment->type_id);
+                }
+            }
+        }
     }
 }
