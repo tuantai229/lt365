@@ -73,7 +73,7 @@ class DocumentController extends Controller
      */
     public function show(Request $request, $slug, $id, RatingService $ratingService)
     {
-        $document = Document::with(['level', 'subject', 'documentType', 'difficultyLevel', 'school', 'tags', 'featuredImage'])
+        $document = Document::with(['level', 'subject', 'documentType', 'difficultyLevel', 'school', 'tags', 'featuredImage', 'metaSeo'])
             ->active()
             ->findOrFail($id);
 
@@ -118,7 +118,9 @@ class DocumentController extends Controller
         // Sidebar: Document categories
         $documentCategories = DocumentType::withCount('documents')->active()->ordered()->get();
 
-        return view('documents.show', compact('document', 'relatedDocuments', 'mostDownloaded', 'documentCategories', 'ratingStats', 'userRating', 'ratings'));
+        $data = compact('document', 'relatedDocuments', 'mostDownloaded', 'documentCategories', 'ratingStats', 'userRating', 'ratings');
+
+        return $this->viewWithSeo('documents.show', 'documents.show', $data, $document);
     }
 
     public function byType(Request $request, $typeSlug)

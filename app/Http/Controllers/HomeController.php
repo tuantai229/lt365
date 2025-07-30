@@ -88,7 +88,7 @@ class HomeController extends Controller
         $this->getUpcomingSchedules();
         $upcomingSchedules = $this->upcomingSchedules;
 
-        return view('home', compact(
+        $data = compact(
             'heroSlides',
             'quickTransfer',
             'selectedNews',
@@ -104,7 +104,9 @@ class HomeController extends Controller
             'featuredDocumentLevels',
             'featuredDocuments',
             'upcomingSchedules'
-        ));
+        );
+
+        return $this->viewWithSeo('home', 'home', $data);
     }
 
     private function getUpcomingSchedules()
