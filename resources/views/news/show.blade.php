@@ -112,6 +112,14 @@
                         </div>
                     </div>
                 </footer>
+
+                <!-- Comments Section -->
+                <div class="mt-12 pt-8 border-t border-gray-200">
+                    <x-comments.comment-list 
+                        type="news" 
+                        :type-id="$news->id" 
+                    />
+                </div>
             </article>
             <!-- Sidebar (4 columns) -->
             <aside class="lg:col-span-4">

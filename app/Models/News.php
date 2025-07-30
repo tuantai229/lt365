@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Traits\HasComments;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class News extends Model
 {
-    use HasFactory;
+    use HasFactory, HasComments;
 
     protected $fillable = [
         'admin_user_id',
