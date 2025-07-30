@@ -80,11 +80,7 @@
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2025 LT365. Tất cả quyền được bảo lưu.</p>
                 <div class="flex items-center gap-4">
-                    <a href="#" class="text-gray-400 hover:text-white text-sm">Chính sách bảo mật</a>
-                    <span class="text-gray-600">|</span>
-                    <a href="#" class="text-gray-400 hover:text-white text-sm">Điều khoản sử dụng</a>
-                    <span class="text-gray-600">|</span>
-                    <a href="#" class="text-gray-400 hover:text-white text-sm">Sitemap</a>
+                    <a href="{{ route('sitemap') }}" class="text-gray-400 hover:text-white text-sm">Sitemap</a>
                 </div>
             </div>
         </div>
