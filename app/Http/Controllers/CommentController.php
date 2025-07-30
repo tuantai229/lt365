@@ -112,7 +112,7 @@ class CommentController extends Controller
 
         // Rate limiting
         $key = 'comment:' . Auth::id();
-        if (RateLimiter::tooManyAttempts($key, 5)) {
+        if (RateLimiter::tooManyAttempts($key, 2)) {
             $seconds = RateLimiter::availableIn($key);
             return response()->json([
                 'success' => false,
