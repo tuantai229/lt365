@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     </span>
                                 </div>
                             </div>
-                            <div class="text-sm text-gray-700 whitespace-pre-wrap">
+                            <div class="text-sm text-gray-700">
                                 ${comment.content}
                             </div>
                         </div>
@@ -231,7 +231,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     ${timeAgo}
                                 </span>
                             </div>
-                            <div class="text-sm text-gray-700 whitespace-pre-wrap">
+                            <div class="text-sm text-gray-700">
                                 ${reply.content}
                             </div>
                         </div>
