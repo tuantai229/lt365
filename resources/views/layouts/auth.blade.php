@@ -4,25 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Authentication') - LT365</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css" integrity="sha384-6FSSi597BTd6QcnsBNoLclRKxTOyyYqkaucRjFgCNr8wHVCp0COLClSPY4Vy/bjh" crossorigin="anonymous" onerror="this.onerror=null;this.href='{{ asset('js/fallbacks/remixicon.css') }}'">
+    @vite(['resources/css/app.css'])
+    <link rel="stylesheet" href="{{ asset('fonts/font.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#4f46e5',
-                        secondary: '#f59e0b'
-                    },
-                    borderRadius: {
-                        'button': '8px'
-                    }
-                }
-            }
-        }
-    </script>
     <style>
         .auth-container {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -46,6 +38,9 @@
         .strength-weak { background: #ef4444; width: 33%; }
         .strength-medium { background: #f59e0b; width: 66%; }
         .strength-strong { background: #10b981; width: 100%; }
+    </style>
+    <style>
+        {!! file_get_contents(public_path('css/critical.css')) !!}
     </style>
     @stack('styles')
 </head>
